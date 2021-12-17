@@ -1,19 +1,26 @@
 {
-  "name": "chat-app",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "next": "12.0.7",
-    "react": "17.0.2",
-    "react-dom": "17.0.2"
-  },
-  "devDependencies": {
-    "eslint": "7.32.0",
-    "eslint-config-next": "12.0.7"
-  }
+	"name": "chat-app",
+	"private": true,
+	"scripts": {
+		"dev": "next dev",
+		"build": "next build",
+		"start": "next start",
+		"lint": "next lint"
+	},
+	"dependencies": {
+		"axios": "0.24.0",
+		"cors": "2.8.5",
+		"express": "4.17.1",
+		"luxon": "2.2.0",
+		"next": "12.0.7",
+		"react": "17.0.2",
+		"react-dom": "17.0.2",
+		"socket.io": "4.4.0",
+		"socket.io-client": "4.4.0",
+		"tiny-uid": "1.1.1"
+	},
+	"devDependencies": {
+		"eslint": "7.32.0",
+		"eslint-config-next": "12.0.7"
+	}
 }

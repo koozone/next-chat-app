@@ -1,0 +1,9 @@
+.menu {
+	display: flex;
+	flex-direction: row;
+	color: red;
+}
+
+.item {
+	color: blue;
+}
