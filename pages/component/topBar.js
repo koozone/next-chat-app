@@ -4,7 +4,8 @@ import styles from './topBar.module.css';
 
 export default function topBar() {
 	return (
-		<div>
+		<div className={styles.topBarContainer}>
+			<div className={styles.menuContainer}>
 			<ul className={styles.menu}>
 				<li className={styles.item}>
 					<Link href="/">
@@ -22,6 +23,7 @@ export default function topBar() {
 					</Link>
 				</li>
 			</ul>
+			</div>
 		</div>
 	);
 }
