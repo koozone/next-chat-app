@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {useState, useEffect} from 'react';
 
-import TopBar from '../component/topBar';
+import NavBar from '../component/navBar';
 
 export default function chat() {
 	const [roomList, setRoomList] = useState([]);
@@ -18,7 +18,7 @@ export default function chat() {
 
 	return (
 		<div>
-			<TopBar />
+			<NavBar />
 			<ul>
 				{roomList.map((item) => (
 					<li key={item.roomId}>{item.roomName}</li>

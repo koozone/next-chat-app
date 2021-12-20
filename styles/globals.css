@@ -19,3 +19,7 @@ a {
 	padding: 0;
 	margin: 0;
 }
+
+/* .btn {
+	@apply px-2 py-2 text-gray-500 bg-black/10 rounded-md hover:text-white hover:bg-red-500;
+} */
