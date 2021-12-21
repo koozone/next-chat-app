@@ -9,11 +9,7 @@ export function ButtonA({
 	className,
 }) {
 	return (
-		<button
-			type="button"
-			onClick={onClick}
-			className={`w-10 h-10 text-center text-gray-900 bg-black/10 rounded-full hover:text-white hover:bg-black/50 space-x-1 ${className}`}
-		>
+		<button type="button" onClick={onClick} className={`h-10 aspect-square text-center text-gray-900 bg-black/10 rounded-full hover:text-white hover:bg-black/50 space-x-1 ${className}`}>
 			{icon ? <i className={`bx ${icon} bx-fw`} /> : ''}
 			{/* <span>{children}</span> */}
 		</button>
@@ -44,10 +40,7 @@ export function LinkB({children, icon, href = '#'}) {
 export function ImageA({children, src, href = '#'}) {
 	return (
 		<Link href={href}>
-			<img
-				src={src}
-				className="w-10 h-10 border-2 border-white/50 rounded-full object-cover"
-			/>
+			<img src={src} className="h-10 aspect-square border-2 border-white/50 rounded-full object-cover" />
 		</Link>
 	);
 }
