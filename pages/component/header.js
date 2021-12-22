@@ -1,23 +1,65 @@
 import React from 'react';
 import {ButtonA, LinkA, LinkB, ImageA} from './button';
+import Nav from '../component/nav';
+import NavItem from '../component/navItem';
+
+const menuList = [
+	{icon: 'bx-party', href: '/', content: 'Home'},
+	{icon: 'bx-bowl-rice', href: '/view/room', content: 'Room'},
+	{icon: 'bx-lemon', href: '/view/chat', content: 'Chat'},
+	{icon: 'bx-lemon', href: '/view/sample', content: 'Sample'},
+	{icon: 'bx-lemon', href: '/view/test', content: 'Test'},
+];
 
 export function Header1() {
 	return (
-		<div className="sticky top-0 flex justify-between items-center bg-[#300b3f85] sm:h-20 h-12">
+		<div className="sticky top-0 flex justify-between items-center bg-[#300b3f85] md:h-20 h-12">
 			<img
 				className="w-1/4 h-full object-cover"
 				src="https://images.unsplash.com/photo-1496200186974-4293800e2c20?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1332&q=80"
 			/>
-			<div className="sm:flex ml-6 space-x-3 hidden">
+			<div className="hidden md:flex ml-6 space-x-3">
 				<LinkB icon="bx-party" href="/">
-					List
+					Home
 				</LinkB>
-				<LinkB icon="bx-bowl-rice" href="/view/test">
-					Ticket
+				<LinkB icon="bx-bowl-rice" href="/view/room">
+					Room
 				</LinkB>
 				<LinkB icon="bx-lemon" href="/view/chat">
-					Search
+					Chat
 				</LinkB>
+				<LinkB icon="bx-lemon" href="/view/sample">
+					Sample
+				</LinkB>
+				<LinkB icon="bx-lemon" href="/view/test">
+					Test
+				</LinkB>
+			</div>
+		</div>
+	);
+}
+
+export function Header3() {
+	return (
+		<div className="sticky top-0 flex justify-between items-center bg-[#300b3f85] md:h-20 h-12">
+			<img
+				className="w-1/4 h-full object-cover"
+				src="https://images.unsplash.com/photo-1569399078436-da10fbd60f12?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1475&q=80"
+			/>
+			<div className="hidden md:block">
+				<Nav>
+					{menuList.map((item, index) => (
+						<li key={index}>
+							<NavItem item={item}>{item.content}</NavItem>
+						</li>
+					))}
+				</Nav>
+			</div>
+			<div className="flex space-x-2">
+				<ButtonA
+					icon="bx-menu"
+					className="inline-block md:hidden"
+				></ButtonA>
 			</div>
 		</div>
 	);
@@ -30,21 +72,27 @@ export function Header2() {
 				className="w-[200px] h-full object-cover"
 				src="https://images.unsplash.com/photo-1627064719444-1985feb93f54?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1715&q=80"
 			/>
-			<div className="sm:flex ml-6 space-x-3 hidden">
+			<div className="hidden md:flex ml-6 space-x-3">
 				<LinkA icon="bx-party" href="/">
-					List
+					Home
 				</LinkA>
-				<LinkA icon="bx-bowl-rice" href="/view/test">
-					Ticket
+				<LinkA icon="bx-bowl-rice" href="/view/room">
+					Room
 				</LinkA>
 				<LinkA icon="bx-lemon" href="/view/chat">
-					Search
+					Chat
+				</LinkA>
+				<LinkA icon="bx-lemon" href="/view/sample">
+					Sample
+				</LinkA>
+				<LinkA icon="bx-lemon" href="/view/test">
+					Test
 				</LinkA>
 			</div>
 			<div className="flex space-x-2">
 				<ButtonA
 					icon="bx-menu"
-					className="inline-block sm:hidden"
+					className="inline-block md:hidden"
 				></ButtonA>
 				<ButtonA icon="bx-log-in"></ButtonA>
 				<ImageA src="https://images.unsplash.com/photo-1544348817-5f2cf14b88c8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1287&q=80"></ImageA>
@@ -53,4 +101,4 @@ export function Header2() {
 	);
 }
 
-export default Header2;
+export default Header1;

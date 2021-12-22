@@ -5,6 +5,7 @@ export default function test() {
 		<div>
 			<header.Header1 />
 			<header.Header2 />
+			<header.Header3 />
 		</div>
 	);
 }
