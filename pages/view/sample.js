@@ -3,9 +3,21 @@ import NavItem from '../component/navItem';
 import Header, {Header3} from '../component/header';
 import List from '../component/list';
 import ListItem from '../component/listItem';
+import {useEffect, useState} from 'react';
 
 export default function list() {
-	const boxList = [{}];
+	const [movieList, setMovieList] = useState([]);
+
+	useEffect(() => {
+		fetch(
+			'https://yts.mx/api/v2/list_movies.json?minimum_rating=8.5&sort_by=year'
+		)
+			.then((res) => res.json())
+			.then((res) => {
+				console.log(res?.data?.movies);
+				setMovieList(res?.data?.movies);
+			});
+	}, []);
 
 	return (
 		<>
@@ -17,9 +29,9 @@ export default function list() {
 					<NavItem>item3</NavItem>
 				</Nav>
 				<List>
-					{boxList.map((item, index) => (
+					{movieList.map((item, index) => (
 						<li key={index}>
-							<ListItem item={item}>{item.content}</ListItem>
+							<ListItem movie={item}></ListItem>
 						</li>
 					))}
 				</List>

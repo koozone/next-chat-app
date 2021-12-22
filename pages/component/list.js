@@ -1,5 +1,5 @@
 export const List = ({children}) => {
-	return <ul>{children}</ul>;
+	return <ul className="divide-y divide-gray-100">{children}</ul>;
 };
 
 export default List;
