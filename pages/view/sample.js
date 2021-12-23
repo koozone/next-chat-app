@@ -22,19 +22,21 @@ export default function list() {
 	return (
 		<>
 			<Header3 />
-			<div className="divide-y divide-red-900">
+			<div className="">
 				<Nav>
 					<NavItem>item1</NavItem>
 					<NavItem isSelect={true}>item2</NavItem>
 					<NavItem>item3</NavItem>
 				</Nav>
-				<List>
-					{movieList.map((item, index) => (
-						<li key={index}>
-							<ListItem movie={item}></ListItem>
-						</li>
-					))}
-				</List>
+				<div className="mx-auto w-[500px] h-[600px] overflow-auto border-2 rounded-lg border-red-500 bg-lime-50">
+					<List>
+						{movieList.map((item, index) => (
+							<li key={index}>
+								<ListItem movie={item}></ListItem>
+							</li>
+						))}
+					</List>
+				</div>
 			</div>
 		</>
 	);

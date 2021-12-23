@@ -9,6 +9,7 @@ const menuList = [
 	{icon: 'bx-lemon', href: '/view/chat', content: 'Chat'},
 	{icon: 'bx-lemon', href: '/view/sample', content: 'Sample'},
 	{icon: 'bx-lemon', href: '/view/test', content: 'Test'},
+	{icon: 'bx-lemon', href: '/view/layout', content: 'Layout'},
 ];
 
 export function Header1() {
