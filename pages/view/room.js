@@ -7,13 +7,27 @@ import BoxItem, {BoxItem2} from '../component/boxItem';
 import Header, {Header2} from '../component/header';
 import NavBar from '../component/navBar';
 import Popup from '../component/popup';
+import useModals from '../hook/useModals';
+import MyModal from '../component/MyModal';
 
 // Modal.setAppElement('#__next');
 
 export default function chat() {
 	const [isModal, setIsModal] = useState(false);
 	const [roomList, setRoomList] = useState([]);
-	console.log('isModal', isModal);
+	// console.log('isModal', isModal);
+
+	const {openModal} = useModals();
+
+	const handleClick = () => {
+		console.log('handleClick');
+		openModal(MyModal, {
+			onSubmit: () => {
+				console.log('비지니스 로직 처리...');
+			},
+		});
+	};
+
 	useEffect(() => {
 		// axios('http://localhost:3000/roomList')
 		axios('/api/room')
@@ -59,7 +73,9 @@ export default function chat() {
 			</Box>
 
 			<footer className="p-4 absolute inset-x-0 bottom-0 grid grid-cols-2 gap-x-6">
-				<button className="btn btn--secondary">Decline</button>
+				<button className="btn btn--secondary" onClick={handleClick}>
+					모달 열기
+				</button>
 				<button className="btn btn--primary" onClick={() => setIsModal(true)}>
 					Accept
 				</button>

@@ -31,7 +31,7 @@ export const Popup = ({isOpen = false, setIsOpen}) => {
 					padding: '20px',
 				},
 			}}
-			closeTimeoutMS={200}
+			// closeTimeoutMS={200}
 			contentLabel="Post modal"
 		>
 			{/* <div

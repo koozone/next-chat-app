@@ -2,6 +2,8 @@ import Head from 'next/head';
 import '../styles/globals.css';
 import '../styles/style.css';
 import 'boxicons/css/boxicons.min.css';
+import ModalsProvider from './component/ModalsProvider';
+import Modals from './component/Modals';
 
 function MyApp({Component, pageProps}) {
 	return (
@@ -12,7 +14,10 @@ function MyApp({Component, pageProps}) {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 
-			<Component {...pageProps} />
+			<ModalsProvider>
+				<Component {...pageProps} />
+				<Modals />
+			</ModalsProvider>
 		</>
 	);
 }
