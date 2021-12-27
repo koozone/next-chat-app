@@ -6,6 +6,7 @@ import useModals from '../hook/useModals';
 import MyModal from './MyModal';
 // import {SideMenuContext} from '../_app';
 import {useSideMenu} from '../hook/useSideMenu';
+import {useModal} from '../hook/useModal';
 
 const menuList = [
 	{icon: 'bx-party', href: '/', content: 'Home'},
@@ -68,15 +69,16 @@ export function Header3() {
 }
 
 export function Header2() {
-	const {openModal} = useModals();
+	const {openModals} = useModals();
 	// const {isSideMenu, openSideMenu, closeSideMenu} = useContext(SideMenuContext);
 	const {isSideMenu, openSideMenu, closeSideMenu} = useSideMenu();
+	const {isModal, openModal, closeModal} = useModal();
 
 	const clickMenu = () => {
 		openSideMenu();
 	};
 	const clickLogin = () => {
-		openModal(MyModal, {
+		openModals(MyModal, {
 			onSubmit: () => {
 				console.log('비지니스 로직 처리...');
 			},
@@ -108,7 +110,7 @@ export function Header2() {
 			</div>
 			<div className="flex space-x-2">
 				<ButtonA icon="bx-menu" className="inline-block md:hidden" onClick={clickMenu}></ButtonA>
-				<ButtonA icon="bx-log-in" onClick={clickLogin}></ButtonA>
+				<ButtonA icon="bx-log-in" onClick={openModal}></ButtonA>
 				<ImageA src="https://images.unsplash.com/photo-1544348817-5f2cf14b88c8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1287&q=80"></ImageA>
 			</div>
 		</div>

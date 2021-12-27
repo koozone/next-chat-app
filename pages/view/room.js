@@ -11,29 +11,27 @@ import useModals from '../hook/useModals';
 import MyModal from '../component/MyModal';
 // import {SideMenuContext} from '../_app';
 import {useSideMenu} from '../hook/useSideMenu';
+import {useModal} from '../hook/useModal';
 
 // Modal.setAppElement('#__next');
 
 export default function chat() {
-	const [isModal, setIsModal] = useState(false);
+	const [isModals, setIsModals] = useState(false);
 	const [roomList, setRoomList] = useState([]);
-	// console.log('isModal', isModal);
+	// console.log('isModals', isModals);
 
-	const {openModal} = useModals();
+	const {openModals} = useModals();
 	// const {openSideMenu} = useContext(SideMenuContext);
 	const {isSideMenu, openSideMenu, closeSideMenu} = useSideMenu();
+	const {isModal, openModal, closeModal} = useModal();
 
-	const clickOpenModal = () => {
-		console.log('clickOpenModal');
-		openModal(MyModal, {
+	const clickOpenModals = () => {
+		console.log('clickOpenModals');
+		openModals(MyModal, {
 			onSubmit: () => {
 				console.log('비지니스 로직 처리...');
 			},
 		});
-	};
-
-	const clickOpenSideMenu = () => {
-		openSideMenu();
 	};
 
 	useEffect(() => {
@@ -81,18 +79,21 @@ export default function chat() {
 			</Box>
 
 			<footer className="p-4 absolute inset-x-0 bottom-0 grid grid-cols-2 gap-x-6">
-				<button className="btn btn--secondary" onClick={clickOpenModal}>
+				<button className="btn btn--secondary" onClick={clickOpenModals}>
 					모달 열기
 				</button>
-				<button className="btn btn--secondary" onClick={clickOpenSideMenu}>
-					메뉴 열기
+				<button className="btn btn--secondary" onClick={openSideMenu}>
+					사이드 메뉴 열기
 				</button>
-				<button className="btn btn--primary" onClick={() => setIsModal(true)}>
+				<button className="btn btn--secondary" onClick={openModal}>
+					모달 열기
+				</button>
+				<button className="btn btn--primary" onClick={() => setIsModals(true)}>
 					Accept
 				</button>
 			</footer>
 
-			<Popup isOpen={isModal} setIsOpen={setIsModal} />
+			<Popup isOpen={isModals} setIsOpen={setIsModals} />
 		</div>
 	);
 }

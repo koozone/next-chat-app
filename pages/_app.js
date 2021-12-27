@@ -5,10 +5,12 @@ import 'boxicons/css/boxicons.min.css';
 import ModalsProvider from './component/ModalsProvider';
 import Modals from './component/Modals';
 import {createContext, useState} from 'react';
-import SideMenu from './component/sideMenu';
 
 // export const SideMenuContext = createContext({});
 import SideMenuProvider from './hook/useSideMenu';
+import ModalProvider from './hook/useModal';
+import SideMenu from './component/sideMenu';
+import Modal from './component/modal';
 
 function MyApp({Component, pageProps}) {
 	// const [isSideMenu, setIsSideMenu] = useState(false);
@@ -35,13 +37,16 @@ function MyApp({Component, pageProps}) {
 					closeSideMenu,
 				}}
 			> */}
-			<SideMenuProvider>
-				<ModalsProvider>
-					<Component {...pageProps} />
-					<SideMenu />
-					<Modals />
-				</ModalsProvider>
-			</SideMenuProvider>
+			<ModalProvider>
+				<SideMenuProvider>
+					<ModalsProvider>
+						<Component {...pageProps} />
+						<SideMenu />
+						<Modals />
+						<Modal />
+					</ModalsProvider>
+				</SideMenuProvider>
+			</ModalProvider>
 			{/* </SideMenuContext.Provider> */}
 		</>
 	);
