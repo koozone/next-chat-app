@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useContext} from 'react';
 // import Modal from 'react-modal';
 
 import Box from '../component/box';
@@ -9,6 +9,8 @@ import NavBar from '../component/navBar';
 import Popup from '../component/popup';
 import useModals from '../hook/useModals';
 import MyModal from '../component/MyModal';
+// import {SideMenuContext} from '../_app';
+import {useSideMenu} from '../hook/useSideMenu';
 
 // Modal.setAppElement('#__next');
 
@@ -18,14 +20,20 @@ export default function chat() {
 	// console.log('isModal', isModal);
 
 	const {openModal} = useModals();
+	// const {openSideMenu} = useContext(SideMenuContext);
+	const {isSideMenu, openSideMenu, closeSideMenu} = useSideMenu();
 
-	const handleClick = () => {
-		console.log('handleClick');
+	const clickOpenModal = () => {
+		console.log('clickOpenModal');
 		openModal(MyModal, {
 			onSubmit: () => {
 				console.log('비지니스 로직 처리...');
 			},
 		});
+	};
+
+	const clickOpenSideMenu = () => {
+		openSideMenu();
 	};
 
 	useEffect(() => {
@@ -73,8 +81,11 @@ export default function chat() {
 			</Box>
 
 			<footer className="p-4 absolute inset-x-0 bottom-0 grid grid-cols-2 gap-x-6">
-				<button className="btn btn--secondary" onClick={handleClick}>
+				<button className="btn btn--secondary" onClick={clickOpenModal}>
 					모달 열기
+				</button>
+				<button className="btn btn--secondary" onClick={clickOpenSideMenu}>
+					메뉴 열기
 				</button>
 				<button className="btn btn--primary" onClick={() => setIsModal(true)}>
 					Accept

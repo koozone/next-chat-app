@@ -1,7 +1,11 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {ButtonA, LinkA, LinkB, ImageA} from './button';
 import Nav from '../component/nav';
 import NavItem from '../component/navItem';
+import useModals from '../hook/useModals';
+import MyModal from './MyModal';
+// import {SideMenuContext} from '../_app';
+import {useSideMenu} from '../hook/useSideMenu';
 
 const menuList = [
 	{icon: 'bx-party', href: '/', content: 'Home'},
@@ -57,16 +61,28 @@ export function Header3() {
 				</Nav>
 			</div>
 			<div className="flex space-x-2">
-				<ButtonA
-					icon="bx-menu"
-					className="inline-block md:hidden"
-				></ButtonA>
+				<ButtonA icon="bx-menu" className="inline-block md:hidden"></ButtonA>
 			</div>
 		</div>
 	);
 }
 
 export function Header2() {
+	const {openModal} = useModals();
+	// const {isSideMenu, openSideMenu, closeSideMenu} = useContext(SideMenuContext);
+	const {isSideMenu, openSideMenu, closeSideMenu} = useSideMenu();
+
+	const clickMenu = () => {
+		openSideMenu();
+	};
+	const clickLogin = () => {
+		openModal(MyModal, {
+			onSubmit: () => {
+				console.log('비지니스 로직 처리...');
+			},
+		});
+	};
+
 	return (
 		<div className="sticky top-0 flex justify-between items-center bg-[#300b3f85] h-12">
 			<img
@@ -91,11 +107,8 @@ export function Header2() {
 				</LinkA>
 			</div>
 			<div className="flex space-x-2">
-				<ButtonA
-					icon="bx-menu"
-					className="inline-block md:hidden"
-				></ButtonA>
-				<ButtonA icon="bx-log-in"></ButtonA>
+				<ButtonA icon="bx-menu" className="inline-block md:hidden" onClick={clickMenu}></ButtonA>
+				<ButtonA icon="bx-log-in" onClick={clickLogin}></ButtonA>
 				<ImageA src="https://images.unsplash.com/photo-1544348817-5f2cf14b88c8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1287&q=80"></ImageA>
 			</div>
 		</div>

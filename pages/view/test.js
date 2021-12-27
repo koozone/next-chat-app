@@ -4,28 +4,19 @@ import {useDog} from './../hook/useDog';
 import {useUnsplash} from './../hook/useUnsplash';
 
 export default function test() {
-	// const [dogData, dogRefresh] = useDog();
-	const [unsplashData, unsplashRefresh] = useUnsplash();
-	console.log(unsplashData);
+	const [imageList, imageRefresh] = useDog({count: 1 + Math.round(Math.random() * 2)});
+	// const [imageList, imageRefresh] = useUnsplash();
 
 	return (
 		<div>
 			<header.Header1 />
 			<header.Header2 />
 			<header.Header3 />
-			{unsplashData?.map((item, index) => (
-				<img key={index} src={item.urls.thumb} />
+
+			{imageList?.map((item, index) => (
+				<img key={index} src={item} className="inline-block w-[200px] h-[200px] object-cover rounded-md m-5 hover:ring-4 hover:ring-white" />
 			))}
-
-			<input type="text"></input>
-
-			<button
-				onClick={() => {
-					unsplashRefresh({query: 'face', count: Math.round(Math.random() * 5) + 1});
-				}}
-			>
-				Refresh
-			</button>
+			<button onClick={imageRefresh}>Refresh({imageList.length})</button>
 		</div>
 	);
 }

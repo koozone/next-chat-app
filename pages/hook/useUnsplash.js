@@ -1,18 +1,21 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 
-export const useUnsplash = () => {
-	const [data, setData] = useState();
+export const useUnsplash = (props) => {
+	const {count = 1} = props || {};
+	const [data, setData] = useState([]);
 
-	const refresh = async (param = {}) => {
+	const refresh = async () => {
 		const res = await axios.get(`https://api.unsplash.com/photos/random`, {
 			params: {
 				client_id: 'lURuzNyySLSj5YOUsaZwcxObbTtWEqi8kPhV2SBkla8',
-				...param,
+				query: 'face',
+				count: {count},
 			},
 		});
+		const dataList = [].concat(res.data || []);
 
-		setData([].concat(res.data));
+		setData(dataList.map((item) => item.urls.thumb));
 	};
 
 	useEffect(() => {
