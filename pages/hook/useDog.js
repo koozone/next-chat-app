@@ -7,10 +7,10 @@ export const useDog = (props) => {
 
 	const refresh = async () => {
 		const res = await axios.get(`https://dog.ceo/api/breeds/image/random/${count}`);
-		console.log('res', res);
 		const dataList = [].concat(res.data?.message || []);
+		// console.log('dataList', dataList);
 
-		setData(dataList);
+		setData(dataList.map((item) => ({src: item, name: item.split('/').pop()})));
 	};
 
 	useEffect(() => {

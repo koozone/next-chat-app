@@ -1,46 +1,147 @@
 import Link from 'next/link';
 
-export function ButtonA({
-	children,
-	icon,
-	onClick = () => {
-		alert('click');
-	},
-	className,
-}) {
+const makeContent = (item) => {
+	const {icon, name} = item;
+
 	return (
-		<button type="button" onClick={onClick} className={`h-10 aspect-square text-center text-gray-900 bg-black/10 rounded-full hover:text-white hover:bg-black/50 space-x-1 ${className}`}>
+		<>
 			{icon ? <i className={`bx ${icon} bx-fw`} /> : ''}
-			{/* <span>{children}</span> */}
+			{name ? <span>{name}</span> : ''}
+		</>
+	);
+};
+
+const ButtonItem = (props) => {
+	const {
+		children,
+		className = '',
+		css = '',
+		onClick = () => {
+			console.log('onClick');
+		},
+	} = props;
+	const content = children ? children : makeContent(props);
+
+	return (
+		<button className={`${css} ${className}`} onClick={onClick}>
+			{content}
 		</button>
 	);
-}
+};
 
-export function LinkA({children, icon, href = '#'}) {
+const LinkItem = (props) => {
+	const {children, className = '', css = '', href = '#'} = props;
+	const content = children ? children : makeContent(props);
+
 	return (
 		<Link href={href}>
-			<a className="px-2 py-2 text-gray-300 bg-black/20 rounded-md hover:text-white hover:bg-black/50 inline-block transition relative active:top-0.5 space-x-1">
-				{icon ? <i className={`bx ${icon} bx-fw`} /> : ''}
-				<span>{children}</span>
-			</a>
+			<a className={`${css} ${className}`}>{content}</a>
 		</Link>
 	);
-}
-export function LinkB({children, icon, href = '#'}) {
+};
+
+const ImageItem = (props) => {
+	const {className = '', css = '', src = ''} = props;
+
+	return <img className={`${css} ${className}`} src={src} />;
+};
+
+export function ButtonA(props) {
 	return (
-		<Link href={href}>
-			<a className="px-2 py-2 text-white/80 bg-black/10 border-white/80 border-2 rounded hover:text-black/60 hover:bg-white/60 inline-block transition relative active:top-0.5 space-x-1">
-				{icon ? <i className={`bx ${icon} bx-fw`} /> : ''}
-				<span>{children}</span>
-			</a>
-		</Link>
+		<ButtonItem
+			{...{
+				...props,
+				css: `h-10 aspect-square text-center text-gray-900 bg-black/10 rounded-full hover:text-white hover:bg-black/50 space-x-1 ${
+					props.isSelect ? 'bg-white/20' : 'bg-black/20'
+				}`,
+			}}
+		/>
 	);
 }
 
-export function ImageA({children, src, href = '#'}) {
+export function ButtonB(props) {
 	return (
-		<Link href={href}>
-			<img src={src} className="h-10 aspect-square border-2 border-white/50 rounded-full object-cover" />
-		</Link>
+		<ButtonItem
+			{...{
+				...props,
+				css: `px-2 py-2 text-gray-300 rounded-md hover:text-white hover:bg-black/50 inline-block transition relative active:top-0.5 space-x-1 ${
+					props.isSelect ? 'bg-white/20' : 'bg-black/20'
+				}`,
+			}}
+		/>
+	);
+}
+
+export function LinkA(props) {
+	return (
+		<LinkItem
+			{...{
+				...props,
+				css: `px-2 py-2 text-gray-300 rounded-md hover:text-white hover:bg-black/50 inline-block transition relative active:top-0.5 space-x-1 ${
+					props.isSelect ? 'bg-white/20' : 'bg-black/20'
+				}`,
+			}}
+		/>
+	);
+}
+
+export function LinkB(props) {
+	return (
+		<LinkItem
+			{...{
+				...props,
+				css: `px-2 py-2 text-white/80 border-white/80 border-2 rounded hover:text-black/60 hover:bg-white/60 inline-block transition relative active:top-0.5 space-x-1 ${
+					props.isSelect ? 'bg-white/20' : 'bg-black/20'
+				}`,
+			}}
+		/>
+	);
+}
+
+export function LinkC(props) {
+	return (
+		<LinkItem
+			{...{
+				...props,
+				css: `block px-2 py-1 rounded-md ${
+					props.isSelect ? 'bg-sky-300 text-white' : 'bg-gray-50 hover:text-red-900'
+				}`,
+			}}
+		/>
+	);
+}
+
+export function ImageA(props) {
+	return (
+		<ImageItem
+			{...{
+				...props,
+				css: `h-10 aspect-square border-2 border-white/50 rounded-full object-cover ${
+					props.isSelect ? '' : ''
+				}`,
+			}}
+		/>
+	);
+}
+
+export function ImageB(props) {
+	return (
+		<ImageItem
+			{...{
+				...props,
+				css: `inline-block w-[200px] h-[200px] object-cover rounded-md ${
+					props.isSelect ? '' : ''
+				}`,
+			}}
+		/>
+	);
+}
+
+export function KKK(props) {
+	return (
+		<ButtonB {...props}>
+			<ImageB {...props} />
+			{props.name}
+		</ButtonB>
 	);
 }

@@ -5,6 +5,7 @@ import uid from 'tiny-uid';
 
 import {SocketContext} from '../net/socketContent';
 import NavBar from '../component/navBar';
+import {Header3} from '../component/header';
 
 export default function room({nickName, roomName}) {
 	const socket = useContext(SocketContext);
@@ -72,7 +73,8 @@ export default function room({nickName, roomName}) {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 
-			<NavBar />
+			{/* <NavBar /> */}
+			<Header3 />
 
 			<h2>{roomName}</h2>
 

@@ -14,8 +14,9 @@ export const useUnsplash = (props) => {
 			},
 		});
 		const dataList = [].concat(res.data || []);
+		// console.log('dataList', dataList);
 
-		setData(dataList.map((item) => item.urls.thumb));
+		setData(dataList.map((item) => ({src: item.urls.thumb})));
 	};
 
 	useEffect(() => {

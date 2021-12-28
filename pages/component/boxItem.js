@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import {useDog} from '../hook/useDog';
+import {ImageA} from './button';
 import {Toggle} from './toggle';
 
 export const BoxItem2 = () => {
@@ -27,7 +28,9 @@ export const BoxItem = ({children, item = {}}) => {
 				<dl className="flex-auto grid sm:block lg:grid xl:block grid-cols-2 grid-rows-2 items-center">
 					<div>
 						<dt className="sr-only">Title</dt>
-						<dd className="group-hover:text-white font-semibold text-gray-900">{item.title}</dd>
+						<dd className="group-hover:text-white font-semibold text-gray-900">
+							{item.title}
+						</dd>
 					</div>
 					<div>
 						<dt className="sr-only">Category</dt>
@@ -37,7 +40,13 @@ export const BoxItem = ({children, item = {}}) => {
 						<dt className="sr-only">Users</dt>
 						<dd className="flex justify-end sm:justify-start lg:justify-end xl:justify-start -space-x-1.5">
 							{imageList.map((item, index) => (
-								<img key={index} src={item} alt="" className="w-8 h-8 object-cover rounded-full bg-gray-100 ring-2 ring-white" loading="lazy" />
+								<img
+									key={index}
+									src={item.src}
+									alt=""
+									className="w-8 h-8 object-cover rounded-full bg-gray-100 ring-2 ring-white"
+									loading="lazy"
+								/>
 							))}
 						</dd>
 					</div>

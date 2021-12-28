@@ -1,4 +1,4 @@
-import {createContext, useState, useContext} from 'react';
+import {createContext, useState, useContext, useMemo} from 'react';
 
 export const ModalContext = createContext();
 
@@ -7,7 +7,7 @@ export const useModal = () => {
 };
 
 export default function ModalProvider({children}) {
-	const [isModal, setIsModal] = useState(true);
+	const [isModal, setIsModal] = useState(false);
 
 	const openModal = () => {
 		setIsModal(true);
@@ -16,15 +16,14 @@ export default function ModalProvider({children}) {
 		setIsModal(false);
 	};
 
-	return (
-		<ModalContext.Provider
-			value={{
-				isModal,
-				openModal,
-				closeModal,
-			}}
-		>
-			{children}
-		</ModalContext.Provider>
+	const value = useMemo(
+		() => ({
+			isModal,
+			openModal,
+			closeModal,
+		}),
+		[isModal, openModal, closeModal]
 	);
+
+	return <ModalContext.Provider value={value}>{children}</ModalContext.Provider>;
 }

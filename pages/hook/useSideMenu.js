@@ -1,4 +1,4 @@
-import {createContext, useState, useContext} from 'react';
+import {createContext, useState, useContext, useMemo} from 'react';
 
 export const SideMenuContext = createContext();
 
@@ -16,15 +16,14 @@ export default function SideMenuProvider({children}) {
 		setIsSideMenu(false);
 	};
 
-	return (
-		<SideMenuContext.Provider
-			value={{
-				isSideMenu,
-				openSideMenu,
-				closeSideMenu,
-			}}
-		>
-			{children}
-		</SideMenuContext.Provider>
+	const value = useMemo(
+		() => ({
+			isSideMenu,
+			openSideMenu,
+			closeSideMenu,
+		}),
+		[isSideMenu, openSideMenu, closeSideMenu]
 	);
+
+	return <SideMenuContext.Provider value={value}>{children}</SideMenuContext.Provider>;
 }

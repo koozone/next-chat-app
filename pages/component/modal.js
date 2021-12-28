@@ -11,14 +11,30 @@ export default function Example() {
 
 	return (
 		<Transition.Root show={isModal} as={Fragment}>
-			<Dialog as="div" className="fixed z-10 inset-0 overflow-y-auto" initialFocus={cancelButtonRef} onClose={closeModal}>
+			<Dialog
+				as="div"
+				className="fixed z-10 inset-0 overflow-y-auto"
+				initialFocus={cancelButtonRef}
+				onClose={closeModal}
+			>
 				<div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-					<Transition.Child as={Fragment} enter="ease-out duration-300" enterFrom="opacity-0" enterTo="opacity-100" leave="ease-in duration-200" leaveFrom="opacity-100" leaveTo="opacity-0">
+					<Transition.Child
+						as={Fragment}
+						enter="ease-out duration-300"
+						enterFrom="opacity-0"
+						enterTo="opacity-100"
+						leave="ease-in duration-200"
+						leaveFrom="opacity-100"
+						leaveTo="opacity-0"
+					>
 						<Dialog.Overlay className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
 					</Transition.Child>
 
 					{/* This element is to trick the browser into centering the modal contents. */}
-					<span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">
+					<span
+						className="hidden sm:inline-block sm:align-middle sm:h-screen"
+						aria-hidden="true"
+					>
 						&#8203;
 					</span>
 					<Transition.Child
@@ -37,12 +53,17 @@ export default function Example() {
 										{/* <ExclamationIcon className="h-6 w-6 text-red-600" aria-hidden="true" /> */}
 									</div>
 									<div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-										<Dialog.Title as="h3" className="text-lg leading-6 font-medium text-gray-900">
+										<Dialog.Title
+											as="h3"
+											className="text-lg leading-6 font-medium text-gray-900"
+										>
 											Deactivate account
 										</Dialog.Title>
 										<div className="mt-2">
 											<p className="text-sm text-gray-500">
-												Are you sure you want to deactivate your account? All of your data will be permanently removed. This action cannot be undone.
+												Are you sure you want to deactivate your account?
+												All of your data will be permanently removed. This
+												action cannot be undone.
 											</p>
 										</div>
 									</div>
