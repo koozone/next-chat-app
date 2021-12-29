@@ -43,8 +43,8 @@ export function Header1() {
 export function Header2() {
 	const {openModals} = useModals();
 	// const {isSideMenu, openSideMenu, closeSideMenu} = useContext(SideMenuContext);
-	const {isSideMenu, openSideMenu, closeSideMenu} = useSideMenu();
-	const {isModal, openModal, closeModal} = useModal();
+	const [isSideMenu, openSideMenu, closeSideMenu] = useSideMenu();
+	const [isModal, openModal, closeModal] = useModal();
 
 	const clickMenu = () => {
 		openSideMenu();

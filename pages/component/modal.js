@@ -5,7 +5,7 @@ import {useModal} from '../hook/useModal';
 
 export default function Example() {
 	// const [open, setOpen] = useState(true);
-	const {isModal, openModal, closeModal} = useModal();
+	const [isModal, openModal, closeModal] = useModal();
 
 	const cancelButtonRef = useRef(null);
 

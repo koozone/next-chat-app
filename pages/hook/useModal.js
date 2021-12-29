@@ -1,9 +1,12 @@
+// useContext를 사용한 custom hook 구현
 import {createContext, useState, useContext, useMemo} from 'react';
 
 export const ModalContext = createContext();
 
 export const useModal = () => {
-	return useContext(ModalContext);
+	const value = useContext(ModalContext);
+
+	return value;
 };
 
 export default function ModalProvider({children}) {
@@ -16,14 +19,7 @@ export default function ModalProvider({children}) {
 		setIsModal(false);
 	};
 
-	const value = useMemo(
-		() => ({
-			isModal,
-			openModal,
-			closeModal,
-		}),
-		[isModal, openModal, closeModal]
-	);
+	const value = useMemo(() => [isModal, openModal, closeModal], [isModal, openModal, closeModal]);
 
 	return <ModalContext.Provider value={value}>{children}</ModalContext.Provider>;
 }

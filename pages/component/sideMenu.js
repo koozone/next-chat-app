@@ -7,7 +7,7 @@ import {useSideMenu} from '../hook/useSideMenu';
 export default function SideMenu() {
 	// const [open, setOpen] = useState();
 	// const {isSideMenu, openSideMenu, closeSideMenu} = useContext(SideMenuContext);
-	const {isSideMenu, openSideMenu, closeSideMenu} = useSideMenu();
+	const [isSideMenu, openSideMenu, closeSideMenu] = useSideMenu();
 
 	return (
 		<Transition.Root show={isSideMenu} as={Fragment}>

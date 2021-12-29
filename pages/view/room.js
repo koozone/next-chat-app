@@ -22,8 +22,8 @@ export default function chat() {
 
 	const {openModals} = useModals();
 	// const {openSideMenu} = useContext(SideMenuContext);
-	const {isSideMenu, openSideMenu, closeSideMenu} = useSideMenu();
-	const {isModal, openModal, closeModal} = useModal();
+	const [isSideMenu, openSideMenu, closeSideMenu] = useSideMenu();
+	const [isModal, openModal, closeModal] = useModal();
 
 	const clickOpenModals = () => {
 		console.log('clickOpenModals');
@@ -51,7 +51,10 @@ export default function chat() {
 			<header className="bg-white space-y-4 p-4 sm:px-8 sm:py-6 lg:p-4 xl:px-8 xl:py-6">
 				<div className="flex items-center justify-between">
 					<h2 className="font-semibold text-gray-900">Projects</h2>
-					<a href="/new" className="hover:bg-blue-400 group flex items-center rounded-md bg-blue-500 text-white text-sm font-medium pl-2 pr-3 py-2 shadow-sm">
+					<a
+						href="/new"
+						className="hover:bg-blue-400 group flex items-center rounded-md bg-blue-500 text-white text-sm font-medium pl-2 pr-3 py-2 shadow-sm"
+					>
 						<i className="bx bx-plus-medical mr-2"></i>
 						New
 					</a>

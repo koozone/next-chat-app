@@ -3,7 +3,9 @@ import {createContext, useState, useContext, useMemo} from 'react';
 export const SideMenuContext = createContext();
 
 export const useSideMenu = () => {
-	return useContext(SideMenuContext);
+	const value = useContext(SideMenuContext);
+
+	return value;
 };
 
 export default function SideMenuProvider({children}) {
@@ -17,11 +19,7 @@ export default function SideMenuProvider({children}) {
 	};
 
 	const value = useMemo(
-		() => ({
-			isSideMenu,
-			openSideMenu,
-			closeSideMenu,
-		}),
+		() => [isSideMenu, openSideMenu, closeSideMenu],
 		[isSideMenu, openSideMenu, closeSideMenu]
 	);
 
