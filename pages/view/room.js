@@ -22,8 +22,8 @@ export default function chat() {
 
 	const {openModals} = useModals();
 	// const {openSideMenu} = useContext(SideMenuContext);
-	const [isSideMenu, openSideMenu, closeSideMenu] = useSideMenu();
-	const [isModal, openModal, closeModal] = useModal();
+	const [sideMenu, runSideMenu] = useSideMenu();
+	const [modal, runModal] = useModal();
 
 	const clickOpenModals = () => {
 		console.log('clickOpenModals');
@@ -85,10 +85,10 @@ export default function chat() {
 				<button className="btn btn--secondary" onClick={clickOpenModals}>
 					모달 열기
 				</button>
-				<button className="btn btn--secondary" onClick={openSideMenu}>
+				<button className="btn btn--secondary" onClick={runSideMenu.open}>
 					사이드 메뉴 열기
 				</button>
-				<button className="btn btn--secondary" onClick={openModal}>
+				<button className="btn btn--secondary" onClick={runModal.open}>
 					모달 열기
 				</button>
 				<button className="btn btn--primary" onClick={() => setIsModals(true)}>

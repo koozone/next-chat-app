@@ -16,6 +16,7 @@ const menuList = [
 	{name: 'Sample', icon: 'bx-lemon', href: '/view/sample'},
 	{name: 'Test', icon: 'bx-lemon', href: '/view/test'},
 	{name: 'Layout', icon: 'bx-lemon', href: '/view/layout'},
+	{name: 'Code', icon: 'bx-lemon', href: '/view/code'},
 ];
 
 const getMenuList = () => {
@@ -42,12 +43,12 @@ export function Header1() {
 
 export function Header2() {
 	const {openModals} = useModals();
-	// const {isSideMenu, openSideMenu, closeSideMenu} = useContext(SideMenuContext);
-	const [isSideMenu, openSideMenu, closeSideMenu] = useSideMenu();
-	const [isModal, openModal, closeModal] = useModal();
+	// const {sideMenu, openSideMenu, closeSideMenu} = useContext(SideMenuContext);
+	const [sideMenu, runSideMenu] = useSideMenu();
+	const [modal, runModal] = useModal();
 
 	const clickMenu = () => {
-		openSideMenu();
+		runSideMenu.open();
 	};
 	const clickLogin = () => {
 		openModals(MyModal, {
@@ -74,7 +75,7 @@ export function Header2() {
 					className="inline-block md:hidden"
 					onClick={clickMenu}
 				></ButtonA>
-				<ButtonA icon="bx-log-in" onClick={openModal}></ButtonA>
+				<ButtonA icon="bx-log-in" onClick={runModal.open}></ButtonA>
 				<ImageA src="https://images.unsplash.com/photo-1544348817-5f2cf14b88c8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1287&q=80"></ImageA>
 			</div>
 		</div>

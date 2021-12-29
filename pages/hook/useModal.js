@@ -10,16 +10,16 @@ export const useModal = () => {
 };
 
 export default function ModalProvider({children}) {
-	const [isModal, setIsModal] = useState(false);
+	const [data, setData] = useState(false);
 
-	const openModal = () => {
-		setIsModal(true);
+	const open = () => {
+		setData(true);
 	};
-	const closeModal = () => {
-		setIsModal(false);
+	const close = () => {
+		setData(false);
 	};
 
-	const value = useMemo(() => [isModal, openModal, closeModal], [isModal, openModal, closeModal]);
+	const value = useMemo(() => [data, {open, close}], [data, open, close]);
 
 	return <ModalContext.Provider value={value}>{children}</ModalContext.Provider>;
 }

@@ -1,40 +1,47 @@
-import {useInput} from '../hook/useInput';
-import {useCount} from '../hook/useCount_useState';
+import {useFiled} from '../hook/useFiled';
+import {useCount} from '../hook/useCount';
 import {useModal} from '../hook/useModal';
 import {useSideMenu} from '../hook/useSideMenu';
+import {Header3} from '../component/header';
+import {Button} from '../component/button';
 
-const CodeUseInput = () => {
-	const [inputData, runInputData] = useInput({id: '', pw: '123'});
+const CodeUseFiled = () => {
+	const [field, runField] = useFiled({id: '', password: '123'});
 
 	const onChageInput = (event) => {
 		const {name, value} = event.target;
 
-		runInputData.change({name, value});
+		runField.change({name, value});
 	};
 	const onClickReset = (event) => {
 		const {name} = event.target;
 
-		runInputData.reset({name});
+		runField.reset({name});
 	};
 	const onClickResetAll = (event) => {
-		runInputData.reset();
+		runField.reset();
 	};
 
 	return (
 		<div>
 			<div>
-				<input type="text" value={inputData.id} name="id" onChange={onChageInput} />
-				<span>{inputData.id}</span>
-
+				id :
+				<input type="text" value={field.id} name="id" onChange={onChageInput} />
+				<span>{field.id}</span>
 				<button type="button" name="id" onClick={onClickReset}>
 					[reset]
 				</button>
 			</div>
 			<div>
-				<input type="text" value={inputData.pw} name="pw" onChange={onChageInput} />
-				<span>{inputData.pw}</span>
-
-				<button type="button" name="pw" onClick={onClickReset}>
+				password :
+				<input
+					type="password"
+					value={field.password}
+					name="password"
+					onChange={onChageInput}
+				/>
+				<span>{field.password}</span>
+				<button type="button" name="password" onClick={onClickReset}>
 					[reset]
 				</button>
 			</div>
@@ -46,62 +53,62 @@ const CodeUseInput = () => {
 };
 
 const CodeUseCount = () => {
-	const [inputData, runInputData] = useCount({
-		countA: 0,
-		countB: 10,
+	const [count, runCount] = useCount({
+		coffee: 0,
+		bread: 10,
 	});
 
 	const onChageInput = (event) => {
 		const {name, value} = event.target;
 
-		runInputData.change({name, value});
+		runCount.change({name, value});
 	};
 	const onClickIncrement = (event) => {
 		const {name} = event.target;
 
-		runInputData.increment({name});
+		runCount.increment({name});
 	};
 	const onClickDecrement = (event) => {
 		const {name} = event.target;
 
-		runInputData.decrement({name});
+		runCount.decrement({name});
 	};
 	const onClickReset = (event) => {
 		const {name} = event.target;
 
-		runInputData.reset({name});
+		runCount.reset({name});
 	};
 	const onClickResetAll = (event) => {
-		runInputData.reset();
+		runCount.reset();
 	};
 
 	return (
 		<div>
 			<div>
-				<input type="text" value={inputData.countA} name="countA" onChange={onChageInput} />
-				<span>{inputData.countA}</span>
-
-				<button type="button" name="countA" onClick={onClickIncrement}>
+				coffee :
+				<input type="text" value={count.coffee} name="coffee" onChange={onChageInput} />
+				<span>{count.coffee}</span>
+				<button type="button" name="coffee" onClick={onClickIncrement}>
 					[ + ]
 				</button>
-				<button type="button" name="countA" onClick={onClickDecrement}>
+				<button type="button" name="coffee" onClick={onClickDecrement}>
 					[ - ]
 				</button>
-				<button type="button" name="countA" onClick={onClickReset}>
+				<button type="button" name="coffee" onClick={onClickReset}>
 					[reset]
 				</button>
 			</div>
 			<div>
-				<input type="text" value={inputData.countB} name="countB" onChange={onChageInput} />
-				<span>{inputData.countB}</span>
-
-				<button type="button" name="countB" onClick={onClickIncrement}>
+				bread :
+				<input type="text" value={count.bread} name="bread" onChange={onChageInput} />
+				<span>{count.bread}</span>
+				<button type="button" name="bread" onClick={onClickIncrement}>
 					[ + ]
 				</button>
-				<button type="button" name="countB" onClick={onClickDecrement}>
+				<button type="button" name="bread" onClick={onClickDecrement}>
 					[ - ]
 				</button>
-				<button type="button" name="countB" onClick={onClickReset}>
+				<button type="button" name="bread" onClick={onClickReset}>
 					[reset]
 				</button>
 			</div>
@@ -113,10 +120,10 @@ const CodeUseCount = () => {
 };
 
 const CodeUseModal = () => {
-	const [isModal, openModal, closeModal] = useModal();
+	const [modal, runModal] = useModal();
 
 	const onClickModal = (event) => {
-		openModal();
+		runModal.open();
 	};
 
 	return (
@@ -127,10 +134,10 @@ const CodeUseModal = () => {
 };
 
 const CodeUseSideMenu = () => {
-	const [isSideMenu, openSideMenu, closeSideMenu] = useSideMenu();
+	const [sideMenu, runSideMenu] = useSideMenu();
 
 	const onClickSideMenu = (event) => {
-		openSideMenu();
+		runSideMenu.open();
 	};
 
 	return (
@@ -143,9 +150,10 @@ const CodeUseSideMenu = () => {
 export default function code() {
 	return (
 		<>
+			<Header3 />
 			<div className="p-3">
-				<h2 className="text-2xl font-semibold">useState를 사용한 useInput 구현</h2>
-				<CodeUseInput />
+				<h2 className="text-2xl font-semibold">useState를 사용한 useFiled 구현</h2>
+				<CodeUseFiled />
 			</div>
 			<div className="p-3">
 				<h2 className="text-2xl font-semibold">useReducer를 사용한 useCount 구현</h2>
@@ -159,6 +167,10 @@ export default function code() {
 				<h2 className="text-2xl font-semibold">useContext를 사용한 useSideMenu 구현</h2>
 				<CodeUseSideMenu />
 			</div>
+
+			<Button type="normal" name="MENU" icon="bx-menu" />
+			<Button type="bold" name="MENU" icon="bx-menu" />
+			<Button type="primary" name="MENU" />
 		</>
 	);
 }

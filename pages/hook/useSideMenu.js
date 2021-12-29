@@ -9,19 +9,16 @@ export const useSideMenu = () => {
 };
 
 export default function SideMenuProvider({children}) {
-	const [isSideMenu, setIsSideMenu] = useState(false);
+	const [data, setData] = useState(false);
 
-	const openSideMenu = () => {
-		setIsSideMenu(true);
+	const open = () => {
+		setData(true);
 	};
-	const closeSideMenu = () => {
-		setIsSideMenu(false);
+	const close = () => {
+		setData(false);
 	};
 
-	const value = useMemo(
-		() => [isSideMenu, openSideMenu, closeSideMenu],
-		[isSideMenu, openSideMenu, closeSideMenu]
-	);
+	const value = useMemo(() => [data, {open, close}], [data, open, close]);
 
 	return <SideMenuContext.Provider value={value}>{children}</SideMenuContext.Provider>;
 }

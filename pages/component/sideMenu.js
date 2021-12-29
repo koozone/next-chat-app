@@ -6,12 +6,12 @@ import {useSideMenu} from '../hook/useSideMenu';
 
 export default function SideMenu() {
 	// const [open, setOpen] = useState();
-	// const {isSideMenu, openSideMenu, closeSideMenu} = useContext(SideMenuContext);
-	const [isSideMenu, openSideMenu, closeSideMenu] = useSideMenu();
+	// const {sideMenu, openSideMenu, closeSideMenu} = useContext(SideMenuContext);
+	const [sideMenu, runSideMenu] = useSideMenu();
 
 	return (
-		<Transition.Root show={isSideMenu} as={Fragment}>
-			<Dialog as="div" className="fixed inset-0 overflow-hidden" onClose={closeSideMenu}>
+		<Transition.Root show={sideMenu} as={Fragment}>
+			<Dialog as="div" className="fixed inset-0 overflow-hidden" onClose={runSideMenu.close}>
 				<div className="absolute inset-0 overflow-hidden">
 					<Transition.Child
 						as={Fragment}
@@ -48,7 +48,7 @@ export default function SideMenu() {
 										<button
 											type="button"
 											className="rounded-md text-gray-300 hover:text-white focus:outline-none focus:ring-2 focus:ring-white"
-											onClick={closeSideMenu}
+											onClick={runSideMenu.close}
 										>
 											<span className="sr-only">Close panel</span>
 											{/* <XIcon className="h-6 w-6" aria-hidden="true" /> */}

@@ -1,6 +1,7 @@
 import Link from 'next/link';
+import {useRef} from 'react';
 
-const makeContent = (item) => {
+const getContent = (item) => {
 	const {icon, name} = item;
 
 	return (
@@ -20,7 +21,7 @@ const ButtonItem = (props) => {
 			console.log('onClick');
 		},
 	} = props;
-	const content = children ? children : makeContent(props);
+	const content = children ? children : getContent(props);
 
 	return (
 		<button className={`${css} ${className}`} onClick={onClick}>
@@ -28,10 +29,41 @@ const ButtonItem = (props) => {
 		</button>
 	);
 };
+const getStyleButton = (props) => {
+	// return (
+	// 	<div
+	// 		className={() => {
+	// 			switch (props.type) {
+	// 				case 'primary':
+	// 					return 'text-red-500';
+
+	// 				default:
+	// 					return 'text-red-100';
+	// 			}
+	// 		}}
+	// 	></div>
+	// );
+	switch (props.type) {
+		case 'bold':
+			return `px-2 py-2 text-gray-300 rounded-md hover:text-white hover:bg-black/50 inline-block transition relative active:top-0.5 space-x-1 ${
+				props.isSelect ? 'bg-white/20' : 'bg-black/20'
+			}`;
+		case 'normal':
+			return `px-2 py-2 text-white ring-2 ring-white rounded-md hover:text-white hover:bg-black/50 inline-block transition relative active:top-0.5 space-x-1 ${
+				props.isSelect ? 'bg-white/20' : 'bg-black/20'
+			}`;
+		case 'primary':
+			return `px-2 py-2 text-orange-500 ring-2 ring-white rounded-md hover:text-white hover:bg-black/50 inline-block transition relative active:top-0.5 space-x-1 ${
+				props.isSelect ? 'bg-white/20' : 'bg-black/20'
+			}`;
+		default:
+			return '';
+	}
+};
 
 const LinkItem = (props) => {
 	const {children, className = '', css = '', href = '#'} = props;
-	const content = children ? children : makeContent(props);
+	const content = children ? children : getContent(props);
 
 	return (
 		<Link href={href}>
@@ -45,6 +77,24 @@ const ImageItem = (props) => {
 
 	return <img className={`${css} ${className}`} src={src} />;
 };
+
+export function Button(props) {
+	const {
+		children,
+		className = '',
+		onClick = () => {
+			console.log('onClick');
+		},
+	} = props;
+	const content = children ? children : getContent(props);
+	const style = getStyleButton(props);
+
+	return (
+		<button className={`${style} ${className}`} onClick={onClick}>
+			{content}
+		</button>
+	);
+}
 
 export function ButtonA(props) {
 	return (
