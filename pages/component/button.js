@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import {useRef} from 'react';
 
 const getContent = (item) => {
 	const {icon, name} = item;
@@ -12,54 +11,23 @@ const getContent = (item) => {
 	);
 };
 
-const ButtonItem = (props) => {
-	const {
-		children,
-		className = '',
-		css = '',
-		onClick = () => {
-			console.log('onClick');
-		},
-	} = props;
-	const content = children ? children : getContent(props);
+// const ButtonItem = (props) => {
+// 	const {
+// 		children,
+// 		className = '',
+// 		css = '',
+// 		onClick = () => {
+// 			console.log('onClick');
+// 		},
+// 	} = props;
+// 	const content = children ? children : getContent(props);
 
-	return (
-		<button className={`${css} ${className}`} onClick={onClick}>
-			{content}
-		</button>
-	);
-};
-const getStyleButton = (props) => {
-	// return (
-	// 	<div
-	// 		className={() => {
-	// 			switch (props.type) {
-	// 				case 'primary':
-	// 					return 'text-red-500';
-
-	// 				default:
-	// 					return 'text-red-100';
-	// 			}
-	// 		}}
-	// 	></div>
-	// );
-	switch (props.type) {
-		case 'bold':
-			return `px-2 py-2 text-gray-300 rounded-md hover:text-white hover:bg-black/50 inline-block transition relative active:top-0.5 space-x-1 ${
-				props.isSelect ? 'bg-white/20' : 'bg-black/20'
-			}`;
-		case 'normal':
-			return `px-2 py-2 text-white ring-2 ring-white rounded-md hover:text-white hover:bg-black/50 inline-block transition relative active:top-0.5 space-x-1 ${
-				props.isSelect ? 'bg-white/20' : 'bg-black/20'
-			}`;
-		case 'primary':
-			return `px-2 py-2 text-orange-500 ring-2 ring-white rounded-md hover:text-white hover:bg-black/50 inline-block transition relative active:top-0.5 space-x-1 ${
-				props.isSelect ? 'bg-white/20' : 'bg-black/20'
-			}`;
-		default:
-			return '';
-	}
-};
+// 	return (
+// 		<button className={`${css} ${className}`} onClick={onClick}>
+// 			{content}
+// 		</button>
+// 	);
+// };
 
 const LinkItem = (props) => {
 	const {children, className = '', css = '', href = '#'} = props;
@@ -81,16 +49,43 @@ const ImageItem = (props) => {
 export function Button(props) {
 	const {
 		children,
+		type,
+		selected,
 		className = '',
 		onClick = () => {
 			console.log('onClick');
 		},
 	} = props;
 	const content = children ? children : getContent(props);
-	const style = getStyleButton(props);
 
 	return (
-		<button className={`${style} ${className}`} onClick={onClick}>
+		<button
+			onClick={onClick}
+			className={`${className} ${(() => {
+				switch (type) {
+					case 'bold':
+						return `px-2 py-2 text-black/80 bg-white/20 font-semibold border-b-2 border-r-2 border-black/50 rounded-md hover:border-0 hover:border-t-2 hover:border-l-2 hover:border-black/50 hover:bg-black/10 hover:text-white space-x-1 ${
+							selected ? '' : ''
+						}`;
+					case 'normal':
+						return `px-2 py-2 text-white ring-2 ring-white rounded-md hover:text-white hover:bg-black/50 inline-block transition relative active:top-0.5 space-x-1 ${
+							selected ? 'bg-white/20' : 'bg-black/20'
+						}`;
+					case 'primary':
+						return `px-2 py-2 text-orange-500 ring-2 ring-white rounded-md hover:text-white hover:bg-black/50 inline-block transition relative active:top-0.5 space-x-1 ${
+							selected ? 'bg-white/20' : 'bg-black/20'
+						}`;
+					case 'buttonA':
+						return `h-10 aspect-square text-center text-gray-900 bg-black/10 rounded-full hover:text-white hover:bg-black/50 space-x-1 ${selected ? 'bg-white/20' : 'bg-black/20'}`;
+					case 'buttonB':
+						return `px-2 py-2 text-gray-300 rounded-md hover:text-white hover:bg-black/50 inline-block transition relative active:top-0.5 space-x-1 ${
+							selected ? 'bg-white/20' : 'bg-black/20'
+						}`;
+					default:
+						return '';
+				}
+			})()}`}
+		>
 			{content}
 		</button>
 	);
@@ -98,12 +93,10 @@ export function Button(props) {
 
 export function ButtonA(props) {
 	return (
-		<ButtonItem
+		<Button
 			{...{
 				...props,
-				css: `h-10 aspect-square text-center text-gray-900 bg-black/10 rounded-full hover:text-white hover:bg-black/50 space-x-1 ${
-					props.isSelect ? 'bg-white/20' : 'bg-black/20'
-				}`,
+				type: 'buttonA',
 			}}
 		/>
 	);
@@ -111,12 +104,10 @@ export function ButtonA(props) {
 
 export function ButtonB(props) {
 	return (
-		<ButtonItem
+		<Button
 			{...{
 				...props,
-				css: `px-2 py-2 text-gray-300 rounded-md hover:text-white hover:bg-black/50 inline-block transition relative active:top-0.5 space-x-1 ${
-					props.isSelect ? 'bg-white/20' : 'bg-black/20'
-				}`,
+				type: 'buttonB',
 			}}
 		/>
 	);
@@ -153,9 +144,7 @@ export function LinkC(props) {
 		<LinkItem
 			{...{
 				...props,
-				css: `block px-2 py-1 rounded-md ${
-					props.isSelect ? 'bg-sky-300 text-white' : 'bg-gray-50 hover:text-red-900'
-				}`,
+				css: `block px-2 py-1 rounded-md ${props.isSelect ? 'bg-sky-300 text-white' : 'bg-gray-50 hover:text-red-900'}`,
 			}}
 		/>
 	);
@@ -166,9 +155,7 @@ export function ImageA(props) {
 		<ImageItem
 			{...{
 				...props,
-				css: `h-10 aspect-square border-2 border-white/50 rounded-full object-cover ${
-					props.isSelect ? '' : ''
-				}`,
+				css: `h-10 aspect-square border-2 border-white/50 rounded-full object-cover ${props.isSelect ? '' : ''}`,
 			}}
 		/>
 	);
@@ -179,9 +166,7 @@ export function ImageB(props) {
 		<ImageItem
 			{...{
 				...props,
-				css: `inline-block w-[200px] h-[200px] object-cover rounded-md ${
-					props.isSelect ? '' : ''
-				}`,
+				css: `inline-block w-[200px] h-[200px] object-cover rounded-md ${props.isSelect ? '' : ''}`,
 			}}
 		/>
 	);

@@ -34,12 +34,7 @@ const CodeUseFiled = () => {
 			</div>
 			<div>
 				password :
-				<input
-					type="password"
-					value={field.password}
-					name="password"
-					onChange={onChageInput}
-				/>
+				<input type="password" value={field.password} name="password" onChange={onChageInput} />
 				<span>{field.password}</span>
 				<button type="button" name="password" onClick={onClickReset}>
 					[reset]
@@ -168,9 +163,11 @@ export default function code() {
 				<CodeUseSideMenu />
 			</div>
 
-			<Button type="normal" name="MENU" icon="bx-menu" />
-			<Button type="bold" name="MENU" icon="bx-menu" />
-			<Button type="primary" name="MENU" />
+			<div class="space-x-2">
+				<Button type="normal" name="MENU" icon="bx-menu" />
+				<Button type="bold" name="MENU" icon="bx-menu" />
+				<Button type="primary" name="MENU" className="text-3xl" />
+			</div>
 		</>
 	);
 }
