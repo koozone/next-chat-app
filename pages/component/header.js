@@ -37,7 +37,7 @@ export function Header1() {
 			/>
 			<div className="hidden md:flex ml-6 space-x-3">
 				{getMenuList().map((item, index) => (
-					<A key={index} {...{...item, type: 'linkA'}} />
+					<A key={index} {...{...item, css: 'linkA'}} />
 				))}
 			</div>
 		</div>
@@ -69,7 +69,7 @@ export function Header2() {
 			/>
 			<div className="hidden md:flex ml-6 space-x-3">
 				{getMenuList().map((item, index) => (
-					<A key={index} {...{...item, type: 'linkB'}} />
+					<A key={index} {...{...item, css: 'linkB'}} />
 				))}
 			</div>
 			<div className="flex space-x-2">
@@ -93,7 +93,7 @@ export function Header3() {
 			/>
 			<div className="hidden md:flex space-x-2">
 				{getMenuList().map((item, index) => (
-					<A key={index} {...{...item, type: 'linkC'}} />
+					<A key={index} {...{...item, css: 'linkC'}} />
 				))}
 			</div>
 			<div className="flex space-x-2">
