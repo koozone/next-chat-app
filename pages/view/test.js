@@ -1,4 +1,4 @@
-import Header, {Header1, Header2, Header3} from '../component/header';
+import Header from '../component/header';
 import axios from 'axios';
 import {useDog} from './../hook/useDog';
 import {useUnsplash} from './../hook/useUnsplash';
@@ -12,10 +12,6 @@ export default function test() {
 	return (
 		<div>
 			<Header />
-
-			<Header1 />
-			<Header2 />
-			<Header3 />
 
 			<div className="flex flex-row">
 				{imageList?.map((item, index) => (

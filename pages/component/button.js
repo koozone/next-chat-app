@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import {useFiled} from '../hook/useFiled';
 
 const getStyle = ({tag, type, selected}) => {
 	const buttonStyle = (
@@ -8,6 +9,8 @@ const getStyle = ({tag, type, selected}) => {
 			}`}
 		/>
 	).props.className;
+
+	const inputStyle = (<div className={` ${selected ? '' : ''}`} />).props.className;
 
 	const element = (() => {
 		switch (`[${tag}] ${type}`) {
@@ -131,6 +134,14 @@ const getStyle = ({tag, type, selected}) => {
 						}`}
 					/>
 				);
+			case '[input] text':
+				return (
+					<div
+						className={`focus:ring-2 focus:ring-blue-500 focus:outline-none w-full text-sm leading-6 text-gray-900 placeholder-gray-400 rounded-md py-2 pl-10 ring-1 ring-gray-200 shadow-sm ${
+							selected ? '' : ''
+						}`}
+					/>
+				);
 			default:
 				return <div className="" />;
 		}
@@ -153,10 +164,12 @@ function aaa(props) {
 	const {
 		children,
 		className = '',
-		src,
+		// src,
+		// name,
 		href = '#',
-		type = '',
-		selected = false,
+		// type = '',
+		// selected = false,
+		placeholder = '',
 		onClick = () => {
 			console.log('onClick');
 		},
@@ -166,66 +179,80 @@ function aaa(props) {
 	const content = getContent(props);
 
 	return {
+		...props,
 		children: children ? children : content,
 		className: `${className} | ${style}`,
-		src,
+		// src,
+		// name,
 		href,
-		type,
-		selected,
+		// type,
+		// selected,
 		onClick,
 	};
 }
 
 export const A = (props) => {
-	const {children, href, className} = aaa({...props, tag: 'a'});
+	// const {children, href, name, className} = aaa({...props, tag: 'a'});
+	const option = aaa({...props, tag: 'a'});
 
 	return (
-		<Link href={href}>
-			<a className={className}>{children}</a>
+		<Link href={option.href}>
+			<a name={option.name} className={option.className}>
+				{option.children}
+			</a>
 		</Link>
 	);
 };
 
 export const Img = (props) => {
-	const {src, className} = aaa({...props, tag: 'img'});
+	// const {src, name, className} = aaa({...props, tag: 'img'});
+	const option = aaa({...props, tag: 'img'});
 
-	return <img src={src} className={className} />;
+	return <img src={option.src} name={option.name} className={option.className} />;
 };
 
 export const Button = (props) => {
-	const {children, onClick, className} = aaa({...props, tag: 'button'});
+	// const {children, onClick, name, className} = aaa({...props, tag: 'button'});
+	const option = aaa({...props, tag: 'button'});
 
 	return (
-		<button type="button" onClick={onClick} className={className}>
-			{children}
+		<button
+			type="button"
+			onClick={option.onClick}
+			name={option.name}
+			className={option.className}
+		>
+			{option.children}
 		</button>
 	);
 };
 
-export const ButtonA = (props) => {
-	return <Button {...props} type="buttonA" />;
+export const Input = (props) => {
+	// const {children, onClick, onChange, placeholder, name, className} = aaa({
+	const option = aaa({
+		...props,
+		tag: 'input',
+	});
+	// const [field, runField] = useFiled({[name]: ''});
+
+	// const onChageInput = (event) => {
+	// 	const {name, value} = event.currentTarget;
+
+	// 	runField.change({name, value});
+	// };
+
+	return (
+		<div className="group relative">
+			<i className="bx bx-search-alt-2 text-2xl absolute left-3 top-1/2 -mt-2.5 text-gray-400 pointer-events-none group-focus-within:text-blue-500"></i>
+			<input
+				type="text"
+				// className="focus:ring-2 focus:ring-blue-500 focus:outline-none w-full text-sm leading-6 text-gray-900 placeholder-gray-400 rounded-md py-2 pl-10 ring-1 ring-gray-200 shadow-sm"
+				placeholder={option.placeholder}
+				value={option.value}
+				name={option.name}
+				onChange={option.onChange}
+				className={option.className}
+			/>
+		</div>
+	);
 };
-
-export const ButtonB = (props) => {
-	return <Button {...props} type="buttonB" />;
-};
-
-export function LinkA(props) {
-	return <A {...props} type="linkA" />;
-}
-
-export function LinkB(props) {
-	return <A {...props} type="linkB" />;
-}
-
-export function LinkC(props) {
-	return <A {...props} type="linkC" />;
-}
-
-export function ImageA(props) {
-	return <Img {...props} type="imageA" />;
-}
-
-export function ImageB(props) {
-	return <Img {...props} type="imageB" />;
-}

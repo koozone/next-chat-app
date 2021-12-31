@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import {useDog} from '../hook/useDog';
-import {ImageA} from './button';
 import {Toggle} from './toggle';
 
 export const BoxItem2 = () => {

@@ -2,20 +2,20 @@ import {useFiled} from '../hook/useFiled';
 import {useCount} from '../hook/useCount';
 import {useModal} from '../hook/useModal';
 import {useSideMenu} from '../hook/useSideMenu';
-import Header from '../component/header';
-import {A, Button, Img} from '../component/button';
+import Header, {Header1, Header2, Header3} from '../component/header';
+import {A, Button, Img, Input} from '../component/button';
 import {useDog} from '../hook/useDog';
 
 const CodeUseFiled = () => {
-	const [field, runField] = useFiled({id: '', password: '123'});
+	const [field, runField] = useFiled({id: 'koozone', password: '123'});
 
 	const onChageInput = (event) => {
-		const {name, value} = event.target;
+		const {name, value} = event.currentTarget;
 
 		runField.change({name, value});
 	};
 	const onClickReset = (event) => {
-		const {name} = event.target;
+		const {name} = event.currentTarget;
 
 		runField.reset({name});
 	};
@@ -26,12 +26,18 @@ const CodeUseFiled = () => {
 	return (
 		<div>
 			<div>
-				id :
-				<input type="text" value={field.id} name="id" onChange={onChageInput} />
+				id :{/* <input type="text" value={field.id} name="id" onChange={onChageInput} /> */}
+				<Input
+					type="text"
+					value={field.id}
+					name="id"
+					placeholder="입력해 주세요."
+					onChange={onChageInput}
+				/>
+				<Button type="success" name="id" onClick={onClickReset}>
+					reset
+				</Button>
 				<span>{field.id}</span>
-				<button type="button" name="id" onClick={onClickReset}>
-					[reset]
-				</button>
 			</div>
 			<div>
 				password :
@@ -41,14 +47,14 @@ const CodeUseFiled = () => {
 					name="password"
 					onChange={onChageInput}
 				/>
+				<Button type="success" name="password" onClick={onClickReset}>
+					reset
+				</Button>
 				<span>{field.password}</span>
-				<button type="button" name="password" onClick={onClickReset}>
-					[reset]
-				</button>
 			</div>
-			<button type="button" onClick={onClickResetAll}>
-				[reset]
-			</button>
+			<Button type="primary" onClick={onClickResetAll}>
+				reset
+			</Button>
 		</div>
 	);
 };
@@ -60,22 +66,22 @@ const CodeUseCount = () => {
 	});
 
 	const onChageInput = (event) => {
-		const {name, value} = event.target;
+		const {name, value} = event.currentTarget;
 
 		runCount.change({name, value});
 	};
 	const onClickIncrement = (event) => {
-		const {name} = event.target;
+		const {name} = event.currentTarget;
 
 		runCount.increment({name});
 	};
 	const onClickDecrement = (event) => {
-		const {name} = event.target;
+		const {name} = event.currentTarget;
 
 		runCount.decrement({name});
 	};
 	const onClickReset = (event) => {
-		const {name} = event.target;
+		const {name} = event.currentTarget;
 
 		runCount.reset({name});
 	};
@@ -88,34 +94,46 @@ const CodeUseCount = () => {
 			<div>
 				coffee :
 				<input type="text" value={count.coffee} name="coffee" onChange={onChageInput} />
+				<Button
+					type="secondary"
+					name="coffee"
+					onClick={onClickIncrement}
+					icon="bx-message-square-add"
+				></Button>
+				<Button
+					type="secondary"
+					name="coffee"
+					onClick={onClickDecrement}
+					icon="bx-message-square-minus"
+				></Button>
+				<Button type="success" name="coffee" onClick={onClickReset}>
+					reset
+				</Button>
 				<span>{count.coffee}</span>
-				<button type="button" name="coffee" onClick={onClickIncrement}>
-					[ + ]
-				</button>
-				<button type="button" name="coffee" onClick={onClickDecrement}>
-					[ - ]
-				</button>
-				<button type="button" name="coffee" onClick={onClickReset}>
-					[reset]
-				</button>
 			</div>
 			<div>
 				bread :
 				<input type="text" value={count.bread} name="bread" onChange={onChageInput} />
+				<Button
+					type="secondary"
+					name="bread"
+					onClick={onClickIncrement}
+					icon="bx-message-square-add"
+				></Button>
+				<Button
+					type="secondary"
+					name="bread"
+					onClick={onClickDecrement}
+					icon="bx-message-square-minus"
+				></Button>
+				<Button type="success" name="bread" onClick={onClickReset}>
+					reset
+				</Button>
 				<span>{count.bread}</span>
-				<button type="button" name="bread" onClick={onClickIncrement}>
-					[ + ]
-				</button>
-				<button type="button" name="bread" onClick={onClickDecrement}>
-					[ - ]
-				</button>
-				<button type="button" name="bread" onClick={onClickReset}>
-					[reset]
-				</button>
 			</div>
-			<button type="button" onClick={onClickResetAll}>
-				[reset]
-			</button>
+			<Button type="primary" onClick={onClickResetAll}>
+				reset
+			</Button>
 		</div>
 	);
 };
@@ -128,9 +146,9 @@ const CodeUseModal = () => {
 	};
 
 	return (
-		<button type="button" onClick={onClickModal}>
-			[modal]
-		</button>
+		<Button type="primary" onClick={onClickModal}>
+			modal
+		</Button>
 	);
 };
 
@@ -142,9 +160,23 @@ const CodeUseSideMenu = () => {
 	};
 
 	return (
-		<button type="button" onClick={onClickSideMenu}>
-			[sideMenu]
-		</button>
+		<Button type="primary" onClick={onClickSideMenu}>
+			sideMenu
+		</Button>
+	);
+};
+
+const CodeUseDog = () => {
+	const [sideMenu, runSideMenu] = useSideMenu();
+
+	const onClickSideMenu = (event) => {
+		runSideMenu.open();
+	};
+
+	return (
+		<Button type="primary" onClick={onClickSideMenu}>
+			dog
+		</Button>
 	);
 };
 
@@ -156,23 +188,29 @@ export default function code() {
 			<Header />
 
 			<div className="p-3">
-				<h2 className="text-2xl font-semibold">useState를 사용한 useFiled 구현</h2>
+				<h2 className="text-2xl font-semibold">useFiled (useState 사용)</h2>
 				<CodeUseFiled />
 			</div>
 			<div className="p-3">
-				<h2 className="text-2xl font-semibold">useReducer를 사용한 useCount 구현</h2>
+				<h2 className="text-2xl font-semibold">useCount (useReducer 사용)</h2>
 				<CodeUseCount />
 			</div>
 			<div className="p-3">
-				<h2 className="text-2xl font-semibold">useContext를 사용한 useModal 구현</h2>
+				<h2 className="text-2xl font-semibold">useModal (useContext 사용)</h2>
 				<CodeUseModal />
 			</div>
 			<div className="p-3">
-				<h2 className="text-2xl font-semibold">useContext를 사용한 useSideMenu 구현</h2>
+				<h2 className="text-2xl font-semibold">useSideMenu (useContext 사용)</h2>
 				<CodeUseSideMenu />
 			</div>
 
-			<div className="space-x-2">
+			<div className="p-3">
+				<h2 className="text-2xl font-semibold">useDog (axios 사용)</h2>
+				<CodeUseDog />
+			</div>
+
+			<div className="p-3">
+				<h2 className="text-2xl font-semibold">button</h2>
 				<div className="flex items-center gap-x-2">
 					<Button type="primary" name="Primary" />
 					<Button type="secondary" name="Secodary" />
@@ -205,6 +243,13 @@ export default function code() {
 				<A href="/view/layout" name="home" icon="bx-math" />
 
 				<Img src={imageList[0]?.src} name="home" icon="bx-math" className="h-[100px]" />
+			</div>
+
+			<div className="p-3">
+				<h2 className="text-2xl font-semibold">header</h2>
+				<Header1 />
+				<Header2 />
+				<Header3 />
 			</div>
 		</>
 	);

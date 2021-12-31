@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import {ButtonA, LinkA, LinkB, LinkC, ImageA} from './button';
+import {Button, A, Img} from './button';
 import Nav from '../component/nav';
 import NavItem from '../component/navItem';
 import useModals from '../hook/useModals';
@@ -14,15 +14,18 @@ const menuList = [
 	{name: 'Room', icon: 'bx-party', href: '/view/room'},
 	{name: 'Chat', icon: 'bx-bowl-rice', href: '/view/chat'},
 	{name: 'Sample', icon: 'bx-lemon', href: '/view/sample'},
-	{name: 'Test', icon: 'bx-lemon', href: '/view/test'},
 	{name: 'Layout', icon: 'bx-lemon', href: '/view/layout'},
 	{name: 'Code', icon: 'bx-lemon', href: '/view/code'},
+	{name: 'Test', icon: 'bx-lemon', href: '/view/test'},
 ];
 
 const getMenuList = () => {
 	const router = useRouter();
 
-	return menuList.map((item, index) => ({...item, selected: item.href == router.pathname}));
+	return menuList.map((item, index) => ({
+		...item,
+		selected: item.href == router.pathname,
+	}));
 };
 
 export function Header1() {
@@ -34,7 +37,7 @@ export function Header1() {
 			/>
 			<div className="hidden md:flex ml-6 space-x-3">
 				{getMenuList().map((item, index) => (
-					<LinkA key={index} {...item} />
+					<A key={index} {...{...item, type: 'linkA'}} />
 				))}
 			</div>
 		</div>
@@ -66,17 +69,21 @@ export function Header2() {
 			/>
 			<div className="hidden md:flex ml-6 space-x-3">
 				{getMenuList().map((item, index) => (
-					<LinkB key={index} {...item} />
+					<A key={index} {...{...item, type: 'linkB'}} />
 				))}
 			</div>
 			<div className="flex space-x-2">
-				<ButtonA
+				<Button
+					type="buttonA"
 					icon="bx-menu"
 					className="inline-block md:hidden"
 					onClick={clickMenu}
-				></ButtonA>
-				<ButtonA icon="bx-log-in" onClick={runModal.open}></ButtonA>
-				<ImageA src="https://images.unsplash.com/photo-1544348817-5f2cf14b88c8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1287&q=80"></ImageA>
+				></Button>
+				<Button type="buttonA" icon="bx-log-in" onClick={runModal.open}></Button>
+				<Img
+					type="imageA"
+					src="https://images.unsplash.com/photo-1544348817-5f2cf14b88c8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1287&q=80"
+				></Img>
 			</div>
 		</div>
 	);
@@ -91,11 +98,11 @@ export function Header3() {
 			/>
 			<div className="hidden md:flex space-x-2">
 				{getMenuList().map((item, index) => (
-					<LinkC key={index} {...item} />
+					<A key={index} {...{...item, type: 'linkC'}} />
 				))}
 			</div>
 			<div className="flex space-x-2">
-				<ButtonA icon="bx-menu" className="inline-block md:hidden"></ButtonA>
+				<Button icon="bx-menu" className="inline-block md:hidden"></Button>
 			</div>
 		</div>
 	);
