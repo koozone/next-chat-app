@@ -73,15 +73,10 @@ export function Header2() {
 				))}
 			</div>
 			<div className="flex space-x-2">
-				<Button
-					type="buttonA"
-					icon="bx-menu"
-					className="inline-block md:hidden"
-					onClick={clickMenu}
-				></Button>
-				<Button type="buttonA" icon="bx-log-in" onClick={runModal.open}></Button>
+				<Button css="buttonA" icon="bx-menu" className="inline-block md:hidden" onClick={clickMenu}></Button>
+				<Button css="buttonA" icon="bx-log-in" onClick={runModal.open}></Button>
 				<Img
-					type="imageA"
+					css="imageA"
 					src="https://images.unsplash.com/photo-1544348817-5f2cf14b88c8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1287&q=80"
 				></Img>
 			</div>

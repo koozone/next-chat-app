@@ -23,7 +23,7 @@ export default function test() {
 					<CardItem key={index} src={item.src} name={item.name} className="m-3" />
 				))}
 			</div>
-			<Button type="success" onClick={imageRefresh}>
+			<Button css="success" onClick={imageRefresh}>
 				<i className="bx bx-refresh bx-fw" />
 				<span>Refresh ({imageList.length})</span>
 			</Button>

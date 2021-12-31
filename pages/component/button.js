@@ -1,67 +1,26 @@
 import Link from 'next/link';
 import {useFiled} from '../hook/useFiled';
 
-const getStyle = ({tag, type, selected}) => {
-	const buttonStyle = (
-		<div
-			className={`px-2 py-1 text-sm leading-6 font-medium rounded-md space-x-1 ${
-				selected ? '' : ''
-			}`}
-		/>
-	).props.className;
+const getStyle = (props) => {
+	const {tag, css, icon, selected} = props;
 
-	const inputStyle = (<div className={` ${selected ? '' : ''}`} />).props.className;
+	const buttonStyle = (<div className={`px-2 py-1 ring-1 ring-black/10 text-sm leading-6 font-medium rounded-md space-x-1 ${selected ? '' : ''}`} />).props.className;
+	const inputStyle = (<div className={`px-2 py-1 ring-1 ring-black/10 text-sm leading-6 font-medium rounded-md space-x-1 ${icon ? 'pl-9' : ''} ${selected ? '' : ''}`} />).props.className;
 
 	const element = (() => {
-		switch (`[${tag}] ${type}`) {
+		switch (`[${tag}] ${css}`) {
 			case '[button] primary':
-				return (
-					<div
-						className={`text-white bg-blue-500 hover:bg-blue-600 ${
-							selected ? '' : ''
-						} ${buttonStyle}`}
-					/>
-				);
+				return <div className={`text-white bg-blue-500 hover:bg-blue-600 ${selected ? '' : ''} ${buttonStyle}`} />;
 			case '[button] secondary':
-				return (
-					<div
-						className={`text-white bg-neutral-400 hover:bg-neutral-500 ${
-							selected ? '' : ''
-						} ${buttonStyle}`}
-					/>
-				);
+				return <div className={`text-white bg-neutral-400 hover:bg-neutral-500 ${selected ? '' : ''} ${buttonStyle}`} />;
 			case '[button] success':
-				return (
-					<div
-						className={`text-white bg-lime-500 hover:bg-lime-600 ${
-							selected ? '' : ''
-						} ${buttonStyle}`}
-					/>
-				);
+				return <div className={`text-white bg-lime-500 hover:bg-lime-600 ${selected ? '' : ''} ${buttonStyle}`} />;
 			case '[button] danger':
-				return (
-					<div
-						className={`text-white bg-rose-500 hover:bg-rose-600 ${
-							selected ? '' : ''
-						} ${buttonStyle}`}
-					/>
-				);
+				return <div className={`text-white bg-rose-500 hover:bg-rose-600 ${selected ? '' : ''} ${buttonStyle}`} />;
 			case '[button] warning':
-				return (
-					<div
-						className={`text-white bg-amber-500 hover:bg-amber-600 ${
-							selected ? '' : ''
-						} ${buttonStyle}`}
-					/>
-				);
+				return <div className={`text-white bg-amber-500 hover:bg-amber-600 ${selected ? '' : ''} ${buttonStyle}`} />;
 			case '[button] info':
-				return (
-					<div
-						className={`text-white bg-cyan-500 hover:bg-cyan-600 ${
-							selected ? '' : ''
-						} ${buttonStyle}`}
-					/>
-				);
+				return <div className={`text-white bg-cyan-500 hover:bg-cyan-600 ${selected ? '' : ''} ${buttonStyle}`} />;
 			case '[button] bold':
 				return (
 					<div
@@ -80,11 +39,7 @@ const getStyle = ({tag, type, selected}) => {
 				);
 			case '[button] buttonA':
 				return (
-					<div
-						className={`h-10 aspect-square text-center text-gray-900 bg-black/10 rounded-full hover:text-white hover:bg-black/50 space-x-1 ${
-							selected ? 'bg-white/20' : 'bg-black/20'
-						}`}
-					/>
+					<div className={`h-10 aspect-square text-center text-gray-900 bg-black/10 rounded-full hover:text-white hover:bg-black/50 space-x-1 ${selected ? 'bg-white/20' : 'bg-black/20'}`} />
 				);
 			case '[button] buttonB':
 				return (
@@ -111,37 +66,15 @@ const getStyle = ({tag, type, selected}) => {
 					/>
 				);
 			case '[a] linkC':
-				return (
-					<div
-						className={`block px-2 py-1 rounded-md ${
-							selected ? 'bg-sky-300 text-white' : 'bg-gray-50 hover:text-red-900'
-						}`}
-					/>
-				);
+				return <div className={`block px-2 py-1 rounded-md ${selected ? 'bg-sky-300 text-white' : 'bg-gray-50 hover:text-red-900'}`} />;
 			case '[img] imageA':
-				return (
-					<div
-						className={`h-10 aspect-square border-2 border-white/50 rounded-full object-cover ${
-							selected ? '' : ''
-						}`}
-					/>
-				);
+				return <div className={`h-10 aspect-square border-2 border-white/50 rounded-full object-cover ${selected ? '' : ''}`} />;
 			case '[img] imageB':
-				return (
-					<div
-						className={`inline-block w-[200px] h-[200px] object-cover rounded-md ${
-							selected ? '' : ''
-						}`}
-					/>
-				);
-			case '[input] text':
-				return (
-					<div
-						className={`focus:ring-2 focus:ring-blue-500 focus:outline-none w-full text-sm leading-6 text-gray-900 placeholder-gray-400 rounded-md py-2 pl-10 ring-1 ring-gray-200 shadow-sm ${
-							selected ? '' : ''
-						}`}
-					/>
-				);
+				return <div className={`inline-block w-[200px] h-[200px] object-cover rounded-md ${selected ? '' : ''}`} />;
+			case '[input] primary':
+				return <div className={`focus:ring-2 focus:ring-blue-500 focus:outline-none w-full text-gray-900 placeholder-gray-300 ${selected ? '' : ''}  ${inputStyle}`} />;
+			case '[input] secondary':
+				return <div className={`focus:ring-2 focus:ring-blue-500 focus:outline-none w-full text-gray-900 placeholder-gray-300 ${selected ? '' : ''}  ${inputStyle}`} />;
 			default:
 				return <div className="" />;
 		}
@@ -169,7 +102,7 @@ function aaa(props) {
 		href = '#',
 		// type = '',
 		// selected = false,
-		placeholder = '',
+		// placeholder = '',
 		onClick = () => {
 			console.log('onClick');
 		},
@@ -216,36 +149,24 @@ export const Button = (props) => {
 	const option = aaa({...props, tag: 'button'});
 
 	return (
-		<button
-			type="button"
-			onClick={option.onClick}
-			name={option.name}
-			className={option.className}
-		>
+		<button type="button" onClick={option.onClick} name={option.name} className={option.className}>
 			{option.children}
 		</button>
 	);
 };
 
 export const Input = (props) => {
-	// const {children, onClick, onChange, placeholder, name, className} = aaa({
 	const option = aaa({
 		...props,
 		tag: 'input',
 	});
-	// const [field, runField] = useFiled({[name]: ''});
-
-	// const onChageInput = (event) => {
-	// 	const {name, value} = event.currentTarget;
-
-	// 	runField.change({name, value});
-	// };
 
 	return (
-		<div className="group relative">
-			<i className="bx bx-search-alt-2 text-2xl absolute left-3 top-1/2 -mt-2.5 text-gray-400 pointer-events-none group-focus-within:text-blue-500"></i>
+		<div className="group relative inline-block">
+			{/* <i className={`bx bx-user text-lg absolute left-3 top-1/2 -mt-2 text-gray-400 pointer-events-none group-focus-within:text-blue-500`}></i> */}
+			{option.icon ? <i className={`bx ${option.icon} text-lg absolute left-2 top-1/2 -mt-2 pointer-events-none text-gray-500 group-focus-within:text-blue-500`} /> : ''}
 			<input
-				type="text"
+				type={option.type}
 				// className="focus:ring-2 focus:ring-blue-500 focus:outline-none w-full text-sm leading-6 text-gray-900 placeholder-gray-400 rounded-md py-2 pl-10 ring-1 ring-gray-200 shadow-sm"
 				placeholder={option.placeholder}
 				value={option.value}
