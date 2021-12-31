@@ -1,6 +1,6 @@
 import Nav from '../component/nav';
 import NavItem from '../component/navItem';
-import Header, {Header3} from '../component/header';
+import Header from '../component/header';
 import List from '../component/list';
 import ListItem from '../component/listItem';
 import {useEffect, useState} from 'react';
@@ -19,7 +19,8 @@ export default function list() {
 
 	return (
 		<>
-			<Header3 />
+			<Header />
+
 			<div className="">
 				<Nav>
 					<NavItem>item1</NavItem>

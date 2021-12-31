@@ -22,7 +22,7 @@ const menuList = [
 const getMenuList = () => {
 	const router = useRouter();
 
-	return menuList.map((item, index) => ({...item, isSelect: item.href == router.pathname}));
+	return menuList.map((item, index) => ({...item, selected: item.href == router.pathname}));
 };
 
 export function Header1() {
@@ -101,4 +101,4 @@ export function Header3() {
 	);
 }
 
-export default Header1;
+export default Header3;

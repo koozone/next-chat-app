@@ -2,8 +2,9 @@ import {useFiled} from '../hook/useFiled';
 import {useCount} from '../hook/useCount';
 import {useModal} from '../hook/useModal';
 import {useSideMenu} from '../hook/useSideMenu';
-import {Header3} from '../component/header';
-import {Button} from '../component/button';
+import Header from '../component/header';
+import {A, Button, Img} from '../component/button';
+import {useDog} from '../hook/useDog';
 
 const CodeUseFiled = () => {
 	const [field, runField] = useFiled({id: '', password: '123'});
@@ -34,7 +35,12 @@ const CodeUseFiled = () => {
 			</div>
 			<div>
 				password :
-				<input type="password" value={field.password} name="password" onChange={onChageInput} />
+				<input
+					type="password"
+					value={field.password}
+					name="password"
+					onChange={onChageInput}
+				/>
 				<span>{field.password}</span>
 				<button type="button" name="password" onClick={onClickReset}>
 					[reset]
@@ -143,9 +149,12 @@ const CodeUseSideMenu = () => {
 };
 
 export default function code() {
+	const [imageList, imageRefresh] = useDog({count: 1 + Math.round(Math.random() * 4)});
+
 	return (
 		<>
-			<Header3 />
+			<Header />
+
 			<div className="p-3">
 				<h2 className="text-2xl font-semibold">useState를 사용한 useFiled 구현</h2>
 				<CodeUseFiled />
@@ -163,10 +172,39 @@ export default function code() {
 				<CodeUseSideMenu />
 			</div>
 
-			<div class="space-x-2">
-				<Button type="normal" name="MENU" icon="bx-menu" />
-				<Button type="bold" name="MENU" icon="bx-menu" />
-				<Button type="primary" name="MENU" className="text-3xl" />
+			<div className="space-x-2">
+				<div className="flex items-center gap-x-2">
+					<Button type="primary" name="Primary" />
+					<Button type="secondary" name="Secodary" />
+					<Button type="success" name="Success" />
+					<Button type="danger" name="Danger" />
+					<Button type="warning" name="Warning" />
+					<Button type="info" name="Info" />
+				</div>
+				<div className="flex items-center gap-x-2">
+					<Button type="normal" name="MENU" icon="bx-menu" />
+					<Button type="bold" name="MENU" icon="bx-menu" selected={true} />
+					<Button
+						type="primary"
+						name="Primary"
+						icon="bx-leaf"
+						iconR="bxs-chevron-right"
+					/>
+					<Button type="secondary" name="Secodary" iconR="bxs-chevron-right" />
+					<Button
+						type="success"
+						name="다음단계"
+						iconR="bxs-chevron-right"
+						className="w-[150px]"
+					/>
+					<Button type="danger" name="Danger" />
+					<Button type="warning" name="Warning" />
+					<Button type="info" name="Info" />
+				</div>
+
+				<A href="/view/layout" name="home" icon="bx-math" />
+
+				<Img src={imageList[0]?.src} name="home" icon="bx-math" className="h-[100px]" />
 			</div>
 		</>
 	);

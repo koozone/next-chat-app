@@ -5,7 +5,7 @@ import uid from 'tiny-uid';
 
 import {SocketContext} from '../net/socketContent';
 import NavBar from '../component/navBar';
-import {Header3} from '../component/header';
+import Header from '../component/header';
 
 export default function room({nickName, roomName}) {
 	const socket = useContext(SocketContext);
@@ -74,20 +74,34 @@ export default function room({nickName, roomName}) {
 			</Head>
 
 			{/* <NavBar /> */}
-			<Header3 />
+			<Header />
 
 			<h2>{roomName}</h2>
 
 			<label>이름 : </label>
-			<input type="text" name="nickName" value={chatData.nickName} onChange={changeInput}></input>
+			<input
+				type="text"
+				name="nickName"
+				value={chatData.nickName}
+				onChange={changeInput}
+			></input>
 
 			<ul>
 				{chatList.map((item, index) => {
-					return <li key={index}>{`${item.nickName} : ${item.message} [${DateTime.fromMillis(item.date).toFormat('LL-dd hh:mm')}]`}</li>;
+					return (
+						<li key={index}>{`${item.nickName} : ${item.message} [${DateTime.fromMillis(
+							item.date
+						).toFormat('LL-dd hh:mm')}]`}</li>
+					);
 				})}
 			</ul>
 
-			<input type="text" name="message" value={chatData.message} onChange={changeInput}></input>
+			<input
+				type="text"
+				name="message"
+				value={chatData.message}
+				onChange={changeInput}
+			></input>
 			<button type="button" onClick={clickButton}>
 				보내기
 			</button>

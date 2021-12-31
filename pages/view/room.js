@@ -4,7 +4,7 @@ import {useState, useEffect, useContext} from 'react';
 
 import Box from '../component/box';
 import BoxItem, {BoxItem2} from '../component/boxItem';
-import Header, {Header2} from '../component/header';
+import Header from '../component/header';
 import NavBar from '../component/navBar';
 import Popup from '../component/popup';
 import useModals from '../hook/useModals';
@@ -46,7 +46,7 @@ export default function chat() {
 
 	return (
 		<div className="relative h-screen">
-			<Header2 />
+			<Header />
 			{/* <NavBar /> */}
 			<header className="bg-white space-y-4 p-4 sm:px-8 sm:py-6 lg:p-4 xl:px-8 xl:py-6">
 				<div className="flex items-center justify-between">

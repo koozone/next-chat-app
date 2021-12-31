@@ -1,8 +1,9 @@
-import * as header from '../component/header';
+import Header, {Header1, Header2, Header3} from '../component/header';
 import axios from 'axios';
 import {useDog} from './../hook/useDog';
 import {useUnsplash} from './../hook/useUnsplash';
-import {ButtonB, KKK} from '../component/button';
+import {Button} from '../component/button';
+import {CardItem} from '../component/cardItem';
 
 export default function test() {
 	const [imageList, imageRefresh] = useDog({count: 1 + Math.round(Math.random() * 2)});
@@ -10,9 +11,11 @@ export default function test() {
 
 	return (
 		<div>
-			<header.Header1 />
-			<header.Header2 />
-			<header.Header3 />
+			<Header />
+
+			<Header1 />
+			<Header2 />
+			<Header3 />
 
 			<div className="flex flex-row">
 				{imageList?.map((item, index) => (
@@ -21,10 +24,13 @@ export default function test() {
 					// 	src={item}
 					// 	className="inline-block w-[200px] h-[200px] object-cover rounded-md m-5 hover:ring-4 hover:ring-white"
 					// />
-					<KKK key={index} src={item.src} name={item.name} className="m-3" />
+					<CardItem key={index} src={item.src} name={item.name} className="m-3" />
 				))}
 			</div>
-			<ButtonB onClick={imageRefresh}>Refresh({imageList.length})</ButtonB>
+			<Button type="success" onClick={imageRefresh}>
+				<i className="bx bx-refresh bx-fw" />
+				<span>Refresh ({imageList.length})</span>
+			</Button>
 		</div>
 	);
 }
