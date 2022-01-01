@@ -20,8 +20,6 @@ const getStyle = ({tag, css, icon, selected}) => {
 	console.log(css);
 	const element = (() => {
 		switch (`[${tag}]:${css}`) {
-			case '[i]:a-linkA':
-			case '[i]:a-linkC':
 			case '[i]:button-primary':
 				return <div className={`text-white group-hover:text-blue-500 group-hover:animate-bounce ${selected ? '' : ''}`} />;
 			case '[i]:button-danger':
@@ -31,7 +29,7 @@ const getStyle = ({tag, css, icon, selected}) => {
 			case '[i]:input-danger':
 				return <div className={`text-gray-500 group-focus-within:text-rose-500 group-focus-within:animate-spin ${selected ? '' : ''}`} />;
 			case '[i]:':
-				return <div className={`text-yellow-500 group-hover:text-red-500 ${selected ? '' : ''}`} />;
+				return <div className={`text-black/50 ${selected ? '' : ''}`} />;
 			case '[input]:primary':
 				return <div className={`focus:ring-blue-500 text-gray-900 placeholder-gray-300  ${selected ? '' : ''}`} />;
 			case '[input]:danger':
