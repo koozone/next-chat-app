@@ -96,7 +96,7 @@ const CodeUseCount = () => {
 			</div>
 			<div>
 				bread :{/* <input type="text" value={count.bread} name="bread" onChange={onChageInput} /> */}
-				<Input type="text" css="primary" value={count.bread} name="bread" icon="bx-baguette" placeholder="bread 입력" onChange={onChageInput} className="w-[80px]" />
+				<Input type="text" css="danger" value={count.bread} name="bread" icon="bx-baguette" placeholder="bread 입력" onChange={onChageInput} className="w-[80px]" />
 				<Button css="secondary" name="bread" onClick={onClickIncrement}>
 					<i className="bx bx-message-square-add bx-fw" />
 				</Button>
