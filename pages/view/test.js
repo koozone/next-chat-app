@@ -2,7 +2,7 @@ import Header from '../component/header';
 import axios from 'axios';
 import {useDog} from './../hook/useDog';
 import {useUnsplash} from './../hook/useUnsplash';
-import {Button} from '../component/button';
+import {Button} from '../component/ui';
 import {CardItem} from '../component/cardItem';
 
 export default function test() {

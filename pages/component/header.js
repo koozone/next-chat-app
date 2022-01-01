@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import {Button, A, Img} from './button';
+import {Button, A, Img} from './ui';
 import Nav from '../component/nav';
 import NavItem from '../component/navItem';
 import useModals from '../hook/useModals';

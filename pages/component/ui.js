@@ -1,11 +1,14 @@
 import Link from 'next/link';
-import {useFiled} from '../hook/useFiled';
+import {useState} from 'react';
 
-const getStyle = ({tag, css, icon, selected}) => {
+const getStyle = (props) => {
+	const {tag, css, icon, selected} = props;
+
 	const baseElement = {
 		i: <div className={`bx ${icon} pointer-events-none`} />,
 		a: <div className="group space-x-1" />,
 		img: <div className="" />,
+		label: <div className="" />,
 		button: (
 			<div className={`group px-2 py-1 ring-1 ring-black/30 hover:ring-2 text-sm leading-6 font-medium rounded-md space-x-1 ${selected ? '' : ''}`} />
 		),
@@ -17,7 +20,7 @@ const getStyle = ({tag, css, icon, selected}) => {
 			/>
 		),
 	};
-	console.log(css);
+
 	const element = (() => {
 		switch (`[${tag}]:${css}`) {
 			case '[i]:button-primary':
@@ -31,11 +34,11 @@ const getStyle = ({tag, css, icon, selected}) => {
 			case '[i]:':
 				return <div className={`text-black/50 ${selected ? '' : ''}`} />;
 			case '[input]:primary':
-				return <div className={`focus:ring-blue-500 text-gray-900 placeholder-gray-300  ${selected ? '' : ''}`} />;
+				return <div className={`focus:ring-blue-500 text-gray-900 placeholder-gray-300 ${selected ? '' : ''}`} />;
 			case '[input]:danger':
 				return <div className={`focus:ring-rose-500 text-gray-900 placeholder-gray-300 ${selected ? '' : ''}`} />;
 			case '[button]:primary':
-				return <div className={`text-white bg-blue-500 hover:bg-blue-50 hover:ring-blue-500 hover:text-blue-600 ${selected ? '' : ''}`} />;
+				return <div className={`text-white bg-blue-500 hover:bg-blue-50 hover:ring-blue-500 hover:text-blue-600 peer-checked:ring-red-500`} />;
 			case '[button]:secondary':
 				return <div className={`text-white bg-neutral-500 hover:bg-neutral-600 ${selected ? '' : ''}`} />;
 			case '[button]:success':
@@ -49,9 +52,7 @@ const getStyle = ({tag, css, icon, selected}) => {
 			case '[button]:bold':
 				return (
 					<div
-						className={`px-2 py-2 text-black/80 bg-white/20 font-semibold border-b-2 border-r-2 border-black/50 rounded-md hover:border-0 hover:border-t-2 hover:border-l-2 hover:border-black/50 hover:bg-black/10 hover:text-white ${
-							selected ? 'bg-red-500' : ''
-						}`}
+						className={`px-2 py-2 text-black/80 bg-white/20 font-semibold border-b-2 border-r-2 border-black/50 rounded-md hover:border-0 hover:border-t-2 hover:border-l-2 hover:border-black/50 hover:bg-black/10 hover:text-white peer-checked:bg-red-500`}
 					/>
 				);
 			case '[button]:normal':
@@ -106,10 +107,12 @@ const getStyle = ({tag, css, icon, selected}) => {
 		}
 	})();
 
-	return `${baseElement[tag].props.className} ${element.props.className}`;
+	return `${baseElement[tag].props.className} | ${element.props.className}`;
 };
 
-const getContent = ({tag, css, icon, iconL, iconR, name}) => {
+const getContent = (props) => {
+	const {tag, css, icon, iconL, iconR, name} = props;
+
 	return (
 		<>
 			{icon || iconL ? <I css={tag + '-' + css} icon={icon || iconL} /> : ''}
@@ -119,18 +122,13 @@ const getContent = ({tag, css, icon, iconL, iconR, name}) => {
 	);
 };
 
-function aaa(props) {
+const getProps = (props) => {
 	const {
 		children,
 		className = '',
-		// src,
-		// name,
 		href = '#',
-		// type = '',
-		// selected = false,
-		// placeholder = '',
 		onClick = () => {
-			console.log('onClick');
+			console.log('button click!');
 		},
 	} = props;
 
@@ -140,72 +138,69 @@ function aaa(props) {
 	return {
 		...props,
 		children: children ? children : content,
-		className: `${className} | ${style}`,
-		// src,
-		// name,
+		className: `${style} | ${className}`,
 		href,
-		// type,
-		// selected,
 		onClick,
 	};
-}
+};
+
+export const Label = (props) => {
+	const {children, css, className} = getProps({...props, tag: 'label'});
+
+	return (
+		<label css={css} className={className}>
+			{children}
+		</label>
+	);
+};
 
 export const I = (props) => {
-	// const {children, onClick, name, className} = aaa({...props, tag: 'button'});
-	const option = aaa({...props, tag: 'i'});
+	const {css, className} = getProps({...props, tag: 'i'});
 
-	return <i css={option.css} className={option.className} />;
+	return <i css={css} className={className} />;
 };
 
 export const A = (props) => {
-	// const {children, href, name, className} = aaa({...props, tag: 'a'});
-	const option = aaa({...props, tag: 'a'});
+	const {children, href, name, css, className} = getProps({...props, tag: 'a'});
 
 	return (
-		<Link href={option.href}>
-			<a name={option.name} css={option.css} className={option.className}>
-				{option.children}
+		<Link href={href}>
+			<a name={name} css={css} className={className}>
+				{children}
 			</a>
 		</Link>
 	);
 };
 
 export const Img = (props) => {
-	// const {src, name, className} = aaa({...props, tag: 'img'});
-	const option = aaa({...props, tag: 'img'});
+	const {src, name, css, className} = getProps({...props, tag: 'img'});
 
-	return <img src={option.src} name={option.name} css={option.css} className={option.className} />;
+	return <img src={src} name={name} css={css} className={className} />;
 };
 
 export const Button = (props) => {
-	// const {children, onClick, name, className} = aaa({...props, tag: 'button'});
-	const option = aaa({...props, tag: 'button'});
+	const {children, name, css, className, onClick, checked = false} = getProps({...props, tag: 'button'});
 
 	return (
-		<button type="button" onClick={option.onClick} name={option.name} css={option.css} className={option.className}>
-			{option.children}
-		</button>
+		<>
+			<input type="checkbox" className="peer hidden" checked={checked} onChange={() => {}} />
+			<button type="button" onClick={onClick} name={name} css={css} className={className}>
+				{children}
+			</button>
+		</>
 	);
 };
 
 export const Input = (props) => {
-	const option = aaa({
+	const {tag, css, icon, type, placeholder, value, name, onChange, className} = getProps({
 		...props,
 		tag: 'input',
 	});
 
 	return (
 		<div className="group relative inline-block">
-			{option.icon ? <I css={option.tag + '-' + option.css} icon={option.icon} className="text-lg absolute left-2 top-1/2 -mt-2" /> : ''}
-			<input
-				type={option.type}
-				placeholder={option.placeholder}
-				value={option.value}
-				name={option.name}
-				onChange={option.onChange}
-				css={option.css}
-				className={option.className}
-			/>
+			{icon ? <I css={tag + '-' + css} icon={icon} className="text-lg absolute left-2 top-1/2 -mt-2" /> : ''}
+			<input type={type} placeholder={placeholder} value={value} name={name} onChange={onChange} css={css} className={className} />
 		</div>
 	);
 };

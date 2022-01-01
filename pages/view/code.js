@@ -3,7 +3,7 @@ import {useCount} from '../hook/useCount';
 import {useModal} from '../hook/useModal';
 import {useSideMenu} from '../hook/useSideMenu';
 import Header, {Header1, Header2, Header3} from '../component/header';
-import {A, Button, Img, Input} from '../component/button';
+import {A, Button, Img, Input, Label} from '../component/ui';
 import {useDog} from '../hook/useDog';
 
 const CodeUseFiled = () => {
@@ -202,6 +202,7 @@ export default function code() {
 
 			<div className="p-3">
 				<h2 className="text-2xl font-semibold">useFiled (useState 사용)</h2>
+				<Label>kkkkk</Label>
 				<CodeUseFiled />
 			</div>
 			<div className="p-3">
@@ -234,8 +235,8 @@ export default function code() {
 				</div>
 				<div className="flex items-center gap-x-2">
 					<Button css="normal" name="MENU" icon="bx-menu" />
-					<Button css="bold" name="MENU" icon="bx-menu" selected={true} />
-					<Button css="primary" name="Primary" icon="bx-leaf" iconR="bxs-chevron-right" />
+					<Button css="bold" name="MENU" icon="bx-menu" checked />
+					<Button css="primary" name="Primary" icon="bx-leaf" iconR="bxs-chevron-right" checked />
 					<Button css="secondary" name="Secodary" iconR="bxs-chevron-right" />
 					<Button css="success" name="다음단계" iconR="bxs-chevron-right" className="w-[150px]" />
 					<Button css="danger" name="경고" icon="bx-bug" />

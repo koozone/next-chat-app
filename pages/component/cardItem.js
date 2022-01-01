@@ -1,5 +1,5 @@
 import React from 'react';
-import {A, Img} from './button';
+import {A, Img} from './ui';
 
 export const CardItem = (props) => {
 	const {className} = props;
