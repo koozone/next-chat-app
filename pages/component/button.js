@@ -1,12 +1,14 @@
 import Link from 'next/link';
 import {useFiled} from '../hook/useFiled';
 
-const getStyle = ({tag, css = '', icon, selected}) => {
+const getStyle = ({tag, css, icon, selected}) => {
 	const baseElement = {
-		i: <div className={`bx ${icon} pointer-events-none group-focus-within:animate-spin`} />,
+		i: <div className={`bx ${icon} pointer-events-none`} />,
 		a: <div className="group space-x-1" />,
 		img: <div className="" />,
-		button: <div className={`group px-2 py-1 ring-1 ring-black/30 text-sm leading-6 font-medium rounded-md space-x-1 ${selected ? '' : ''}`} />,
+		button: (
+			<div className={`group px-2 py-1 ring-1 ring-black/30 hover:ring-2 text-sm leading-6 font-medium rounded-md space-x-1 ${selected ? '' : ''}`} />
+		),
 		input: (
 			<div
 				className={`px-2 py-1 ring-1 ring-black/30 text-sm leading-6 font-medium rounded-md focus:ring-2 focus:outline-none w-full truncate ${
@@ -15,13 +17,19 @@ const getStyle = ({tag, css = '', icon, selected}) => {
 			/>
 		),
 	};
-
+	console.log(css);
 	const element = (() => {
 		switch (`[${tag}]:${css}`) {
-			case '[i]:primary':
-				return <div className={`text-gray-500 group-focus-within:text-blue-500 ${selected ? '' : ''}`} />;
-			case '[i]:danger':
-				return <div className={`text-gray-500 group-focus-within:text-rose-500 ${selected ? '' : ''}`} />;
+			case '[i]:a-linkA':
+			case '[i]:a-linkC':
+			case '[i]:button-primary':
+				return <div className={`text-white group-hover:text-blue-500 group-hover:animate-bounce ${selected ? '' : ''}`} />;
+			case '[i]:button-danger':
+				return <div className={`text-white group-hover:text-rose-500 group-hover:animate-bounce ${selected ? '' : ''}`} />;
+			case '[i]:input-primary':
+				return <div className={`text-gray-500 group-focus-within:text-blue-500 group-focus-within:animate-spin ${selected ? '' : ''}`} />;
+			case '[i]:input-danger':
+				return <div className={`text-gray-500 group-focus-within:text-rose-500 group-focus-within:animate-spin ${selected ? '' : ''}`} />;
 			case '[i]:':
 				return <div className={`text-yellow-500 group-hover:text-red-500 ${selected ? '' : ''}`} />;
 			case '[input]:primary':
@@ -29,13 +37,13 @@ const getStyle = ({tag, css = '', icon, selected}) => {
 			case '[input]:danger':
 				return <div className={`focus:ring-rose-500 text-gray-900 placeholder-gray-300 ${selected ? '' : ''}`} />;
 			case '[button]:primary':
-				return <div className={`text-white bg-blue-500 hover:bg-blue-600 ${selected ? '' : ''}`} />;
+				return <div className={`text-white bg-blue-500 hover:bg-blue-50 hover:ring-blue-500 hover:text-blue-600 ${selected ? '' : ''}`} />;
 			case '[button]:secondary':
 				return <div className={`text-white bg-neutral-500 hover:bg-neutral-600 ${selected ? '' : ''}`} />;
 			case '[button]:success':
 				return <div className={`text-white bg-lime-500 hover:bg-lime-600 ${selected ? '' : ''}`} />;
 			case '[button]:danger':
-				return <div className={`text-white bg-rose-500 hover:bg-rose-600 ${selected ? '' : ''}`} />;
+				return <div className={`text-white bg-rose-500 hover:bg-rose-50 hover:ring-rose-500 hover:text-rose-600 ${selected ? '' : ''}`} />;
 			case '[button]:warning':
 				return <div className={`text-white bg-amber-500 hover:bg-amber-600 ${selected ? '' : ''}`} />;
 			case '[button]:info':
@@ -103,10 +111,10 @@ const getStyle = ({tag, css = '', icon, selected}) => {
 	return `${baseElement[tag].props.className} ${element.props.className}`;
 };
 
-const getContent = ({icon, iconL, iconR, name}) => {
+const getContent = ({tag, css, icon, iconL, iconR, name}) => {
 	return (
 		<>
-			{icon || iconL ? <I icon={icon || iconL} /> : ''}
+			{icon || iconL ? <I css={tag + '-' + css} icon={icon || iconL} /> : ''}
 			{name ? <span>{name}</span> : ''}
 			{iconR ? <I icon={iconR} /> : ''}
 		</>
@@ -190,7 +198,7 @@ export const Input = (props) => {
 
 	return (
 		<div className="group relative inline-block">
-			{option.icon ? <I css={option.css} icon={option.icon} className="text-lg absolute left-2 top-1/2 -mt-2" /> : ''}
+			{option.icon ? <I css={option.tag + '-' + option.css} icon={option.icon} className="text-lg absolute left-2 top-1/2 -mt-2" /> : ''}
 			<input
 				type={option.type}
 				placeholder={option.placeholder}

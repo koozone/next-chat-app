@@ -27,7 +27,16 @@ const CodeUseFiled = () => {
 		<div>
 			<div>
 				id :{/* <input type="text" value={field.id} name="id" onChange={onChageInput} /> */}
-				<Input type="text" css="primary" value={field.id} name="id" icon="bx-user" placeholder="id 입력" onChange={onChageInput} className="w-[150px]" />
+				<Input
+					type="text"
+					css="primary"
+					value={field.id}
+					name="id"
+					icon="bx-user"
+					placeholder="id 입력"
+					onChange={onChageInput}
+					className="w-[150px]"
+				/>
 				<Button css="success" name="id" onClick={onClickReset}>
 					reset
 				</Button>
@@ -35,7 +44,16 @@ const CodeUseFiled = () => {
 			</div>
 			<div>
 				password :{/* <input type="password" value={field.password} name="password" onChange={onChageInput} /> */}
-				<Input type="password" css="primary" value={field.password} name="password" icon="bx-key" placeholder="password 입력" onChange={onChageInput} className="w-[150px]" />
+				<Input
+					type="password"
+					css="primary"
+					value={field.password}
+					name="password"
+					icon="bx-key"
+					placeholder="password 입력"
+					onChange={onChageInput}
+					className="w-[150px]"
+				/>
 				<Button css="success" name="password" onClick={onClickReset}>
 					reset
 				</Button>
@@ -82,7 +100,16 @@ const CodeUseCount = () => {
 		<div>
 			<div>
 				coffee :{/* <input type="text" value={count.coffee} name="coffee" onChange={onChageInput} /> */}
-				<Input type="text" css="primary" value={count.coffee} name="coffee" icon="bx-coffee-togo" placeholder="coffee 입력" onChange={onChageInput} className="w-[80px]" />
+				<Input
+					type="text"
+					css="primary"
+					value={count.coffee}
+					name="coffee"
+					icon="bx-coffee-togo"
+					placeholder="coffee 입력"
+					onChange={onChageInput}
+					className="w-[80px]"
+				/>
 				<Button css="secondary" name="coffee" onClick={onClickIncrement}>
 					<i className="bx bx-message-square-add bx-fw" />
 				</Button>
@@ -96,7 +123,16 @@ const CodeUseCount = () => {
 			</div>
 			<div>
 				bread :{/* <input type="text" value={count.bread} name="bread" onChange={onChageInput} /> */}
-				<Input type="text" css="danger" value={count.bread} name="bread" icon="bx-baguette" placeholder="bread 입력" onChange={onChageInput} className="w-[80px]" />
+				<Input
+					type="text"
+					css="danger"
+					value={count.bread}
+					name="bread"
+					icon="bx-baguette"
+					placeholder="bread 입력"
+					onChange={onChageInput}
+					className="w-[80px]"
+				/>
 				<Button css="secondary" name="bread" onClick={onClickIncrement}>
 					<i className="bx bx-message-square-add bx-fw" />
 				</Button>
@@ -202,7 +238,7 @@ export default function code() {
 					<Button css="primary" name="Primary" icon="bx-leaf" iconR="bxs-chevron-right" />
 					<Button css="secondary" name="Secodary" iconR="bxs-chevron-right" />
 					<Button css="success" name="다음단계" iconR="bxs-chevron-right" className="w-[150px]" />
-					<Button css="danger" name="Danger" />
+					<Button css="danger" name="경고" icon="bx-bug" />
 					<Button css="warning" name="Warning" />
 					<Button css="info" name="Info" />
 				</div>
