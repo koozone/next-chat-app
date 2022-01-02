@@ -3,7 +3,7 @@ import {useCount} from '../hook/useCount';
 import {useModal} from '../hook/useModal';
 import {useSideMenu} from '../hook/useSideMenu';
 import Header, {Header1, Header2, Header3} from '../component/header';
-import {A, Button, Img, Input, Label} from '../component/ui';
+import {A, Button, Img, Input, Label, Checkbox} from '../component/ui';
 import {useDog} from '../hook/useDog';
 
 const CodeUseFiled = () => {
@@ -26,7 +26,7 @@ const CodeUseFiled = () => {
 	return (
 		<div>
 			<div>
-				id :{/* <input type="text" value={field.id} name="id" onChange={onChageInput} /> */}
+				id :
 				<Input
 					type="text"
 					css="primary"
@@ -43,7 +43,7 @@ const CodeUseFiled = () => {
 				<span>{field.id}</span>
 			</div>
 			<div>
-				password :{/* <input type="password" value={field.password} name="password" onChange={onChageInput} /> */}
+				password :
 				<Input
 					type="password"
 					css="primary"
@@ -99,7 +99,7 @@ const CodeUseCount = () => {
 	return (
 		<div>
 			<div>
-				coffee :{/* <input type="text" value={count.coffee} name="coffee" onChange={onChageInput} /> */}
+				coffee :
 				<Input
 					type="text"
 					css="primary"
@@ -122,7 +122,7 @@ const CodeUseCount = () => {
 				<span>{count.coffee}</span>
 			</div>
 			<div>
-				bread :{/* <input type="text" value={count.bread} name="bread" onChange={onChageInput} /> */}
+				bread :
 				<Input
 					type="text"
 					css="danger"
@@ -193,9 +193,61 @@ const CodeUseDog = () => {
 	);
 };
 
-export default function code() {
+const CodeUseCheckbox = () => {
 	const [imageList, imageRefresh] = useDog({count: 1 + Math.round(Math.random() * 4)});
+	const [check, runCheck] = useFiled({bird: true, cat: false});
 
+	const onChangeCheckbox = (event) => {
+		const {name, checked: value} = event.currentTarget;
+
+		runCheck.change({name, value});
+	};
+
+	const onClickResetAll = (event) => {
+		runCheck.reset();
+	};
+
+	return (
+		<>
+			<div className="flex items-center gap-x-2">
+				<Button css="primary" name="Primary" />
+				<Button css="secondary" name="Secodary" />
+				<Button css="success" name="Success" />
+				<Button css="danger" name="Danger" />
+				<Button css="warning" name="Warning" />
+				<Button css="info" name="Info" />
+			</div>
+			<div className="flex items-center gap-x-2">
+				<Button css="normal" name="MENU" icon="bx-menu" />
+				<Button css="bold" name="MENU" icon="bx-menu" checked />
+				<Button css="primary" name="Primary" icon="bx-leaf" iconR="bxs-chevron-right" checked />
+				<Button css="secondary" name="Secodary" iconR="bxs-chevron-right" />
+				<Button css="success" name="다음단계" iconR="bxs-chevron-right" className="w-[150px]" />
+				<Button css="danger" name="경고" icon="bx-bug" />
+				<Button css="warning" name="Warning" />
+				<Button css="info" name="Info" />
+			</div>
+			<div className="flex items-center gap-x-2">
+				bird :
+				<Checkbox css="primary" name="bird" icon="bx-leaf" iconR="bxs-chevron-right" checked={check.bird} onChange={onChangeCheckbox} />
+				<span>{check.bird ? 'true' : 'false'}</span>
+				cat :
+				<Checkbox css="primary" name="cat" icon="bx-leaf" iconR="bxs-chevron-right" checked={check.cat} onChange={onChangeCheckbox} />
+				<span>{check.cat ? 'true' : 'false'}</span>
+			</div>
+
+			<A href="/view/layout" name="home" icon="bx-math" />
+
+			<Img src={imageList[0]?.src} name="home" icon="bx-math" className="h-[100px]" />
+
+			<Button css="primary" onClick={onClickResetAll}>
+				reset
+			</Button>
+		</>
+	);
+};
+
+export default function code() {
 	return (
 		<>
 			<Header />
@@ -225,28 +277,7 @@ export default function code() {
 
 			<div className="p-3">
 				<h2 className="text-2xl font-semibold">button</h2>
-				<div className="flex items-center gap-x-2">
-					<Button css="primary" name="Primary" />
-					<Button css="secondary" name="Secodary" />
-					<Button css="success" name="Success" />
-					<Button css="danger" name="Danger" />
-					<Button css="warning" name="Warning" />
-					<Button css="info" name="Info" />
-				</div>
-				<div className="flex items-center gap-x-2">
-					<Button css="normal" name="MENU" icon="bx-menu" />
-					<Button css="bold" name="MENU" icon="bx-menu" checked />
-					<Button css="primary" name="Primary" icon="bx-leaf" iconR="bxs-chevron-right" checked />
-					<Button css="secondary" name="Secodary" iconR="bxs-chevron-right" />
-					<Button css="success" name="다음단계" iconR="bxs-chevron-right" className="w-[150px]" />
-					<Button css="danger" name="경고" icon="bx-bug" />
-					<Button css="warning" name="Warning" />
-					<Button css="info" name="Info" />
-				</div>
-
-				<A href="/view/layout" name="home" icon="bx-math" />
-
-				<Img src={imageList[0]?.src} name="home" icon="bx-math" className="h-[100px]" />
+				<CodeUseCheckbox />
 			</div>
 
 			<div className="p-3">

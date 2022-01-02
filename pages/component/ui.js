@@ -38,7 +38,11 @@ const getStyle = (props) => {
 			case '[input]:danger':
 				return <div className={`focus:ring-rose-500 text-gray-900 placeholder-gray-300 ${selected ? '' : ''}`} />;
 			case '[button]:primary':
-				return <div className={`text-white bg-blue-500 hover:bg-blue-50 hover:ring-blue-500 hover:text-blue-600 peer-checked:ring-red-500`} />;
+				return (
+					<div
+						className={`text-white bg-blue-500 hover:bg-blue-50 hover:ring-blue-500 hover:text-blue-600 peer-checked:bg-yellow-500 peer-disabled:bg-gray-500`}
+					/>
+				);
 			case '[button]:secondary':
 				return <div className={`text-white bg-neutral-500 hover:bg-neutral-600 ${selected ? '' : ''}`} />;
 			case '[button]:success':
@@ -188,6 +192,26 @@ export const Button = (props) => {
 				{children}
 			</button>
 		</>
+	);
+};
+
+export const Checkbox = (props) => {
+	const {children, name, css, className, onChange, checked = false, disabled = false} = getProps({...props, tag: 'button'});
+
+	return (
+		<span className="relative">
+			<input
+				type="checkbox"
+				name={name}
+				className="peer absolute top-0 left-0 opacity-0 w-full h-full m-0 p-0 cursor-pointer z-10 disabled:cursor-default"
+				onChange={onChange}
+				checked={checked}
+				disabled={disabled}
+			/>
+			<button type="button" name={name} css={css} className={className}>
+				{children}
+			</button>
+		</span>
 	);
 };
 
