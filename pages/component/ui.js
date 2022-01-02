@@ -8,8 +8,8 @@ const getStyle = (props) => {
 		i: <div className={`bx ${icon} pointer-events-none`} />,
 		a: <div className="group space-x-1" />,
 		img: <div className="" />,
-		div: <div className={`group px-2 py-1 ring-1 ring-black/30 hover:ring-2 text-sm leading-6 font-medium rounded-md space-x-1`} />,
-		label: <div className="" />,
+		// div: <div className={`group px-2 py-1 ring-1 ring-black/30 hover:ring-2 text-sm leading-6 font-medium rounded-md space-x-1`} />,
+		label: <div className="group px-2 py-1 text-sm leading-6 font-medium rounded-md space-x-1" />,
 		button: (
 			<div className={`group px-2 py-1 ring-1 ring-black/30 hover:ring-2 text-sm leading-6 font-medium rounded-md space-x-1 ${selected ? '' : ''}`} />
 		),
@@ -38,7 +38,9 @@ const getStyle = (props) => {
 				return <div className={`focus:ring-blue-500 text-gray-900 placeholder-gray-300 ${selected ? '' : ''}`} />;
 			case '[input]:danger':
 				return <div className={`focus:ring-rose-500 text-gray-900 placeholder-gray-300 ${selected ? '' : ''}`} />;
-			case '[div]:primary':
+			case '[label]:test':
+				return <div className={`text-red-500`} />;
+			case '[button]:checkbox':
 				return <div className={`text-white bg-blue-500 peer-checked:bg-blue-50 peer-checked:text-blue-600 peer-disabled:bg-gray-500`} />;
 			case '[button]:primary':
 				return (
@@ -137,6 +139,7 @@ const getProps = (props) => {
 		onClick = () => {
 			console.log('button click!');
 		},
+		css = '',
 	} = props;
 
 	const style = getStyle(props);
@@ -196,19 +199,19 @@ export const Button = (props) => {
 };
 
 export const Checkbox = (props) => {
-	const {children, name, css, className, onChange, checked, disabled} = getProps({...props, tag: 'div'});
+	const {children, name, css, className, onChange, checked, disabled} = getProps({...props, tag: 'button'});
 
 	return (
 		<label className="inline-block relative cursor-pointer">
 			<input
 				type="checkbox"
-				className="peer absolute top-0 -left-5 opacity-90 w-4 h-full m-0 p-0 cursor-pointer z-10 disabled:cursor-default"
+				className="peer absolute top-0 left-2 opacity-90 w-4 h-full m-0 p-0 cursor-pointer z-10 disabled:cursor-default"
 				name={name}
 				onChange={onChange}
 				checked={checked}
 				disabled={disabled}
 			/>
-			<div name={name} css={css} className={className}>
+			<div name={name} css={css} className={className + ' pl-8'}>
 				{children}
 			</div>
 		</label>

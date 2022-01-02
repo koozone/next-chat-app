@@ -240,17 +240,17 @@ const CodeUseCheckbox = () => {
 		<>
 			<div className="space-x-2">
 				<span>bird :</span>
-				<Checkbox css="primary" name="bird" icon="bx-leaf" iconR="bxs-chevron-right" checked={value.bird} onChange={onChangeCheckbox} />
+				<Checkbox css="checkbox" name="bird" icon="bx-leaf" iconR="bxs-chevron-right" checked={value.bird} onChange={onChangeCheckbox} />
 				<span>{value.bird ? 'true' : 'false'}</span>
 			</div>
 			<div className="space-x-2">
 				<span>cat :</span>
-				<Checkbox css="primary" name="cat" icon="bx-leaf" iconR="bxs-chevron-right" checked={value.cat} onChange={onChangeCheckbox} />
+				<Checkbox css="checkbox" name="cat" icon="bx-leaf" iconR="bxs-chevron-right" checked={value.cat} onChange={onChangeCheckbox} />
 				<span>{value.cat ? 'true' : 'false'}</span>
 			</div>
 			<div className="space-x-2">
 				<span>mouse :</span>
-				<Checkbox2 css="primary" name="mouse" icon="bx-leaf" checked={value.mouse} onChange={onChangeCheckbox} />
+				<Checkbox2 css="checkbox" name="mouse" icon="bx-leaf" checked={value.mouse} onChange={onChangeCheckbox} />
 				<span>{value.mouse ? 'true' : 'false'}</span>
 			</div>
 
@@ -268,7 +268,7 @@ export default function code() {
 
 			<div className="p-3">
 				<h2 className="text-2xl font-semibold">useValue (useState 사용)</h2>
-				<Label>kkkkk</Label>
+				<Label css="test" icon="bx-menu" name="MENU"></Label>
 				<CodeUseValue />
 			</div>
 			<div className="p-3">
