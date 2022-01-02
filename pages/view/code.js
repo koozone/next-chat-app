@@ -1,36 +1,36 @@
-import {useFiled} from '../hook/useFiled';
+import {useValue} from '../hook/useValue';
 import {useCount} from '../hook/useCount';
 import {useModal} from '../hook/useModal';
 import {useSideMenu} from '../hook/useSideMenu';
 import Header, {Header1, Header2, Header3} from '../component/header';
-import {A, Button, Img, Input, Label, Checkbox} from '../component/ui';
+import {A, Button, Img, Input, Label, Checkbox, Checkbox2} from '../component/ui';
 import {useDog} from '../hook/useDog';
 
-const CodeUseFiled = () => {
-	const [field, runField] = useFiled({id: 'koozone', password: '123'});
+const CodeUseValue = () => {
+	const [value, runValue] = useValue({id: 'koozone', password: '123'});
 
 	const onChageInput = (event) => {
 		const {name, value} = event.currentTarget;
 
-		runField.change({name, value});
+		runValue.change({name, value});
 	};
 	const onClickReset = (event) => {
 		const {name} = event.currentTarget;
 
-		runField.reset({name});
+		runValue.reset({name});
 	};
 	const onClickResetAll = (event) => {
-		runField.reset();
+		runValue.reset();
 	};
 
 	return (
 		<div>
-			<div>
-				id :
+			<div className="space-x-2">
+				<span>id :</span>
 				<Input
 					type="text"
 					css="primary"
-					value={field.id}
+					value={value.id}
 					name="id"
 					icon="bx-user"
 					placeholder="id 입력"
@@ -40,14 +40,14 @@ const CodeUseFiled = () => {
 				<Button css="success" name="id" onClick={onClickReset}>
 					reset
 				</Button>
-				<span>{field.id}</span>
+				<span>{value.id}</span>
 			</div>
-			<div>
-				password :
+			<div className="space-x-2">
+				<span>password :</span>
 				<Input
 					type="password"
 					css="primary"
-					value={field.password}
+					value={value.password}
 					name="password"
 					icon="bx-key"
 					placeholder="password 입력"
@@ -57,7 +57,7 @@ const CodeUseFiled = () => {
 				<Button css="success" name="password" onClick={onClickReset}>
 					reset
 				</Button>
-				<span>{field.password}</span>
+				<span>{value.password}</span>
 			</div>
 			<Button css="primary" onClick={onClickResetAll}>
 				reset
@@ -98,8 +98,8 @@ const CodeUseCount = () => {
 
 	return (
 		<div>
-			<div>
-				coffee :
+			<div className="space-x-2">
+				<span>coffee :</span>
 				<Input
 					type="text"
 					css="primary"
@@ -121,8 +121,8 @@ const CodeUseCount = () => {
 				</Button>
 				<span>{count.coffee}</span>
 			</div>
-			<div>
-				bread :
+			<div className="space-x-2">
+				<span>bread :</span>
 				<Input
 					type="text"
 					css="danger"
@@ -193,23 +193,12 @@ const CodeUseDog = () => {
 	);
 };
 
-const CodeUseCheckbox = () => {
+const CodeUseButton = () => {
 	const [imageList, imageRefresh] = useDog({count: 1 + Math.round(Math.random() * 4)});
-	const [check, runCheck] = useFiled({bird: true, cat: false});
-
-	const onChangeCheckbox = (event) => {
-		const {name, checked: value} = event.currentTarget;
-
-		runCheck.change({name, value});
-	};
-
-	const onClickResetAll = (event) => {
-		runCheck.reset();
-	};
 
 	return (
 		<>
-			<div className="flex items-center gap-x-2">
+			<div className="space-x-2">
 				<Button css="primary" name="Primary" />
 				<Button css="secondary" name="Secodary" />
 				<Button css="success" name="Success" />
@@ -217,7 +206,7 @@ const CodeUseCheckbox = () => {
 				<Button css="warning" name="Warning" />
 				<Button css="info" name="Info" />
 			</div>
-			<div className="flex items-center gap-x-2">
+			<div className="space-x-2">
 				<Button css="normal" name="MENU" icon="bx-menu" />
 				<Button css="bold" name="MENU" icon="bx-menu" checked />
 				<Button css="primary" name="Primary" icon="bx-leaf" iconR="bxs-chevron-right" checked />
@@ -227,18 +216,43 @@ const CodeUseCheckbox = () => {
 				<Button css="warning" name="Warning" />
 				<Button css="info" name="Info" />
 			</div>
-			<div className="flex items-center gap-x-2">
-				bird :
-				<Checkbox css="primary" name="bird" icon="bx-leaf" iconR="bxs-chevron-right" checked={check.bird} onChange={onChangeCheckbox} />
-				<span>{check.bird ? 'true' : 'false'}</span>
-				cat :
-				<Checkbox css="primary" name="cat" icon="bx-leaf" iconR="bxs-chevron-right" checked={check.cat} onChange={onChangeCheckbox} />
-				<span>{check.cat ? 'true' : 'false'}</span>
-			</div>
 
 			<A href="/view/layout" name="home" icon="bx-math" />
 
 			<Img src={imageList[0]?.src} name="home" icon="bx-math" className="h-[100px]" />
+		</>
+	);
+};
+const CodeUseCheckbox = () => {
+	const [value, runValue] = useValue({bird: true, cat: false, mouse: true});
+
+	const onChangeCheckbox = (event) => {
+		const {name, checked: value} = event.currentTarget;
+
+		runValue.change({name, value});
+	};
+
+	const onClickResetAll = (event) => {
+		runValue.reset();
+	};
+
+	return (
+		<>
+			<div className="space-x-2">
+				<span>bird :</span>
+				<Checkbox css="primary" name="bird" icon="bx-leaf" iconR="bxs-chevron-right" checked={value.bird} onChange={onChangeCheckbox} />
+				<span>{value.bird ? 'true' : 'false'}</span>
+			</div>
+			<div className="space-x-2">
+				<span>cat :</span>
+				<Checkbox css="primary" name="cat" icon="bx-leaf" iconR="bxs-chevron-right" checked={value.cat} onChange={onChangeCheckbox} />
+				<span>{value.cat ? 'true' : 'false'}</span>
+			</div>
+			<div className="space-x-2">
+				<span>mouse :</span>
+				<Checkbox2 css="primary" name="mouse" icon="bx-leaf" checked={value.mouse} onChange={onChangeCheckbox} />
+				<span>{value.mouse ? 'true' : 'false'}</span>
+			</div>
 
 			<Button css="primary" onClick={onClickResetAll}>
 				reset
@@ -253,9 +267,9 @@ export default function code() {
 			<Header />
 
 			<div className="p-3">
-				<h2 className="text-2xl font-semibold">useFiled (useState 사용)</h2>
+				<h2 className="text-2xl font-semibold">useValue (useState 사용)</h2>
 				<Label>kkkkk</Label>
-				<CodeUseFiled />
+				<CodeUseValue />
 			</div>
 			<div className="p-3">
 				<h2 className="text-2xl font-semibold">useCount (useReducer 사용)</h2>
@@ -276,7 +290,12 @@ export default function code() {
 			</div>
 
 			<div className="p-3">
-				<h2 className="text-2xl font-semibold">button</h2>
+				<h2 className="text-2xl font-semibold">ui Button</h2>
+				<CodeUseButton />
+			</div>
+
+			<div className="p-3">
+				<h2 className="text-2xl font-semibold">ui Checkbox</h2>
 				<CodeUseCheckbox />
 			</div>
 

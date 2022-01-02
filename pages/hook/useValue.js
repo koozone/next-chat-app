@@ -1,7 +1,7 @@
 // useState를 사용한 custom hook 구현
 import {useState} from 'react';
 
-export const useFiled = (initData = {}) => {
+export const useValue = (initData = {}) => {
 	const [data, setData] = useState(initData);
 
 	const change = ({name, value}) => {

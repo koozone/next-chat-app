@@ -3,13 +3,7 @@ import {DateTime} from 'luxon';
 export const ListItem = ({movie}) => {
 	return (
 		<article className="flex items-start space-x-6 p-6">
-			<img
-				src={movie.small_cover_image}
-				alt=""
-				width="60"
-				height="88"
-				className="flex-none rounded-md bg-gray-100"
-			/>
+			<img src={movie.small_cover_image} alt="" width="60" height="88" className="flex-none rounded-md bg-gray-100" />
 			<div className="min-w-0 relative flex-auto">
 				<h2 className="font-semibold text-gray-900 truncate pr-20">{movie.title}</h2>
 				<dl className="mt-2 flex flex-wrap text-sm leading-6 font-medium">
@@ -25,9 +19,7 @@ export const ListItem = ({movie}) => {
 					</div>
 					<div>
 						<dt className="sr-only">Rating</dt>
-						<dd className="px-1.5 ring-1 ring-gray-200 rounded uppercase">
-							{movie.language}
-						</dd>
+						<dd className="px-1.5 ring-1 ring-gray-200 rounded uppercase">{movie.language}</dd>
 					</div>
 					<div className="ml-2">
 						<dt className="sr-only">Year</dt>
@@ -36,33 +28,19 @@ export const ListItem = ({movie}) => {
 					<div>
 						<dt className="sr-only">Genre</dt>
 						<dd className="flex items-center">
-							<svg
-								width="2"
-								height="2"
-								fill="currentColor"
-								className="mx-2 text-gray-300"
-								aria-hidden="true"
-							>
+							<svg width="2" height="2" fill="currentColor" className="mx-2 text-gray-300" aria-hidden="true">
 								<circle cx="1" cy="1" r="1" />
 							</svg>
-							{movie.genres[0]}
+							{movie.genres ? movie.genres[0] : ''}
 						</dd>
 					</div>
 					<div>
 						<dt className="sr-only">Runtime</dt>
 						<dd className="flex items-center">
-							<svg
-								width="2"
-								height="2"
-								fill="currentColor"
-								className="mx-2 text-gray-300"
-								aria-hidden="true"
-							>
+							<svg width="2" height="2" fill="currentColor" className="mx-2 text-gray-300" aria-hidden="true">
 								<circle cx="1" cy="1" r="1" />
 							</svg>
-							{DateTime.fromSeconds(movie.runtime * 60 - 9 * 60 * 60).toFormat(
-								"H'h' m'm'"
-							)}
+							{DateTime.fromSeconds(movie.runtime * 60 - 9 * 60 * 60).toFormat("H'h' m'm'")}
 						</dd>
 					</div>
 					<div className="flex-none w-full mt-2 font-normal">

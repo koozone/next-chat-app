@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import {useState} from 'react';
+import {useState, useRef, useCallback} from 'react';
 
 const getStyle = (props) => {
 	const {tag, css, icon, selected} = props;
@@ -8,6 +8,7 @@ const getStyle = (props) => {
 		i: <div className={`bx ${icon} pointer-events-none`} />,
 		a: <div className="group space-x-1" />,
 		img: <div className="" />,
+		div: <div className={`group px-2 py-1 ring-1 ring-black/30 hover:ring-2 text-sm leading-6 font-medium rounded-md space-x-1`} />,
 		label: <div className="" />,
 		button: (
 			<div className={`group px-2 py-1 ring-1 ring-black/30 hover:ring-2 text-sm leading-6 font-medium rounded-md space-x-1 ${selected ? '' : ''}`} />
@@ -24,7 +25,7 @@ const getStyle = (props) => {
 	const element = (() => {
 		switch (`[${tag}]:${css}`) {
 			case '[i]:button-primary':
-				return <div className={`text-white group-hover:text-blue-500 group-hover:animate-bounce ${selected ? '' : ''}`} />;
+				return <div className={`group-hover:animate-bounce ${selected ? '' : ''}`} />;
 			case '[i]:button-danger':
 				return <div className={`text-white group-hover:text-rose-500 group-hover:animate-bounce ${selected ? '' : ''}`} />;
 			case '[i]:input-primary':
@@ -37,10 +38,12 @@ const getStyle = (props) => {
 				return <div className={`focus:ring-blue-500 text-gray-900 placeholder-gray-300 ${selected ? '' : ''}`} />;
 			case '[input]:danger':
 				return <div className={`focus:ring-rose-500 text-gray-900 placeholder-gray-300 ${selected ? '' : ''}`} />;
+			case '[div]:primary':
+				return <div className={`text-white bg-blue-500 peer-checked:bg-blue-50 peer-checked:text-blue-600 peer-disabled:bg-gray-500`} />;
 			case '[button]:primary':
 				return (
 					<div
-						className={`text-white bg-blue-500 hover:bg-blue-50 hover:ring-blue-500 hover:text-blue-600 peer-checked:bg-yellow-500 peer-disabled:bg-gray-500`}
+						className={`text-white bg-blue-500 hover:bg-blue-50 hover:ring-blue-500 hover:text-blue-600 peer-checked:bg-blue-50 peer-checked:text-blue-600 peer-disabled:bg-gray-500`}
 					/>
 				);
 			case '[button]:secondary':
@@ -183,35 +186,56 @@ export const Img = (props) => {
 };
 
 export const Button = (props) => {
-	const {children, name, css, className, onClick, checked = false} = getProps({...props, tag: 'button'});
+	const {children, name, css, className, onClick} = getProps({...props, tag: 'button'});
 
 	return (
-		<>
-			<input type="checkbox" className="peer hidden" checked={checked} onChange={() => {}} />
-			<button type="button" onClick={onClick} name={name} css={css} className={className}>
-				{children}
-			</button>
-		</>
+		<button onClick={onClick} name={name} css={css} className={className}>
+			{children}
+		</button>
 	);
 };
 
 export const Checkbox = (props) => {
-	const {children, name, css, className, onChange, checked = false, disabled = false} = getProps({...props, tag: 'button'});
+	const {children, name, css, className, onChange, checked, disabled} = getProps({...props, tag: 'div'});
 
 	return (
-		<span className="relative">
+		<label className="inline-block relative cursor-pointer">
 			<input
 				type="checkbox"
+				className="peer absolute top-0 -left-5 opacity-90 w-4 h-full m-0 p-0 cursor-pointer z-10 disabled:cursor-default"
 				name={name}
-				className="peer absolute top-0 left-0 opacity-0 w-full h-full m-0 p-0 cursor-pointer z-10 disabled:cursor-default"
 				onChange={onChange}
 				checked={checked}
 				disabled={disabled}
 			/>
-			<button type="button" name={name} css={css} className={className}>
+			<div name={name} css={css} className={className}>
 				{children}
-			</button>
-		</span>
+			</div>
+		</label>
+	);
+};
+export const Checkbox2 = (props) => {
+	const {children, name, css, className, onChange, checked, disabled} = getProps({...props, tag: 'button'});
+
+	return (
+		<label htmlFor={name} className="inline-block relative cursor-pointer">
+			<input
+				type="checkbox"
+				className="peer absolute top-0 left-0 opacity-50 w-0 h-0 m-0 p-0 cursor-pointer z-10 disabled:cursor-default"
+				id={name}
+				name={name}
+				onChange={onChange}
+				checked={checked}
+				disabled={disabled}
+			/>
+			{/* <button type="button" name={name} css={css} className={className}>
+				{children}
+			</button> */}
+			<div name={name} css={css} className={className}>
+				{children}
+			</div>
+			{/* {children} */}
+		</label>
 	);
 };
 
