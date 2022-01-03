@@ -32,12 +32,12 @@ const CodeUseValue = () => {
 	};
 
 	return (
-		<div>
+		<>
 			<div className="space-x-2">
-				<span>id :</span>
+				<Label>id :</Label>
 				<Input
 					type="text"
-					deco="primary"
+					// deco="primary"
 					value={value.id}
 					name="id"
 					icon="bx-user"
@@ -48,10 +48,10 @@ const CodeUseValue = () => {
 				<Button deco="success" name="id" onClick={onClickReset}>
 					reset
 				</Button>
-				<span>{value.id}</span>
+				<Label>{value.id}</Label>
 			</div>
 			<div className="space-x-2">
-				<span>password :</span>
+				<Label>password :</Label>
 				<Input
 					type="password"
 					deco="primary"
@@ -65,12 +65,12 @@ const CodeUseValue = () => {
 				<Button deco="success" name="password" onClick={onClickReset}>
 					reset
 				</Button>
-				<span>{value.password}</span>
+				<Label>{value.password}</Label>
 			</div>
 			<Button deco="primary" onClick={onClickResetAll}>
 				reset
 			</Button>
-		</div>
+		</>
 	);
 };
 
@@ -114,9 +114,9 @@ const CodeUseCount = () => {
 	};
 
 	return (
-		<div>
+		<>
 			<div className="space-x-2">
-				<span>coffee :</span>
+				<Label>coffee :</Label>
 				<Input
 					type="text"
 					deco="primary"
@@ -128,18 +128,18 @@ const CodeUseCount = () => {
 					className="w-[80px]"
 				/>
 				<Button deco="secondary" name="coffee" onClick={onClickIncrement}>
-					<i className="bx bx-message-square-add bx-fw" />
+					<i className="bx bx-message-square-add" />
 				</Button>
 				<Button deco="secondary" name="coffee" onClick={onClickDecrement}>
-					<i className="bx bx-message-square-minus bx-fw" />
+					<i className="bx bx-message-square-minus" />
 				</Button>
 				<Button deco="success" name="coffee" onClick={onClickReset}>
 					reset
 				</Button>
-				<span>{count.coffee}</span>
+				<Label>{count.coffee}</Label>
 			</div>
 			<div className="space-x-2">
-				<span>bread :</span>
+				<Label>bread :</Label>
 				<Input
 					type="text"
 					deco="danger"
@@ -151,20 +151,20 @@ const CodeUseCount = () => {
 					className="w-[80px]"
 				/>
 				<Button deco="secondary" name="bread" onClick={onClickIncrement}>
-					<i className="bx bx-message-square-add bx-fw" />
+					<i className="bx bx-message-square-add" />
 				</Button>
 				<Button deco="secondary" name="bread" onClick={onClickDecrement}>
-					<i className="bx bx-message-square-minus bx-fw" />
+					<i className="bx bx-message-square-minus" />
 				</Button>
 				<Button deco="success" name="bread" onClick={onClickReset}>
 					reset
 				</Button>
-				<span>{count.bread}</span>
+				<Label>{count.bread}</Label>
 			</div>
 			<Button deco="primary" onClick={onClickResetAll}>
 				reset
 			</Button>
-		</div>
+		</>
 	);
 };
 
@@ -176,9 +176,11 @@ const CodeUseModal = () => {
 	};
 
 	return (
-		<Button deco="primary" onClick={onClickModal}>
-			modal
-		</Button>
+		<div className="space-x-2">
+			<Button deco="primary" onClick={onClickModal}>
+				modal
+			</Button>
+		</div>
 	);
 };
 
@@ -190,9 +192,11 @@ const CodeUseSideMenu = () => {
 	};
 
 	return (
-		<Button deco="primary" onClick={onClickSideMenu}>
-			sideMenu
-		</Button>
+		<div className="space-x-2">
+			<Button deco="primary" onClick={onClickSideMenu}>
+				sideMenu
+			</Button>
+		</div>
 	);
 };
 
@@ -204,9 +208,11 @@ const CodeUseDog = () => {
 	};
 
 	return (
-		<Button deco="primary" onClick={onClickSideMenu}>
-			dog
-		</Button>
+		<div className="space-x-2">
+			<Button deco="primary" onClick={onClickSideMenu}>
+				dog
+			</Button>
+		</div>
 	);
 };
 
@@ -236,7 +242,7 @@ const CodeUseButton = () => {
 				<Button deco="info" name="Info" />
 			</div>
 
-			<A href="/view/layout" name="home" icon="bx-math" />
+			{/* <A href="/view/layout" name="home" icon="bx-math" /> */}
 
 			{/* <Img src={imageList[0]?.src} name="home" icon="bx-math" className="h-[100px]" /> */}
 		</>
@@ -265,19 +271,19 @@ const CodeUseCheckbox = () => {
 	return (
 		<>
 			<div className="space-x-2">
-				<span>bird :</span>
+				<Label>bird :</Label>
 				<Checkbox deco="checkbox" name="bird" icon="bx-leaf" iconR="bxs-chevron-right" checked={value.bird} onChange={onChangeCheckbox} />
-				<span>{value.bird ? 'true' : 'false'}</span>
+				<Label>{value.bird ? 'true' : 'false'}</Label>
 			</div>
 			<div className="space-x-2">
-				<span>cat :</span>
+				<Label>cat :</Label>
 				<Checkbox deco="checkbox" name="cat" icon="bx-leaf" iconR="bxs-chevron-right" checked={value.cat} onChange={onChangeCheckbox} />
-				<span>{value.cat ? 'true' : 'false'}</span>
+				<Label>{value.cat ? 'true' : 'false'}</Label>
 			</div>
 			<div className="space-x-2">
-				<span>mouse :</span>
+				<Label>mouse :</Label>
 				<Checkbox2 deco="checkbox" name="mouse" icon="bx-leaf" checked={value.mouse} onChange={onChangeCheckbox} />
-				<span>{value.mouse ? 'true' : 'false'}</span>
+				<Label>{value.mouse ? 'true' : 'false'}</Label>
 			</div>
 
 			<Button deco="primary" onClick={onClickResetAll}>
@@ -292,62 +298,62 @@ export default function code() {
 		<>
 			<Header />
 
-			<div className="p-3">
-				<Label deco="400" className="block">
-					Label
-				</Label>
+			<div className="p-3 space-y-2">
+				<Label deco="t4">Label</Label>
 
-				<Label deco="300">
-					Lorem ipsum,{' '}
-					<Label deco="100" className="text-red-500">
-						dolor sit amet consectetur adipisicing elit.
-					</Label>{' '}
-					Voluptates deserunt officiis recusandae sunt totam optio, facilis blanditiis hic, placeat voluptatibus provident facere consequatur earum.
-					Laudantium in inventore distinctio animi voluptas.
-				</Label>
-				<Label icon="bx-menu" className="text-white" />
-				<Label name="menu" />
-				<Label icon="bx-menu" name="MENU" className="text-red-500" />
-				<Label>menu</Label>
+				<div className="space-x-2">
+					<Label deco="t3">
+						Lorem ipsum,
+						<Label deco="t2" className="inline-block">
+							dolor sit amet consectetur adipisicing elit.
+						</Label>
+						Voluptates deserunt officiis recusandae sunt totam optio, facilis blanditiis hic, placeat voluptatibus provident facere consequatur
+						earum. Laudantium in inventore distinctio animi voluptas.
+					</Label>
+					<Label icon="bx-menu" />
+					<Label name="menu" />
+					<Label icon="bx-menu" name="MENU" />
+					<Label>menu</Label>
+				</div>
 			</div>
 
-			<div className="p-3">
-				<h2 className="text-2xl font-semibold">useValue (useState 사용)</h2>
-				<CodeUseValue />
-			</div>
-
-			<div className="p-3">
-				<h2 className="text-2xl font-semibold">useCount (useReducer 사용)</h2>
-				<CodeUseCount />
-			</div>
-
-			<div className="p-3">
-				<h2 className="text-2xl font-semibold">useModal (useContext 사용)</h2>
-				<CodeUseModal />
-			</div>
-
-			<div className="p-3">
-				<h2 className="text-2xl font-semibold">useSideMenu (useContext 사용)</h2>
-				<CodeUseSideMenu />
-			</div>
-
-			<div className="p-3">
-				<h2 className="text-2xl font-semibold">useDog (axios 사용)</h2>
-				<CodeUseDog />
-			</div>
-
-			<div className="p-3">
-				<h2 className="text-2xl font-semibold">ui Button</h2>
+			<div className="p-3 space-y-2">
+				<Label deco="t4">Button</Label>
 				<CodeUseButton />
 			</div>
 
-			<div className="p-3">
-				<h2 className="text-2xl font-semibold">ui Checkbox</h2>
+			<div className="p-3 space-y-2">
+				<Label deco="t4">Checkbox</Label>
 				<CodeUseCheckbox />
 			</div>
 
-			<div className="p-3">
-				<h2 className="text-2xl font-semibold">header</h2>
+			<div className="p-3 space-y-2">
+				<Label deco="t4">useValue (useState 사용)</Label>
+				<CodeUseValue />
+			</div>
+
+			<div className="p-3 space-y-2">
+				<Label deco="t4">useCount (useReducer 사용)</Label>
+				<CodeUseCount />
+			</div>
+
+			<div className="p-3 space-y-2">
+				<Label deco="t4">useModal (useContext 사용)</Label>
+				<CodeUseModal />
+			</div>
+
+			<div className="p-3 space-y-2">
+				<Label deco="t4">useSideMenu (useContext 사용)</Label>
+				<CodeUseSideMenu />
+			</div>
+
+			<div className="p-3 space-y-2">
+				<Label deco="t4">useDog (axios 사용)</Label>
+				<CodeUseDog />
+			</div>
+
+			<div className="p-3 space-y-2">
+				<Label deco="t4">header</Label>
 				<Header1 />
 				<Header2 />
 				<Header3 />
