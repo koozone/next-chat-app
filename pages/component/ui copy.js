@@ -1,9 +1,10 @@
 import Link from 'next/link';
+import {useState, useRef, useCallback} from 'react';
 
 const getStyle = (props) => {
-	const {tag, deco, icon, selected} = props;
+	const {tag, css, deco, icon, selected} = props;
 
-	const defaultElement = (() => {
+	const baseElement = (() => {
 		switch (`[${tag}]`) {
 			case '[i]':
 				return <div className={`bx ${icon} pointer-events-none`} />;
@@ -37,9 +38,25 @@ const getStyle = (props) => {
 				return <div className="" />;
 		}
 	})();
+	// i: <div className={`bx ${icon} pointer-events-none`} />,
+	// label: <div className="cursor-text space-x-1" />,
+	// a: <div className="group space-x-1" />,
+	// img: <div className="" />,
+	// // div: <div className={`group px-2 py-1 ring-1 ring-black/30 hover:ring-2 text-sm leading-6 font-medium rounded-md space-x-1`} />,
+	// button: (
+	// 	<div className={`group px-2 py-1 ring-1 ring-black/30 hover:ring-2 text-sm leading-6 font-medium rounded-md space-x-1 ${selected ? '' : ''}`} />
+	// ),
+	// input: (
+	// 	<div
+	// 		className={`px-2 py-1 ring-1 ring-black/30 text-sm leading-6 font-medium rounded-md focus:ring-2 focus:outline-none w-full truncate ${
+	// 			icon ? 'pl-9' : ''
+	// 		} ${selected ? '' : ''}`}
+	// 	/>
+	// ),
+	// };
 
 	const element = (() => {
-		switch (`[${tag}]:${deco}`) {
+		switch (`[${tag}]:${css}`) {
 			case '[i]:':
 				return <div className={``} />;
 			// case '[i]:button-primary':
@@ -52,12 +69,10 @@ const getStyle = (props) => {
 			// 	return <div className={`text-gray-500 group-focus-within:text-rose-500 group-focus-within:animate-spin ${selected ? '' : ''}`} />;
 			// case '[i]:label-test':
 			// 	return <div className={`group-checked:text-white`} />;
-			case '[label]:100':
-				return <div className={`text-xs`} />;
-			case '[label]:300':
-				return <div className={`text-base text-black font-normal`} />;
-			case '[label]:400':
-				return <div className={`text-2xl text-black/50 font-semibold`} />;
+			case '[label]:h2':
+				return <div className={`text-xl`} />;
+			case '[label]:h4':
+				return <div className={`text-base`} />;
 			case '[label]:test':
 				return <div className={`text-red-500`} />;
 			case '[input]:primary':
@@ -140,11 +155,11 @@ const getStyle = (props) => {
 		}
 	})();
 
-	return `${defaultElement.props.className} | ${element.props.className}`;
+	return `${baseElement.props.className} | ${element.props.className}`;
 };
 
 const getContent = (props) => {
-	const {tag, deco, icon, iconL, iconR, name} = props;
+	const {tag, css, icon, iconL, iconR, name} = props;
 
 	return (
 		<>
@@ -178,27 +193,27 @@ const getProps = (props) => {
 };
 
 export const I = (props) => {
-	const {deco, className} = getProps({...props, tag: 'i'});
+	const {css, className} = getProps({...props, tag: 'i'});
 
-	return <i deco={deco} className={className} />;
+	return <i css={css} className={className} />;
 };
 
 export const Label = (props) => {
-	const {children, deco, className} = getProps({...props, tag: 'label'});
+	const {children, css, className} = getProps({...props, tag: 'label'});
 
 	return (
-		<label deco={deco} className={className}>
+		<label css={css} className={className}>
 			{children}
 		</label>
 	);
 };
 
 export const A = (props) => {
-	const {children, href, name, deco, className} = getProps({...props, tag: 'a'});
+	const {children, href, name, css, className} = getProps({...props, tag: 'a'});
 
 	return (
 		<Link href={href}>
-			<a name={name} deco={deco} className={className}>
+			<a name={name} css={css} className={className}>
 				{children}
 			</a>
 		</Link>
@@ -206,23 +221,23 @@ export const A = (props) => {
 };
 
 export const Img = (props) => {
-	const {src, name, deco, className} = getProps({...props, tag: 'img'});
+	const {src, name, css, className} = getProps({...props, tag: 'img'});
 
-	return <img src={src} name={name} deco={deco} className={className} />;
+	return <img src={src} name={name} css={css} className={className} />;
 };
 
 export const Button = (props) => {
-	const {children, name, deco, className, onClick} = getProps({...props, tag: 'button'});
+	const {children, name, css, className, onClick} = getProps({...props, tag: 'button'});
 
 	return (
-		<button onClick={onClick} name={name} deco={deco} className={className}>
+		<button onClick={onClick} name={name} css={css} className={className}>
 			{children}
 		</button>
 	);
 };
 
 export const Checkbox = (props) => {
-	const {children, name, deco, className, onChange, checked, disabled} = getProps({...props, tag: 'button'});
+	const {children, name, css, className, onChange, checked, disabled} = getProps({...props, tag: 'button'});
 
 	return (
 		<label className="inline-block relative cursor-pointer">
@@ -234,14 +249,14 @@ export const Checkbox = (props) => {
 				checked={checked}
 				disabled={disabled}
 			/>
-			<div name={name} deco={deco} className={className + ' pl-8'}>
+			<div name={name} css={css} className={className + ' pl-8'}>
 				{children}
 			</div>
 		</label>
 	);
 };
 export const Checkbox2 = (props) => {
-	const {children, name, deco, className, onChange, checked, disabled} = getProps({...props, tag: 'button'});
+	const {children, name, css, className, onChange, checked, disabled} = getProps({...props, tag: 'button'});
 
 	return (
 		<label htmlFor={name} className="inline-block relative cursor-pointer">
@@ -254,10 +269,10 @@ export const Checkbox2 = (props) => {
 				checked={checked}
 				disabled={disabled}
 			/>
-			{/* <button type="button" name={name} deco={deco} className={className}>
+			{/* <button type="button" name={name} css={css} className={className}>
 				{children}
 			</button> */}
-			<div name={name} deco={deco} className={className}>
+			<div name={name} css={css} className={className}>
 				{children}
 			</div>
 			{/* {children} */}
@@ -266,15 +281,15 @@ export const Checkbox2 = (props) => {
 };
 
 export const Input = (props) => {
-	const {tag, deco, icon, type, placeholder, value, name, onChange, className} = getProps({
+	const {tag, css, icon, type, placeholder, value, name, onChange, className} = getProps({
 		...props,
 		tag: 'input',
 	});
 
 	return (
 		<div className="group relative inline-block">
-			{icon ? <I deco={tag + '-' + deco} icon={icon} className="text-lg absolute left-2 top-1/2 -mt-2" /> : ''}
-			<input type={type} placeholder={placeholder} value={value} name={name} onChange={onChange} deco={deco} className={className} />
+			{icon ? <I css={tag + '-' + css} icon={icon} className="text-lg absolute left-2 top-1/2 -mt-2" /> : ''}
+			<input type={type} placeholder={placeholder} value={value} name={name} onChange={onChange} css={css} className={className} />
 		</div>
 	);
 };

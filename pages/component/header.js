@@ -37,7 +37,7 @@ export function Header1() {
 			/>
 			<div className="hidden md:flex ml-6 space-x-3">
 				{getMenuList().map((item, index) => (
-					<A key={index} {...{...item, css: 'linkA'}} />
+					<A key={index} {...{...item, deco: 'linkA'}} />
 				))}
 			</div>
 		</div>
@@ -69,14 +69,14 @@ export function Header2() {
 			/>
 			<div className="hidden md:flex ml-6 space-x-3">
 				{getMenuList().map((item, index) => (
-					<A key={index} {...{...item, css: 'linkB'}} />
+					<A key={index} {...{...item, deco: 'linkB'}} />
 				))}
 			</div>
 			<div className="flex space-x-2">
-				<Button css="buttonA" icon="bx-menu" className="inline-block md:hidden" onClick={clickMenu}></Button>
-				<Button css="buttonA" icon="bx-log-in" onClick={runModal.open}></Button>
+				<Button deco="buttonA" icon="bx-menu" className="inline-block md:hidden" onClick={clickMenu}></Button>
+				<Button deco="buttonA" icon="bx-log-in" onClick={runModal.open}></Button>
 				<Img
-					css="imageA"
+					deco="imageA"
 					src="https://images.unsplash.com/photo-1544348817-5f2cf14b88c8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1287&q=80"
 				></Img>
 			</div>
@@ -93,7 +93,7 @@ export function Header3() {
 			/>
 			<div className="hidden md:flex space-x-2">
 				{getMenuList().map((item, index) => (
-					<A key={index} {...{...item, css: 'linkC'}} />
+					<A key={index} {...{...item, deco: 'linkC'}} />
 				))}
 			</div>
 			<div className="flex space-x-2">
