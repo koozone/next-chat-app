@@ -291,8 +291,8 @@ export const Input = (props) => {
 
 	return (
 		<div deco={deco} className="group relative inline-block">
-			{icon ? <I deco={tag + '-' + deco} icon={icon} className="text-lg absolute left-2 top-1/2 -mt-2" /> : ''}
-			<input type={type} placeholder={placeholder} value={value} name={name} onChange={onChange} deco={deco} className={className} />
+			{icon ? <I deco={tag + '-' + deco} className="text-lg absolute left-2 top-1/2 -mt-2" icon={icon} /> : ''}
+			<input type={type} deco={deco} className={className} name={name} onChange={onChange} placeholder={placeholder} value={value} />
 		</div>
 	);
 };
