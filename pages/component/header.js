@@ -1,5 +1,5 @@
-import React, {useContext} from 'react';
-import {Button, A, Img} from './ui';
+import React, {useContext, useState} from 'react';
+import {Button, A, Img, Label, A2} from './ui';
 import Nav from '../component/nav';
 import NavItem from '../component/navItem';
 import useModals from '../hook/useModals';
@@ -29,6 +29,9 @@ const getMenuList = () => {
 };
 
 export function Header1() {
+	const router = useRouter();
+	const [pathList, setPathList] = useState([router.pathname]);
+
 	return (
 		<div className="sticky top-0 flex justify-between items-center bg-[#300b3f85] md:h-20 h-12">
 			<img
@@ -36,8 +39,9 @@ export function Header1() {
 				src="https://images.unsplash.com/photo-1496200186974-4293800e2c20?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1332&q=80"
 			/>
 			<div className="hidden md:flex ml-6 space-x-3">
-				{getMenuList().map((item, index) => (
-					<A key={index} {...{...item, deco: 'linkA'}} />
+				{menuList.map((item, index) => (
+					// <A key={index} {...item} deco="linkA" />
+					<A2 key={index} {...item} checked={pathList.includes(item.href)} />
 				))}
 			</div>
 		</div>
@@ -45,6 +49,9 @@ export function Header1() {
 }
 
 export function Header2() {
+	const router = useRouter();
+	const [pathList, setPathList] = useState([router.pathname]);
+
 	const {openModals} = useModals();
 	// const {sideMenu, openSideMenu, closeSideMenu} = useContext(SideMenuContext);
 	const [sideMenu, runSideMenu] = useSideMenu();
@@ -68,8 +75,9 @@ export function Header2() {
 				src="https://images.unsplash.com/photo-1627064719444-1985feb93f54?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1715&q=80"
 			/>
 			<div className="hidden md:flex ml-6 space-x-3">
-				{getMenuList().map((item, index) => (
-					<A key={index} {...{...item, deco: 'linkB'}} />
+				{menuList.map((item, index) => (
+					// <A key={index} {...item} deco="linkB" />
+					<A2 key={index} {...item} checked={pathList.includes(item.href)} />
 				))}
 			</div>
 			<div className="flex space-x-2">
@@ -85,6 +93,9 @@ export function Header2() {
 }
 
 export function Header3() {
+	const router = useRouter();
+	const [pathList, setPathList] = useState([router.pathname]);
+
 	return (
 		<div className="sticky top-0 flex justify-between items-center bg-[#300b3f85] md:h-20 h-12">
 			<img
@@ -92,13 +103,16 @@ export function Header3() {
 				src="https://images.unsplash.com/photo-1569399078436-da10fbd60f12?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1475&q=80"
 			/>
 			<div className="hidden md:flex space-x-2">
-				{getMenuList().map((item, index) => (
-					<A key={index} {...{...item, deco: 'linkC'}} />
+				{menuList.map((item, index) => (
+					// <A key={index} {...item} deco='linkC' />
+					<A2 key={index} {...item} checked={pathList.includes(item.href)} />
 				))}
 			</div>
 			<div className="flex space-x-2">
 				<Button icon="bx-menu" className="inline-block md:hidden"></Button>
 			</div>
+
+			<Label>{JSON.stringify(pathList)}</Label>
 		</div>
 	);
 }

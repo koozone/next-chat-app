@@ -5,7 +5,11 @@ export const useValue = (initData = {}) => {
 	const [data, setData] = useState(initData);
 
 	const change = ({name, value}) => {
-		setData((data) => ({...data, [name]: value}));
+		if (name) {
+			setData((data) => ({...data, [name]: value}));
+		} else {
+			setData(value);
+		}
 	};
 	const reset = ({name} = {}) => {
 		if (name) {
