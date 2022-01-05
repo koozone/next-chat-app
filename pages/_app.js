@@ -17,6 +17,8 @@ function MyApp({Component, pageProps}) {
 				<title>Chat App</title>
 				<meta name="description" content="koozone chat app" />
 				<link rel="icon" href="/favicon.ico" />
+
+				{/* <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></link> */}
 			</Head>
 
 			<ModalProvider>

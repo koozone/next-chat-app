@@ -1,5 +1,5 @@
 import React, {useContext, useState} from 'react';
-import {Button, A, Img, Label, A2} from './ui';
+import {Button, A, Img, Label} from './ui';
 import Nav from '../component/nav';
 import NavItem from '../component/navItem';
 import useModals from '../hook/useModals';
@@ -41,7 +41,7 @@ export function Header1() {
 			<div className="hidden md:flex ml-6 space-x-3">
 				{menuList.map((item, index) => (
 					// <A key={index} {...item} deco="linkA" />
-					<A2 key={index} {...item} checked={pathList.includes(item.href)} />
+					<A key={index} {...item} checked={pathList.includes(item.href)} />
 				))}
 			</div>
 		</div>
@@ -77,7 +77,7 @@ export function Header2() {
 			<div className="hidden md:flex ml-6 space-x-3">
 				{menuList.map((item, index) => (
 					// <A key={index} {...item} deco="linkB" />
-					<A2 key={index} {...item} checked={pathList.includes(item.href)} />
+					<A key={index} {...item} checked={pathList.includes(item.href)} />
 				))}
 			</div>
 			<div className="flex space-x-2">
@@ -105,7 +105,7 @@ export function Header3() {
 			<div className="hidden md:flex space-x-2">
 				{menuList.map((item, index) => (
 					// <A key={index} {...item} deco='linkC' />
-					<A2 key={index} {...item} checked={pathList.includes(item.href)} />
+					<A key={index} {...item} checked={pathList.includes(item.href)} />
 				))}
 			</div>
 			<div className="flex space-x-2">
