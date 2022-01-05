@@ -16,14 +16,15 @@ const getStyle = (props) => {
 				return <div className={`cursor-text space-x-1`} />;
 
 			case '[box]':
-				return <div className={`inline-block text-center cursor-pointer group px-2 py-1 rounded space-x-1`} />;
+				return <div className={`group px-2 py-1 rounded space-x-1`} />;
 
 			case '[button]':
 				// return <div className={`inline-block text-center cursor-pointer group px-2 py-1 rounded space-x-1`} />;
 				return <div className={``} />;
 
 			case '[a]':
-				return <div className={`group px-2 py-1 rounded space-x-1`} />;
+				// return <div className={`group px-2 py-1 rounded space-x-1`} />;
+				return <div className={``} />;
 
 			case '[input]':
 				return <div className={`px-2 py-1 rounded w-full truncate ${icon ? 'pl-8' : ''}`} />;
@@ -135,7 +136,8 @@ const getStyle = (props) => {
 			case '[a]:':
 				return (
 					<div
-						className={`text-sm text-violet-500 bg-white/50 hover:bg-white peer-checked:text-white peer-checked:bg-violet-500/50 peer-checked:hover:bg-violet-500`}
+						// className={`text-sm text-violet-500 bg-white/50 hover:bg-white peer-checked:text-white peer-checked:bg-violet-500/50 peer-checked:hover:bg-violet-500`}
+						className={``}
 					/>
 				);
 			// case '[a]:linkA':
