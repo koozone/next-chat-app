@@ -113,6 +113,18 @@ const getStyle = (props) => {
 						className={`text-sm text-lime-500 bg-white/80 ring-2 ring-lime-500 hover:bg-white peer-checked:text-white peer-checked:bg-lime-500/80 peer-checked:hover:bg-lime-500`}
 					/>
 				);
+			case '[box]:checkbox-t1':
+				return (
+					<div
+						className={`pl-8 text-sm text-blue-500 bg-white/80 ring-2 ring-blue-500 hover:bg-white peer-checked:text-white peer-checked:bg-blue-500/80 peer-checked:hover:bg-blue-500`}
+					/>
+				);
+			case '[box]:radio-t2':
+				return (
+					<div
+						className={`pl-8 text-sm text-neutral-500 bg-white/80 ring-2 ring-neutral-500 hover:bg-white peer-checked:text-white peer-checked:bg-neutral-500/80 peer-checked:hover:bg-neutral-500`}
+					/>
+				);
 
 			// button
 			case '[button]:':
@@ -200,9 +212,9 @@ const getStyle = (props) => {
 			case '[in]:a-t3':
 				return <div className={`opacity-50 top-0 left-0 w-0 h-0`} />;
 			case '[in]:radio-t2':
-				return <div className={`opacity-50 top-0 -left-6 w-4 h-full`} />;
+				return <div className={`opacity-50 top-0 left-2 w-4 h-full`} />;
 			case '[in]:checkbox-t1':
-				return <div className={`opacity-50 top-0 -left-6 w-4 h-full`} />;
+				return <div className={`opacity-50 top-0 left-2 w-4 h-full`} />;
 
 			// input
 			case '[input]:':
@@ -364,7 +376,7 @@ export const Radio = (props) => {
 			{/* <div className={className + ' pl-8'} name={name}>
 				{children}
 			</div> */}
-			<Box {...props} />
+			<Box {...props} deco={`radio-${deco}`} />
 		</label>
 	);
 };
@@ -387,7 +399,7 @@ export const Checkbox = (props) => {
 			{/* <div className={className + ' pl-8'} name={name}>
 				{children}
 			</div> */}
-			<Box {...props} />
+			<Box {...props} deco={`checkbox-${deco}`} />
 		</label>
 	);
 };
