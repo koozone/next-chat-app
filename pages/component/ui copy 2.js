@@ -22,19 +22,12 @@ const getStyle = (props) => {
 				// return <div className={`inline-block text-center cursor-pointer group px-2 py-1 rounded space-x-1`} />;
 				return <div className={``} />;
 
-			case '[area]':
-				// return <div className={`inline-block text-center cursor-pointer group px-2 py-1 rounded space-x-1`} />;
-				return <div className={`inline-block relative cursor-pointer`} />;
-
 			case '[a]':
 				// return <div className={`group px-2 py-1 rounded space-x-1`} />;
 				return <div className={``} />;
 
 			case '[input]':
 				return <div className={`px-2 py-1 rounded w-full truncate ${icon ? 'pl-8' : ''}`} />;
-
-			case '[in]':
-				return <div className={`peer absolute m-0 p-0 pointer-events-none z-10`} />;
 
 			default:
 				return <div className={``} />;
@@ -139,15 +132,6 @@ const getStyle = (props) => {
 			// 		/>
 			// 	);
 
-			// area
-			case '[area]:':
-				return (
-					<div
-						// className={`text-sm text-violet-500 bg-white/50 hover:bg-white peer-checked:text-white peer-checked:bg-violet-500/50 peer-checked:hover:bg-violet-500`}
-						className={``}
-					/>
-				);
-
 			// a
 			case '[a]:':
 				return (
@@ -170,16 +154,6 @@ const getStyle = (props) => {
 			// 	);
 			// case '[a]:linkC':
 			// 	return <div className={`block px-2 py-1 rounded-md`} />;
-
-			// in
-			case '[in]:':
-				return <div className={`opacity-50 top-0 left-0 w-0 h-0`} />;
-			// case '[in]:a':
-			// 	return <div className={`opacity-50 top-0 left-0 w-0 h-0`} />;
-			// case '[in]:radio':
-			// 	return <div className={`opacity-50 top-0 -left-2 w-4 h-full`} />;
-			// case '[in]:checkbox':
-			// 	return <div className={`opacity-50 top-0 -left-2 w-4 h-full`} />;
 
 			// input
 			case '[input]:':
@@ -283,9 +257,19 @@ export const Button = (props) => {
 };
 
 export const In = (props) => {
-	const {children, deco, className, name, href, type, onChange, checked, disabled} = getProps({...props, tag: 'in'});
+	const {children, deco, className, name, href, type, onChange, checked, disabled} = getProps({...props, tag: 'input'});
 
-	return <input type={type} className={className} id={name} name={name} onChange={onChange} checked={checked} disabled={disabled} />;
+	return (
+		<input
+			type={type}
+			className="peer absolute opacity-50 top-0 left-2 w-4 h-full m-0 p-0 pointer-events-none z-10"
+			id={name}
+			name={name}
+			onChange={onChange}
+			checked={checked}
+			disabled={disabled}
+		/>
+	);
 };
 
 // export const A2 = (props) => {
@@ -300,11 +284,11 @@ export const In = (props) => {
 // 	);
 // };
 export const A = (props) => {
-	const {children, deco, className, name, href, onChange, checked, disabled} = getProps({...props, tag: 'area'});
+	const {children, deco, className, name, href, onChange, checked, disabled} = getProps({...props, tag: 'button'});
 
 	return (
 		<Link href={href}>
-			<label htmlFor={name} deco={deco} className={className}>
+			<label htmlFor={name} deco={deco} className="inline-block relative cursor-pointer">
 				{/* <input
 					type="checkbox"
 					className="peer absolute opacity-50 top-0 left-2 w-4 h-full m-0 p-0 pointer-events-none z-10"
@@ -314,7 +298,7 @@ export const A = (props) => {
 					checked={checked}
 					disabled={disabled}
 				/> */}
-				<In {...props} type="checkbox" deco="a" />
+				<In {...props} type="checkbox" />
 				{/* <div className={className + ' pl-8'} name={name}>
 					{children}
 				</div> */}
@@ -325,10 +309,10 @@ export const A = (props) => {
 };
 
 export const Radio = (props) => {
-	const {children, deco, className, name, onChange, checked, disabled} = getProps({...props, tag: 'area'});
+	const {children, deco, className, name, onChange, checked, disabled} = getProps({...props, tag: 'button'});
 
 	return (
-		<label htmlFor={name} deco={deco} className={className}>
+		<label htmlFor={name} deco={deco} className="inline-block relative cursor-pointer">
 			{/* <input
 				type="radio"
 				className="peer absolute opacity-50 top-0 left-2 w-4 h-full m-0 p-0 pointer-events-none z-10"
@@ -338,7 +322,7 @@ export const Radio = (props) => {
 				checked={checked}
 				disabled={disabled}
 			/> */}
-			<In {...props} type="radio" deco="radio" />
+			<In {...props} type="radio" />
 			{/* <div className={className + ' pl-8'} name={name}>
 				{children}
 			</div> */}
@@ -348,10 +332,10 @@ export const Radio = (props) => {
 };
 
 export const Checkbox = (props) => {
-	const {children, deco, className, name, onChange, checked, disabled} = getProps({...props, tag: 'area'});
+	const {children, deco, className, name, onChange, checked, disabled} = getProps({...props, tag: 'button'});
 
 	return (
-		<label htmlFor={name} deco={deco} className={className}>
+		<label htmlFor={name} deco={deco} className="inline-block relative cursor-pointer">
 			{/* <input
 				type="checkbox"
 				className="peer absolute opacity-50 top-0 left-2 w-4 h-full m-0 p-0 pointer-events-none z-10"
@@ -361,7 +345,7 @@ export const Checkbox = (props) => {
 				checked={checked}
 				disabled={disabled}
 			/> */}
-			<In {...props} type="checkbox" deco="checkbox" />
+			<In {...props} type="checkbox" />
 			{/* <div className={className + ' pl-8'} name={name}>
 				{children}
 			</div> */}
@@ -370,10 +354,10 @@ export const Checkbox = (props) => {
 	);
 };
 // export const Checkbox2 = (props) => {
-// 	const {children, deco, className, name, onChange, checked, disabled} = getProps({...props, tag: 'area'});
+// 	const {children, deco, className, name, onChange, checked, disabled} = getProps({...props, tag: 'button'});
 
 // 	return (
-// 		<label htmlFor={name} deco={deco} className={className}>
+// 		<label htmlFor={name} deco={deco} className="inline-block relative cursor-pointer">
 // 			<input
 // 				type="checkbox"
 // 				className="peer absolute opacity-50 top-0 left-0 w-0 h-0 m-0 p-0 pointer-events-none z-10"

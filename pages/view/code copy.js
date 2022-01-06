@@ -1,4 +1,4 @@
-import {useData} from '../hook/useData';
+import {useValue} from '../hook/useValue';
 import {useCount} from '../hook/useCount';
 import {useModal} from '../hook/useModal';
 import {useSideMenu} from '../hook/useSideMenu';
@@ -7,9 +7,9 @@ import {I, A, Button, Img, Input, Label, Checkbox, Radio} from '../component/ui'
 import {useDog} from '../hook/useDog';
 import {useRef} from 'react';
 
-const CodeUseData = () => {
+const CodeUseValue = () => {
 	const idInput = useRef(null);
-	const [data, runData] = useData({
+	const [value, runValue] = useValue({
 		id: 'koozone',
 		password: '123',
 	});
@@ -17,15 +17,20 @@ const CodeUseData = () => {
 	const onChageInput = (event) => {
 		const {name, value} = event.currentTarget;
 
-		runData.change(name, value);
+		runValue.change({
+			name,
+			value,
+		});
 	};
 	const onClickReset = (event) => {
 		const {name} = event.currentTarget;
 
-		runData.reset(name);
+		runValue.reset({
+			name,
+		});
 	};
 	const onClickResetAll = (event) => {
-		runData.reset();
+		runValue.reset();
 
 		idInput.current.focus();
 	};
@@ -37,7 +42,7 @@ const CodeUseData = () => {
 				<Input
 					type="text"
 					// deco="primary"
-					value={data.id}
+					value={value.id}
 					name="id"
 					icon="bx-user"
 					placeholder="id 입력"
@@ -48,14 +53,14 @@ const CodeUseData = () => {
 				<Button deco="success" name="id" onClick={onClickReset}>
 					reset
 				</Button>
-				<Label>{data.id}</Label>
+				<Label>{value.id}</Label>
 			</div>
 			<div className="space-x-2">
 				<Label>password :</Label>
 				<Input
 					type="password"
 					deco="primary"
-					value={data.password}
+					value={value.password}
 					name="password"
 					icon="bx-key"
 					placeholder="password 입력"
@@ -65,13 +70,13 @@ const CodeUseData = () => {
 				<Button deco="success" name="password" onClick={onClickReset}>
 					reset
 				</Button>
-				<Label>{data.password}</Label>
+				<Label>{value.password}</Label>
 			</div>
 
 			<Button deco="primary" onClick={onClickResetAll}>
 				reset
 			</Button>
-			<Label>{JSON.stringify(data)}</Label>
+			<Label>{JSON.stringify(value)}</Label>
 		</>
 	);
 };
@@ -138,7 +143,7 @@ const CodeUseCount = () => {
 				<Button deco="success" name="coffee" onClick={onClickReset}>
 					reset
 				</Button>
-				<Label>{count.coffee.toString()}</Label>
+				<Label>{count.coffee}</Label>
 			</div>
 			<div className="space-x-2">
 				<Label>bread :</Label>
@@ -161,7 +166,7 @@ const CodeUseCount = () => {
 				<Button deco="success" name="bread" onClick={onClickReset}>
 					reset
 				</Button>
-				<Label>{count.bread.toString()}</Label>
+				<Label>{count.bread}</Label>
 			</div>
 
 			<Button deco="primary" onClick={onClickResetAll}>
@@ -254,7 +259,7 @@ const CodeUseButton = () => {
 };
 
 const CodeUseCheckbox = () => {
-	const [data, runData] = useData([
+	const [value, runValue] = useValue([
 		'bird',
 		// 'cat',
 		'mouse',
@@ -264,43 +269,43 @@ const CodeUseCheckbox = () => {
 		const {name, checked} = event.currentTarget;
 
 		if (checked) {
-			runData.change([...data, name]);
+			runValue.change({value: [...value, name]});
 		} else {
-			runData.change(data.filter((item) => item != name));
+			runValue.change({value: value.filter((item) => item != name)});
 		}
 	};
 
 	const onClickResetAll = (event) => {
-		runData.reset();
+		runValue.reset();
 	};
 
 	return (
 		<>
 			<div className="space-x-2">
 				<Label>bird :</Label>
-				<Checkbox deco="checkbox" name="bird" icon="bx-leaf" iconR="bxs-chevron-right" checked={data.includes('bird')} onChange={onChangeCheckbox} />
-				<Label>{data.includes('bird') ? 'true' : 'false'}</Label>
+				<Checkbox deco="checkbox" name="bird" icon="bx-leaf" iconR="bxs-chevron-right" checked={value.includes('bird')} onChange={onChangeCheckbox} />
+				<Label>{value.includes('bird') ? 'true' : 'false'}</Label>
 			</div>
 			<div className="space-x-2">
 				<Label>cat :</Label>
-				<Checkbox deco="checkbox" name="cat" icon="bx-leaf" iconR="bxs-chevron-right" checked={data.includes('cat')} onChange={onChangeCheckbox} />
-				<Label>{data.includes('cat') ? 'true' : 'false'}</Label>
+				<Checkbox deco="checkbox" name="cat" icon="bx-leaf" iconR="bxs-chevron-right" checked={value.includes('cat')} onChange={onChangeCheckbox} />
+				<Label>{value.includes('cat') ? 'true' : 'false'}</Label>
 			</div>
 			<div className="space-x-2">
 				<Label>mouse :</Label>
-				<Checkbox deco="checkbox" name="mouse" icon="bx-leaf" checked={data.includes('mouse')} onChange={onChangeCheckbox} />
-				<Label>{data.includes('mouse') ? 'true' : 'false'}</Label>
+				<Checkbox deco="checkbox" name="mouse" icon="bx-leaf" checked={value.includes('mouse')} onChange={onChangeCheckbox} />
+				<Label>{value.includes('mouse') ? 'true' : 'false'}</Label>
 			</div>
 
 			<Button deco="primary" onClick={onClickResetAll}>
 				reset
 			</Button>
-			<Label>{JSON.stringify(data)}</Label>
+			<Label>{JSON.stringify(value)}</Label>
 		</>
 	);
 };
 const CodeUseRadio = () => {
-	const [data, runData] = useData([
+	const [value, runValue] = useValue([
 		// 'apple',
 		'banana',
 		// 'orange',
@@ -309,35 +314,35 @@ const CodeUseRadio = () => {
 	const onChangeRadio = (event) => {
 		const {name, checked} = event.currentTarget;
 
-		runData.change([name]);
+		runValue.change({value: [name]});
 	};
 
 	const onClickResetAll = (event) => {
-		runData.reset();
+		runValue.reset();
 	};
 
 	return (
 		<>
 			<div className="space-x-2">
 				<Label>apple :</Label>
-				<Radio deco="checkbox" name="apple" icon="bx-leaf" iconR="bxs-chevron-right" checked={data.includes('apple')} onChange={onChangeRadio} />
-				<Label>{data.includes('apple') ? 'true' : 'false'}</Label>
+				<Radio deco="checkbox" name="apple" icon="bx-leaf" iconR="bxs-chevron-right" checked={value.includes('apple')} onChange={onChangeRadio} />
+				<Label>{value.includes('apple') ? 'true' : 'false'}</Label>
 			</div>
 			<div className="space-x-2">
 				<Label>banana :</Label>
-				<Radio deco="checkbox" name="banana" icon="bx-leaf" iconR="bxs-chevron-right" checked={data.includes('banana')} onChange={onChangeRadio} />
-				<Label>{data.includes('banana') ? 'true' : 'false'}</Label>
+				<Radio deco="checkbox" name="banana" icon="bx-leaf" iconR="bxs-chevron-right" checked={value.includes('banana')} onChange={onChangeRadio} />
+				<Label>{value.includes('banana') ? 'true' : 'false'}</Label>
 			</div>
 			<div className="space-x-2">
 				<Label>orange :</Label>
-				<Radio deco="checkbox" name="orange" icon="bx-leaf" checked={data.includes('orange')} onChange={onChangeRadio} />
-				<Label>{data.includes('orange') ? 'true' : 'false'}</Label>
+				<Radio deco="checkbox" name="orange" icon="bx-leaf" checked={value.includes('orange')} onChange={onChangeRadio} />
+				<Label>{value.includes('orange') ? 'true' : 'false'}</Label>
 			</div>
 
 			<Button deco="primary" onClick={onClickResetAll}>
 				reset
 			</Button>
-			<Label>{JSON.stringify(data)}</Label>
+			<Label>{JSON.stringify(value)}</Label>
 		</>
 	);
 };
@@ -382,8 +387,8 @@ export default function code() {
 			</div>
 
 			<div className="p-3 space-y-2">
-				<Label deco="t4">useData (useState 사용)</Label>
-				<CodeUseData />
+				<Label deco="t4">useValue (useState 사용)</Label>
+				<CodeUseValue />
 			</div>
 
 			<div className="p-3 space-y-2">
