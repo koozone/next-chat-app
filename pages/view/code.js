@@ -228,9 +228,9 @@ const CodeUseButton = () => {
 	return (
 		<>
 			<div className="space-x-2">
-				<Button deco="primary" name="Primary" />
-				<Button deco="secondary" name="Secodary" />
-				<Button deco="success" name="Success" />
+				<Button deco="t1" name="Primary" />
+				<Button deco="t2" name="Secodary" />
+				<Button deco="t3" name="Success" />
 				<Button deco="danger" name="Danger" />
 				<Button deco="warning" name="Warning" />
 				<Button deco="info" name="Info" />
@@ -277,25 +277,25 @@ const CodeUseCheckbox = () => {
 	return (
 		<>
 			<div className="space-x-2">
-				<Label>bird :</Label>
-				<Checkbox deco="checkbox" name="bird" icon="bx-leaf" iconR="bxs-chevron-right" checked={data.includes('bird')} onChange={onChangeCheckbox} />
-				<Label>{data.includes('bird') ? 'true' : 'false'}</Label>
+				<Label deco="t2">bird :</Label>
+				<Checkbox deco="t1" name="bird" icon="bx-leaf" iconR="bxs-chevron-right" checked={data.includes('bird')} onChange={onChangeCheckbox} />
+				<Label deco="t5">{data.includes('bird') ? 'true' : 'false'}</Label>
 			</div>
 			<div className="space-x-2">
-				<Label>cat :</Label>
-				<Checkbox deco="checkbox" name="cat" icon="bx-leaf" iconR="bxs-chevron-right" checked={data.includes('cat')} onChange={onChangeCheckbox} />
-				<Label>{data.includes('cat') ? 'true' : 'false'}</Label>
+				<Label deco="t2">cat :</Label>
+				<Checkbox deco="t1" name="cat" icon="bx-leaf" iconR="bxs-chevron-right" checked={data.includes('cat')} onChange={onChangeCheckbox} />
+				<Label deco="t5">{data.includes('cat') ? 'true' : 'false'}</Label>
 			</div>
 			<div className="space-x-2">
-				<Label>mouse :</Label>
-				<Checkbox deco="checkbox" name="mouse" icon="bx-leaf" checked={data.includes('mouse')} onChange={onChangeCheckbox} />
-				<Label>{data.includes('mouse') ? 'true' : 'false'}</Label>
+				<Label deco="t2">mouse :</Label>
+				<Checkbox deco="t1" name="mouse" icon="bx-leaf" checked={data.includes('mouse')} onChange={onChangeCheckbox} />
+				<Label deco="t5">{data.includes('mouse') ? 'true' : 'false'}</Label>
 			</div>
 
-			<Button deco="primary" onClick={onClickResetAll}>
+			<Button deco="t3" onClick={onClickResetAll}>
 				reset
 			</Button>
-			<Label>{JSON.stringify(data)}</Label>
+			<Label deco="t3">{JSON.stringify(data)}</Label>
 		</>
 	);
 };
@@ -319,25 +319,25 @@ const CodeUseRadio = () => {
 	return (
 		<>
 			<div className="space-x-2">
-				<Label>apple :</Label>
-				<Radio deco="checkbox" name="apple" icon="bx-leaf" iconR="bxs-chevron-right" checked={data.includes('apple')} onChange={onChangeRadio} />
-				<Label>{data.includes('apple') ? 'true' : 'false'}</Label>
+				<Label deco="t2">apple :</Label>
+				<Radio deco="t2" name="apple" icon="bx-leaf" iconR="bxs-chevron-right" checked={data.includes('apple')} onChange={onChangeRadio} />
+				<Label deco="t5">{data.includes('apple') ? 'true' : 'false'}</Label>
 			</div>
 			<div className="space-x-2">
-				<Label>banana :</Label>
-				<Radio deco="checkbox" name="banana" icon="bx-leaf" iconR="bxs-chevron-right" checked={data.includes('banana')} onChange={onChangeRadio} />
-				<Label>{data.includes('banana') ? 'true' : 'false'}</Label>
+				<Label deco="t2">banana :</Label>
+				<Radio deco="t2" name="banana" icon="bx-leaf" iconR="bxs-chevron-right" checked={data.includes('banana')} onChange={onChangeRadio} />
+				<Label deco="t5">{data.includes('banana') ? 'true' : 'false'}</Label>
 			</div>
 			<div className="space-x-2">
-				<Label>orange :</Label>
-				<Radio deco="checkbox" name="orange" icon="bx-leaf" checked={data.includes('orange')} onChange={onChangeRadio} />
-				<Label>{data.includes('orange') ? 'true' : 'false'}</Label>
+				<Label deco="t2">orange :</Label>
+				<Radio deco="t2" name="orange" icon="bx-leaf" checked={data.includes('orange')} onChange={onChangeRadio} />
+				<Label deco="t5">{data.includes('orange') ? 'true' : 'false'}</Label>
 			</div>
 
-			<Button deco="primary" onClick={onClickResetAll}>
+			<Button deco="t3" onClick={onClickResetAll}>
 				reset
 			</Button>
-			<Label>{JSON.stringify(data)}</Label>
+			<Label deco="t3">{JSON.stringify(data)}</Label>
 		</>
 	);
 };
@@ -348,12 +348,12 @@ export default function code() {
 			<Header />
 
 			<div className="p-3 space-y-2">
-				<Label deco="t4">Label</Label>
+				<Label deco="t1">Label</Label>
 
 				<div className="space-x-2">
 					<Label deco="t3">
 						Lorem ipsum,
-						<Label deco="t2" className="inline-block">
+						<Label deco="t5" className="inline-block">
 							dolor sit amet consectetur adipisicing elit.
 						</Label>
 						Voluptates deserunt officiis recusandae sunt totam optio, facilis blanditiis hic, placeat voluptatibus provident facere consequatur
@@ -367,47 +367,47 @@ export default function code() {
 			</div>
 
 			<div className="p-3 space-y-2">
-				<Label deco="t4">Button</Label>
+				<Label deco="t1">Button</Label>
 				<CodeUseButton />
 			</div>
 
 			<div className="p-3 space-y-2">
-				<Label deco="t4">Checkbox</Label>
+				<Label deco="t1">Checkbox</Label>
 				<CodeUseCheckbox />
 			</div>
 
 			<div className="p-3 space-y-2">
-				<Label deco="t4">Radio</Label>
+				<Label deco="t1">Radio</Label>
 				<CodeUseRadio />
 			</div>
 
 			<div className="p-3 space-y-2">
-				<Label deco="t4">useData (useState 사용)</Label>
+				<Label deco="t1">useData (useState 사용)</Label>
 				<CodeUseData />
 			</div>
 
 			<div className="p-3 space-y-2">
-				<Label deco="t4">useCount (useReducer 사용)</Label>
+				<Label deco="t1">useCount (useReducer 사용)</Label>
 				<CodeUseCount />
 			</div>
 
 			<div className="p-3 space-y-2">
-				<Label deco="t4">useModal (useContext 사용)</Label>
+				<Label deco="t1">useModal (useContext 사용)</Label>
 				<CodeUseModal />
 			</div>
 
 			<div className="p-3 space-y-2">
-				<Label deco="t4">useSideMenu (useContext 사용)</Label>
+				<Label deco="t1">useSideMenu (useContext 사용)</Label>
 				<CodeUseSideMenu />
 			</div>
 
 			<div className="p-3 space-y-2">
-				<Label deco="t4">useDog (axios 사용)</Label>
+				<Label deco="t1">useDog (axios 사용)</Label>
 				<CodeUseDog />
 			</div>
 
 			<div className="p-3 space-y-2">
-				<Label deco="t4">header</Label>
+				<Label deco="t1">header</Label>
 				<Header1 />
 				<Header2 />
 				<Header3 />

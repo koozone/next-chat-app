@@ -42,8 +42,8 @@ const getStyle = (props) => {
 	})();
 
 	const element = (() => {
-		// switch (`[${tag}]:${deco}`) {
-		switch (`[${tag}]:`) {
+		switch (`[${tag}]:${deco}`) {
+			// switch (`[${tag}]:`) {
 			// img
 			case '[img]:':
 				return <div className={`h-10 aspect-square border-2 border-white/50 rounded-full object-cover`} />;
@@ -71,6 +71,14 @@ const getStyle = (props) => {
 			// label
 			case '[label]:':
 				return <div className={`text-sm text-violet-500`} />;
+			case '[label]:t1':
+				return <div className={`text-2xl text-neutral-900 font-semibold`} />;
+			case '[label]:t2':
+				return <div className={`text-base text-neutral-900 font-medium`} />;
+			case '[label]:t3':
+				return <div className={`text-sm text-neutral-900`} />;
+			case '[label]:t5':
+				return <div className={`text-xs text-red-500 font-medium`} />;
 			// case '[label]:100':
 			// 	return <div className={`text-xs`} />;
 			// case '[label]:300':
@@ -85,6 +93,24 @@ const getStyle = (props) => {
 				return (
 					<div
 						className={`text-sm text-violet-500 bg-white/50 hover:bg-white peer-checked:text-white peer-checked:bg-violet-500/50 peer-checked:hover:bg-violet-500`}
+					/>
+				);
+			case '[box]:t1':
+				return (
+					<div
+						className={`text-sm text-blue-500 bg-white/80 ring-2 ring-blue-500 hover:bg-white peer-checked:text-white peer-checked:bg-blue-500/80 peer-checked:hover:bg-blue-500`}
+					/>
+				);
+			case '[box]:t2':
+				return (
+					<div
+						className={`text-sm text-neutral-500 bg-white/80 ring-2 ring-neutral-500 hover:bg-white peer-checked:text-white peer-checked:bg-neutral-500/80 peer-checked:hover:bg-neutral-500`}
+					/>
+				);
+			case '[box]:t3':
+				return (
+					<div
+						className={`text-sm text-lime-500 bg-white/80 ring-2 ring-lime-500 hover:bg-white peer-checked:text-white peer-checked:bg-lime-500/80 peer-checked:hover:bg-lime-500`}
 					/>
 				);
 
@@ -141,12 +167,7 @@ const getStyle = (props) => {
 
 			// area
 			case '[area]:':
-				return (
-					<div
-						// className={`text-sm text-violet-500 bg-white/50 hover:bg-white peer-checked:text-white peer-checked:bg-violet-500/50 peer-checked:hover:bg-violet-500`}
-						className={``}
-					/>
-				);
+				return <div className={``} />;
 
 			// a
 			case '[a]:':
@@ -174,12 +195,14 @@ const getStyle = (props) => {
 			// in
 			case '[in]:':
 				return <div className={`opacity-50 top-0 left-0 w-0 h-0`} />;
-			// case '[in]:a':
-			// 	return <div className={`opacity-50 top-0 left-0 w-0 h-0`} />;
-			// case '[in]:radio':
-			// 	return <div className={`opacity-50 top-0 -left-2 w-4 h-full`} />;
-			// case '[in]:checkbox':
-			// 	return <div className={`opacity-50 top-0 -left-2 w-4 h-full`} />;
+			case '[in]:a-t1':
+			case '[in]:a-t2':
+			case '[in]:a-t3':
+				return <div className={`opacity-50 top-0 left-0 w-0 h-0`} />;
+			case '[in]:radio-t2':
+				return <div className={`opacity-50 top-0 -left-6 w-4 h-full`} />;
+			case '[in]:checkbox-t1':
+				return <div className={`opacity-50 top-0 -left-6 w-4 h-full`} />;
 
 			// input
 			case '[input]:':
@@ -259,6 +282,11 @@ export const Label = (props) => {
 	);
 };
 
+export const In = (props) => {
+	const {children, deco, className, name, href, type, onChange, checked, disabled} = getProps({...props, tag: 'in'});
+
+	return <input type={type} className={className} id={name} name={name} onChange={onChange} checked={checked} disabled={disabled} />;
+};
 export const Box = (props) => {
 	const {children, deco, className, name} = getProps({...props, tag: 'box'});
 
@@ -280,12 +308,6 @@ export const Button = (props) => {
 		// 	{children}
 		// </div>
 	);
-};
-
-export const In = (props) => {
-	const {children, deco, className, name, href, type, onChange, checked, disabled} = getProps({...props, tag: 'in'});
-
-	return <input type={type} className={className} id={name} name={name} onChange={onChange} checked={checked} disabled={disabled} />;
 };
 
 // export const A2 = (props) => {
@@ -314,7 +336,7 @@ export const A = (props) => {
 					checked={checked}
 					disabled={disabled}
 				/> */}
-				<In {...props} type="checkbox" deco="a" />
+				<In {...props} type="checkbox" deco={`a-${deco}`} />
 				{/* <div className={className + ' pl-8'} name={name}>
 					{children}
 				</div> */}
@@ -338,7 +360,7 @@ export const Radio = (props) => {
 				checked={checked}
 				disabled={disabled}
 			/> */}
-			<In {...props} type="radio" deco="radio" />
+			<In {...props} type="radio" deco={`radio-${deco}`} />
 			{/* <div className={className + ' pl-8'} name={name}>
 				{children}
 			</div> */}
@@ -361,7 +383,7 @@ export const Checkbox = (props) => {
 				checked={checked}
 				disabled={disabled}
 			/> */}
-			<In {...props} type="checkbox" deco="checkbox" />
+			<In {...props} type="checkbox" deco={`checkbox-${deco}`} />
 			{/* <div className={className + ' pl-8'} name={name}>
 				{children}
 			</div> */}
