@@ -231,9 +231,9 @@ const CodeUseButton = () => {
 				<Button deco="bu-1" name="Primary" />
 				<Button deco="bu-2" name="Secodary" />
 				<Button deco="bu-3" name="Success" />
-				<Button deco="danger" name="Danger" />
-				<Button deco="warning" name="Warning" />
-				<Button deco="info" name="Info" />
+				<Button deco="bu-4" name="Danger" />
+				<Button deco="bu-5" name="Warning" />
+				<Button deco="bu-6" name="Info" />
 			</div>
 			<div className="space-x-2">
 				<Button deco="bu-1" name="MENU" icon="bx-menu" />
