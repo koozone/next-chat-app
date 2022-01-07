@@ -11,7 +11,7 @@ export default function SideMenu() {
 
 	return (
 		<Transition.Root show={sideMenu} as={Fragment}>
-			<Dialog as="div" className="fixed inset-0 overflow-hidden" onClose={runSideMenu.close}>
+			<Dialog as="div" className="fixed inset-0 overflow-hidden z-20" onClose={runSideMenu.close}>
 				<div className="absolute inset-0 overflow-hidden">
 					<Transition.Child
 						as={Fragment}
@@ -58,17 +58,12 @@ export default function SideMenu() {
 								</Transition.Child>
 								<div className="h-full flex flex-col py-6 bg-white shadow-xl overflow-y-scroll">
 									<div className="px-4 sm:px-6">
-										<Dialog.Title className="text-lg font-medium text-gray-900">
-											Panel title
-										</Dialog.Title>
+										<Dialog.Title className="text-lg font-medium text-gray-900">Panel title</Dialog.Title>
 									</div>
 									<div className="mt-6 relative flex-1 px-4 sm:px-6">
 										{/* Replace with your content */}
 										<div className="absolute inset-0 px-4 sm:px-6">
-											<div
-												className="h-full border-2 border-dashed border-gray-200"
-												aria-hidden="true"
-											/>
+											<div className="h-full border-2 border-dashed border-gray-200" aria-hidden="true" />
 										</div>
 										{/* /End replace */}
 									</div>

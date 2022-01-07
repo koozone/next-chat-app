@@ -41,7 +41,7 @@ export function Header1() {
 			<div className="hidden md:flex ml-6 space-x-3">
 				{menuList.map((item, index) => (
 					// <A key={index} {...item} deco="linkA" />
-					<A key={index} {...item} deco="t3" checked={pathList.includes(item.href)} />
+					<A key={index} {...item} deco="a-3" checked={pathList.includes(item.href)} />
 				))}
 			</div>
 		</div>
@@ -77,14 +77,14 @@ export function Header2() {
 			<div className="hidden md:flex ml-6 space-x-3">
 				{menuList.map((item, index) => (
 					// <A key={index} {...item} deco="linkB" />
-					<A key={index} {...item} deco="t1" checked={pathList.includes(item.href)} />
+					<A key={index} {...item} deco="a-1" checked={pathList.includes(item.href)} />
 				))}
 			</div>
 			<div className="flex space-x-2">
-				<Button deco="buttonA" icon="bx-menu" className="inline-block md:hidden" onClick={clickMenu}></Button>
-				<Button deco="buttonA" icon="bx-log-in" onClick={runModal.open}></Button>
+				<Button deco="bu-9" icon="bx-menu" className="inline-block md:hidden" onClick={clickMenu}></Button>
+				<Button deco="bu-9" icon="bx-log-in" onClick={runModal.open}></Button>
 				<Img
-					deco="imageA"
+					deco="im-1"
 					src="https://images.unsplash.com/photo-1544348817-5f2cf14b88c8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1287&q=80"
 				></Img>
 			</div>
@@ -97,7 +97,7 @@ export function Header3() {
 	const [pathList, setPathList] = useState([router.pathname]);
 
 	return (
-		<div className="sticky top-0 flex justify-between items-center bg-[#300b3f85] md:h-20 h-12">
+		<div className="sticky top-0 flex justify-between items-center bg-[#300b3f85] md:h-20 h-12 z-10">
 			<img
 				className="w-1/4 h-full object-cover"
 				src="https://images.unsplash.com/photo-1569399078436-da10fbd60f12?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1475&q=80"
@@ -105,14 +105,12 @@ export function Header3() {
 			<div className="hidden md:flex space-x-2">
 				{menuList.map((item, index) => (
 					// <A key={index} {...item} deco='linkC' />
-					<A key={index} {...item} deco="t2" checked={pathList.includes(item.href)} />
+					<A key={index} {...item} deco="a-2" checked={pathList.includes(item.href)} />
 				))}
 			</div>
 			<div className="flex space-x-2">
-				<Button icon="bx-menu" className="inline-block md:hidden"></Button>
+				<Button deco="bu-9" icon="bx-menu" className="inline-block md:hidden"></Button>
 			</div>
-
-			<Label>{JSON.stringify(pathList)}</Label>
 		</div>
 	);
 }

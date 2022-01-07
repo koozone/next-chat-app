@@ -3,7 +3,7 @@ import {useCount} from '../hook/useCount';
 import {useModal} from '../hook/useModal';
 import {useSideMenu} from '../hook/useSideMenu';
 import Header, {Header1, Header2, Header3} from '../component/header';
-import {I, A, Button, Img, Input, Label, Checkbox, Radio} from '../component/ui';
+import {I, A, Button, Img, Input, Label, Checkbox, Checkbox2, Radio, Radio2} from '../component/ui';
 import {useDog} from '../hook/useDog';
 import {useRef} from 'react';
 
@@ -33,10 +33,10 @@ const CodeUseData = () => {
 	return (
 		<>
 			<div className="space-x-2">
-				<Label>id :</Label>
+				<Label deco="la-2">id :</Label>
 				<Input
 					type="text"
-					// deco="primary"
+					deco="in-1"
 					value={data.id}
 					name="id"
 					icon="bx-user"
@@ -45,16 +45,16 @@ const CodeUseData = () => {
 					className="w-[150px]"
 					ref={idInput}
 				/>
-				<Button deco="success" name="id" onClick={onClickReset}>
+				<Button deco="bu-3" name="id" onClick={onClickReset}>
 					reset
 				</Button>
-				<Label>{data.id}</Label>
+				<Label deco="la-5">{data.id}</Label>
 			</div>
 			<div className="space-x-2">
-				<Label>password :</Label>
+				<Label deco="la-2">password :</Label>
 				<Input
 					type="password"
-					deco="primary"
+					deco="in-1"
 					value={data.password}
 					name="password"
 					icon="bx-key"
@@ -62,16 +62,16 @@ const CodeUseData = () => {
 					onChange={onChageInput}
 					className="w-[150px]"
 				/>
-				<Button deco="success" name="password" onClick={onClickReset}>
+				<Button deco="bu-3" name="password" onClick={onClickReset}>
 					reset
 				</Button>
-				<Label>{data.password}</Label>
+				<Label deco="la-5">{data.password}</Label>
 			</div>
 
-			<Button deco="primary" onClick={onClickResetAll}>
+			<Button deco="bu-3" onClick={onClickResetAll}>
 				reset
 			</Button>
-			<Label>{JSON.stringify(data)}</Label>
+			<Label deco="la-3">{JSON.stringify(data)}</Label>
 		</>
 	);
 };
@@ -118,10 +118,10 @@ const CodeUseCount = () => {
 	return (
 		<>
 			<div className="space-x-2">
-				<Label>coffee :</Label>
+				<Label deco="la-2">coffee :</Label>
 				<Input
 					type="text"
-					deco="primary"
+					deco="in-3"
 					value={count.coffee}
 					name="coffee"
 					icon="bx-coffee-togo"
@@ -129,22 +129,22 @@ const CodeUseCount = () => {
 					onChange={onChageInput}
 					className="w-[80px]"
 				/>
-				<Button deco="secondary" name="coffee" onClick={onClickIncrement}>
+				<Button deco="bu-1" name="coffee" onClick={onClickIncrement}>
 					<i className="bx bx-message-square-add" />
 				</Button>
-				<Button deco="secondary" name="coffee" onClick={onClickDecrement}>
+				<Button deco="bu-1" name="coffee" onClick={onClickDecrement}>
 					<i className="bx bx-message-square-minus" />
 				</Button>
-				<Button deco="success" name="coffee" onClick={onClickReset}>
+				<Button deco="bu-3" name="coffee" onClick={onClickReset}>
 					reset
 				</Button>
-				<Label>{count.coffee.toString()}</Label>
+				<Label deco="la-5">{count.coffee.toString()}</Label>
 			</div>
 			<div className="space-x-2">
-				<Label>bread :</Label>
+				<Label deco="la-2">bread :</Label>
 				<Input
 					type="text"
-					deco="danger"
+					deco="in-3"
 					value={count.bread}
 					name="bread"
 					icon="bx-baguette"
@@ -152,22 +152,22 @@ const CodeUseCount = () => {
 					onChange={onChageInput}
 					className="w-[80px]"
 				/>
-				<Button deco="secondary" name="bread" onClick={onClickIncrement}>
+				<Button deco="bu-1" name="bread" onClick={onClickIncrement}>
 					<i className="bx bx-message-square-add" />
 				</Button>
-				<Button deco="secondary" name="bread" onClick={onClickDecrement}>
+				<Button deco="bu-1" name="bread" onClick={onClickDecrement}>
 					<i className="bx bx-message-square-minus" />
 				</Button>
-				<Button deco="success" name="bread" onClick={onClickReset}>
+				<Button deco="bu-3" name="bread" onClick={onClickReset}>
 					reset
 				</Button>
-				<Label>{count.bread.toString()}</Label>
+				<Label deco="la-5">{count.bread.toString()}</Label>
 			</div>
 
-			<Button deco="primary" onClick={onClickResetAll}>
+			<Button deco="bu-3" onClick={onClickResetAll}>
 				reset
 			</Button>
-			<Label>{JSON.stringify(count)}</Label>
+			<Label deco="la-3">{JSON.stringify(count)}</Label>
 		</>
 	);
 };
@@ -181,7 +181,7 @@ const CodeUseModal = () => {
 
 	return (
 		<div className="space-x-2">
-			<Button deco="primary" onClick={onClickModal}>
+			<Button deco="bu-3" onClick={onClickModal}>
 				modal
 			</Button>
 		</div>
@@ -197,7 +197,7 @@ const CodeUseSideMenu = () => {
 
 	return (
 		<div className="space-x-2">
-			<Button deco="primary" onClick={onClickSideMenu}>
+			<Button deco="bu-3" onClick={onClickSideMenu}>
 				sideMenu
 			</Button>
 		</div>
@@ -213,7 +213,7 @@ const CodeUseDog = () => {
 
 	return (
 		<div className="space-x-2">
-			<Button deco="primary" onClick={onClickSideMenu}>
+			<Button deco="bu-3" onClick={onClickSideMenu}>
 				dog
 			</Button>
 		</div>
@@ -228,22 +228,22 @@ const CodeUseButton = () => {
 	return (
 		<>
 			<div className="space-x-2">
-				<Button deco="t1" name="Primary" />
-				<Button deco="t2" name="Secodary" />
-				<Button deco="t3" name="Success" />
+				<Button deco="bu-1" name="Primary" />
+				<Button deco="bu-2" name="Secodary" />
+				<Button deco="bu-3" name="Success" />
 				<Button deco="danger" name="Danger" />
 				<Button deco="warning" name="Warning" />
 				<Button deco="info" name="Info" />
 			</div>
 			<div className="space-x-2">
-				<Button deco="normal" name="MENU" icon="bx-menu" />
-				<Button deco="bold" name="MENU" icon="bx-menu" checked />
-				<Button deco="primary" name="Primary" icon="bx-leaf" iconR="bxs-chevron-right" checked />
-				<Button deco="secondary" name="Secodary" iconR="bxs-chevron-right" />
-				<Button deco="success" name="다음단계" iconR="bxs-chevron-right" className="w-[150px]" />
-				<Button deco="danger" name="경고" icon="bx-bug" />
-				<Button deco="warning" name="Warning" />
-				<Button deco="info" name="Info" />
+				<Button deco="bu-1" name="MENU" icon="bx-menu" />
+				<Button deco="bu-1" name="MENU" icon="bx-menu" checked />
+				<Button deco="bu-1" name="Primary" icon="bx-leaf" iconR="bxs-chevron-right" checked />
+				<Button deco="bu-1" name="Secodary" iconR="bxs-chevron-right" />
+				<Button deco="bu-1" name="다음단계" iconR="bxs-chevron-right" className="text-xl w-[150px] h-[40px]" />
+				<Button deco="bu-1" name="경고" icon="bx-bug" />
+				<Button deco="bu-1" name="Warning" />
+				<Button deco="bu-1" name="Info" />
 			</div>
 
 			{/* <A href="/view/layout" name="home" icon="bx-math" /> */}
@@ -277,32 +277,40 @@ const CodeUseCheckbox = () => {
 	return (
 		<>
 			<div className="space-x-2">
-				<Label deco="t2">bird :</Label>
-				<Checkbox deco="t1" name="bird" icon="bx-leaf" iconR="bxs-chevron-right" checked={data.includes('bird')} onChange={onChangeCheckbox} />
-				<Label deco="t5">{data.includes('bird') ? 'true' : 'false'}</Label>
+				<Label deco="la-2">bird :</Label>
+				<Checkbox
+					deco="ch-1"
+					name="bird"
+					icon="bx-leaf"
+					iconR="bxs-chevron-right"
+					checked={data.includes('bird')}
+					onChange={onChangeCheckbox}
+					className="text-xl w-[150px] h-[40px]"
+				/>
+				<Label deco="la-5">{data.includes('bird') ? 'true' : 'false'}</Label>
 			</div>
 			<div className="space-x-2">
-				<Label deco="t2">cat :</Label>
-				<Checkbox deco="t1" name="cat" icon="bx-leaf" iconR="bxs-chevron-right" checked={data.includes('cat')} onChange={onChangeCheckbox} />
-				<Label deco="t5">{data.includes('cat') ? 'true' : 'false'}</Label>
+				<Label deco="la-2">cat :</Label>
+				<Checkbox deco="ch-1" name="cat" icon="bx-leaf" iconR="bxs-chevron-right" checked={data.includes('cat')} onChange={onChangeCheckbox} />
+				<Label deco="la-5">{data.includes('cat') ? 'true' : 'false'}</Label>
 			</div>
 			<div className="space-x-2">
-				<Label deco="t2">mouse :</Label>
-				<Checkbox deco="t1" name="mouse" icon="bx-leaf" checked={data.includes('mouse')} onChange={onChangeCheckbox} />
-				<Label deco="t5">{data.includes('mouse') ? 'true' : 'false'}</Label>
+				<Label deco="la-2">mouse :</Label>
+				<Checkbox2 deco="ch-2" name="mouse" iconR="bxs-chevron-right" checked={data.includes('mouse')} onChange={onChangeCheckbox} />
+				<Label deco="la-5">{data.includes('mouse') ? 'true' : 'false'}</Label>
 			</div>
 
-			<Button deco="t3" onClick={onClickResetAll}>
+			<Button deco="bu-3" onClick={onClickResetAll}>
 				reset
 			</Button>
-			<Label deco="t3">{JSON.stringify(data)}</Label>
+			<Label deco="la-3">{JSON.stringify(data)}</Label>
 		</>
 	);
 };
 const CodeUseRadio = () => {
 	const [data, runData] = useData([
 		// 'apple',
-		'banana',
+		// 'banana',
 		// 'orange',
 	]);
 
@@ -319,25 +327,25 @@ const CodeUseRadio = () => {
 	return (
 		<>
 			<div className="space-x-2">
-				<Label deco="t2">apple :</Label>
-				<Radio deco="t2" name="apple" icon="bx-leaf" iconR="bxs-chevron-right" checked={data.includes('apple')} onChange={onChangeRadio} />
-				<Label deco="t5">{data.includes('apple') ? 'true' : 'false'}</Label>
+				<Label deco="la-2">apple :</Label>
+				<Radio deco="ra-1" name="apple" icon="bx-leaf" iconR="bxs-chevron-right" checked={data.includes('apple')} onChange={onChangeRadio} />
+				<Label deco="la-5">{data.includes('apple') ? 'true' : 'false'}</Label>
 			</div>
 			<div className="space-x-2">
-				<Label deco="t2">banana :</Label>
-				<Radio deco="t2" name="banana" icon="bx-leaf" iconR="bxs-chevron-right" checked={data.includes('banana')} onChange={onChangeRadio} />
-				<Label deco="t5">{data.includes('banana') ? 'true' : 'false'}</Label>
+				<Label deco="la-2">banana :</Label>
+				<Radio deco="ra-1" name="banana" icon="bx-leaf" iconR="bxs-chevron-right" checked={data.includes('banana')} onChange={onChangeRadio} />
+				<Label deco="la-5">{data.includes('banana') ? 'true' : 'false'}</Label>
 			</div>
 			<div className="space-x-2">
-				<Label deco="t2">orange :</Label>
-				<Radio deco="t2" name="orange" icon="bx-leaf" checked={data.includes('orange')} onChange={onChangeRadio} />
-				<Label deco="t5">{data.includes('orange') ? 'true' : 'false'}</Label>
+				<Label deco="la-2">orange :</Label>
+				<Radio2 deco="ra-2" name="orange" checked={data.includes('orange')} onChange={onChangeRadio} />
+				<Label deco="la-5">{data.includes('orange') ? 'true' : 'false'}</Label>
 			</div>
 
-			<Button deco="t3" onClick={onClickResetAll}>
+			<Button deco="bu-3" onClick={onClickResetAll}>
 				reset
 			</Button>
-			<Label deco="t3">{JSON.stringify(data)}</Label>
+			<Label deco="la-3">{JSON.stringify(data)}</Label>
 		</>
 	);
 };
@@ -348,66 +356,66 @@ export default function code() {
 			<Header />
 
 			<div className="p-3 space-y-2">
-				<Label deco="t1">Label</Label>
+				<Label deco="la-1">Label</Label>
 
 				<div className="space-x-2">
-					<Label deco="t3">
+					<Label deco="la-3">
 						Lorem ipsum,
-						<Label deco="t5" className="inline-block">
+						<Label deco="la-5" className="inline-block">
 							dolor sit amet consectetur adipisicing elit.
 						</Label>
 						Voluptates deserunt officiis recusandae sunt totam optio, facilis blanditiis hic, placeat voluptatibus provident facere consequatur
 						earum. Laudantium in inventore distinctio animi voluptas.
 					</Label>
-					<Label icon="bx-menu" />
-					<Label name="menu" />
-					<Label icon="bx-menu" name="MENU" />
-					<Label>menu</Label>
+					<Label deco="la-2" icon="bx-menu" />
+					<Label deco="la-2" name="menu" />
+					<Label deco="la-2" icon="bx-menu" name="MENU" />
+					<Label deco="la-2">menu</Label>
 				</div>
 			</div>
 
 			<div className="p-3 space-y-2">
-				<Label deco="t1">Button</Label>
+				<Label deco="la-1">Button</Label>
 				<CodeUseButton />
 			</div>
 
 			<div className="p-3 space-y-2">
-				<Label deco="t1">Checkbox</Label>
+				<Label deco="la-1">Checkbox</Label>
 				<CodeUseCheckbox />
 			</div>
 
 			<div className="p-3 space-y-2">
-				<Label deco="t1">Radio</Label>
+				<Label deco="la-1">Radio</Label>
 				<CodeUseRadio />
 			</div>
 
 			<div className="p-3 space-y-2">
-				<Label deco="t1">useData (useState 사용)</Label>
+				<Label deco="la-1">useData (useState 사용)</Label>
 				<CodeUseData />
 			</div>
 
 			<div className="p-3 space-y-2">
-				<Label deco="t1">useCount (useReducer 사용)</Label>
+				<Label deco="la-1">useCount (useReducer 사용)</Label>
 				<CodeUseCount />
 			</div>
 
 			<div className="p-3 space-y-2">
-				<Label deco="t1">useModal (useContext 사용)</Label>
+				<Label deco="la-1">useModal (useContext 사용)</Label>
 				<CodeUseModal />
 			</div>
 
 			<div className="p-3 space-y-2">
-				<Label deco="t1">useSideMenu (useContext 사용)</Label>
+				<Label deco="la-1">useSideMenu (useContext 사용)</Label>
 				<CodeUseSideMenu />
 			</div>
 
 			<div className="p-3 space-y-2">
-				<Label deco="t1">useDog (axios 사용)</Label>
+				<Label deco="la-1">useDog (axios 사용)</Label>
 				<CodeUseDog />
 			</div>
 
 			<div className="p-3 space-y-2">
-				<Label deco="t1">header</Label>
+				<Label deco="la-1">header</Label>
 				<Header1 />
 				<Header2 />
 				<Header3 />
