@@ -112,6 +112,12 @@ const getStyle = (props) => {
 						className={`pl-8 text-sm text-white bg-blue-500/80 ring-2 ring-blue-500 hover:bg-blue-500 peer-checked:text-blue-500 peer-checked:bg-white/80 peer-checked:hover:bg-white`}
 					/>
 				);
+			case '[box]:ch-3':
+				return (
+					<div
+						className={`text-sm text-white bg-blue-500/80 ring-2 ring-blue-500 hover:bg-blue-500 peer-checked:text-blue-500 peer-checked:bg-white/80 peer-checked:hover:bg-white`}
+					/>
+				);
 			case '[box]:ra-1':
 			case '[box]:ra-2':
 				return (
@@ -165,13 +171,17 @@ const getStyle = (props) => {
 			case '[type]:a-1':
 			case '[type]:a-2':
 			case '[type]:a-3':
-			case '[type]:ch-2':
-			case '[type]:ra-2':
 				return <div className={`opacity-50 top-0 left-0 w-0 h-0`} />;
 			case '[type]:ch-1':
 				return <div className={`accent-blue-500 opacity-100 top-0 left-2 w-4 h-full`} />;
+			case '[type]:ch-2':
+				return <div className={`opacity-50 top-0 left-0 w-0 h-0`} />;
+			case '[type]:ch-3':
+				return <div className={`opacity-50 top-0 left-0 w-0 h-0`} />;
 			case '[type]:ra-1':
 				return <div className={`accent-neutral-500 opacity-100 top-0 left-2 w-4 h-full`} />;
+			case '[type]:ra-2':
+				return <div className={`opacity-50 top-0 left-0 w-0 h-0`} />;
 
 			// button
 			case '[button]:':
@@ -350,6 +360,17 @@ export const Checkbox2 = (props) => {
 			<Type {...props} type="checkbox" />
 			<I deco={`${deco}:off`} icon="bxs-checkbox" />
 			<I deco={`${deco}:on`} icon="bx-checkbox-checked" />
+			<Box {...props} />
+		</label>
+	);
+};
+export const Checkbox3 = (props) => {
+	const {children, deco, style, className, name, onChange, checked, disabled} = getProps({...props, tag: 'checkbox'});
+
+	return (
+		<label htmlFor={name} deco={deco} className={style}>
+			<Type {...props} type="checkbox" />
+			{children}
 			<Box {...props} />
 		</label>
 	);

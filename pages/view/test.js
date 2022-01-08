@@ -1,5 +1,5 @@
 import Header from '../component/header';
-import {Input, Label, Button, Checkbox, A} from '../component/ui';
+import {Input, Label, Button, Checkbox, Checkbox3, A, I} from '../component/ui';
 import {useData} from '../hook/useData';
 import {useRef, useEffect} from 'react';
 import uid from 'tiny-uid';
@@ -79,53 +79,68 @@ export default function test() {
 			<Header />
 
 			<section className="m-2 p-2 space-y-2">
-				<div>{JSON.stringify(data)}</div>
+				<Label deco="la-3">{JSON.stringify(data)}</Label>
 
 				<div className="space-x-2">
 					<span className="space-x-1">
-						<Label>name : </Label>
-						<Input type="text" name="name" value={data.name} onChange={changeInput} ref={nameInput} />
-						<Button name="name" onClick={clickReset}>
+						<Label deco="la-2">name : </Label>
+						<Input
+							type="text"
+							deco="in-1"
+							name="name"
+							icon="bx-key"
+							placeholder="password 입력"
+							value={data.name}
+							onChange={changeInput}
+							ref={nameInput}
+						/>
+						<Button deco="bu-3" name="name" onClick={clickReset}>
 							리셋
 						</Button>
 					</span>
 					<span className="space-x-1">
-						<Label>email : </Label>
-						<Input type="email" name="email" value={data.email} onChange={changeInput} />
-						<Button name="email" onClick={clickReset}>
+						<Label deco="la-2">email : </Label>
+						<Input type="email" deco="in-1" name="email" icon="bx-key" placeholder="password 입력" value={data.email} onChange={changeInput} />
+						<Button deco="bu-3" name="email" onClick={clickReset}>
 							리셋
 						</Button>
 					</span>
-					<Button onClick={clickSave}>저장</Button>
-					<Button onClick={clickResetAll}>초기화</Button>
+					<Button deco="bu-1" onClick={clickSave}>
+						저장
+					</Button>
+					<Button deco="bu-1" onClick={clickResetAll}>
+						초기화
+					</Button>
 				</div>
 			</section>
 
-			<section className="m-2 p-2 space-x-1 space-y-1">
+			<section className="m-2 p-2 space-x-1 space-y-2">
 				<ul className="space-y-2">
 					{userList.map((item) => (
-						<li key={item.id} className="space-x-1">
-							<Checkbox name={item.id} checked={checkList.includes(item.id)} onChange={changeItem}>
-								{/* {item.name} ({item.email}) */}
-								{`---`}
-							</Checkbox>
-							<A name={item.id} checked={checkList.includes(item.id)}>
+						<li key={item.id} className="space-x-2">
+							<Checkbox3 deco="ch-2" name={item.id} checked={checkList.includes(item.id)} onChange={changeItem}>
+								<I deco={`ch-2:off`} icon="bxs-checkbox" />
+								<I deco={`ch-2:on`} icon="bx-checkbox-checked" />
+							</Checkbox3>
+							<A deco="a-2" name={item.id} checked={checkList.includes(item.id)}>
 								{item.name} ({item.email})
 							</A>
-							<Button name={item.id} onClick={clickModify}>
+							<Button deco="bu-3" name={item.id} onClick={clickModify}>
 								수정
 							</Button>
-							<Button name={item.id} onClick={clickRemove}>
+							<Button deco="bu-4" name={item.id} onClick={clickRemove}>
 								삭제
 							</Button>
 						</li>
 					))}
 				</ul>
 
-				<div>{JSON.stringify(checkList)}</div>
+				<Label deco="la-3">{JSON.stringify(checkList)}</Label>
 				<div>
 					{userList.map((item) => (
-						<div key={item.id}>{JSON.stringify(item)}</div>
+						<Label key={item.id} deco="la-3" className="block">
+							{JSON.stringify(item)}
+						</Label>
 					))}
 				</div>
 			</section>
