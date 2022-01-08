@@ -41,7 +41,7 @@ export function Header1() {
 			<div className="hidden md:flex ml-6 space-x-3">
 				{menuList.map((item, index) => (
 					// <A key={index} {...item} deco="linkA" />
-					<A key={index} {...item} deco="a-3" checked={pathList.includes(item.href)} />
+					<Button key={index} {...item} deco="bu-1" checked={pathList.includes(item.href)} />
 				))}
 			</div>
 		</div>
@@ -77,7 +77,7 @@ export function Header2() {
 			<div className="hidden md:flex ml-6 space-x-3">
 				{menuList.map((item, index) => (
 					// <A key={index} {...item} deco="linkB" />
-					<A key={index} {...item} deco="a-1" checked={pathList.includes(item.href)} />
+					<Button key={index} {...item} deco="bu-2" checked={pathList.includes(item.href)} />
 				))}
 			</div>
 			<div className="flex space-x-2">

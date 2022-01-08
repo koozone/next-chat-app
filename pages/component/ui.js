@@ -23,7 +23,7 @@ const getStyle = (props) => {
 				return <div className={`peer absolute m-0 p-0 pointer-events-none`} />;
 
 			case '[button]':
-				return <div className={``} />;
+				return <div className={`cursor-pointer`} />;
 
 			case '[a]':
 			case '[radio]':
@@ -167,21 +167,21 @@ const getStyle = (props) => {
 
 			// type
 			case '[type]:':
-				return <div className={`opacity-50 top-0 left-0 w-0 h-0`} />;
+				return <div className={`appearance-none`} />;
 			case '[type]:a-1':
 			case '[type]:a-2':
 			case '[type]:a-3':
-				return <div className={`opacity-50 top-0 left-0 w-0 h-0`} />;
+				return <div className={`appearance-none`} />;
 			case '[type]:ch-1':
 				return <div className={`accent-blue-500 opacity-100 top-0 left-2 w-4 h-full`} />;
 			case '[type]:ch-2':
-				return <div className={`opacity-50 top-0 left-0 w-0 h-0`} />;
+				return <div className={`appearance-none`} />;
 			case '[type]:ch-3':
-				return <div className={`opacity-50 top-0 left-0 w-0 h-0`} />;
+				return <div className={`appearance-none`} />;
 			case '[type]:ra-1':
 				return <div className={`accent-neutral-500 opacity-100 top-0 left-2 w-4 h-full`} />;
 			case '[type]:ra-2':
-				return <div className={`opacity-50 top-0 left-0 w-0 h-0`} />;
+				return <div className={`appearance-none`} />;
 
 			// button
 			case '[button]:':
@@ -234,7 +234,7 @@ const getProps = (props) => {
 		children,
 		deco = '',
 		className = '',
-		href = '#',
+		href = '',
 		onClick = () => {
 			console.log('click!');
 		},
@@ -297,11 +297,19 @@ export const Box = (props) => {
 };
 
 export const Button = (props) => {
-	const {children, deco, style, className, name, onClick} = getProps({...props, tag: 'button'});
+	const {children, deco, style, className, name, href, onClick} = getProps({...props, tag: 'button'});
 
-	return (
+	return href ? (
+		<Link href={href}>
+			<label htmlFor={name} deco={deco} className={style}>
+				<Type {...props} type="checkbox" />
+				<Box {...props} />
+			</label>
+		</Link>
+	) : (
 		<button type="button" deco={deco} className={style} name={name} onClick={onClick}>
-			<Box {...props}>{children}</Box>
+			{/* <Box {...props}>{children}</Box> */}
+			<Box {...props} />
 		</button>
 	);
 };
@@ -313,7 +321,10 @@ export const A = (props) => {
 		<Link href={href}>
 			<label htmlFor={name} deco={deco} className={style}>
 				<Type {...props} type="checkbox" />
-				<Box {...props} />
+				{/* <Box {...props} /> */}
+				<a className="underline decoration-transparent text-blue-500/80 hover:text-blue-500 hover:decoration-inherit peer-checked:text-white">
+					{children}
+				</a>
 			</label>
 		</Link>
 	);
