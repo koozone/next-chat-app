@@ -385,11 +385,11 @@ export default function code() {
 				<Label deco="la-1">A</Label>
 
 				<div className="space-x-2">
-					asdlfjlsadfj{' '}
+					Lorem ipsum dolor sit amet consectetur adipisicing elit.{' '}
 					<A href="http://naver.com" deco="a-3">
-						Naver
-					</A>{' '}
-					asdkfjslakdfjk.
+						Explicabo quisquam magni nisi eum blanditiis vero animi
+					</A>
+					, qui suscipit aliquid excepturi consequatur quasi. Dolore explicabo exercitationem possimus ea praesentium vel error.
 				</div>
 			</div>
 

@@ -70,9 +70,9 @@ const getStyle = (props) => {
 				return <div className={`absolute top-1 left-1 text-2xl text-white visible peer-checked:invisible`} />;
 			case '[i]:ch-2:on':
 				return <div className={`absolute top-1 left-1 text-2xl text-blue-500 invisible peer-checked:visible`} />;
-			case '[i]:r3:off':
+			case '[i]:ra-2:off':
 				return <div className={`absolute top-2 left-2 text-base text-white visible peer-checked:invisible`} />;
-			case '[i]:r3:on':
+			case '[i]:ra-2:on':
 				return <div className={`absolute top-1 left-1 text-2xl text-neutral-500 invisible peer-checked:visible`} />;
 
 			// label
@@ -126,7 +126,7 @@ const getStyle = (props) => {
 					/>
 				);
 			case '[box]:ra-1':
-			case '[box]:r3':
+			case '[box]:ra-2':
 				return (
 					<div
 						className={`pl-8 text-sm text-white bg-neutral-500/80 ring-2 ring-neutral-500 hover:bg-neutral-500 peer-checked:text-neutral-500 peer-checked:bg-white/80 peer-checked:hover:bg-white`}
@@ -191,7 +191,7 @@ const getStyle = (props) => {
 				return <div className={`appearance-none`} />;
 			case '[type]:ra-1':
 				return <div className={`accent-neutral-500 opacity-100 top-0 left-2 w-4 h-full`} />;
-			case '[type]:r3':
+			case '[type]:ra-2':
 				return <div className={`appearance-none`} />;
 
 			// button
