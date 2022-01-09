@@ -20,7 +20,14 @@ const getStyle = (props) => {
 				return <div className={`group px-2 py-1 flex justify-center items-center rounded space-x-1`} />;
 
 			case '[type]':
-				return <div className={`peer absolute m-0 p-0 pointer-events-none`} />;
+				// return <div className={`peer absolute m-0 p-0 pointer-events-none`} />;
+				return <div className={`peer absolute m-0 p-0 appearance-none pointer-events-none`} />;
+			// return <div className={`peer h-4 w-4 float-left mr-2 appearance-none pointer-events-none`} />;
+			// return (
+			// 	<div
+			// 		className={`peer appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer`}
+			// 	/>
+			// );
 
 			case '[button]':
 				return <div className={`cursor-pointer`} />;
@@ -63,9 +70,9 @@ const getStyle = (props) => {
 				return <div className={`absolute top-1 left-1 text-2xl text-white visible peer-checked:invisible`} />;
 			case '[i]:ch-2:on':
 				return <div className={`absolute top-1 left-1 text-2xl text-blue-500 invisible peer-checked:visible`} />;
-			case '[i]:ra-2:off':
+			case '[i]:r3:off':
 				return <div className={`absolute top-2 left-2 text-base text-white visible peer-checked:invisible`} />;
-			case '[i]:ra-2:on':
+			case '[i]:r3:on':
 				return <div className={`absolute top-1 left-1 text-2xl text-neutral-500 invisible peer-checked:visible`} />;
 
 			// label
@@ -73,7 +80,7 @@ const getStyle = (props) => {
 				return <div className={`text-sm text-violet-500`} />;
 			case '[label]:la-1':
 				return <div className={`text-2xl text-neutral-900 font-semibold`} />;
-			case '[label]:la-2':
+			case '[label]:l3':
 				return <div className={`text-base text-neutral-900 font-medium`} />;
 			case '[label]:la-3':
 				return <div className={`text-sm text-neutral-900`} />;
@@ -93,7 +100,7 @@ const getStyle = (props) => {
 						className={`text-sm text-white bg-blue-500/80 ring-2 ring-blue-500 hover:bg-blue-500 peer-checked:text-blue-500 peer-checked:bg-white/80 peer-checked:hover:bg-white`}
 					/>
 				);
-			case '[box]:a-2':
+			case '[box]:3':
 				return (
 					<div
 						className={`text-sm text-white bg-neutral-500/80 ring-2 ring-neutral-500 hover:bg-neutral-500 peer-checked:text-neutral-500 peer-checked:bg-white/80 peer-checked:hover:bg-white`}
@@ -119,7 +126,7 @@ const getStyle = (props) => {
 					/>
 				);
 			case '[box]:ra-1':
-			case '[box]:ra-2':
+			case '[box]:r3':
 				return (
 					<div
 						className={`pl-8 text-sm text-white bg-neutral-500/80 ring-2 ring-neutral-500 hover:bg-neutral-500 peer-checked:text-neutral-500 peer-checked:bg-white/80 peer-checked:hover:bg-white`}
@@ -169,8 +176,12 @@ const getStyle = (props) => {
 			case '[type]:':
 				return <div className={`appearance-none`} />;
 			case '[type]:a-1':
-			case '[type]:a-2':
+			case '[type]:3':
 			case '[type]:a-3':
+				return <div className={`appearance-none`} />;
+			case '[type]:bu-1':
+			case '[type]:bu-2':
+			case '[type]:bu-3':
 				return <div className={`appearance-none`} />;
 			case '[type]:ch-1':
 				return <div className={`accent-blue-500 opacity-100 top-0 left-2 w-4 h-full`} />;
@@ -180,16 +191,24 @@ const getStyle = (props) => {
 				return <div className={`appearance-none`} />;
 			case '[type]:ra-1':
 				return <div className={`accent-neutral-500 opacity-100 top-0 left-2 w-4 h-full`} />;
-			case '[type]:ra-2':
+			case '[type]:r3':
 				return <div className={`appearance-none`} />;
 
 			// button
 			case '[button]:':
 				return <div className={``} />;
 
-			// area
+			// a
 			case '[a]:':
+				return <div className={``} />;
+			case '[a]:a-3':
+				return <div className={`px-1 ring-1 ring-red-500 rounded bg-white text-green-500`} />;
+
+			// radio
 			case '[radio]:':
+				return <div className={``} />;
+
+			// checkbox
 			case '[checkbox]:':
 				return <div className={``} />;
 
@@ -299,17 +318,25 @@ export const Box = (props) => {
 export const Button = (props) => {
 	const {children, deco, style, className, name, href, onClick} = getProps({...props, tag: 'button'});
 
-	return href ? (
-		<Link href={href}>
+	// return href ? (
+	// 	<Link href={href}>
+	// 		<label htmlFor={name} deco={deco} className={style}>
+	// 			<Type {...props} type="checkbox" />
+	// 			<Box {...props} />
+	// 		</label>
+	// 	</Link>
+	// ) : (
+	// 	<button type="button" deco={deco} className={style} name={name} onClick={onClick}>
+	// 		{/* <Box {...props}>{children}</Box> */}
+	// 		<Box {...props} />
+	// 	</button>
+	// );
+	return (
+		<button type="button" deco={deco} className={style} name={name} onClick={onClick}>
 			<label htmlFor={name} deco={deco} className={style}>
-				<Type {...props} type="checkbox" />
+				<Type {...props} type="checkbox" disabled />
 				<Box {...props} />
 			</label>
-		</Link>
-	) : (
-		<button type="button" deco={deco} className={style} name={name} onClick={onClick}>
-			{/* <Box {...props}>{children}</Box> */}
-			<Box {...props} />
 		</button>
 	);
 };
@@ -382,7 +409,6 @@ export const Checkbox3 = (props) => {
 		<label htmlFor={name} deco={deco} className={style}>
 			<Type {...props} type="checkbox" />
 			{children}
-			<Box {...props} />
 		</label>
 	);
 };

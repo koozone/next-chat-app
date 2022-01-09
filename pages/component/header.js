@@ -32,6 +32,10 @@ export function Header1() {
 	const router = useRouter();
 	const [pathList, setPathList] = useState([router.pathname]);
 
+	const gotoHref = ({href}) => {
+		router.push(href);
+	};
+
 	return (
 		<div className="sticky top-0 flex justify-between items-center bg-[#300b3f85] md:h-20 h-12">
 			<img
@@ -41,7 +45,15 @@ export function Header1() {
 			<div className="hidden md:flex ml-6 space-x-3">
 				{menuList.map((item, index) => (
 					// <A key={index} {...item} deco="linkA" />
-					<Button key={index} {...item} deco="bu-1" checked={pathList.includes(item.href)} />
+					<Button
+						key={index}
+						{...item}
+						deco="bu-1"
+						checked={pathList.includes(item.href)}
+						onClick={(event) => {
+							gotoHref(item);
+						}}
+					/>
 				))}
 			</div>
 		</div>
@@ -57,6 +69,9 @@ export function Header2() {
 	const [sideMenu, runSideMenu] = useSideMenu();
 	const [modal, runModal] = useModal();
 
+	const gotoHref = ({href}) => {
+		router.push(href);
+	};
 	const clickMenu = () => {
 		runSideMenu.open();
 	};
@@ -75,10 +90,20 @@ export function Header2() {
 				src="https://images.unsplash.com/photo-1627064719444-1985feb93f54?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1715&q=80"
 			/>
 			<div className="hidden md:flex ml-6 space-x-3">
-				{menuList.map((item, index) => (
+				{menuList.map((item, index) => {
 					// <A key={index} {...item} deco="linkB" />
-					<Button key={index} {...item} deco="bu-2" checked={pathList.includes(item.href)} />
-				))}
+					return (
+						<Button
+							key={index}
+							{...item}
+							deco="bu-2"
+							checked={pathList.includes(item.href)}
+							onClick={(event) => {
+								gotoHref(item);
+							}}
+						/>
+					);
+				})}
 			</div>
 			<div className="flex space-x-2">
 				<Button deco="bu-9" icon="bx-menu" className="inline-block md:hidden" onClick={clickMenu}></Button>

@@ -3,7 +3,7 @@ import {useCount} from '../hook/useCount';
 import {useModal} from '../hook/useModal';
 import {useSideMenu} from '../hook/useSideMenu';
 import Header, {Header1, Header2, Header3} from '../component/header';
-import {I, A, Button, Img, Input, Label, Checkbox, Checkbox2, Radio, Radio2} from '../component/ui';
+import {I, A, Button, Img, Input, Label, Checkbox, Checkbox2, Checkbox3, Radio, Radio2} from '../component/ui';
 import {useDog} from '../hook/useDog';
 import {useRef} from 'react';
 
@@ -299,6 +299,13 @@ const CodeUseCheckbox = () => {
 				<Checkbox2 deco="ch-2" name="mouse" iconR="bxs-chevron-right" checked={data.includes('mouse')} onChange={onChangeCheckbox} />
 				<Label deco="la-5">{data.includes('mouse') ? 'true' : 'false'}</Label>
 			</div>
+			<div className="space-x-2">
+				<Label deco="la-2">dog :</Label>
+				<Checkbox3 deco="ch-2" name="dog" iconR="bxs-chevron-right" checked={data.includes('dog')} onChange={onChangeCheckbox}>
+					DOG
+				</Checkbox3>
+				<Label deco="la-5">{data.includes('dog') ? 'true' : 'false'}</Label>
+			</div>
 
 			<Button deco="bu-3" onClick={onClickResetAll}>
 				reset
@@ -371,6 +378,18 @@ export default function code() {
 					<Label deco="la-2" name="menu" />
 					<Label deco="la-2" icon="bx-menu" name="MENU" />
 					<Label deco="la-2">menu</Label>
+				</div>
+			</div>
+
+			<div className="p-3 space-y-2">
+				<Label deco="la-1">A</Label>
+
+				<div className="space-x-2">
+					asdlfjlsadfj{' '}
+					<A href="http://naver.com" deco="a-3">
+						Naver
+					</A>{' '}
+					asdkfjslakdfjk.
 				</div>
 			</div>
 
