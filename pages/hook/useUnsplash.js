@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 
-export const useUnsplash = (props) => {
+export const UseUnsplash = (props) => {
 	const {count = 1} = props || {};
 	const [data, setData] = useState([]);
 

@@ -1,6 +1,6 @@
 import Header from '../component/header';
 import {Input, Label, Button, Checkbox, Checkbox3, A, I} from '../component/ui';
-import {useData} from '../hook/useData';
+import {UseData} from '../hook/useData';
 import {useRef, useEffect} from 'react';
 import uid from 'tiny-uid';
 
@@ -12,9 +12,9 @@ const initUserList = [
 
 export default function test() {
 	const nameInput = useRef(null);
-	const [data, runData] = useData(initData);
-	const [userList, runUserList] = useData([]);
-	const [checkList, runCheckList] = useData([]);
+	const [data, runData] = UseData(initData);
+	const [userList, runUserList] = UseData([]);
+	const [checkList, runCheckList] = UseData([]);
 
 	useEffect(() => {
 		runUserList.change(initUserList);

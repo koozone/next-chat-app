@@ -2,12 +2,12 @@ import {Fragment, useState, useContext} from 'react';
 import {Dialog, Transition} from '@headlessui/react';
 // import {XIcon} from '@heroicons/react/outline';
 // import {SideMenuContext} from '../_app';
-import {useSideMenu} from '../hook/useSideMenu';
+import {UseSideMenu} from '../hook/useSideMenu';
 
 export default function SideMenu() {
 	// const [open, setOpen] = useState();
 	// const {sideMenu, openSideMenu, closeSideMenu} = useContext(SideMenuContext);
-	const [sideMenu, runSideMenu] = useSideMenu();
+	const [sideMenu, runSideMenu] = UseSideMenu();
 
 	return (
 		<Transition.Root show={sideMenu} as={Fragment}>

@@ -1,15 +1,15 @@
-import {useData} from '../hook/useData';
-import {useCount} from '../hook/useCount';
-import {useModal} from '../hook/useModal';
-import {useSideMenu} from '../hook/useSideMenu';
+import {UseData} from '../hook/useData';
+import {UseCount} from '../hook/useCount';
+import {UseModal} from '../hook/useModal';
+import {UseSideMenu} from '../hook/useSideMenu';
 import Header, {Header1, Header2, Header3} from '../component/header';
-import {I, A, Button, Img, Input, Label, Checkbox, Checkbox2, Checkbox3, Radio, Radio2} from '../component/ui';
-import {useDog} from '../hook/useDog';
+import {I, A, Button, Img, Input, Label, Checkbox, Checkbox2, Checkbox3, Radio, Radio2, Box} from '../component/ui';
+import {UseDog} from '../hook/useDog';
 import {useRef} from 'react';
 
 const CodeUseData = () => {
 	const idInput = useRef(null);
-	const [data, runData] = useData({
+	const [data, runData] = UseData({
 		id: 'koozone',
 		password: '123',
 	});
@@ -77,7 +77,7 @@ const CodeUseData = () => {
 };
 
 const CodeUseCount = () => {
-	const [count, runCount] = useCount({
+	const [count, runCount] = UseCount({
 		coffee: 0,
 		bread: 10,
 	});
@@ -173,7 +173,7 @@ const CodeUseCount = () => {
 };
 
 const CodeUseModal = () => {
-	const [modal, runModal] = useModal();
+	const [modal, runModal] = UseModal();
 
 	const onClickModal = (event) => {
 		runModal.open();
@@ -189,7 +189,7 @@ const CodeUseModal = () => {
 };
 
 const CodeUseSideMenu = () => {
-	const [sideMenu, runSideMenu] = useSideMenu();
+	const [sideMenu, runSideMenu] = UseSideMenu();
 
 	const onClickSideMenu = (event) => {
 		runSideMenu.open();
@@ -205,7 +205,7 @@ const CodeUseSideMenu = () => {
 };
 
 const CodeUseDog = () => {
-	const [sideMenu, runSideMenu] = useSideMenu();
+	const [sideMenu, runSideMenu] = UseSideMenu();
 
 	const onClickSideMenu = (event) => {
 		runSideMenu.open();
@@ -221,7 +221,7 @@ const CodeUseDog = () => {
 };
 
 const CodeUseButton = () => {
-	// const [imageList, imageRefresh] = useDog({
+	// const [imageList, imageRefresh] = UseDog({
 	// 	count: 1 + Math.round(Math.random() * 4),
 	// });
 
@@ -254,7 +254,7 @@ const CodeUseButton = () => {
 };
 
 const CodeUseCheckbox = () => {
-	const [data, runData] = useData([
+	const [data, runData] = UseData([
 		'bird',
 		// 'cat',
 		'mouse',
@@ -315,7 +315,7 @@ const CodeUseCheckbox = () => {
 	);
 };
 const CodeUseRadio = () => {
-	const [data, runData] = useData([
+	const [data, runData] = UseData([
 		// 'apple',
 		// 'banana',
 		// 'orange',
@@ -385,11 +385,49 @@ export default function code() {
 				<Label deco="la-1">A</Label>
 
 				<div className="space-x-2">
-					Lorem ipsum dolor sit amet consectetur adipisicing elit.{' '}
-					<A href="http://naver.com" deco="a-3">
-						Explicabo quisquam magni nisi eum blanditiis vero animi
-					</A>
-					, qui suscipit aliquid excepturi consequatur quasi. Dolore explicabo exercitationem possimus ea praesentium vel error.
+					Lorem ipsum{' '}
+					<A href="/view/room" deco="a-1">
+						dolor
+					</A>{' '}
+					sit, amet consectetur{' '}
+					<A href="/view/room" deco="a-1" checked>
+						adipisicing
+					</A>{' '}
+					elit.
+				</div>
+				<div className="space-x-2">
+					Ipsa ex,{' '}
+					<A href="/view/room" deco="a-2">
+						maiores
+					</A>{' '}
+					nisi harum{' '}
+					<A href="/view/room" deco="a-2" checked>
+						exercitationem
+					</A>{' '}
+					quod ullam vitae.
+				</div>
+				<div className="space-x-2">
+					Nobis rerum tenetur quia{' '}
+					<A href="/view/test" deco="a-3">
+						voluptates
+					</A>{' '}
+					numquam pariatur, reprehenderit in, velit{' '}
+					<A href="/view/test" deco="a-3" checked>
+						molestiae
+					</A>{' '}
+					itaque unde?
+				</div>
+				<div className="space-x-2">
+					Lorem ipsum <A href="/view/sample" deco="a-1" icon="bx-bowl-rice" name="dolor" /> sit amet consectetur{' '}
+					<A href="/view/sample" deco="a-1" icon="bx-lemon" name="adipisicing" checked /> elit.
+				</div>
+				<div className="space-x-2">
+					Lorem ipsum <A href="/view/sample" deco="a-2" icon="bx-bowl-rice" name="dolor" /> sit amet consectetur{' '}
+					<A href="/view/sample" deco="a-2" icon="bx-lemon" name="adipisicing" checked /> elit.
+				</div>
+				<div className="space-x-2">
+					Repudiandae <A href="/view/sample" deco="a-3" icon="bx-party" name="quidem" /> eligendi, natus{' '}
+					<A href="/view/sample" deco="a-3" icon="bx-home" name="alias" checked /> autem corrupti aspernatur?
 				</div>
 			</div>
 
@@ -409,27 +447,27 @@ export default function code() {
 			</div>
 
 			<div className="p-3 space-y-2">
-				<Label deco="la-1">useData (useState 사용)</Label>
+				<Label deco="la-1">UseData (useState 사용)</Label>
 				<CodeUseData />
 			</div>
 
 			<div className="p-3 space-y-2">
-				<Label deco="la-1">useCount (useReducer 사용)</Label>
+				<Label deco="la-1">UseCount (useReducer 사용)</Label>
 				<CodeUseCount />
 			</div>
 
 			<div className="p-3 space-y-2">
-				<Label deco="la-1">useModal (useContext 사용)</Label>
+				<Label deco="la-1">UseModal (useContext 사용)</Label>
 				<CodeUseModal />
 			</div>
 
 			<div className="p-3 space-y-2">
-				<Label deco="la-1">useSideMenu (useContext 사용)</Label>
+				<Label deco="la-1">UseSideMenu (useContext 사용)</Label>
 				<CodeUseSideMenu />
 			</div>
 
 			<div className="p-3 space-y-2">
-				<Label deco="la-1">useDog (axios 사용)</Label>
+				<Label deco="la-1">UseDog (axios 사용)</Label>
 				<CodeUseDog />
 			</div>
 

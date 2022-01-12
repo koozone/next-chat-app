@@ -3,7 +3,7 @@ import {createContext, useState, useContext, useMemo} from 'react';
 
 export const ModalContext = createContext();
 
-export const useModal = () => {
+export const UseModal = () => {
 	const value = useContext(ModalContext);
 
 	return value;

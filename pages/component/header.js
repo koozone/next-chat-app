@@ -2,11 +2,11 @@ import React, {useContext, useState} from 'react';
 import {Button, A, Img, Label} from './ui';
 import Nav from '../component/nav';
 import NavItem from '../component/navItem';
-import useModals from '../hook/useModals';
+import UseModals from '../hook/useModals';
 import MyModal from './MyModal';
 // import {SideMenuContext} from '../_app';
-import {useSideMenu} from '../hook/useSideMenu';
-import {useModal} from '../hook/useModal';
+import {UseSideMenu} from '../hook/useSideMenu';
+import {UseModal} from '../hook/useModal';
 import {useRouter} from 'next/router';
 
 const menuList = [
@@ -16,17 +16,18 @@ const menuList = [
 	{name: 'Sample', icon: 'bx-lemon', href: '/view/sample'},
 	{name: 'Layout', icon: 'bx-lemon', href: '/view/layout'},
 	{name: 'Code', icon: 'bx-lemon', href: '/view/code'},
+	{name: 'Design', icon: 'bx-lemon', href: '/view/design'},
 	{name: 'Test', icon: 'bx-lemon', href: '/view/test'},
 ];
 
-const getMenuList = () => {
-	const router = useRouter();
+// const getMenuList = () => {
+// 	const router = useRouter();
 
-	return menuList.map((item, index) => ({
-		...item,
-		selected: item.href == router.pathname,
-	}));
-};
+// 	return menuList.map((item, index) => ({
+// 		...item,
+// 		selected: item.href == router.pathname,
+// 	}));
+// };
 
 export function Header1() {
 	const router = useRouter();
@@ -64,10 +65,10 @@ export function Header2() {
 	const router = useRouter();
 	const [pathList, setPathList] = useState([router.pathname]);
 
-	const {openModals} = useModals();
+	const {openModals} = UseModals();
 	// const {sideMenu, openSideMenu, closeSideMenu} = useContext(SideMenuContext);
-	const [sideMenu, runSideMenu] = useSideMenu();
-	const [modal, runModal] = useModal();
+	const [sideMenu, runSideMenu] = UseSideMenu();
+	const [modal, runModal] = UseModal();
 
 	const gotoHref = ({href}) => {
 		router.push(href);

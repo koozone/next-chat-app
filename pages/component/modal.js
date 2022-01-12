@@ -1,11 +1,11 @@
 import {Fragment, useRef, useState} from 'react';
 import {Dialog, Transition} from '@headlessui/react';
-import {useModal} from '../hook/useModal';
+import {UseModal} from '../hook/useModal';
 // import { ExclamationIcon } from '@heroicons/react/outline'
 
 export default function Example() {
 	// const [open, setOpen] = useState(true);
-	const [modal, runModal] = useModal();
+	const [modal, runModal] = UseModal();
 
 	const cancelButtonRef = useRef(null);
 

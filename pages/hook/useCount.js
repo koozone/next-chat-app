@@ -20,7 +20,7 @@ const reducer = (state, action) => {
 	}
 };
 
-export const useCount = (initData = {}) => {
+export const UseCount = (initData = {}) => {
 	const [data, dispatch] = useReducer(reducer, initData);
 
 	const change = ({name, value}) => {

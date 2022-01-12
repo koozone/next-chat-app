@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import {useDog} from '../hook/useDog';
+import {UseDog} from '../hook/useDog';
 import {Toggle} from './toggle';
 
 export const BoxItem2 = () => {
@@ -17,7 +17,7 @@ export const BoxItem2 = () => {
 };
 
 export const BoxItem = ({children, item = {}}) => {
-	const [imageList, imageRefresh] = useDog({count: 1 + Math.round(Math.random() * 4)});
+	const [imageList, imageRefresh] = UseDog({count: 1 + Math.round(Math.random() * 4)});
 	const {href = '#', icon, isSelect = false} = item;
 	const css = isSelect ? 'bg-sky-300 text-white' : 'bg-gray-50 hover:text-red-900';
 

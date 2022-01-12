@@ -7,11 +7,11 @@ import BoxItem, {BoxItem2} from '../component/boxItem';
 import Header from '../component/header';
 import NavBar from '../component/navBar';
 import Popup from '../component/popup';
-import useModals from '../hook/useModals';
+import UseModals from '../hook/useModals';
 import MyModal from '../component/MyModal';
 // import {SideMenuContext} from '../_app';
-import {useSideMenu} from '../hook/useSideMenu';
-import {useModal} from '../hook/useModal';
+import {UseSideMenu} from '../hook/useSideMenu';
+import {UseModal} from '../hook/useModal';
 
 // Modal.setAppElement('#__next');
 
@@ -20,10 +20,10 @@ export default function chat() {
 	const [roomList, setRoomList] = useState([]);
 	// console.log('isModals', isModals);
 
-	const {openModals} = useModals();
+	const {openModals} = UseModals();
 	// const {openSideMenu} = useContext(SideMenuContext);
-	const [sideMenu, runSideMenu] = useSideMenu();
-	const [modal, runModal] = useModal();
+	const [sideMenu, runSideMenu] = UseSideMenu();
+	const [modal, runModal] = UseModal();
 
 	const clickOpenModals = () => {
 		console.log('clickOpenModals');

@@ -13,15 +13,17 @@ const getStyle = (props) => {
 			case '[i]':
 				return <div className={`bx ${icon} pointer-events-none`} />;
 
-			case '[label]':
-				return <div className={`cursor-text space-x-1`} />;
+			case '[text]':
+				// return <div className={`inline-flex justify-center items-center`} />;
+				return <div className={`inline-block`} />;
 
 			case '[box]':
-				return <div className={`group px-2 py-1 flex justify-center items-center rounded space-x-1`} />;
+				// return <div className={`flex justify-center items-center`} />;
+				return <div className={``} />;
 
 			case '[type]':
 				// return <div className={`peer absolute m-0 p-0 pointer-events-none`} />;
-				return <div className={`peer absolute m-0 p-0 appearance-none pointer-events-none`} />;
+				return <div className={`peer absolute appearance-none pointer-events-none`} />;
 			// return <div className={`peer h-4 w-4 float-left mr-2 appearance-none pointer-events-none`} />;
 			// return (
 			// 	<div
@@ -30,15 +32,16 @@ const getStyle = (props) => {
 			// );
 
 			case '[button]':
-				return <div className={`cursor-pointer`} />;
+				return <div className={`inline-flex justify-center items-center relative cursor-pointer select-none`} />;
 
 			case '[a]':
 			case '[radio]':
 			case '[checkbox]':
-				return <div className={`inline-block relative cursor-pointer select-none`} />;
+				return <div className={`group inline-flex justify-center items-center relative cursor-pointer select-none`} />;
 
 			case '[input]':
-				return <div className={`px-2 py-1 rounded w-full truncate`} />;
+				// return <div className={`px-2 py-1 rounded w-full truncate`} />;
+				return <div className={`peer truncate`} />;
 
 			default:
 				return <div className={``} />;
@@ -59,7 +62,7 @@ const getStyle = (props) => {
 
 			// i
 			case '[i]:':
-				return <div className={`text-sm text-violet-500`} />;
+				return <div className={``} />;
 			case '[i]:in-1':
 				return <div className={`absolute left-2 top-1/2 -mt-2 text-black/50 group-focus-within:text-blue-500`} />;
 			case '[i]:in-3':
@@ -75,43 +78,59 @@ const getStyle = (props) => {
 			case '[i]:ra-2:on':
 				return <div className={`absolute top-1 left-1 text-2xl text-neutral-500 invisible peer-checked:visible`} />;
 
-			// label
-			case '[label]:':
-				return <div className={`text-sm text-violet-500`} />;
-			case '[label]:la-1':
+			// text
+			case '[text]:':
+				// return <div className={`text-sm text-violet-500`} />;
+				return <div className={``} />;
+			case '[text]:la-1':
 				return <div className={`text-2xl text-neutral-900 font-semibold`} />;
-			case '[label]:l3':
+			case '[text]:l3':
 				return <div className={`text-base text-neutral-900 font-medium`} />;
-			case '[label]:la-3':
+			case '[text]:la-3':
 				return <div className={`text-sm text-neutral-900`} />;
-			case '[label]:la-5':
+			case '[text]:la-5':
 				return <div className={`text-xs text-red-500 font-medium`} />;
+			case '[box]:a-1':
+				return (
+					<div className={`underline decoration-transparent text-blue-500/80 hover:text-blue-500 hover:decoration-inherit peer-checked:text-white`} />
+				);
+			case '[box]:a-2':
+				return (
+					<div className={`underline decoration-transparent text-rose-500/80 hover:text-rose-500 hover:decoration-inherit peer-checked:text-white`} />
+				);
+			case '[box]:a-3':
+				return (
+					<div
+						className={`px-2 text-sm underline decoration-transparent text-blue-500/80 hover:text-blue-500 hover:decoration-inherit peer-checked:text-white ring-1 ring-gray-500 rounded bg-orange-200`}
+					/>
+				);
 
 			// box
 			case '[box]:':
 				return (
 					<div
-						className={`text-sm text-violet-500 bg-white/50 hover:bg-white peer-checked:text-white peer-checked:bg-violet-500/50 peer-checked:hover:bg-violet-500`}
+						// className={`text-sm text-violet-500 bg-white/50 hover:bg-white peer-checked:text-white peer-checked:bg-violet-500/50 peer-checked:hover:bg-violet-500`}
+						className={``}
 					/>
 				);
-			case '[box]:a-1':
-				return (
-					<div
-						className={`text-sm text-white bg-blue-500/80 ring-2 ring-blue-500 hover:bg-blue-500 peer-checked:text-blue-500 peer-checked:bg-white/80 peer-checked:hover:bg-white`}
-					/>
-				);
-			case '[box]:a-2':
-				return (
-					<div
-						className={`text-sm text-white bg-neutral-500/80 ring-2 ring-neutral-500 hover:bg-neutral-500 peer-checked:text-neutral-500 peer-checked:bg-white/80 peer-checked:hover:bg-white`}
-					/>
-				);
-			case '[box]:a-3':
-				return (
-					<div
-						className={`text-sm text-white bg-lime-500/80 ring-2 ring-lime-500 hover:bg-lime-500 peer-checked:text-lime-500 peer-checked:bg-white/80 peer-checked:hover:bg-white`}
-					/>
-				);
+			// case '[box]:a-1':
+			// 	return (
+			// 		<div
+			// 			className={`text-sm text-white bg-blue-500/80 ring-2 ring-blue-500 hover:bg-blue-500 peer-checked:text-blue-500 peer-checked:bg-white/80 peer-checked:hover:bg-white`}
+			// 		/>
+			// 	);
+			// case '[box]:a-2':
+			// 	return (
+			// 		<div
+			// 			className={`text-sm text-white bg-neutral-500/80 ring-2 ring-neutral-500 hover:bg-neutral-500 peer-checked:text-neutral-500 peer-checked:bg-white/80 peer-checked:hover:bg-white`}
+			// 		/>
+			// 	);
+			// case '[box]:a-3':
+			// 	return (
+			// 		<div
+			// 			className={`text-sm text-white bg-lime-500/80 ring-2 ring-lime-500 hover:bg-lime-500 peer-checked:text-lime-500 peer-checked:bg-white/80 peer-checked:hover:bg-white`}
+			// 		/>
+			// 	);
 			case '[box]:ch-1':
 			case '[box]:ch-2':
 				return (
@@ -174,7 +193,7 @@ const getStyle = (props) => {
 
 			// type
 			case '[type]:':
-				return <div className={`appearance-none`} />;
+				return <div className={``} />;
 			case '[type]:a-1':
 			case '[type]:a-2':
 			case '[type]:a-3':
@@ -201,8 +220,8 @@ const getStyle = (props) => {
 			// a
 			case '[a]:':
 				return <div className={``} />;
-			case '[a]:a-3':
-				return <div className={`px-2 text-sm ring-1 ring-gray-500 rounded bg-orange-200 text-green-500`} />;
+			// case '[a]:a-3':
+			// 	return <div className={`px-2 text-sm ring-1 ring-gray-500 rounded bg-orange-200 text-green-500`} />;
 
 			// radio
 			case '[radio]:':
@@ -214,7 +233,8 @@ const getStyle = (props) => {
 
 			// input
 			case '[input]:':
-				return <div className={`text-sm text-violet-500 bg-white/50 focus:bg-white placeholder-black/30`} />;
+				// return <div className={`text-sm text-violet-500 bg-white/50 focus:bg-white placeholder-black/30`} />;
+				return <div className={``} />;
 			case '[input]:in-1':
 				return (
 					<div
@@ -254,11 +274,11 @@ const getProps = (props) => {
 		deco = '',
 		className = '',
 		href = '',
-		onClick = () => {
-			console.log('click!');
+		onClick = (event) => {
+			console.log(`${event.currentTarget.name} click!`);
 		},
-		onChange = () => {
-			console.log('change!');
+		onChange = (event) => {
+			console.log(`${event.currentTarget.name} change!`);
 		},
 	} = props;
 
@@ -280,62 +300,71 @@ const getProps = (props) => {
 export const Img = (props) => {
 	const {deco, style, className, name, src} = getProps({...props, tag: 'img'});
 
-	// return <Image deco={deco} className={className} name={name} src={src} layout="fill" objectFit="cover" />;
-	return <img deco={deco} className={`${style} | ${className}`} name={name} src={src} />;
+	// return <Image className={`${style} | ${className}`} src={src} layout="fill" objectFit="cover" />;
+	// return <Image className={`${style} | ${className}`} src={src} width={100} height={100} />;
+	return <img className={`${style} | ${className}`} name={name} src={src} />;
 };
 
 export const I = (props) => {
 	const {deco, style, className} = getProps({...props, tag: 'i'});
 
-	return <i deco={deco} className={style} />;
-};
-
-export const Label = (props) => {
-	const {children, deco, style, className} = getProps({...props, tag: 'label'});
-
-	return (
-		<label deco={deco} className={`${style} | ${className}`}>
-			{children}
-		</label>
-	);
+	return <i className={`${style} | ${className}`} />;
 };
 
 export const Type = (props) => {
 	const {children, deco, style, className, name, href, type, onChange, checked, disabled} = getProps({...props, tag: 'type'});
 
-	return <input type={type} deco={deco} className={style} id={name} name={name} onChange={onChange} checked={checked} disabled={disabled} />;
+	return <input type={type} className={style} id={name} name={name} onChange={onChange} checked={checked} disabled={disabled} />;
 };
+
+export const Label = (props) => {
+	return Text(props);
+};
+export const Text = (props) => {
+	const {children, deco, style, className, name} = getProps({...props, tag: 'text'});
+
+	return <div className={`${style} | ${className}`}>{children}</div>;
+};
+
 export const Box = (props) => {
 	const {children, deco, style, className, name} = getProps({...props, tag: 'box'});
 
-	return (
-		<div deco={deco} className={`${style} | ${className}`} name={name}>
-			{children}
-		</div>
-	);
+	return <div className={`${style} | ${className}`}>{children}</div>;
 };
 
+// export const Button = (props) => {
+// 	const {children, deco, style, className, name, href, onClick} = getProps({...props, tag: 'button'});
+
+// 	return href ? (
+// 		<Link href={href}>
+// 			<label htmlFor={name} deco={deco} className={style}>
+// 				<Type {...props} type="checkbox" />
+// 				<Box {...props} />
+// 			</label>
+// 		</Link>
+// 	) : (
+// 		<button type="button" deco={deco} className={style} name={name} onClick={onClick}>
+// 			{/* <Box {...props}>{children}</Box> */}
+// 			<Box {...props} />
+// 		</button>
+// 	);
+// 	return (
+// 		<button type="button" deco={`[button]:${deco}`} className={style} name={name} onClick={onClick}>
+// 			<label htmlFor={name} className={style}>
+// 				<Type {...props} type="checkbox" disabled />
+// 				<Box {...props} />
+// 			</label>
+// 		</button>
+// 	);
+// };
 export const Button = (props) => {
 	const {children, deco, style, className, name, href, onClick} = getProps({...props, tag: 'button'});
 
-	// return href ? (
-	// 	<Link href={href}>
-	// 		<label htmlFor={name} deco={deco} className={style}>
-	// 			<Type {...props} type="checkbox" />
-	// 			<Box {...props} />
-	// 		</label>
-	// 	</Link>
-	// ) : (
-	// 	<button type="button" deco={deco} className={style} name={name} onClick={onClick}>
-	// 		{/* <Box {...props}>{children}</Box> */}
-	// 		<Box {...props} />
-	// 	</button>
-	// );
 	return (
-		<button type="button" deco={deco} className={style} name={name} onClick={onClick}>
-			<label htmlFor={name} deco={deco} className={style}>
-				<Type {...props} type="checkbox" disabled />
-				<Box {...props} />
+		<button type="button" className="group" name={name} onClick={onClick}>
+			<label htmlFor={name} className={`${style} | ${className}`}>
+				<Type type="checkbox" {...props} disabled />
+				{children}
 			</label>
 		</button>
 	);
@@ -346,83 +375,98 @@ export const A = (props) => {
 
 	return (
 		<Link href={href}>
-			<label htmlFor={name} deco={deco} className={style}>
-				<Type {...props} type="checkbox" />
+			<label htmlFor={name} className={`${style} | ${className}`}>
+				<Type type="checkbox" {...props} disabled />
 				{/* <Box {...props} /> */}
-				<a className="underline decoration-transparent text-blue-500/80 hover:text-blue-500 hover:decoration-inherit peer-checked:text-white">
+				{/* <a className="underline decoration-transparent text-blue-500/80 hover:text-blue-500 hover:decoration-inherit peer-checked:text-white">
 					{children}
-				</a>
+				</a> */}
+				{children}
 			</label>
 		</Link>
 	);
 };
 
-export const Radio = (props) => {
-	const {children, deco, style, className, name, onChange, checked, disabled} = getProps({...props, tag: 'radio'});
+// export const Checkbox = (props) => {
+// 	const {children, deco, style, className, name, onChange, checked, disabled} = getProps({...props, tag: 'checkbox'});
 
-	return (
-		<label htmlFor={name} deco={deco} className={style}>
-			<Type {...props} type="radio" />
-			<Box {...props} />
-		</label>
-	);
-};
-export const Radio2 = (props) => {
-	const {children, deco, style, className, name, onChange, checked, disabled} = getProps({...props, tag: 'radio'});
-
-	return (
-		<label htmlFor={name} deco={deco} className={style}>
-			<Type {...props} type="radio" />
-			<I deco={`${deco}:off`} icon="bxs-circle" />
-			<I deco={`${deco}:on`} icon="bx-radio-circle-marked" />
-			<Box {...props} />
-		</label>
-	);
-};
-
+// 	return (
+// 		<label htmlFor={name} deco={`[checkbox]:${deco}`} className={style}>
+// 			<Type {...props} type="checkbox" />
+// 			<Box {...props} />
+// 		</label>
+// 	);
+// };
 export const Checkbox = (props) => {
 	const {children, deco, style, className, name, onChange, checked, disabled} = getProps({...props, tag: 'checkbox'});
 
 	return (
-		<label htmlFor={name} deco={deco} className={style}>
-			<Type {...props} type="checkbox" />
-			<Box {...props} />
-		</label>
-	);
-};
-export const Checkbox2 = (props) => {
-	const {children, deco, style, className, name, onChange, checked, disabled} = getProps({...props, tag: 'checkbox'});
-
-	return (
-		<label htmlFor={name} deco={deco} className={style}>
-			<Type {...props} type="checkbox" />
-			<I deco={`${deco}:off`} icon="bxs-checkbox" />
-			<I deco={`${deco}:on`} icon="bx-checkbox-checked" />
-			<Box {...props} />
-		</label>
-	);
-};
-export const Checkbox3 = (props) => {
-	const {children, deco, style, className, name, onChange, checked, disabled} = getProps({...props, tag: 'checkbox'});
-
-	return (
-		<label htmlFor={name} deco={deco} className={style}>
-			<Type {...props} type="checkbox" />
+		<label htmlFor={name} className={`${style} | ${className}`}>
+			<Type type="checkbox" {...props} />
 			{children}
 		</label>
 	);
 };
+// export const Checkbox2 = (props) => {
+// 	const {children, deco, style, className, name, onChange, checked, disabled} = getProps({...props, tag: 'checkbox'});
+
+// 	return (
+// 		<label htmlFor={name} className={style}>
+// 			<Type {...props} type="checkbox" />
+// 			<I deco={`${deco}:off`} icon="bxs-checkbox" />
+// 			<I deco={`${deco}:on`} icon="bx-checkbox-checked" />
+// 			<Box {...props} />
+// 		</label>
+// 	);
+// };
+// export const Checkbox3 = (props) => {
+// 	const {children, deco, style, className, name, onChange, checked, disabled} = getProps({...props, tag: 'checkbox'});
+
+// 	return (
+// 		<label htmlFor={name} className={style}>
+// 			<Type {...props} type="checkbox" />
+// 			<Box {...props} />
+// 		</label>
+// 	);
+// };
+
+export const Radio = (props) => {
+	const {children, deco, style, className, name, onChange, checked, disabled} = getProps({...props, tag: 'radio'});
+
+	return (
+		<label htmlFor={name} className={`${style} | ${className}`}>
+			<Type type="radio" {...props} />
+			{children}
+		</label>
+	);
+};
+// export const Radio2 = (props) => {
+// 	const {children, deco, style, className, name, onChange, checked, disabled} = getProps({...props, tag: 'radio'});
+
+// 	return (
+// 		<label htmlFor={name} className={style}>
+// 			<Type {...props} type="radio" />
+// 			<I deco={`${deco}:off`} icon="bxs-circle" />
+// 			<I deco={`${deco}:on`} icon="bx-radio-circle-marked" />
+// 			<Box {...props} />
+// 		</label>
+// 	);
+// };
 
 export const Input = forwardRef((props, ref) => {
-	const {deco, style, className, name, onChange, icon, type, value, placeholder} = getProps({
+	const {children, deco, style, className, name, onChange, icon, type, value, placeholder, disabled} = getProps({
 		...props,
 		tag: 'input',
 	});
 
 	return (
-		<div deco={deco} className="group relative inline-block">
-			{icon ? <I deco={deco} icon={icon} /> : ''}
-			<input type={type} className={`${style} | ${className}`} name={name} ref={ref} onChange={onChange} value={value} placeholder={placeholder} />
+		// <div deco={deco} className="group relative inline-block">
+		// 	{icon ? <I deco={deco} icon={icon} /> : ''}
+		// 	<input type={type} className={`${style} | ${className}`} name={name} ref={ref} onChange={onChange} value={value} placeholder={placeholder} />
+		// </div>
+		<div className="group inline-block relative">
+			<input type={type} className={`${style} | ${className}`} name={name} ref={ref} onChange={onChange} value={value} placeholder={placeholder} disabled={disabled} />
+			{children}
 		</div>
 	);
 });

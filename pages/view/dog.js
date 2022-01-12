@@ -1,13 +1,13 @@
 import Header from '../component/header';
 import axios from 'axios';
-import {useDog} from './../hook/useDog';
-import {useUnsplash} from './../hook/useUnsplash';
+import {UseDog} from './../hook/useDog';
+import {UseUnsplash} from './../hook/useUnsplash';
 import {Button} from '../component/ui';
 import {CardItem} from '../component/cardItem';
 
 export default function test() {
-	const [imageList, imageRefresh] = useDog({count: 1 + Math.round(Math.random() * 2)});
-	// const [imageList, imageRefresh] = useUnsplash();
+	const [imageList, imageRefresh] = UseDog({count: 1 + Math.round(Math.random() * 2)});
+	// const [imageList, imageRefresh] = UseUnsplash();
 
 	return (
 		<div>

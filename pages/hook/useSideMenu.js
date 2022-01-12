@@ -2,7 +2,7 @@ import {createContext, useState, useContext, useMemo} from 'react';
 
 export const SideMenuContext = createContext();
 
-export const useSideMenu = () => {
+export const UseSideMenu = () => {
 	const value = useContext(SideMenuContext);
 
 	return value;
