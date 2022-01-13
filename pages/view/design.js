@@ -61,25 +61,29 @@ export default function code() {
 	const css_on = (<div className="absolute left-0 text-white text-3xl visible peer-checked:invisible" />).props.className;
 	const css_off = (<div className="absolute left-0 text-white text-3xl invisible peer-checked:visible" />).props.className;
 
-	const [value, runValue] = UseData(['left']);
-	const [agreeValue, runAgreeValue] = UseData(true);
 	const [data, runData] = UseData({
 		id: 'koozone',
 		password: '123',
+		fruite: ['orange', 'banana'],
+		color: ['yellow'],
+		align: [],
 	});
 	const [modal, runModal] = UseModal();
 
 	const changeCheckbox = (event) => {
-		// const {name, checked} = event.currentTarget;
+		const {name, id:value} = event.currentTarget;
 
-		// if (checked) {
-		// 	runValue.change([...value, name]);
-		// } else {
-		// 	runValue.change(value.filter((item) => item != name));
-		// }
-		const {name, checked} = event.currentTarget;
+		if (data[name].includes(value)) {
+			runData.change(name, data[name].filter((item) => item != value));
+		} else {
+			runData.change(name, [...data[name], value]);
+		}
+	};
 
-		runValue.change([name]);
+	const changeRadio = (event) => {
+		const {name, id:value} = event.currentTarget;
+
+		runData.change(name, [value]);
 	};
 
 	const clickButton = (event) => {};
@@ -140,6 +144,9 @@ export default function code() {
 					<Text className={css_text}>asdfasdf</Text>
 					<I icon="bxs-chevron-right" className={css_text} />
 				</Checkbox>
+
+				{/* {[data].map((item, index) => <div key={index}>{JSON.stringify(item)}</div>)} */}
+				{Object.entries(data).map((item, index) => <div key={index}>{`${item[0]} : ${JSON.stringify(item[1])}`}</div>)}
 			</div>
 
 			<div className="p-3 space-x-2 space-y-2">
@@ -186,60 +193,33 @@ export default function code() {
 					<Box className={box_danger} />
 					<Text className={text_danger}>Danger</Text>
 				</Button>
-			</div>
-
-			<div className="p-3 space-x-2 space-y-2">
-				<div className="">
-					<Checkbox className="p-1" name="left" checked={value.includes('left')} onChange={changeCheckbox}>
-						<Box className={box_item} />
-						<I icon="bx-align-left" className={text_icon} />
-						<Text className={text_default}>Left</Text>
-					</Checkbox>
-					<Checkbox className="p-1" name="middle" checked={value.includes('middle')} onChange={changeCheckbox}>
-						<Box className={box_item} />
-						<I icon="bx-align-middle" className={text_icon} />
-						<Text className={text_default}>Middle</Text>
-					</Checkbox>
-					<Checkbox className="p-1" name="right" checked={value.includes('right')} onChange={changeCheckbox}>
-						<Box className={box_item} />
-						<I icon="bx-align-right" className={text_icon} />
-						<Text className={text_default}>Right</Text>
-					</Checkbox>
-					<Checkbox className="p-1" name="justify" checked={value.includes('justify')} onChange={changeCheckbox}>
-						<Box className={box_item} />
-						<I icon="bx-align-justify" className={text_icon} />
-						<Text className={text_default}>Justify</Text>
-					</Checkbox>
-				</div>
-
-				{JSON.stringify(value)}
 			</div>
 
 			<div className="p-3 space-x-2 space-y-2">
 				<ul className="flex items-center divide-x divide-black/20 list-none">
 					<li className="px-4 first:pl-0 last:pr-0">
-						<Button className="p-1" name="share" checked={value.includes('share')} onClick={clickButton}>
+						<Button className="p-1" name="share" checked={data.align.includes('share')} onClick={clickButton}>
 							<Box className={box_trans} />
 							<I icon="bx-user-plus" className={text_icon} />
 							<Text className={text_default}>Share</Text>
 						</Button>
 					</li>
 					<li className="px-4 first:pl-0 last:pr-0">
-						<Button className="p-1" name="delete" checked={value.includes('delete')} onClick={clickButton}>
+						<Button className="p-1" name="delete" checked={data.align.includes('delete')} onClick={clickButton}>
 							<Box className={box_trans} />
 							<I icon="bx-trash" className={text_icon} />
 							<Text className={text_default}>Delete</Text>
 						</Button>
 					</li>
 					<li className="px-4 first:pl-0 last:pr-0">
-						<Button className="p-1" name="rename" checked={value.includes('rename')} onClick={clickButton}>
+						<Button className="p-1" name="rename" checked={data.align.includes('rename')} onClick={clickButton}>
 							<Box className={box_trans} />
 							<I icon="bx-edit-alt" className={text_icon} />
 							<Text className={text_default}>Rename</Text>
 						</Button>
 					</li>
 					<li className="px-4 first:pl-0 last:pr-0">
-						<Button className="p-1" name="move" checked={value.includes('move')} onClick={clickButton}>
+						<Button className="p-1" name="move" checked={data.align.includes('move')} onClick={clickButton}>
 							<Box className={box_trans} />
 							<I icon="bx-file" className={text_icon} />
 							<Text className={text_default}>Move</Text>
@@ -307,6 +287,53 @@ export default function code() {
 			</div>
 
 			<div className="p-3 space-x-2 space-y-2">
+				<Text className={text_danger}>fruite : </Text>
+				<Checkbox className="p-1" name="fruite" id="banana" checked={data.fruite.includes('banana')} onChange={changeCheckbox}>
+					<Box className={box_checkbox} />
+					<I icon="bxs-chevron-down" className={box_checkbox_dot} />
+					<Text className={text_checkbox}>banana</Text>
+				</Checkbox>
+				<Checkbox className="p-1" name="fruite" id="apple" checked={data.fruite.includes('apple')} onChange={changeCheckbox}>
+					<Box className={box_checkbox} />
+					<I icon="bxs-chevron-down" className={box_checkbox_dot} />
+					<Text className={text_checkbox}>apple</Text>
+				</Checkbox>
+				<Checkbox className="p-1" name="fruite" id="orange" checked={data.fruite.includes('orange')} onChange={changeCheckbox}>
+					<Box className={box_checkbox} />
+					<I icon="bxs-chevron-down" className={box_checkbox_dot} />
+					<Text className={text_checkbox}>orange</Text>
+				</Checkbox>
+				<Checkbox className="p-1" name="fruite" id="melon" checked={data.fruite.includes('melon')} onChange={changeCheckbox}>
+					<Box className={box_checkbox} />
+					<I icon="bxs-chevron-down" className={box_checkbox_dot} />
+					<Text className={text_checkbox}>melon</Text>
+				</Checkbox>
+			</div>
+			<div className="p-3 space-x-2 space-y-2">
+				<Text className={text_danger}>fruite : </Text>
+				<Checkbox className="p-1" name="fruite" id="banana" checked={data.fruite.includes('banana')} onChange={changeCheckbox}>
+					<Box className={box_success} />
+					<I icon="bx-leaf" className={text_icon} />
+					<Text className={text_success}>banana</Text>
+				</Checkbox>
+				<Checkbox className="p-1" name="fruite" id="apple" checked={data.fruite.includes('apple')} onChange={changeCheckbox}>
+					<Box className={box_success} />
+					<I icon="bx-leaf" className={text_icon} />
+					<Text className={text_success}>apple</Text>
+				</Checkbox>
+				<Checkbox className="p-1" name="fruite" id="orange" checked={data.fruite.includes('orange')} onChange={changeCheckbox}>
+					<Box className={box_success} />
+					<I icon="bx-leaf" className={text_icon} />
+					<Text className={text_success}>orange</Text>
+				</Checkbox>
+				<Checkbox className="p-1" name="fruite" id="melon" checked={data.fruite.includes('melon')} onChange={changeCheckbox}>
+					<Box className={box_success} />
+					<I icon="bx-leaf" className={text_icon} />
+					<Text className={text_success}>melon</Text>
+				</Checkbox>
+			</div>
+
+			<div className="p-3 space-x-2 space-y-2">
 				<Radio className="p-1">
 					<Box className={box_radio} />
 					<Box className={box_radio_dot} />
@@ -329,6 +356,79 @@ export default function code() {
 					<Box className={box_radio_dot} />
 					<Text className={text_checkbox}>Disabled Checked Radio</Text>
 				</Radio>
+			</div>
+
+			<div className="p-3 space-x-2 space-y-2">
+				<Text className={text_danger}>color : </Text>
+				<Checkbox className="p-1" name="color" id="red" checked={data.color.includes('red')} onChange={changeRadio}>
+					<Box className={box_radio} />
+					<Box className={box_radio_dot} />
+					<Text className={text_checkbox}>red</Text>
+				</Checkbox>
+				<Checkbox className="p-1" name="color" id="blue" checked={data.color.includes('blue')} onChange={changeRadio}>
+					<Box className={box_radio} />
+					<Box className={box_radio_dot} />
+					<Text className={text_checkbox}>blue</Text>
+				</Checkbox>
+				<Checkbox className="p-1" name="color" id="yellow" checked={data.color.includes('yellow')} onChange={changeRadio}>
+					<Box className={box_radio} />
+					<Box className={box_radio_dot} />
+					<Text className={text_checkbox}>yellow</Text>
+				</Checkbox>
+				<Checkbox className="p-1" name="color" id="green" checked={data.color.includes('green')} onChange={changeRadio}>
+					<Box className={box_radio} />
+					<Box className={box_radio_dot} />
+					<Text className={text_checkbox}>green</Text>
+				</Checkbox>
+			</div>
+			<div className="p-3 space-x-2 space-y-2">
+				<Text className={text_warning}>color : </Text>
+				<Checkbox className="p-1" name="color" id="red" checked={data.color.includes('red')} onChange={changeRadio}>
+					<Box className={box_warning} />
+					<I icon="bx-leaf" className={text_icon} />
+					<Text className={text_warning}>red</Text>
+				</Checkbox>
+				<Checkbox className="p-1" name="color" id="blue" checked={data.color.includes('blue')} onChange={changeRadio}>
+					<Box className={box_warning} />
+					<I icon="bx-leaf" className={text_icon} />
+					<Text className={text_warning}>blue</Text>
+				</Checkbox>
+				<Checkbox className="p-1" name="color" id="yellow" checked={data.color.includes('yellow')} onChange={changeRadio}>
+					<Box className={box_warning} />
+					<I icon="bx-leaf" className={text_icon} />
+					<Text className={text_warning}>yellow</Text>
+				</Checkbox>
+				<Checkbox className="p-1" name="color" id="green" checked={data.color.includes('green')} onChange={changeRadio}>
+					<Box className={box_warning} />
+					<I icon="bx-leaf" className={text_icon} />
+					<Text className={text_warning}>green</Text>
+				</Checkbox>
+			</div>
+
+			<div className="p-3 space-x-2 space-y-2">
+				<Text className={text_danger}>align : </Text>
+				<span>
+					<Checkbox className="p-1" name="align" id="left" checked={data.align.includes('left')} onChange={changeRadio}>
+						<Box className={box_item} />
+						<I icon="bx-align-left" className={text_icon} />
+						<Text className={text_default}>Left</Text>
+					</Checkbox>
+					<Checkbox className="p-1" name="align" id="middle" checked={data.align.includes('middle')} onChange={changeRadio}>
+						<Box className={box_item} />
+						<I icon="bx-align-middle" className={text_icon} />
+						<Text className={text_default}>Middle</Text>
+					</Checkbox>
+					<Checkbox className="p-1" name="align" id="right" checked={data.align.includes('right')} onChange={changeRadio}>
+						<Box className={box_item} />
+						<I icon="bx-align-right" className={text_icon} />
+						<Text className={text_default}>Right</Text>
+					</Checkbox>
+					<Checkbox className="p-1" name="align" id="justify" checked={data.align.includes('justify')} onChange={changeRadio}>
+						<Box className={box_item} />
+						<I icon="bx-align-justify" className={text_icon} />
+						<Text className={text_default}>Justify</Text>
+					</Checkbox>
+				</span>
 			</div>
 
 			<div className="p-3 space-x-2 space-y-2">
@@ -357,22 +457,22 @@ export default function code() {
 			</div>
 
 			<div className="p-3 space-x-2 space-y-2">
-				{/* <Input
-					type="text"
-					deco="in-1"
-					value={data.id}
-					name="id"
-					icon="bx-user"
-					placeholder="id 입력"
-					onChange={onChageInput}
-					className="w-[150px]"
-					ref={idInput}
-				/> */}
+				<Text className={text_danger}>id : </Text>
 				<Input type="text" className={input_default} name="id" value={data.id} placeholder="id 입력" onChange={chageInput}>
-					<I icon="bx-leaf" className={box_input_dot} />
+					<I icon="bx-user" className={box_input_dot} />
 				</Input>
 				<Input type="text" className={input_default} value={data.id} placeholder="id 입력" disabled>
-					<I icon="bx-leaf" className={box_input_dot} />
+					<I icon="bx-user" className={box_input_dot} />
+				</Input>
+			</div>
+
+			<div className="p-3 space-x-2 space-y-2">
+				<Text className={text_danger}>password : </Text>
+				<Input type="password" className={input_default} name="password" value={data.password} placeholder="password 입력" onChange={chageInput}>
+					<I icon="bx-key" className={box_input_dot} />
+				</Input>
+				<Input type="password" className={input_default} value={data.password} placeholder="password 입력" disabled>
+					<I icon="bx-key" className={box_input_dot} />
 				</Input>
 			</div>
 		</>

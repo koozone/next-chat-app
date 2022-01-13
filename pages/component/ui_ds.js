@@ -312,9 +312,9 @@ export const I = (props) => {
 };
 
 export const Type = (props) => {
-	const {children, deco, style, className, name, href, type, onChange, checked, disabled} = getProps({...props, tag: 'type'});
+	const {children, deco, style, className, name, id, href, type, onChange, checked, disabled} = getProps({...props, tag: 'type'});
 
-	return <input type={type} className={style} id={name} name={name} onChange={onChange} checked={checked} disabled={disabled} />;
+	return <input type={type} className={style} id={id} name={name} onChange={onChange} checked={checked} disabled={disabled} />;
 };
 
 export const Label = (props) => {
@@ -398,10 +398,10 @@ export const A = (props) => {
 // 	);
 // };
 export const Checkbox = (props) => {
-	const {children, deco, style, className, name, onChange, checked, disabled} = getProps({...props, tag: 'checkbox'});
+	const {children, deco, style, className, name, id, onChange, checked, disabled} = getProps({...props, tag: 'checkbox'});
 
 	return (
-		<label htmlFor={name} className={`${style} | ${className}`}>
+		<label htmlFor={id} className={`${style} | ${className}`}>
 			<Type type="checkbox" {...props} />
 			{children}
 		</label>
@@ -431,10 +431,10 @@ export const Checkbox = (props) => {
 // };
 
 export const Radio = (props) => {
-	const {children, deco, style, className, name, onChange, checked, disabled} = getProps({...props, tag: 'radio'});
+	const {children, deco, style, className, name, id, onChange, checked, disabled} = getProps({...props, tag: 'radio'});
 
 	return (
-		<label htmlFor={name} className={`${style} | ${className}`}>
+		<label htmlFor={id} className={`${style} | ${className}`}>
 			<Type type="radio" {...props} />
 			{children}
 		</label>
