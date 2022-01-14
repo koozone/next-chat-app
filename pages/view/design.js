@@ -2,11 +2,25 @@ import Header, {Header1, Header2, Header3} from '../component/header';
 import {I, A, Button, Img, Input, Text, Checkbox, Radio, Box} from '../component/ui_ds';
 import { UseData } from '../hook/useData';
 import { UseModal } from '../hook/useModal';
+import { UseSideMenu } from '../hook/useSideMenu';
+
+const Fieldset = ({children, title}) => {
+	return (
+		<fieldset className="m-3 p-3 space-x-2 space-y-2 border-[1px] border-slate-500 rounded-lg">
+			<legend>
+				<span className="p-2">{title}</span>
+			</legend>
+			{children}
+		</fieldset>
+	);
+}
 
 export default function code() {
 	// const css_i = (<div className="p-2 ring-2 ring-white rounded-full text-xl text-blue-500 bg-yellow-500 group-hover:text-white peer-checked:text-red-500" />)
 	// 	.props.className;
 	// const css_text = (<div className="text-xs text-purple-500 group-hover:text-white peer-checked:text-blue-500" />).props.className;
+	const a_default = (<div className="text-xs underline decoration-transparent text-blue-500/80 hover:text-blue-500 hover:decoration-inherit peer-checked:text-white" />).props.className;
+	const a_block = (<div className="text-sm text-white bg-lime-500/80 ring-2 ring-lime-500 hover:bg-lime-500 peer-checked:text-lime-500 peer-checked:bg-white/80 peer-checked:hover:bg-white" />).props.className;
 	const text_icon = (<div className="mr-2 text-lg text-black/50 peer-checked:text-white last:mr-0 peer-disabled:opacity-30" />).props.className;
 	const text_checkbox = (<div className="text-sm text-slate-800 peer-disabled:opacity-30" />).props.className;
 	const text_default = (<div className="text-sm text-slate-800 peer-checked:text-white" />).props.className;
@@ -16,8 +30,11 @@ export default function code() {
 	const text_danger = (<div className="text-sm text-rose-800 peer-checked:text-white" />).props.className;
 	// const css_box = (<div className="absolute bg-teal-200 w-full h-full -z-10 rounded group-hover:bg-black/50 peer-checked:bg-slate-400" />).props.className;
 	const box_trans = (<div className="absolute w-full h-full -z-20 rounded bg-black/0 group-hover:bg-black/5" />).props.className;
-	const box_input_dot = (
+	const inputIcon_primary = (
 		<div className="mr-2 text-lg text-black/50 group-focus-within:text-sky-400 peer-disabled:opacity-30" />
+	).props.className;
+	const inputIcon_danger = (
+		<div className="mr-2 text-lg text-black/50 group-focus-within:text-rose-400 peer-disabled:opacity-30" />
 	).props.className;
 	const box_checkbox = (
 		<div className="mr-2 w-4 h-4 -z-20 rounded-sm ring-1 ring-slate-400 bg-slate-100 group-hover:bg-white peer-checked:bg-sky-500 peer-checked:ring-sky-700 group-hover:peer-checked:bg-sky-600 peer-disabled:opacity-30" />
@@ -64,6 +81,9 @@ export default function code() {
 	const inputBox_danger = (
 		<div className="absolute w-full h-full -z-20 rounded ring-1 ring-slate-400 bg-slate-100 group-focus-within:ring-rose-400 group-focus-within:bg-white peer-disabled:opacity-30" />
 	).props.className;
+	const inputBox_round = (
+		<div className="absolute w-full h-full -z-20 rounded-full ring-1 ring-slate-400 bg-slate-100 group-focus-within:ring-sky-400 group-focus-within:bg-white peer-disabled:opacity-30" />
+	).props.className;
 	const inputText_default = (
 		<div className="p-1 text-sm text-slate-800 placeholder-slate-400 peer-disabled:opacity-30" />
 	).props.className;
@@ -73,26 +93,37 @@ export default function code() {
 	const [data, runData] = UseData({
 		id: 'koozone',
 		password: '123',
+		search: '',
 		fruite: ['orange', 'banana'],
 		color: ['yellow'],
 		align: [],
+		dog: false,
+		cat: true,
+		bird: false,
 	});
 	const [modal, runModal] = UseModal();
+	const [sideMenu, runSideMenu] = UseSideMenu();
 
 	const changeCheckbox = (event) => {
-		const {name, id:value} = event.currentTarget;
+		const {name, id, checked} = event.currentTarget;
 
-		if (data[name].includes(value)) {
-			runData.change(name, data[name].filter((item) => item != value));
+		if (checked) {
+			runData.change(name, [...data[name], id]);
 		} else {
-			runData.change(name, [...data[name], value]);
+			runData.change(name, data[name].filter((item) => item != id));
 		}
 	};
 
 	const changeRadio = (event) => {
-		const {name, id:value} = event.currentTarget;
+		const {name, id} = event.currentTarget;
 
-		runData.change(name, [value]);
+		runData.change(name, [id]);
+	};
+
+	const changeSwitch = (event) => {
+		const {name, checked} = event.currentTarget;
+
+		runData.change(name, checked);
 	};
 
 	const chageInput = (event) => {
@@ -101,17 +132,40 @@ export default function code() {
 		runData.change(name, value);
 	};
 
-	const clickButton = (event) => {};
-
 	return (
 		<>
 			<Header />
 
-			<div className="p-3 space-y-2">
+			<Fieldset title="data">
 				{Object.entries(data).map((item, index) => <div key={index}>{`${item[0]} : ${JSON.stringify(item[1])}`}</div>)}
-			</div>
+			</Fieldset>
 
-			<div className="p-3 space-x-2 space-y-2">
+			<Fieldset title="icon">
+				<I icon="bx-user-plus" className={text_icon} />
+				<I icon="bx-leaf" className={text_icon} />
+				<I icon="bx-align-middle" className={text_icon} />
+				<I icon="bx-search-alt-2" className={inputIcon_primary} />
+			</Fieldset>
+
+			<Fieldset title="text">
+				<Text className={text_primary}>lorem story</Text>
+				<Text className={text_default}>Lorem ipsum dolor sit amet consectetur adipisicing elit. <Text className={text_danger}>Aliquam sequi hic sint!</Text> Earum suscipit repellat officia quibusdam ipsum nisi optio, <Text className={text_warning}>omnis ut saepe,</Text> nihil voluptatibus commodi placeat iure fugit explicabo!</Text>
+			</Fieldset>
+
+			<Fieldset title="a">
+				<A href="http://www.naver.com" className={a_default}>
+					naver
+				</A>
+				<A href="http://www.naver.com">
+					<Text className={a_default}>naver</Text>
+				</A>
+				<A href="http://www.naver.com" className="px-1 py-0">
+					<Box className={box_warning} />
+					<Text className={a_default}>naver</Text>
+				</A>
+			</Fieldset>
+
+			<Fieldset title="button">
 				<Button className="p-1">
 					<Box className={box_default} />
 					<Text className={text_default}>Default</Text>
@@ -132,9 +186,13 @@ export default function code() {
 					<Box className={box_danger} />
 					<Text className={text_danger}>Danger</Text>
 				</Button>
-			</div>
+				<Button className="p-1" onClick={() => {runModal.open();}}>
+					<Box className={box_default} />
+					<Text className={text_default}>open modal</Text>
+				</Button>
+			</Fieldset>
 
-			<div className="p-3 space-x-2 space-y-2">
+			<Fieldset title="button">
 				<Button className="p-1" checked>
 					<Box className={box_default} />
 					<Text className={text_default}>Default</Text>
@@ -155,9 +213,13 @@ export default function code() {
 					<Box className={box_danger} />
 					<Text className={text_danger}>Danger</Text>
 				</Button>
-			</div>
+				<Button className="p-1" onClick={() => {runSideMenu.open();}} checked>
+					<Box className={box_default} />
+					<Text className={text_default}>show sidemonu</Text>
+				</Button>
+			</Fieldset>
 
-			<div className="p-3 space-x-2 space-y-2">
+			<Fieldset title="button">
 				<ul className="flex items-center divide-x divide-black/20 list-none">
 					<li className="px-4 first:pl-0 last:pr-0">
 						<Button className="p-1" >
@@ -188,9 +250,9 @@ export default function code() {
 						</Button>
 					</li>
 				</ul>
-			</div>
+			</Fieldset>
 
-			<div className="p-3 space-x-2 space-y-2">
+			<Fieldset title="button">
 				<Checkbox className="p-1">
 					<Box className={box_default} />
 					<Text className={text_default}>Default</Text>
@@ -221,9 +283,9 @@ export default function code() {
 					<Text className={text_danger}>다음단계</Text>
 					<I icon="bxs-chevron-right" className={text_danger} />
 				</Checkbox>
-			</div>
+			</Fieldset>
 
-			<div className="p-3 space-x-2 space-y-2">
+			<Fieldset title="checkbox">
 				<Checkbox className="p-1">
 					<Box className={box_checkbox} />
 					<I icon="bxs-chevron-down" className={box_checkbox_dot} />
@@ -246,9 +308,9 @@ export default function code() {
 					<I icon="bxs-chevron-down" className={box_checkbox_dot} />
 					<Text className={text_checkbox}>Disabled Checked Checkbox</Text>
 				</Checkbox>
-			</div>
+			</Fieldset>
 
-			<div className="p-3 space-x-2 space-y-2">
+			<Fieldset title="checkbox">
 				<Text className={text_danger}>fruite : </Text>
 				<Checkbox className="p-1" name="fruite" id="banana" checked={data.fruite.includes('banana')} onChange={changeCheckbox}>
 					<Box className={box_checkbox} />
@@ -270,8 +332,8 @@ export default function code() {
 					<I icon="bxs-chevron-down" className={box_checkbox_dot} />
 					<Text className={text_checkbox}>melon</Text>
 				</Checkbox>
-			</div>
-			<div className="p-3 space-x-2 space-y-2">
+			</Fieldset>
+			<Fieldset title="checkbox">
 				<Text className={text_danger}>fruite : </Text>
 				<Checkbox className="p-1" name="fruite" id="banana" checked={data.fruite.includes('banana')} onChange={changeCheckbox}>
 					<Box className={box_success} />
@@ -293,9 +355,9 @@ export default function code() {
 					<I icon="bx-leaf" className={text_icon} />
 					<Text className={text_success}>melon</Text>
 				</Checkbox>
-			</div>
+			</Fieldset>
 
-			<div className="p-3 space-x-2 space-y-2">
+			<Fieldset title="radio">
 				<Radio className="p-1">
 					<Box className={box_radio} />
 					<Box className={box_radio_dot} />
@@ -318,9 +380,9 @@ export default function code() {
 					<Box className={box_radio_dot} />
 					<Text className={text_checkbox}>Disabled Checked Radio</Text>
 				</Radio>
-			</div>
+			</Fieldset>
 
-			<div className="p-3 space-x-2 space-y-2">
+			<Fieldset title="radio">
 				<Text className={text_danger}>color : </Text>
 				<Checkbox className="p-1" name="color" id="red" checked={data.color.includes('red')} onChange={changeRadio}>
 					<Box className={box_radio} />
@@ -342,8 +404,8 @@ export default function code() {
 					<Box className={box_radio_dot} />
 					<Text className={text_checkbox}>green</Text>
 				</Checkbox>
-			</div>
-			<div className="p-3 space-x-2 space-y-2">
+			</Fieldset>
+			<Fieldset title="radio">
 				<Text className={text_warning}>color : </Text>
 				<Checkbox className="p-1" name="color" id="red" checked={data.color.includes('red')} onChange={changeRadio}>
 					<Box className={box_warning} />
@@ -365,9 +427,9 @@ export default function code() {
 					<I icon="bx-leaf" className={text_icon} />
 					<Text className={text_warning}>green</Text>
 				</Checkbox>
-			</div>
+			</Fieldset>
 
-			<div className="p-3 space-x-2 space-y-2">
+			<Fieldset title="radio">
 				<Text className={text_danger}>align : </Text>
 				<span>
 					<Checkbox className="p-1" name="align" id="left" checked={data.align.includes('left')} onChange={changeRadio}>
@@ -391,9 +453,9 @@ export default function code() {
 						<Text className={text_default}>Justify</Text>
 					</Checkbox>
 				</span>
-			</div>
+			</Fieldset>
 
-			<div className="p-3 space-x-2 space-y-2">
+			<Fieldset title="switch">
 				<Checkbox className="p-1">
 					<Box className={box_switch} />
 					<Box className={box_switch_dot} />
@@ -416,31 +478,62 @@ export default function code() {
 					<Box className={box_switch_dot} />
 					<Text className={text_checkbox}>Disabled Checked Switch</Text>
 				</Checkbox>
-			</div>
+			</Fieldset>
 
-			<div className="p-3 space-x-2 space-y-2">
+			<Fieldset title="switch">
+				<Text className={text_danger}>animal : </Text>
+				<Checkbox className="p-1" name="dog" checked={data.dog} onChange={changeSwitch}>
+					<Box className={box_switch} />
+					<Box className={box_switch_dot} />
+					<Text className={text_checkbox}>dog</Text>
+				</Checkbox>
+				<Checkbox className="p-1" name="cat" checked={data.cat} onChange={changeSwitch}>
+					<Box className={box_switch} />
+					<Box className={box_switch_dot} />
+					<Text className={text_checkbox}>cat</Text>
+				</Checkbox>
+				<Checkbox className="p-1" name="bird" checked={data.bird} onChange={changeSwitch}>
+					<Box className={box_switch} />
+					<Box className={box_switch_dot} />
+					<Text className={text_checkbox}>bird</Text>
+				</Checkbox>
+			</Fieldset>
+
+			<Fieldset title="input">
 				<Text className={text_danger}>id : </Text>
 				<Input type="text" className={inputText_default} name="id" value={data.id} placeholder="id 입력" onChange={chageInput}>
 					<Box className={inputBox_default} />
-					<I icon="bx-user" className={box_input_dot} />
+					{/* <I icon="bx-user" className={inputIcon_primary} /> */}
 				</Input>
 				<Input type="text" className={inputText_default} name="id" value={data.id} placeholder="id 입력" onChange={chageInput} disabled>
 					<Box className={inputBox_default} />
-					<I icon="bx-user" className={box_input_dot} />
+					{/* <I icon="bx-user" className={inputIcon_primary} /> */}
 				</Input>
-			</div>
+			</Fieldset>
 
-			<div className="p-3 space-x-2 space-y-2">
+			<Fieldset title="input">
 				<Text className={text_danger}>password : </Text>
-				<Input type="password" className={inputText_default} name="password" id="pw" value={data.password} placeholder="password 입력" onChange={chageInput}>
+				<Input type="password" className={inputText_default} name="password" value={data.password} placeholder="password 입력" onChange={chageInput}>
 					<Box className={inputBox_danger} />
-					<I icon="bx-key" className={box_input_dot} />
+					<I icon="bx-key" className={inputIcon_danger} />
 				</Input>
-				<Input type="password" className={inputText_default} name="password" id="pw2" value={data.password} placeholder="password 입력" onChange={chageInput} disabled>
+				<Input type="password" className={inputText_default} name="password" value={data.password} placeholder="password 입력" onChange={chageInput} disabled>
 					<Box className={inputBox_default} />
-					<I icon="bx-key" className={box_input_dot} />
+					<I icon="bx-key" className={inputIcon_danger} />
 				</Input>
-			</div>
+			</Fieldset>
+
+			<Fieldset title="input">
+				<Text className={text_danger}>search : </Text>
+				<Input type="text" className={inputText_default} name="search" value={data.search} placeholder="search 입력" onChange={chageInput}>
+					<Box className={inputBox_round} />
+					<I icon="bx-search-alt-2" className={inputIcon_primary} />
+				</Input>
+				<Input type="text" className={inputText_default} name="search" value={data.search} placeholder="search 입력" onChange={chageInput} disabled>
+					<Box className={inputBox_round} />
+					<I icon="bx-search-alt-2" className={inputIcon_primary} />
+				</Input>
+			</Fieldset>
 		</>
 	);
 }

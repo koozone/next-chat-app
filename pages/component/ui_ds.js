@@ -390,10 +390,6 @@ export const A = (props) => {
 		<Link href={href}>
 			<label htmlFor={name} className={`${style} | ${className}`}>
 				<Type {...props} type="checkbox" checked={checked} />
-				{/* <Box {...props} /> */}
-				{/* <a className="underline decoration-transparent text-blue-500/80 hover:text-blue-500 hover:decoration-inherit peer-checked:text-white">
-					{children}
-				</a> */}
 				{children}
 			</label>
 		</Link>
