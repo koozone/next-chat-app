@@ -23,13 +23,18 @@ const getStyle = (props) => {
 
 			case '[type]':
 				// return <div className={`peer absolute m-0 p-0 pointer-events-none`} />;
-				return <div className={`peer absolute appearance-none pointer-events-none`} />;
+				return <div className={`peer absolute top-0 left-0 appearance-none pointer-events-none`} />;
 			// return <div className={`peer h-4 w-4 float-left mr-2 appearance-none pointer-events-none`} />;
 			// return (
 			// 	<div
 			// 		className={`peer appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer`}
 			// 	/>
 			// );
+			case '[type2]':
+				// return <div className={`peer absolute m-0 p-0 pointer-events-none`} />;
+				return <div className={`bg-transparent outline-none truncate peer-disabled:opacity-30 peer-disabled:pointer-events-none`} />;
+			// case '[type3]':
+			// 	return <div className={`peer absolute top-0 left-0 pointer-events-none`} />;
 
 			case '[button]':
 				return <div className={`inline-flex justify-center items-center relative cursor-pointer select-none`} />;
@@ -39,9 +44,11 @@ const getStyle = (props) => {
 			case '[checkbox]':
 				return <div className={`group inline-flex justify-center items-center relative cursor-pointer select-none`} />;
 
+			// case '[input]':
+			// 	// return <div className={`px-2 py-1 rounded w-full truncate`} />;
+			// 	return <div className={`peer truncate`} />;
 			case '[input]':
-				// return <div className={`px-2 py-1 rounded w-full truncate`} />;
-				return <div className={`peer truncate`} />;
+				return <div className={`group inline-flex justify-center items-center relative`} />;
 
 			default:
 				return <div className={``} />;
@@ -193,6 +200,7 @@ const getStyle = (props) => {
 
 			// type
 			case '[type]:':
+			case '[type2]:':
 				return <div className={``} />;
 			case '[type]:a-1':
 			case '[type]:a-2':
@@ -316,6 +324,11 @@ export const Type = (props) => {
 
 	return <input type={type} className={style} id={id} name={name} onChange={onChange} checked={checked} disabled={disabled} />;
 };
+export const Type2 = forwardRef((props, ref) => {
+	const {children, deco, style, className, name, id, href, type, value, placeholder, onChange, checked, disabled} = getProps({...props, tag: 'type2'});
+
+	return <input type={type} className={style} id={id} name={name} ref={ref} onChange={onChange} value={value} placeholder={placeholder} />
+});
 
 export const Label = (props) => {
 	return Text(props);
@@ -358,12 +371,12 @@ export const Box = (props) => {
 // 	);
 // };
 export const Button = (props) => {
-	const {children, deco, style, className, name, href, onClick} = getProps({...props, tag: 'button'});
+	const {children, deco, style, className, name, href, onClick, checked=false} = getProps({...props, tag: 'button'});
 
 	return (
 		<button type="button" className="group" name={name} onClick={onClick}>
 			<label htmlFor={name} className={`${style} | ${className}`}>
-				<Type type="checkbox" {...props} disabled />
+				<Type {...props} type="checkbox" checked={checked} />
 				{children}
 			</label>
 		</button>
@@ -371,12 +384,12 @@ export const Button = (props) => {
 };
 
 export const A = (props) => {
-	const {children, deco, style, className, name, href, onChange, checked, disabled} = getProps({...props, tag: 'a'});
+	const {children, deco, style, className, name, href, onChange, checked=false, disabled} = getProps({...props, tag: 'a'});
 
 	return (
 		<Link href={href}>
 			<label htmlFor={name} className={`${style} | ${className}`}>
-				<Type type="checkbox" {...props} disabled />
+				<Type {...props} type="checkbox" checked={checked} />
 				{/* <Box {...props} /> */}
 				{/* <a className="underline decoration-transparent text-blue-500/80 hover:text-blue-500 hover:decoration-inherit peer-checked:text-white">
 					{children}
@@ -402,7 +415,7 @@ export const Checkbox = (props) => {
 
 	return (
 		<label htmlFor={id} className={`${style} | ${className}`}>
-			<Type type="checkbox" {...props} />
+			<Type {...props} type="checkbox" />
 			{children}
 		</label>
 	);
@@ -435,7 +448,7 @@ export const Radio = (props) => {
 
 	return (
 		<label htmlFor={id} className={`${style} | ${className}`}>
-			<Type type="radio" {...props} />
+			<Type {...props} type="radio" />
 			{children}
 		</label>
 	);
@@ -453,20 +466,34 @@ export const Radio = (props) => {
 // 	);
 // };
 
+// export const Input = forwardRef((props, ref) => {
+// 	const {children, deco, style, className, name, onChange, icon, type, value, placeholder, disabled} = getProps({
+// 		...props,
+// 		tag: 'input',
+// 	});
+
+// 	return (
+// 		// <div deco={deco} className="group relative inline-block">
+// 		// 	{icon ? <I deco={deco} icon={icon} /> : ''}
+// 		// 	<input type={type} className={`${style} | ${className}`} name={name} ref={ref} onChange={onChange} value={value} placeholder={placeholder} />
+// 		// </div>
+// 		<div className="group inline-block relative">
+// 			<input type={type} className={`${style} | ${className}`} name={name} ref={ref} onChange={onChange} value={value} placeholder={placeholder} disabled={disabled} />
+// 			{children}
+// 		</div>
+// 	);
+// });
 export const Input = forwardRef((props, ref) => {
-	const {children, deco, style, className, name, onChange, icon, type, value, placeholder, disabled} = getProps({
+	const {children, deco, style, className, name, id, onChange, icon, type, value, placeholder, disabled} = getProps({
 		...props,
 		tag: 'input',
 	});
 
 	return (
-		// <div deco={deco} className="group relative inline-block">
-		// 	{icon ? <I deco={deco} icon={icon} /> : ''}
-		// 	<input type={type} className={`${style} | ${className}`} name={name} ref={ref} onChange={onChange} value={value} placeholder={placeholder} />
-		// </div>
-		<div className="group inline-block relative">
-			<input type={type} className={`${style} | ${className}`} name={name} ref={ref} onChange={onChange} value={value} placeholder={placeholder} disabled={disabled} />
+		<label htmlFor={id} className={`${style} | ${className}`}>
+			<Type {...props} type="button" />
 			{children}
-		</div>
+			<Type2 {...props} type={type} />
+		</label>
 	);
 });

@@ -1,23 +1,23 @@
 import Header, {Header1, Header2, Header3} from '../component/header';
-import {I, A, Button, Img, Input, Text, Checkbox, Checkbox2, Checkbox3, Radio, Radio2, Box} from '../component/ui_ds';
+import {I, A, Button, Img, Input, Text, Checkbox, Radio, Box} from '../component/ui_ds';
 import { UseData } from '../hook/useData';
 import { UseModal } from '../hook/useModal';
 
 export default function code() {
-	const css_i = (<div className="p-2 ring-2 ring-white rounded-full text-xl text-blue-500 bg-yellow-500 group-hover:text-white peer-checked:text-red-500" />)
-		.props.className;
-	const css_text = (<div className="text-xs text-purple-500 group-hover:text-white peer-checked:text-blue-500" />).props.className;
-	const text_icon = (<div className="mr-2 text-lg text-black/50 peer-checked:text-white last:mr-0" />).props.className;
+	// const css_i = (<div className="p-2 ring-2 ring-white rounded-full text-xl text-blue-500 bg-yellow-500 group-hover:text-white peer-checked:text-red-500" />)
+	// 	.props.className;
+	// const css_text = (<div className="text-xs text-purple-500 group-hover:text-white peer-checked:text-blue-500" />).props.className;
+	const text_icon = (<div className="mr-2 text-lg text-black/50 peer-checked:text-white last:mr-0 peer-disabled:opacity-30" />).props.className;
 	const text_checkbox = (<div className="text-sm text-slate-800 peer-disabled:opacity-30" />).props.className;
 	const text_default = (<div className="text-sm text-slate-800 peer-checked:text-white" />).props.className;
 	const text_primary = (<div className="text-sm text-sky-800 peer-checked:text-white" />).props.className;
 	const text_success = (<div className="text-sm text-emerald-800 peer-checked:text-white" />).props.className;
 	const text_warning = (<div className="text-sm text-amber-800 peer-checked:text-white" />).props.className;
 	const text_danger = (<div className="text-sm text-rose-800 peer-checked:text-white" />).props.className;
-	const css_box = (<div className="absolute bg-teal-200 w-full h-full -z-10 rounded group-hover:bg-black/50 peer-checked:bg-slate-400" />).props.className;
+	// const css_box = (<div className="absolute bg-teal-200 w-full h-full -z-10 rounded group-hover:bg-black/50 peer-checked:bg-slate-400" />).props.className;
 	const box_trans = (<div className="absolute w-full h-full -z-20 rounded bg-black/0 group-hover:bg-black/5" />).props.className;
 	const box_input_dot = (
-		<div className="absolute left-2 top-1/2 -mt-2 text-black/50 group-focus-within:text-blue-500 peer-disabled:opacity-30" />
+		<div className="mr-2 text-lg text-black/50 group-focus-within:text-sky-400 peer-disabled:opacity-30" />
 	).props.className;
 	const box_checkbox = (
 		<div className="mr-2 w-4 h-4 -z-20 rounded-sm ring-1 ring-slate-400 bg-slate-100 group-hover:bg-white peer-checked:bg-sky-500 peer-checked:ring-sky-700 group-hover:peer-checked:bg-sky-600 peer-disabled:opacity-30" />
@@ -56,10 +56,19 @@ export default function code() {
 		<div className="absolute w-full h-full -z-20 rounded ring-1 ring-rose-400 bg-rose-100 group-hover:bg-white peer-checked:bg-rose-500 peer-checked:ring-rose-700 group-hover:peer-checked:bg-rose-600" />
 	).props.className;
 	const input_default = (
-		<div className="px-2 py-1 rounded w-full truncate | text-sm pl-8 text-black/80 bg-white/80 ring-1 ring-black/30 focus:ring-2 focus:ring-blue-500 focus:bg-white focus:outline-none placeholder-black/30 disabled:opacity-30" />
+		<div className="p-1 text-sm pl-8 text-slate-800 bg-slate-100 ring-1 ring-slate-400 focus:ring-sky-400 focus:bg-white focus:outline-none placeholder-slate-400 disabled:opacity-30" />
 	).props.className;
-	const css_on = (<div className="absolute left-0 text-white text-3xl visible peer-checked:invisible" />).props.className;
-	const css_off = (<div className="absolute left-0 text-white text-3xl invisible peer-checked:visible" />).props.className;
+	const inputBox_default = (
+		<div className="absolute w-full h-full -z-20 rounded ring-1 ring-slate-400 bg-slate-100 group-focus-within:ring-sky-400 group-focus-within:bg-white peer-disabled:opacity-30" />
+	).props.className;
+	const inputBox_danger = (
+		<div className="absolute w-full h-full -z-20 rounded ring-1 ring-slate-400 bg-slate-100 group-focus-within:ring-rose-400 group-focus-within:bg-white peer-disabled:opacity-30" />
+	).props.className;
+	const inputText_default = (
+		<div className="p-1 text-sm text-slate-800 placeholder-slate-400 peer-disabled:opacity-30" />
+	).props.className;
+	// const css_on = (<div className="absolute left-0 text-white text-3xl visible peer-checked:invisible" />).props.className;
+	// const css_off = (<div className="absolute left-0 text-white text-3xl invisible peer-checked:visible" />).props.className;
 
 	const [data, runData] = UseData({
 		id: 'koozone',
@@ -86,66 +95,19 @@ export default function code() {
 		runData.change(name, [value]);
 	};
 
-	const clickButton = (event) => {};
-
 	const chageInput = (event) => {
 		const {name, value} = event.currentTarget;
 
 		runData.change(name, value);
-	};	
+	};
+
+	const clickButton = (event) => {};
 
 	return (
 		<>
 			<Header />
 
-			<div className="p-3 space-x-2 space-y-2">
-				I<br />
-				<I icon="bx-leaf" className={css_text} />
-				<I icon="bx-leaf" className={css_i} />
-				<Text icon="bx-leaf" className={css_text}>
-					<I icon="bx-leaf" />
-					asdfasdf
-				</Text>
-				<Text icon="bx-leaf" className={css_i}>
-					<I icon="bx-leaf" />
-					asdfasdf
-				</Text>
-				<Button>
-					<Text icon="bx-leaf" className={css_text}>
-						<I icon="bx-leaf" />
-						asdfasdf
-					</Text>
-				</Button>
-				<Button>
-					<Box icon="bx-leaf" className={css_text}>
-						<I icon="bx-leaf" />
-						asdfasdf
-					</Box>
-				</Button>
-				<Button>
-					<I icon="bx-leaf" className={css_i} />
-					<Text icon="bx-leaf">asdfasdf</Text>
-				</Button>
-				<Checkbox className="p-2 w-[300px] space-x-2">
-					<Box className={css_box} />
-					<I icon="bx-leaf" className={css_i} />
-					<Text className={css_text}>asdfasdf</Text>
-				</Checkbox>
-				<Checkbox className="p-2 w-[300px] space-x-2">
-					<Box className={css_box} />
-					<I icon="bxs-checkbox" className={css_on} />
-					<I icon="bx-checkbox-checked" className={css_off} />
-					<Text className={css_text}>asdfasdf</Text>
-					<I icon="bxs-chevron-right" className={css_text} />
-				</Checkbox>
-				<Checkbox className="p-2 pl-8 space-x-2">
-					<I icon="bxs-checkbox" className={css_on} />
-					<I icon="bx-checkbox-checked" className={css_off} />
-					<Text className={css_text}>asdfasdf</Text>
-					<I icon="bxs-chevron-right" className={css_text} />
-				</Checkbox>
-
-				{/* {[data].map((item, index) => <div key={index}>{JSON.stringify(item)}</div>)} */}
+			<div className="p-3 space-y-2">
 				{Object.entries(data).map((item, index) => <div key={index}>{`${item[0]} : ${JSON.stringify(item[1])}`}</div>)}
 			</div>
 
@@ -198,28 +160,28 @@ export default function code() {
 			<div className="p-3 space-x-2 space-y-2">
 				<ul className="flex items-center divide-x divide-black/20 list-none">
 					<li className="px-4 first:pl-0 last:pr-0">
-						<Button className="p-1" name="share" checked={data.align.includes('share')} onClick={clickButton}>
+						<Button className="p-1" >
 							<Box className={box_trans} />
 							<I icon="bx-user-plus" className={text_icon} />
 							<Text className={text_default}>Share</Text>
 						</Button>
 					</li>
 					<li className="px-4 first:pl-0 last:pr-0">
-						<Button className="p-1" name="delete" checked={data.align.includes('delete')} onClick={clickButton}>
+						<Button className="p-1" >
 							<Box className={box_trans} />
 							<I icon="bx-trash" className={text_icon} />
 							<Text className={text_default}>Delete</Text>
 						</Button>
 					</li>
 					<li className="px-4 first:pl-0 last:pr-0">
-						<Button className="p-1" name="rename" checked={data.align.includes('rename')} onClick={clickButton}>
+						<Button className="p-1" >
 							<Box className={box_trans} />
 							<I icon="bx-edit-alt" className={text_icon} />
 							<Text className={text_default}>Rename</Text>
 						</Button>
 					</li>
 					<li className="px-4 first:pl-0 last:pr-0">
-						<Button className="p-1" name="move" checked={data.align.includes('move')} onClick={clickButton}>
+						<Button className="p-1" >
 							<Box className={box_trans} />
 							<I icon="bx-file" className={text_icon} />
 							<Text className={text_default}>Move</Text>
@@ -458,20 +420,24 @@ export default function code() {
 
 			<div className="p-3 space-x-2 space-y-2">
 				<Text className={text_danger}>id : </Text>
-				<Input type="text" className={input_default} name="id" value={data.id} placeholder="id 입력" onChange={chageInput}>
+				<Input type="text" className={inputText_default} name="id" value={data.id} placeholder="id 입력" onChange={chageInput}>
+					<Box className={inputBox_default} />
 					<I icon="bx-user" className={box_input_dot} />
 				</Input>
-				<Input type="text" className={input_default} value={data.id} placeholder="id 입력" disabled>
+				<Input type="text" className={inputText_default} name="id" value={data.id} placeholder="id 입력" onChange={chageInput} disabled>
+					<Box className={inputBox_default} />
 					<I icon="bx-user" className={box_input_dot} />
 				</Input>
 			</div>
 
 			<div className="p-3 space-x-2 space-y-2">
 				<Text className={text_danger}>password : </Text>
-				<Input type="password" className={input_default} name="password" value={data.password} placeholder="password 입력" onChange={chageInput}>
+				<Input type="password" className={inputText_default} name="password" id="pw" value={data.password} placeholder="password 입력" onChange={chageInput}>
+					<Box className={inputBox_danger} />
 					<I icon="bx-key" className={box_input_dot} />
 				</Input>
-				<Input type="password" className={input_default} value={data.password} placeholder="password 입력" disabled>
+				<Input type="password" className={inputText_default} name="password" id="pw2" value={data.password} placeholder="password 입력" onChange={chageInput} disabled>
+					<Box className={inputBox_default} />
 					<I icon="bx-key" className={box_input_dot} />
 				</Input>
 			</div>
