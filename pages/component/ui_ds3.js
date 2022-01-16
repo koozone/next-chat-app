@@ -4,7 +4,10 @@ import {forwardRef} from 'react';
 
 const getStyle = (props) => {
 	const {tag, icon} = props;
-	const myDeco = String(props.deco).replace(/\s+/gm, '##').split('##').filter(item => (item.split('-')[0] == tag))[0];
+	const myDeco = String(props.deco)
+		.replace(/\s+/gm, '##')
+		.split('##')
+		.filter((item) => item.split('-')[0] == tag)[0];
 
 	const defaultElement = (() => {
 		switch (tag) {
@@ -46,21 +49,41 @@ const getStyle = (props) => {
 			case 'icon-default':
 				return <div className={`mr-2 last:mr-0 text-lg text-black/50 peer-checked:text-white peer-disabled:opacity-30`} />;
 			case 'icon-primary':
-				return <div className={`mr-2 last:mr-0 text-lg text-black/50 group-hover:text-sky-800 group-focus-within:text-sky-400 peer-disabled:opacity-30`} />;
+				return (
+					<div className={`mr-2 last:mr-0 text-lg text-black/50 group-hover:text-sky-800 group-focus-within:text-sky-400 peer-disabled:opacity-30`} />
+				);
 			case 'icon-danger':
-				return <div className={`mr-2 last:mr-0 text-lg text-black/50 group-hover:text-rose-800 group-focus-within:text-rose-400 peer-disabled:opacity-30`} />;
+				return (
+					<div
+						className={`mr-2 last:mr-0 text-lg text-black/50 group-hover:text-rose-800 group-focus-within:text-rose-400 peer-disabled:opacity-30`}
+					/>
+				);
 
 			case 'text-default':
 				return <div className={`text-sm text-slate-800 peer-checked:text-white peer-disabled:opacity-30`} />;
+			case 'text-primary':
+				return <div className={`text-sm text-sky-800 peer-checked:text-white peer-disabled:opacity-30`} />;
 			case 'text-danger':
 				return <div className={`text-sm text-rose-800 peer-checked:text-white peer-disabled:opacity-30`} />;
 
 			case 'box-default':
-				return <div className={`absolute w-full h-full -z-20 rounded ring-1 ring-slate-400 bg-slate-100 group-hover:bg-white peer-checked:bg-slate-500 peer-checked:ring-slate-700 group-hover:peer-checked:bg-slate-600`} />;
+				return (
+					<div
+						className={`absolute w-full h-full -z-20 rounded ring-1 ring-slate-400 bg-slate-100 group-hover:bg-white peer-checked:bg-slate-500 peer-checked:ring-slate-700 group-hover:peer-checked:bg-slate-600`}
+					/>
+				);
 			case 'box-primary':
-				return <div className={`absolute w-full h-full -z-20 rounded ring-1 ring-sky-400 bg-sky-100 group-hover:bg-white peer-checked:bg-sky-500 peer-checked:ring-sky-700 group-hover:peer-checked:bg-sky-600`} />;
+				return (
+					<div
+						className={`absolute w-full h-full -z-20 rounded ring-1 ring-sky-400 bg-sky-100 group-hover:bg-white peer-checked:bg-sky-500 peer-checked:ring-sky-700 group-hover:peer-checked:bg-sky-600`}
+					/>
+				);
 			case 'box-danger':
-				return <div className={`absolute w-full h-full -z-20 rounded ring-1 ring-rose-400 bg-rose-100 group-hover:bg-white peer-checked:bg-rose-500 peer-checked:ring-rose-700 group-hover:peer-checked:bg-rose-600 peer-disabled:opacity-30`} />;
+				return (
+					<div
+						className={`absolute w-full h-full -z-20 rounded ring-1 ring-rose-400 bg-rose-100 group-hover:bg-white peer-checked:bg-rose-500 peer-checked:ring-rose-700 group-hover:peer-checked:bg-rose-600 peer-disabled:opacity-30`}
+					/>
+				);
 
 			case 'button-default':
 				return <div className={`p-1`} />;
@@ -135,7 +158,7 @@ export const Type = (props) => {
 export const Type2 = forwardRef((props, ref) => {
 	const {children, deco, style, className, name, id, href, type, value, placeholder, onChange, checked, disabled} = getProps({...props, tag: 'type2'});
 
-	return <input type={type} className={style} id={id} name={name} ref={ref} onChange={onChange} value={value} placeholder={placeholder} />
+	return <input type={type} className={style} id={id} name={name} ref={ref} onChange={onChange} value={value} placeholder={placeholder} />;
 });
 
 export const Label = (props) => {
@@ -144,16 +167,17 @@ export const Label = (props) => {
 export const Text = (props) => {
 	const {children, deco, style, className, icon, iconL, iconR, name} = getProps({...props, tag: 'text'});
 
-	return <div className={`${style} | ${className}`}>
-		{/* {children ? ( */}
+	return (
+		<div className={`${style} | ${className}`}>
+			{/* {children ? ( */}
 			<>
 				{icon || iconL ? <I deco={deco} icon={icon || iconL} /> : ''}
 				{/* {name ? <Text deco={deco}>{name}</Text> :''} */}
 				{children}
-				{name ? <span>{name}</span> :''}
+				{name ? <span>{name}</span> : ''}
 				{iconR ? <I deco={deco} icon={iconR} /> : ''}
 			</>
-		{/* ) : (
+			{/* ) : (
 			<>
 				{icon || iconL ? <I deco={deco} icon={icon || iconL} /> : ''}
 				{name ? <Text deco={deco}>{name}</Text> :''}
@@ -161,7 +185,8 @@ export const Text = (props) => {
 			</>
 		)
 		} */}
-	</div>;
+		</div>
+	);
 };
 
 export const Box = (props) => {
@@ -171,7 +196,7 @@ export const Box = (props) => {
 };
 
 export const A = (props) => {
-	const {children, deco, style, className, name, href, onChange, checked=false, disabled} = getProps({...props, tag: 'a'});
+	const {children, deco, style, className, name, href, onChange, checked = false, disabled} = getProps({...props, tag: 'a'});
 
 	return (
 		<Link href={href}>
@@ -184,7 +209,7 @@ export const A = (props) => {
 };
 
 export const Button = (props) => {
-	const {children, deco, style, className, name, href, onClick, checked=false} = getProps({...props, tag: 'button'});
+	const {children, deco, style, className, name, href, onClick, checked = false} = getProps({...props, tag: 'button'});
 
 	return (
 		<button type="button" className="group" name={name} onClick={onClick}>
@@ -196,17 +221,17 @@ export const Button = (props) => {
 	);
 };
 export const ButtonEx = (props) => {
-	const {children, deco, style, className, icon, iconL, iconR, name, href, onClick, checked=false} = getProps({...props, tag: 'button'});
+	const {children, deco, style, className, icon, iconL, iconR, name, href, onClick, checked = false} = getProps({...props, tag: 'button'});
 
 	return (
 		<button type="button" className="group" name={name} onClick={onClick}>
 			<label htmlFor={name} className={`${style} | ${className}`}>
 				<Type {...props} type="checkbox" checked={checked} />
 				{/* {children} */}
-				
+
 				<>
 					{/* {icon || iconL || iconR || name || children ? <Box deco={deco}/> : ''} */}
-					<Box deco={deco}/>
+					<Box deco={deco} />
 					<Text {...props} />
 				</>
 
@@ -215,9 +240,8 @@ export const ButtonEx = (props) => {
 					<Text {...props} />
 				</> */}
 
-
 				{/* {children ? ( */}
-					{/* <>
+				{/* <>
 						<Box deco={deco}/>
 						<Text {...props} />
 					</> */}
