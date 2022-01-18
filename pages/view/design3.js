@@ -1,5 +1,5 @@
 import Header, {Header1, Header2, Header3} from '../component/header';
-import {I, A, Button, ButtonEx, Img, Input, Text, Checkbox, Checkbox222, Radio, Box} from '../component/ui_ds3';
+import {I, A, Button, ButtonEx, Img, Input, InputEx, Label, Text, Checkbox, CheckboxEx, Checkbox222, Radio, Box, BoxEx} from '../component/ui_ds3';
 import {UseData} from '../hook/useData';
 import {UseModal} from '../hook/useModal';
 import {UseSideMenu} from '../hook/useSideMenu';
@@ -8,14 +8,14 @@ const Fieldset = ({children, title}) => {
 	return (
 		<fieldset className="m-3 p-3 space-y-2 border-[1px] border-slate-500 rounded-lg">
 			<legend>
-				<span className="p-2">{title}</span>
+				<span className="p-2 text-xl font-semibold">{title}</span>
 			</legend>
 			{children}
 		</fieldset>
 	);
 };
 const Group = ({children}) => {
-	return <div className="flex items-center space-x-2">{children}</div>;
+	return <div className="space-x-2">{children}</div>;
 };
 
 export default function code() {
@@ -26,10 +26,10 @@ export default function code() {
 	const icon_default = (<div className="mr-2 text-lg text-black/50 peer-checked:text-white peer-disabled:opacity-30" />).props.className;
 	// icon (input)
 	const icon_primary = (
-		<div className="mr-2 last:mr-0 text-lg text-black/50 group-hover:text-sky-800 group-focus-within:text-sky-400 peer-disabled:opacity-30" />
+		<div className="mr-2 last:mr-0 text-lg text-black/50 group-focus-within:text-sky-400 peer-disabled:opacity-30" />
 	).props.className;
 	const icon_danger = (
-		<div className="mr-2 last:mr-0 text-lg text-black/50 group-hover:text-rose-800 group-focus-within:text-rose-400 peer-disabled:opacity-30" />
+		<div className="mr-2 last:mr-0 text-lg text-black/50 group-focus-within:text-rose-400 peer-disabled:opacity-30" />
 	).props.className;
 
 	// text
@@ -109,6 +109,17 @@ export default function code() {
 	const [modal, runModal] = UseModal();
 	const [sideMenu, runSideMenu] = UseSideMenu();
 
+	const clickButton = (event) => {
+		const {name} = event.currentTarget;
+
+		if (name == 'openModal') {
+			runModal.open();
+		}
+		else if (name == 'showSidemenu') {
+			runSideMenu.open();
+		}
+	}
+
 	const changeCheckbox = (event) => {
 		const {name, id, checked} = event.currentTarget;
 
@@ -154,52 +165,61 @@ export default function code() {
 
 			<Fieldset title="icon">
 				<Group>
-					<I icon="bx-user-plus" className={icon_default} />
-					<I icon="bx-leaf" className={icon_default} />
-					<I icon="bx-align-middle" className={icon_default} />
-					<I icon="bx-search-alt-2" className={icon_primary} />
+					<I icon="bx-user-plus" deco="text-default" />
+					<I icon="bx-leaf" deco="text-default" />
+					<I icon="bx-align-middle" deco="text-danger" />
+					<I icon="bx-search-alt-2" deco="text-primary" />
 				</Group>
 			</Fieldset>
 
 			<Fieldset title="text">
 				<Group>
-					<Text className={text_primary}>lorem story</Text>
-					<Text className={text_default}>
-						Lorem ipsum dolor sit amet consectetur adipisicing elit. <Text className={text_danger}>Aliquam sequi hic sint!</Text> Earum suscipit
-						repellat officia quibusdam ipsum nisi optio, <Text className={text_warning}>omnis ut saepe,</Text> nihil voluptatibus commodi placeat
+					<Text deco="text-primary">lorem story</Text>
+					<Text deco="text-default">
+						Lorem ipsum dolor sit amet consectetur adipisicing elit. <Text deco="text-danger" className="underline"><I icon="bx-leaf" />Aliquam sequi hic sint!</Text> Earum suscipit
+						repellat officia quibusdam ipsum nisi optio, <Text deco="text-success">omnis ut saepe,</Text> nihil voluptatibus commodi placeat
 						iure fugit explicabo!
 					</Text>
 				</Group>
 			</Fieldset>
 
-			<Fieldset title="box">
+			<Fieldset title="label">
 				<Group>
-					<div className="inline-block w-[100px] h-[30px] relative">
-						<Box className={box_default} />
-					</div>
-					<div className="inline-block w-[100px] h-[30px] relative">
-						<Box className={box_success} />
-					</div>
-					<div className="inline-block w-[100px] h-[30px] relative">
-						<Box className={box_danger} />
-					</div>
+					<Label deco="text-primary" text="Start">lorem story</Label>
+					<Label deco="label-default text-primary" icon="bx-leaf" text="leaf" />
+					<Label deco="text-primary" text="asdas" />
+					<Label deco="text-danger" text="Sample" />
 				</Group>
 			</Fieldset>
 
-			<Fieldset title="badge">
+			<Fieldset title="basket">
 				<Group>
-					<Button className="inline-flex justify-center items-center p-1 h-4 relative" checked>
-						<Box className={box_success} />
-						<Text className={text_default}>3</Text>
-					</Button>
-					<Button className="inline-flex justify-center items-center p-1 h-4 relative" checked>
-						<Box className={box_success} />
-						<Text className={text_default}>134</Text>
-					</Button>
-					<Button className="inline-flex justify-center items-center p-1 h-4 relative" checked>
-						<Box className={box_danger} />
-						<Text className={text_default}>8798</Text>
-					</Button>
+					<CheckboxEx deco="button-default label-default box-primary text-danger" icon="bx-user-plus" text="KOOZone" />
+					<CheckboxEx deco="ccc-default box-danger" text="..." checked>
+						<BoxEx deco="box-default" />
+					</CheckboxEx>
+					<CheckboxEx deco="ccc-default" className="w-[200px] h-[50px]">
+						<BoxEx deco="box-primary" />
+					</CheckboxEx>
+					<CheckboxEx deco="ccc-default box-danger" className="w-[100px] h-[30px]" checked>
+						{/* <BoxEx deco="box-danger" /> */}
+					</CheckboxEx>
+				</Group>
+
+				<Group>
+					<CheckboxEx deco="ccc-default" checked>
+						<BoxEx deco="box-round" />
+						<Label deco="text-default" text="3" />
+					</CheckboxEx>
+					<CheckboxEx deco="ccc-default">
+						<BoxEx deco="box-round" />
+						<Label deco="text-default" text="134" />
+					</CheckboxEx>
+					<CheckboxEx deco="ccc-default box-danger" checked>
+						{/* <BoxEx deco="box-danger" /> */}
+						<Label deco="text-default" text="8798" />
+					</CheckboxEx>
+					<CheckboxEx deco="ccc-default box-round text-danger" text="234" checked></CheckboxEx>
 				</Group>
 			</Fieldset>
 
@@ -215,192 +235,183 @@ export default function code() {
 						naver
 					</A>
 					<A href="http://www.naver.com">
-						<Text className={a_default}>naver</Text>
+						<Label className={a_default}>naver</Label>
 					</A>
 					<A href="http://www.naver.com" className="px-1 py-0">
-						<Box className={box_warning} />
-						<Text className={a_default}>naver</Text>
+						<BoxEx className={box_warning} />
+						<Label className={a_default}>naver</Label>
 					</A>
 				</Group>
 			</Fieldset>
 
 			<Fieldset title="button">
 				<Group>
-					<ButtonEx deco="button-default">
-						<Box deco="box-primary" />
-						<Text deco="text-primary" className="text-xl">
+					<ButtonEx deco="button-default box-primary">
+						{/* <Box deco="box-primary" /> */}
+						<Label deco="text-primary" className="text-xl">
 							BG
-						</Text>
-						<I deco="icon-primary" icon="bxs-chevron-left" />
-						<Text deco="text-danger">Sample</Text>
+						</Label>
+						<I deco="text-primary" icon="bxs-chevron-left" />
+						<Label deco="text-danger">Sample</Label>
 					</ButtonEx>
-					<ButtonEx deco="button-default box-primary icon-danger text-danger">asdfasd</ButtonEx>
-					<ButtonEx deco="button-default box-primary icon-danger text-danger" icon="bx-user-plus" name="KOOZone" />
-					<ButtonEx deco="button-default box-primary icon-default text-danger" icon="bx-user-plus" iconR="bxs-chevron-right" name="...">
-						<I deco="icon-primary" icon="bxs-chevron-left" />
+					<ButtonEx deco="button-default box-danger text-danger">asdfasd</ButtonEx>
+					<ButtonEx deco="button-default label-default box-primary text-danger" icon="bx-user-plus" text="KOOZone" />
+					<ButtonEx deco="button-default box-primary text-danger" icon="bx-user-plus" iconR="bxs-chevron-right" text="...">
+						<I deco="text-primary" icon="bxs-chevron-left" />
 						<Text deco="text-primary">asdas</Text>
 					</ButtonEx>
-					<ButtonEx deco="button-default box-danger">
+					<ButtonEx deco="button-default box-danger" checked>
 						{/* <Box deco="box-danger" /> */}
 						<Text deco="text-danger">Sample</Text>
 					</ButtonEx>
 				</Group>
 
 				<Group>
-					<Button className="p-1">
-						<Box className={box_default} />
-						<Text className={text_default}>Default</Text>
-					</Button>
-					<Button className="p-1">
-						<Box className={box_primary} />
-						<Text className={text_primary}>Primary</Text>
-					</Button>
-					<Button className="p-1">
-						<Box className={box_success} />
-						<Text className={text_success}>Success</Text>
-					</Button>
-					<Button className="p-1">
-						<Box className={box_warning} />
-						<Text className={text_warning}>Warning</Text>
-					</Button>
-					<Button className="p-1" disabled>
-						<Box className={box_danger} />
-						<Text className={text_danger}>Danger</Text>
-					</Button>
-					<Button
-						className="p-1"
-						onClick={() => {
-							runModal.open();
-						}}
-					>
-						<Box className={box_default} />
-						<Text className={text_default}>open modal</Text>
-					</Button>
+					<ButtonEx className="p-1">
+						<BoxEx deco="box-default" />
+						<Label deco="text-default" text="Default" />
+					</ButtonEx>
+					<ButtonEx className="p-1">
+						<BoxEx deco="box-primary" />
+						<Label deco="text-primary" text="Primary" />
+					</ButtonEx>
+					<ButtonEx className="p-1">
+						<BoxEx deco="box-success" />
+						<Label deco="text-success" text="Success" />
+					</ButtonEx>
+					<ButtonEx className="p-1">
+						<BoxEx deco="box-warning" />
+						<Label deco="text-warning" text="Warning" />
+					</ButtonEx>
+					<ButtonEx className="p-1" disabled>
+						<BoxEx deco="box-danger" />
+						<Label deco="text-danger" text="Danger" />
+					</ButtonEx>
+					<ButtonEx className="p-1" name="openModal" onClick={clickButton}>
+						<BoxEx deco="box-default" />
+						<Label deco="text-default" text="open modal" />
+					</ButtonEx>
 				</Group>
 
 				<Group>
-					<Button className="p-1" checked>
-						<Box className={box_default} />
-						<Text className={text_default}>Default</Text>
-					</Button>
-					<Button className="p-1" checked>
-						<Box className={box_primary} />
-						<Text className={text_primary}>Primary</Text>
-					</Button>
-					<Button className="p-1" checked>
-						<Box className={box_success} />
-						<Text className={text_success}>Success</Text>
-					</Button>
-					<Button className="p-1" checked>
-						<Box className={box_warning} />
-						<Text className={text_warning}>Warning</Text>
-					</Button>
-					<Button className="p-1" checked>
-						<Box className={box_danger} />
-						<Text className={text_danger}>Danger</Text>
-					</Button>
-					<Button
-						className="p-1"
-						onClick={() => {
-							runSideMenu.open();
-						}}
-						checked
-					>
-						<Box className={box_default} />
-						<Text className={text_default}>show sidemonu</Text>
-					</Button>
+					<ButtonEx className="p-1" checked>
+						<BoxEx deco="box-default" />
+						<Label deco="text-default" text="Default" />
+					</ButtonEx>
+					<ButtonEx className="p-1" checked>
+						<BoxEx deco="box-primary" />
+						<Label deco="text-primary" text="Primary" />
+					</ButtonEx>
+					<ButtonEx className="p-1" checked>
+						<BoxEx deco="box-success" />
+						<Label deco="text-success" text="Success" />
+					</ButtonEx>
+					<ButtonEx className="p-1" checked>
+						<BoxEx deco="box-warning" />
+						<Label deco="text-warning" text="Warning" />
+					</ButtonEx>
+					<ButtonEx className="p-1" checked>
+						<BoxEx deco="box-danger" />
+						<Label deco="text-danger" text="Danger" />
+					</ButtonEx>
+					<ButtonEx className="p-1" name="showSidemenu" onClick={clickButton} checked>
+						<BoxEx deco="box-default" />
+						<Label deco="text-default" text="show sidemonu" />
+					</ButtonEx>
 				</Group>
 
 				<Group>
 					<ul className="flex items-center divide-x divide-black/20 list-none">
 						<li className="px-4 first:pl-0 last:pr-0">
-							<Button className="p-1">
-								<Box className={box_trans} />
-								<I icon="bx-user-plus" className={icon_default} />
-								<Text className={text_default}>Share</Text>
-							</Button>
+							<ButtonEx className="p-1">
+								<Box deco="box-trans" />
+								<I icon="bx-user-plus" deco="text-default" />
+								<Label deco="text-default" text="Share" />
+							</ButtonEx>
 						</li>
 						<li className="px-4 first:pl-0 last:pr-0">
-							<Button className="p-1">
-								<Box className={box_trans} />
-								<I icon="bx-trash" className={icon_default} />
-								<Text className={text_default}>Delete</Text>
-							</Button>
+							<ButtonEx className="p-1">
+								<Box deco="box-trans" />
+								<I icon="bx-trash" deco="text-default" />
+								<Label deco="text-default" text="Delete" />
+							</ButtonEx>
 						</li>
 						<li className="px-4 first:pl-0 last:pr-0">
-							<Button className="p-1">
-								<Box className={box_trans} />
-								<I icon="bx-edit-alt" className={icon_default} />
-								<Text className={text_default}>Rename</Text>
-							</Button>
+							<ButtonEx className="p-1">
+								<Box deco="box-trans" />
+								<I icon="bx-edit-alt" deco="text-default" />
+								<Label deco="text-default" text="Rename" />
+							</ButtonEx>
 						</li>
 						<li className="px-4 first:pl-0 last:pr-0">
-							<Button className="p-1">
-								<Box className={box_trans} />
-								<I icon="bx-file" className={icon_default} />
-								<Text className={text_default}>Move</Text>
-							</Button>
+							<ButtonEx className="p-1">
+								<Box deco="box-trans" />
+								<I icon="bx-file" deco="text-default" />
+								<Label deco="text-default" text="Move" />
+							</ButtonEx>
 						</li>
 					</ul>
 				</Group>
+			</Fieldset>
 
+			<Fieldset title="toggle">
 				<Group>
 					<Checkbox className="p-1">
-						<Box className={box_default} />
-						<Text className={text_default}>Default</Text>
+						<BoxEx deco="box-default" />
+						<Text deco="text-default">Default</Text>
 					</Checkbox>
 					<Checkbox className="p-1">
-						<Box className={box_primary} />
-						<Text className={text_primary}>Primary</Text>
+						<BoxEx deco="box-primary" />
+						<Text deco="text-primary">Primary</Text>
 					</Checkbox>
 					<Checkbox className="p-1 ">
-						<Box className={box_primary} />
-						<I icon="bx-leaf" className={icon_default} />
-						{/* <Text className={text_primary}>Primary</Text> */}
+						<BoxEx deco="box-primary" />
+						<I icon="bx-leaf" deco="text-default" />
+						{/* <Text deco="text-primary">Primary</Text> */}
 					</Checkbox>
 					<Checkbox className="p-1">
-						<Box className={box_primary} />
-						<I icon="bx-leaf" className={icon_default} />
-						<Text className={text_primary}>다음단계</Text>
+						<BoxEx deco="box-primary" />
+						<I icon="bx-leaf" deco="text-danger" />
+						<Text deco="text-primary">다음단계</Text>
 					</Checkbox>
 					<Checkbox className="p-1">
-						<Box className={box_success} />
-						<I icon="bx-leaf" className={icon_default} />
-						<Text className={text_success}>다음단계</Text>
-						<I icon="bxs-chevron-right" className={text_success} />
+						<BoxEx deco="box-success" />
+						<I icon="bx-leaf" deco="text-default" />
+						<Text deco="text-success">다음단계</Text>
+						<I icon="bxs-chevron-right" deco="text-success" />
 					</Checkbox>
 					<Checkbox className="p-1">
-						<Box className={box_danger} />
-						<I icon="bx-leaf" className={icon_default} />
-						<Text className={text_danger}>다음단계</Text>
-						<I icon="bxs-chevron-right" className={text_danger} />
+						<BoxEx deco="box-danger" />
+						<I icon="bx-leaf" deco="text-default" />
+						<Text deco="text-danger">다음단계</Text>
+						<I icon="bxs-chevron-right" deco="text-danger" />
 					</Checkbox>
 				</Group>
 			</Fieldset>
 
 			<Fieldset title="button group">
 				<Group>
-					<Text className={text_danger}>align : </Text>
+					<Text deco="text-danger">align : </Text>
 					<span>
 						<Checkbox className="p-1" name="align" id="left" checked={data.align.includes('left')} onChange={changeRadio}>
-							<Box className={box_item} />
-							<I icon="bx-align-left" className={icon_default} />
-							<Text className={text_default}>Left</Text>
+							<BoxEx deco="box-item" />
+							<I icon="bx-align-left" deco="text-default" />
+							<Text deco="text-default">Left</Text>
 						</Checkbox>
 						<Checkbox className="p-1" name="align" id="middle" checked={data.align.includes('middle')} onChange={changeRadio}>
-							<Box className={box_item} />
-							<I icon="bx-align-middle" className={icon_default} />
-							<Text className={text_default}>Middle</Text>
+							<BoxEx deco="box-item" />
+							<I icon="bx-align-middle" deco="text-default" />
+							<Text deco="text-default">Middle</Text>
 						</Checkbox>
 						<Checkbox className="p-1" name="align" id="right" checked={data.align.includes('right')} onChange={changeRadio}>
-							<Box className={box_item} />
-							<I icon="bx-align-right" className={icon_default} />
-							<Text className={text_default}>Right</Text>
+							<BoxEx deco="box-item" />
+							<I icon="bx-align-right" deco="text-default" />
+							<Text deco="text-default">Right</Text>
 						</Checkbox>
 						<Checkbox className="p-1" name="align" id="justify" checked={data.align.includes('justify')} onChange={changeRadio}>
-							<Box className={box_item} />
-							<I icon="bx-align-justify" className={icon_default} />
-							<Text className={text_default}>Justify</Text>
+							<BoxEx deco="box-item" />
+							<I icon="bx-align-justify" deco="text-default" />
+							<Text deco="text-default">Justify</Text>
 						</Checkbox>
 					</span>
 				</Group>
@@ -413,70 +424,70 @@ export default function code() {
 						<I icon="bxs-chevron-down" className={box_checkbox_dot} />
 						{/* <I icon="bxs-checkbox" className={css_on} />
 						<I icon="bx-checkbox-checked" className={css_off} /> */}
-						<Text className={text_checkbox}>Checkbox</Text>
+						<Label className={text_checkbox}>Checkbox</Label>
 					</Checkbox>
 					<Checkbox className="p-1" checked>
 						<Box className={box_checkbox} />
 						<I icon="bxs-chevron-down" className={box_checkbox_dot} />
-						<Text className={text_checkbox}>Checked Checkbox</Text>
+						<Label className={text_checkbox}>Checked Checkbox</Label>
 					</Checkbox>
 					<Checkbox className="p-1" disabled>
 						<Box className={box_checkbox} />
 						<I icon="bxs-chevron-down" className={box_checkbox_dot} />
-						<Text className={text_checkbox}>Disabled Checkbox</Text>
+						<Label className={text_checkbox}>Disabled Checkbox</Label>
 					</Checkbox>
 					<Checkbox className="p-1" checked disabled>
 						<Box className={box_checkbox} />
 						<I icon="bxs-chevron-down" className={box_checkbox_dot} />
-						<Text className={text_checkbox}>Disabled Checked Checkbox</Text>
+						<Label className={text_checkbox}>Disabled Checked Checkbox</Label>
 					</Checkbox>
 				</Group>
 
 				<Group>
-					<Text className={text_danger}>fruite : </Text>
+					<Text deco="text-danger">fruite : </Text>
 					<Checkbox className="p-1" name="fruite" id="banana" checked={data.fruite.includes('banana')} onChange={changeCheckbox}>
 						<Box className={box_checkbox} />
 						<I icon="bxs-chevron-down" className={box_checkbox_dot} />
-						<Text className={text_checkbox}>banana</Text>
+						<Label className={text_checkbox}>banana</Label>
 					</Checkbox>
 					<Checkbox className="p-1" name="fruite" id="apple" checked={data.fruite.includes('apple')} onChange={changeCheckbox}>
 						<Box className={box_checkbox} />
 						<I icon="bxs-chevron-down" className={box_checkbox_dot} />
-						<Text className={text_checkbox}>apple</Text>
+						<Label className={text_checkbox}>apple</Label>
 					</Checkbox>
 					<Checkbox className="p-1" name="fruite" id="orange" checked={data.fruite.includes('orange')} onChange={changeCheckbox}>
 						<Box className={box_checkbox} />
 						<I icon="bxs-chevron-down" className={box_checkbox_dot} />
-						<Text className={text_checkbox}>orange</Text>
+						<Label className={text_checkbox}>orange</Label>
 					</Checkbox>
 					<Checkbox className="p-1" name="fruite" id="melon" checked={data.fruite.includes('melon')} onChange={changeCheckbox}>
 						<Box className={box_checkbox} />
 						<I icon="bxs-chevron-down" className={box_checkbox_dot} />
-						<Text className={text_checkbox}>melon</Text>
+						<Label className={text_checkbox}>melon</Label>
 					</Checkbox>
 				</Group>
 
 				<Group>
-					<Text className={text_danger}>fruite : </Text>
+					<Text deco="text-danger">fruite : </Text>
 					<Checkbox className="p-1" name="fruite" id="banana" checked={data.fruite.includes('banana')} onChange={changeCheckbox}>
 						<Box className={box_success} />
 						<I icon="bx-leaf" className={icon_default} />
-						<Text className={text_success}>banana</Text>
+						<Label className={text_success}>banana</Label>
 					</Checkbox>
 					<Checkbox className="p-1" name="fruite" id="apple" checked={data.fruite.includes('apple')} onChange={changeCheckbox}>
 						<Box className={box_success} />
 						<I icon="bx-leaf" className={icon_default} />
-						<Text className={text_success}>apple</Text>
+						<Label className={text_success}>apple</Label>
 					</Checkbox>
 					<Checkbox className="p-1" name="fruite" id="orange" checked={data.fruite.includes('orange')} onChange={changeCheckbox}>
 						<Box className={box_success} />
 						<I icon="bx-leaf" className={icon_default} />
-						<Text className={text_success}>orange</Text>
+						<Label className={text_success}>orange</Label>
 					</Checkbox>
 					<Checkbox className="p-1" name="fruite" id="melon" checked={data.fruite.includes('melon')} onChange={changeCheckbox}>
 						<Box className={box_success} />
 						<I icon="bx-leaf" className={icon_default} />
-						<Text className={text_success}>melon</Text>
+						<Label className={text_success}>melon</Label>
 					</Checkbox>
 				</Group>
 			</Fieldset>
@@ -488,70 +499,70 @@ export default function code() {
 						<Box className={box_radio_dot} />
 						{/* <I icon="bxs-checkbox" className={css_on} />
 						<I icon="bx-checkbox-checked" className={css_off} /> */}
-						<Text className={text_checkbox}>Radio</Text>
+						<Label className={text_checkbox}>Radio</Label>
 					</Radio>
 					<Radio className="p-1" checked>
 						<Box className={box_radio} />
 						<Box className={box_radio_dot} />
-						<Text className={text_checkbox}>Checked Radio</Text>
+						<Label className={text_checkbox}>Checked Radio</Label>
 					</Radio>
 					<Radio className="p-1" disabled>
 						<Box className={box_radio} />
 						<Box className={box_radio_dot} />
-						<Text className={text_checkbox}>Disabled Radio</Text>
+						<Label className={text_checkbox}>Disabled Radio</Label>
 					</Radio>
 					<Radio className="p-1" checked disabled>
 						<Box className={box_radio} />
 						<Box className={box_radio_dot} />
-						<Text className={text_checkbox}>Disabled Checked Radio</Text>
+						<Label className={text_checkbox}>Disabled Checked Radio</Label>
 					</Radio>
 				</Group>
 
 				<Group>
-					<Text className={text_danger}>color : </Text>
+					<Text deco="text-danger">color : </Text>
 					<Checkbox className="p-1" name="color" id="red" checked={data.color.includes('red')} onChange={changeRadio}>
 						<Box className={box_radio} />
 						<Box className={box_radio_dot} />
-						<Text className={text_checkbox}>red</Text>
+						<Label className={text_checkbox}>red</Label>
 					</Checkbox>
 					<Checkbox className="p-1" name="color" id="blue" checked={data.color.includes('blue')} onChange={changeRadio}>
 						<Box className={box_radio} />
 						<Box className={box_radio_dot} />
-						<Text className={text_checkbox}>blue</Text>
+						<Label className={text_checkbox}>blue</Label>
 					</Checkbox>
 					<Checkbox className="p-1" name="color" id="yellow" checked={data.color.includes('yellow')} onChange={changeRadio}>
 						<Box className={box_radio} />
 						<Box className={box_radio_dot} />
-						<Text className={text_checkbox}>yellow</Text>
+						<Label className={text_checkbox}>yellow</Label>
 					</Checkbox>
 					<Checkbox className="p-1" name="color" id="green" checked={data.color.includes('green')} onChange={changeRadio}>
 						<Box className={box_radio} />
 						<Box className={box_radio_dot} />
-						<Text className={text_checkbox}>green</Text>
+						<Label className={text_checkbox}>green</Label>
 					</Checkbox>
 				</Group>
 
 				<Group>
-					<Text className={text_warning}>color : </Text>
+					<Text deco="text-success">color : </Text>
 					<Checkbox className="p-1" name="color" id="red" checked={data.color.includes('red')} onChange={changeRadio}>
 						<Box className={box_warning} />
 						<I icon="bx-leaf" className={icon_default} />
-						<Text className={text_warning}>red</Text>
+						<Label className={text_warning}>red</Label>
 					</Checkbox>
 					<Checkbox className="p-1" name="color" id="blue" checked={data.color.includes('blue')} onChange={changeRadio}>
 						<Box className={box_warning} />
 						<I icon="bx-leaf" className={icon_default} />
-						<Text className={text_warning}>blue</Text>
+						<Label className={text_warning}>blue</Label>
 					</Checkbox>
 					<Checkbox className="p-1" name="color" id="yellow" checked={data.color.includes('yellow')} onChange={changeRadio}>
 						<Box className={box_warning} />
 						<I icon="bx-leaf" className={icon_default} />
-						<Text className={text_warning}>yellow</Text>
+						<Label className={text_warning}>yellow</Label>
 					</Checkbox>
 					<Checkbox className="p-1" name="color" id="green" checked={data.color.includes('green')} onChange={changeRadio}>
 						<Box className={box_warning} />
 						<I icon="bx-leaf" className={icon_default} />
-						<Text className={text_warning}>green</Text>
+						<Label className={text_warning}>green</Label>
 					</Checkbox>
 				</Group>
 			</Fieldset>
@@ -563,48 +574,48 @@ export default function code() {
 						<Box className={box_switch_dot} />
 						{/* <I icon="bxs-checkbox" className={css_on} />
 						<I icon="bx-checkbox-checked" className={css_off} /> */}
-						<Text className={text_checkbox}>Switch</Text>
+						<Label className={text_checkbox}>Switch</Label>
 					</Checkbox>
 					<Checkbox className="p-1" checked>
 						<Box className={box_switch} />
 						<Box className={box_switch_dot} />
-						<Text className={text_checkbox}>Checked Switch</Text>
+						<Label className={text_checkbox}>Checked Switch</Label>
 					</Checkbox>
 					<Checkbox className="p-1" disabled>
 						<Box className={box_switch} />
 						<Box className={box_switch_dot} />
-						<Text className={text_checkbox}>Disabled Switch</Text>
+						<Label className={text_checkbox}>Disabled Switch</Label>
 					</Checkbox>
 					<Checkbox className="p-1" checked disabled>
 						<Box className={box_switch} />
 						<Box className={box_switch_dot} />
-						<Text className={text_checkbox}>Disabled Checked Switch</Text>
+						<Label className={text_checkbox}>Disabled Checked Switch</Label>
 					</Checkbox>
 				</Group>
 
 				<Group>
-					<Text className={text_danger}>animal : </Text>
+					<Text deco="text-danger">animal : </Text>
 					<Checkbox className="p-1" name="dog" checked={data.dog} onChange={changeSwitch}>
 						<Box className={box_switch} />
 						<Box className={box_switch_dot} />
-						<Text className={text_checkbox}>dog</Text>
+						<Label className={text_checkbox}>dog</Label>
 					</Checkbox>
 					<Checkbox className="p-1" name="cat" checked={data.cat} onChange={changeSwitch}>
 						<Box className={box_switch} />
 						<Box className={box_switch_dot} />
-						<Text className={text_checkbox}>cat</Text>
+						<Label className={text_checkbox}>cat</Label>
 					</Checkbox>
 					<Checkbox className="p-1" name="bird" checked={data.bird} onChange={changeSwitch}>
 						<Box className={box_switch} />
 						<Box className={box_switch_dot} />
-						<Text className={text_checkbox}>bird</Text>
+						<Label className={text_checkbox}>bird</Label>
 					</Checkbox>
 				</Group>
 			</Fieldset>
 
 			<Fieldset title="input">
 				<Group>
-					<Text className={text_danger}>id : </Text>
+					<Text deco="text-danger">id : </Text>
 					<Input type="text" className={inputText_default} name="id" value={data.id} placeholder="id 입력" onChange={chageInput}>
 						<Box className={inputBox_default} />
 						{/* <I icon="bx-user" className={icon_primary} /> */}
@@ -613,10 +624,14 @@ export default function code() {
 						<Box className={inputBox_default} />
 						{/* <I icon="bx-user" className={icon_primary} /> */}
 					</Input>
+					<InputEx type="text" deco="input-default box-input-round type2-default" name="id" value={data.id} placeholder="id 입력" onChange={chageInput}>
+						{/* <Box className={inputBox_round} /> */}
+						{/* <I icon="bx-search-alt-2" deco="text-primary" /> */}
+					</InputEx>
 				</Group>
 
 				<Group>
-					<Text className={text_danger}>password : </Text>
+					<Text deco="text-danger">password : </Text>
 					<Input
 						type="password"
 						className={inputText_default}
@@ -643,7 +658,7 @@ export default function code() {
 				</Group>
 
 				<Group>
-					<Text className={text_danger}>search : </Text>
+					<Text deco="text-danger">search : </Text>
 					<Input type="text" className={inputText_default} name="search" value={data.search} placeholder="search 입력" onChange={chageInput}>
 						<Box className={inputBox_round} />
 						<I icon="bx-search-alt-2" className={icon_primary} />
@@ -652,6 +667,10 @@ export default function code() {
 						<Box className={inputBox_round} />
 						<I icon="bx-search-alt-2" className={icon_primary} />
 					</Input>
+					<InputEx type="text" deco="input-default box-input-round type2-default" className="w-[100px]" name="search" value={data.search} placeholder="search 입력" onChange={chageInput}>
+						{/* <Box className={inputBox_round} /> */}
+						<I icon="bx-search-alt-2" deco="text-primary" />
+					</InputEx>
 				</Group>
 			</Fieldset>
 
@@ -668,22 +687,22 @@ export default function code() {
 						<Checkbox className="p-1" name="align" id="left" checked={data.align.includes('left')} onChange={changeRadio}>
 							<Box className={box_list} />
 							<I icon="bx-align-left" className={icon_default} />
-							<Text className={text_default}>Left</Text>
+							<Label className={text_default}>Left</Label>
 						</Checkbox>
 						<Checkbox className="p-1" name="align" id="middle" checked={data.align.includes('middle')} onChange={changeRadio}>
 							<Box className={box_list} />
 							<I icon="bx-align-middle" className={icon_default} />
-							<Text className={text_default}>Middle</Text>
+							<Label className={text_default}>Middle</Label>
 						</Checkbox>
 						<Checkbox className="p-1" name="align" id="right" checked={data.align.includes('right')} onChange={changeRadio}>
 							<Box className={box_list} />
 							<I icon="bx-align-right" className={icon_default} />
-							<Text className={text_default}>Right</Text>
+							<Label className={text_default}>Right</Label>
 						</Checkbox>
 						<Checkbox className="p-1" name="align" id="justify" checked={data.align.includes('justify')} onChange={changeRadio}>
 							<Box className={box_list} />
 							<I icon="bx-align-justify" className={icon_default} />
-							<Text className={text_default}>Justify</Text>
+							<Label className={text_default}>Justify</Label>
 						</Checkbox>
 					</span>
 				</Group>
