@@ -1,5 +1,5 @@
 import Header, {Header1, Header2, Header3} from '../component/header';
-import {I, A, Button, Img, Input, Label, Text, Basket, Toggle, Box} from '../component/ui_ds4';
+import {I, Icon, A, Button, Img, Input, Label, Text, Basket, Toggle, Box} from '../component/ui_ds4';
 import {UseData} from '../hook/useData';
 import {UseModal} from '../hook/useModal';
 import {UseSideMenu} from '../hook/useSideMenu';
@@ -44,22 +44,24 @@ export default function code() {
 	};
 
 	const changeCheckbox = (event) => {
-		const {name, id, checked} = event.currentTarget;
+		const {name, checked} = event.currentTarget;
+		const {team} = event.currentTarget.dataset;
 
 		if (checked) {
-			runData.change(name, [...data[name], id]);
+			runData.change(team, [...data[team], name]);
 		} else {
 			runData.change(
-				name,
-				data[name].filter((item) => item != id)
+				team,
+				data[team].filter((item) => item != name)
 			);
 		}
 	};
 
 	const changeRadio = (event) => {
-		const {name, id} = event.currentTarget;
+		const {name} = event.currentTarget;
+		const {team} = event.currentTarget.dataset;
 
-		runData.change(name, [id]);
+		runData.change(team, [name]);
 	};
 
 	const changeSwitch = (event) => {
@@ -69,9 +71,9 @@ export default function code() {
 	};
 
 	const chageInput = (event) => {
-		const {id, value} = event.currentTarget;
+		const {name, value} = event.currentTarget;
 
-		runData.change(id, value);
+		runData.change(name, value);
 	};
 
 	return (
@@ -88,6 +90,7 @@ export default function code() {
 
 			<Fieldset title="icon">
 				<Group>
+					<Icon deco="text-default">bx-user-plus</Icon>
 					<I icon="bx-user-plus" deco="text-default" />
 					<I icon="bx-leaf" deco="text-default" />
 					<I icon="bx-align-middle" deco="text-danger" />
@@ -101,7 +104,7 @@ export default function code() {
 					<Text deco="text-default">
 						Lorem ipsum dolor sit amet consectetur adipisicing elit.{' '}
 						<Text deco="text-danger" className="underline">
-							<I icon="bx-leaf" />
+							<I icon="bx-leaf" deco="text-primary" />
 							Aliquam sequi hic sint!
 						</Text>{' '}
 						Earum suscipit repellat officia quibusdam ipsum nisi optio, <Text deco="text-success">omnis ut saepe,</Text> nihil voluptatibus commodi
@@ -112,8 +115,8 @@ export default function code() {
 
 			<Fieldset title="label">
 				<Group>
-					<Label deco="text-primary" text="Start">
-						lorem story
+					<Label deco="text-primary" icon="bx-star" text="Start : ">
+						<Text deco="text-warning">Earum suscipit repellat officia quibusdam ipsum nisi optio</Text>
 					</Label>
 					<Label deco="label-default text-primary" icon="bx-leaf" text="leaf" />
 					<Label deco="text-primary" text="asdas" />
@@ -167,7 +170,7 @@ export default function code() {
 					<A href="http://www.naver.com" deco="a-primary">
 						<Text deco="text-default">naver</Text>
 					</A>
-					<A href="http://www.naver.com" deco="a-primary box-warning text-warning" icon="bxl-meta" text="meta">
+					<A href="http://www.meta.com" deco="a-primary box-warning text-warning" icon="bxl-meta" text="meta">
 						{/* <Box deco="box-warning" /> */}
 						{/* <I icon="bxl-meta" deco="text-primary" /> */}
 						{/* <Text deco="text-default">meta</Text> */}
@@ -317,22 +320,22 @@ export default function code() {
 
 				<Group>
 					<Text deco="text-danger">fruite : </Text>
-					<Toggle deco="toggle-default" name="fruite" id="banana" checked={data.fruite.includes('banana')} onChange={changeCheckbox}>
+					<Toggle deco="toggle-default" team="fruite" name="banana" checked={data.fruite.includes('banana')} onChange={changeCheckbox}>
 						<Box deco="box-checkbox" />
 						<I icon="bxs-chevron-down" deco="text-checkbox-dot" />
 						<Text deco="text-toggle">banana</Text>
 					</Toggle>
-					<Toggle deco="toggle-default" name="fruite" id="apple" checked={data.fruite.includes('apple')} onChange={changeCheckbox}>
+					<Toggle deco="toggle-default" team="fruite" name="apple" checked={data.fruite.includes('apple')} onChange={changeCheckbox}>
 						<Box deco="box-checkbox" />
 						<I icon="bxs-chevron-down" deco="text-checkbox-dot" />
 						<Text deco="text-toggle">apple</Text>
 					</Toggle>
-					<Toggle deco="toggle-default" name="fruite" id="orange" checked={data.fruite.includes('orange')} onChange={changeCheckbox}>
+					<Toggle deco="toggle-default" team="fruite" name="orange" checked={data.fruite.includes('orange')} onChange={changeCheckbox}>
 						<Box deco="box-checkbox" />
 						<I icon="bxs-chevron-down" deco="text-checkbox-dot" />
 						<Text deco="text-toggle">orange</Text>
 					</Toggle>
-					<Toggle deco="toggle-default" name="fruite" id="melon" checked={data.fruite.includes('melon')} onChange={changeCheckbox}>
+					<Toggle deco="toggle-default" team="fruite" name="melon" checked={data.fruite.includes('melon')} onChange={changeCheckbox}>
 						<Box deco="box-checkbox" />
 						<I icon="bxs-chevron-down" deco="text-checkbox-dot" />
 						<Text deco="text-toggle">melon</Text>
@@ -341,22 +344,22 @@ export default function code() {
 
 				<Group>
 					<Text deco="text-danger">fruite : </Text>
-					<Toggle deco="toggle-default" name="fruite" id="banana" checked={data.fruite.includes('banana')} onChange={changeCheckbox}>
+					<Toggle deco="toggle-default" team="fruite" name="banana" checked={data.fruite.includes('banana')} onChange={changeCheckbox}>
 						<Box deco="box-success" />
 						<I icon="bx-leaf" deco="text-default" />
 						<Text deco="text-success">banana</Text>
 					</Toggle>
-					<Toggle deco="toggle-default" name="fruite" id="apple" checked={data.fruite.includes('apple')} onChange={changeCheckbox}>
+					<Toggle deco="toggle-default" team="fruite" name="apple" checked={data.fruite.includes('apple')} onChange={changeCheckbox}>
 						<Box deco="box-success" />
 						<I icon="bx-leaf" deco="text-default" />
 						<Text deco="text-success">apple</Text>
 					</Toggle>
-					<Toggle deco="toggle-default" name="fruite" id="orange" checked={data.fruite.includes('orange')} onChange={changeCheckbox}>
+					<Toggle deco="toggle-default" team="fruite" name="orange" checked={data.fruite.includes('orange')} onChange={changeCheckbox}>
 						<Box deco="box-success" />
 						<I icon="bx-leaf" deco="text-default" />
 						<Text deco="text-success">orange</Text>
 					</Toggle>
-					<Toggle deco="toggle-default" name="fruite" id="melon" checked={data.fruite.includes('melon')} onChange={changeCheckbox}>
+					<Toggle deco="toggle-default" team="fruite" name="melon" checked={data.fruite.includes('melon')} onChange={changeCheckbox}>
 						<Box deco="box-success" />
 						<I icon="bx-leaf" deco="text-default" />
 						<Text deco="text-success">melon</Text>
@@ -392,22 +395,22 @@ export default function code() {
 
 				<Group>
 					<Text deco="text-danger">color : </Text>
-					<Toggle deco="toggle-default" name="color" id="red" checked={data.color.includes('red')} onChange={changeRadio}>
+					<Toggle deco="toggle-default" team="color" name="red" checked={data.color.includes('red')} onChange={changeRadio}>
 						<Box deco="box-radio" />
 						<Box deco="box-radio-dot" />
 						<Text deco="text-toggle">red</Text>
 					</Toggle>
-					<Toggle deco="toggle-default" name="color" id="blue" checked={data.color.includes('blue')} onChange={changeRadio}>
+					<Toggle deco="toggle-default" team="color" name="blue" checked={data.color.includes('blue')} onChange={changeRadio}>
 						<Box deco="box-radio" />
 						<Box deco="box-radio-dot" />
 						<Text deco="text-toggle">blue</Text>
 					</Toggle>
-					<Toggle deco="toggle-default" name="color" id="yellow" checked={data.color.includes('yellow')} onChange={changeRadio}>
+					<Toggle deco="toggle-default" team="color" name="yellow" checked={data.color.includes('yellow')} onChange={changeRadio}>
 						<Box deco="box-radio" />
 						<Box deco="box-radio-dot" />
 						<Text deco="text-toggle">yellow</Text>
 					</Toggle>
-					<Toggle deco="toggle-default" name="color" id="green" checked={data.color.includes('green')} onChange={changeRadio}>
+					<Toggle deco="toggle-default" team="color" name="green" checked={data.color.includes('green')} onChange={changeRadio}>
 						<Box deco="box-radio" />
 						<Box deco="box-radio-dot" />
 						<Text deco="text-toggle">green</Text>
@@ -416,22 +419,22 @@ export default function code() {
 
 				<Group>
 					<Text deco="text-success">color : </Text>
-					<Toggle deco="toggle-default" name="color" id="red" checked={data.color.includes('red')} onChange={changeRadio}>
+					<Toggle deco="toggle-default" team="color" name="red" checked={data.color.includes('red')} onChange={changeRadio}>
 						<Box deco="box-warning" />
 						<I icon="bx-leaf" deco="text-default" />
 						<Text deco="text-warning">red</Text>
 					</Toggle>
-					<Toggle deco="toggle-default" name="color" id="blue" checked={data.color.includes('blue')} onChange={changeRadio}>
+					<Toggle deco="toggle-default" team="color" name="blue" checked={data.color.includes('blue')} onChange={changeRadio}>
 						<Box deco="box-warning" />
 						<I icon="bx-leaf" deco="text-default" />
 						<Text deco="text-warning">blue</Text>
 					</Toggle>
-					<Toggle deco="toggle-default" name="color" id="yellow" checked={data.color.includes('yellow')} onChange={changeRadio}>
+					<Toggle deco="toggle-default" team="color" name="yellow" checked={data.color.includes('yellow')} onChange={changeRadio}>
 						<Box deco="box-warning" />
 						<I icon="bx-leaf" deco="text-default" />
 						<Text deco="text-warning">yellow</Text>
 					</Toggle>
-					<Toggle deco="toggle-default" name="color" id="green" checked={data.color.includes('green')} onChange={changeRadio}>
+					<Toggle deco="toggle-default" team="color" name="green" checked={data.color.includes('green')} onChange={changeRadio}>
 						<Box deco="box-warning" />
 						<I icon="bx-leaf" deco="text-default" />
 						<Text deco="text-warning">green</Text>
@@ -488,7 +491,7 @@ export default function code() {
 			<Fieldset title="input">
 				<Group>
 					<Text deco="text-danger">id : </Text>
-					<Input type="text" deco="input-default text-primary" id="id" value={data.id} placeholder="id 입력" onChange={chageInput}>
+					<Input type="text" deco="input-default text-primary" name="id" value={data.id} placeholder="id 입력" onChange={chageInput}>
 						<Box deco="box-default" />
 						<I icon="bx-user" deco="text-danger" />
 						<Text deco="text-success">ID : </Text>
@@ -497,7 +500,7 @@ export default function code() {
 						type="text"
 						deco="input-default box-default text-primary"
 						icon="bx-user"
-						id="id2"
+						name="id2"
 						value={data.id}
 						placeholder="id 입력"
 						onChange={chageInput}
@@ -514,7 +517,7 @@ export default function code() {
 					<Input
 						type="password"
 						deco="input-default text-danger"
-						id="password"
+						name="password"
 						value={data.password}
 						placeholder="password 입력"
 						onChange={chageInput}
@@ -526,7 +529,7 @@ export default function code() {
 						type="text"
 						deco="input-default box-danger text-danger"
 						icon="bx-key"
-						id="password2"
+						name="password2"
 						value={data.password}
 						placeholder="password 입력"
 						onChange={chageInput}
@@ -539,7 +542,7 @@ export default function code() {
 
 				<Group>
 					<Text deco="text-danger">search : </Text>
-					<Input type="text" deco="input-default text-success" id="search" value={data.search} placeholder="search 입력" onChange={chageInput}>
+					<Input type="text" deco="input-default text-success" name="search" value={data.search} placeholder="search 입력" onChange={chageInput}>
 						<Box deco="box-round" />
 						<I icon="bx-search-alt-2" deco="text-primary" />
 					</Input>
@@ -547,7 +550,7 @@ export default function code() {
 						type="text"
 						deco="input-default box-round text-success"
 						icon="bx-search-alt-2"
-						id="search2"
+						name="search2"
 						value={data.search}
 						placeholder="search 입력"
 						onChange={chageInput}
@@ -596,22 +599,22 @@ export default function code() {
 				<Group>
 					<Text deco="text-danger">align : </Text>
 					<span>
-						<Toggle deco="toggle-default" name="align" id="left" checked={data.align.includes('left')} onChange={changeRadio}>
+						<Toggle deco="toggle-default" team="align" name="left" checked={data.align.includes('left')} onChange={changeRadio}>
 							<Box deco="box-item" />
 							<I icon="bx-align-left" deco="text-default" />
 							<Text deco="text-default">Left</Text>
 						</Toggle>
-						<Toggle deco="toggle-default" name="align" id="middle" checked={data.align.includes('middle')} onChange={changeRadio}>
+						<Toggle deco="toggle-default" team="align" name="middle" checked={data.align.includes('middle')} onChange={changeRadio}>
 							<Box deco="box-item" />
 							<I icon="bx-align-middle" deco="text-default" />
 							<Text deco="text-default">Middle</Text>
 						</Toggle>
-						<Toggle deco="toggle-default" name="align" id="right" checked={data.align.includes('right')} onChange={changeRadio}>
+						<Toggle deco="toggle-default" team="align" name="right" checked={data.align.includes('right')} onChange={changeRadio}>
 							<Box deco="box-item" />
 							<I icon="bx-align-right" deco="text-default" />
 							<Text deco="text-default">Right</Text>
 						</Toggle>
-						<Toggle deco="toggle-default" name="align" id="justify" checked={data.align.includes('justify')} onChange={changeRadio}>
+						<Toggle deco="toggle-default" team="align" name="justify" checked={data.align.includes('justify')} onChange={changeRadio}>
 							<Box deco="box-item" />
 							<I icon="bx-align-justify" deco="text-default" />
 							<Text deco="text-default">Justify</Text>
@@ -621,22 +624,22 @@ export default function code() {
 
 				<Group>
 					<span>
-						<Toggle deco="toggle-default" name="align" id="left" checked={data.align.includes('left')} onChange={changeRadio}>
+						<Toggle deco="toggle-default" team="align" name="left" checked={data.align.includes('left')} onChange={changeRadio}>
 							<Box deco="box-list-col" />
 							<I icon="bx-align-left" deco="text-warning" />
 							<Text deco="text-default">Left</Text>
 						</Toggle>
-						<Toggle deco="toggle-default" name="align" id="middle" checked={data.align.includes('middle')} onChange={changeRadio}>
+						<Toggle deco="toggle-default" team="align" name="middle" checked={data.align.includes('middle')} onChange={changeRadio}>
 							<Box deco="box-list-col" />
 							<I icon="bx-align-middle" deco="text-warning" />
 							<Text deco="text-default">Middle</Text>
 						</Toggle>
-						<Toggle deco="toggle-default" name="align" id="right" checked={data.align.includes('right')} onChange={changeRadio}>
+						<Toggle deco="toggle-default" team="align" name="right" checked={data.align.includes('right')} onChange={changeRadio}>
 							<Box deco="box-list-col" />
 							<I icon="bx-align-right" deco="text-warning" />
 							<Text deco="text-default">Right</Text>
 						</Toggle>
-						<Toggle deco="toggle-default" name="align" id="justify" checked={data.align.includes('justify')} onChange={changeRadio}>
+						<Toggle deco="toggle-default" team="align" name="justify" checked={data.align.includes('justify')} onChange={changeRadio}>
 							<Box deco="box-list-col" />
 							<I icon="bx-align-justify" deco="text-warning" />
 							<Text deco="text-default">Justify</Text>
