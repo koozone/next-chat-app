@@ -38,11 +38,10 @@ export default function code() {
 
 		if (name == 'openModal') {
 			runModal.open();
-		}
-		else if (name == 'showSidemenu') {
+		} else if (name == 'showSidemenu') {
 			runSideMenu.open();
 		}
-	}
+	};
 
 	const changeCheckbox = (event) => {
 		const {name, id, checked} = event.currentTarget;
@@ -70,9 +69,9 @@ export default function code() {
 	};
 
 	const chageInput = (event) => {
-		const {name, value} = event.currentTarget;
+		const {id, value} = event.currentTarget;
 
-		runData.change(name, value);
+		runData.change(id, value);
 	};
 
 	return (
@@ -100,16 +99,22 @@ export default function code() {
 				<Group>
 					<Text deco="text-primary">lorem story</Text>
 					<Text deco="text-default">
-						Lorem ipsum dolor sit amet consectetur adipisicing elit. <Text deco="text-danger" className="underline"><I icon="bx-leaf" />Aliquam sequi hic sint!</Text> Earum suscipit
-						repellat officia quibusdam ipsum nisi optio, <Text deco="text-success">omnis ut saepe,</Text> nihil voluptatibus commodi placeat
-						iure fugit explicabo!
+						Lorem ipsum dolor sit amet consectetur adipisicing elit.{' '}
+						<Text deco="text-danger" className="underline">
+							<I icon="bx-leaf" />
+							Aliquam sequi hic sint!
+						</Text>{' '}
+						Earum suscipit repellat officia quibusdam ipsum nisi optio, <Text deco="text-success">omnis ut saepe,</Text> nihil voluptatibus commodi
+						placeat iure fugit explicabo!
 					</Text>
 				</Group>
 			</Fieldset>
 
 			<Fieldset title="label">
 				<Group>
-					<Label deco="text-primary" text="Start">lorem story</Label>
+					<Label deco="text-primary" text="Start">
+						lorem story
+					</Label>
 					<Label deco="label-default text-primary" icon="bx-leaf" text="leaf" />
 					<Label deco="text-primary" text="asdas" />
 					<Label deco="text-danger" text="Sample" />
@@ -155,7 +160,7 @@ export default function code() {
 					<A href="/view/room" deco="a-default">
 						<I icon="bx-search-alt-2" deco="text-primary" />
 					</A>
-					<A href="http://www.google.com" deco="a-primary box-success">
+					<A href="http://www.google.com" deco="a-primary box-success" checked>
 						<I icon="bxl-google" deco="text-primary" />
 						<Text deco="text-primary">google</Text>
 					</A>
@@ -180,7 +185,9 @@ export default function code() {
 						<I deco="text-primary" icon="bxs-chevron-right" />
 						<Text deco="text-danger">Sample</Text>
 					</Button>
-					<Button deco="button-default box-danger text-danger"><Text deco="text-default">asdfasd</Text></Button>
+					<Button deco="button-default box-danger text-danger">
+						<Text deco="text-default">asdfasd</Text>
+					</Button>
 					<Button deco="button-default label-default box-primary text-success" icon="bx-user-plus" text="KOOZone" />
 					<Button deco="button-default box-primary text-danger" icon="bx-user-plus" iconR="bxs-chevron-right" text="...">
 						<I deco="text-primary" icon="bxs-chevron-left" />
@@ -273,7 +280,7 @@ export default function code() {
 						<Text deco="text-success">다음단계</Text>
 						<I icon="bxs-chevron-right" deco="text-success" />
 					</Toggle>
-					<Toggle deco="toggle-default">
+					<Toggle deco="toggle-default" disabled>
 						<Box deco="box-danger" />
 						<I icon="bx-leaf" deco="text-default" />
 						<Text deco="text-danger">다음단계</Text>
@@ -481,12 +488,21 @@ export default function code() {
 			<Fieldset title="input">
 				<Group>
 					<Text deco="text-danger">id : </Text>
-					<Input type="text" deco="input-default text-primary" name="id" value={data.id} placeholder="id 입력" onChange={chageInput}>
+					<Input type="text" deco="input-default text-primary" id="id" value={data.id} placeholder="id 입력" onChange={chageInput}>
 						<Box deco="box-default" />
 						<I icon="bx-user" deco="text-danger" />
 						<Text deco="text-success">ID : </Text>
 					</Input>
-					<Input type="text" deco="input-default box-default text-primary" icon="bx-user" name="id" value={data.id} placeholder="id 입력" onChange={chageInput} disabled>
+					<Input
+						type="text"
+						deco="input-default box-default text-primary"
+						icon="bx-user"
+						id="id2"
+						value={data.id}
+						placeholder="id 입력"
+						onChange={chageInput}
+						disabled
+					>
 						{/* <BoxEx deco="box-default" /> */}
 						{/* <I icon="bx-user" deco="text-danger" /> */}
 						<Text deco="text-success">ID : </Text>
@@ -495,11 +511,27 @@ export default function code() {
 
 				<Group>
 					<Text deco="text-danger">password : </Text>
-					<Input type="password" deco="input-default text-danger" name="password" value={data.password} placeholder="password 입력" onChange={chageInput}>
+					<Input
+						type="password"
+						deco="input-default text-danger"
+						id="password"
+						value={data.password}
+						placeholder="password 입력"
+						onChange={chageInput}
+					>
 						<Box deco="box-danger" />
 						<I icon="bx-key" deco="text-danger" />
 					</Input>
-					<Input type="text" deco="input-default box-danger text-danger" icon="bx-key" name="password" value={data.password} placeholder="password 입력" onChange={chageInput} disabled>
+					<Input
+						type="text"
+						deco="input-default box-danger text-danger"
+						icon="bx-key"
+						id="password2"
+						value={data.password}
+						placeholder="password 입력"
+						onChange={chageInput}
+						disabled
+					>
 						{/* <BoxEx deco="box-round" /> */}
 						{/* <I icon="bx-key" deco="text-danger" /> */}
 					</Input>
@@ -507,11 +539,20 @@ export default function code() {
 
 				<Group>
 					<Text deco="text-danger">search : </Text>
-					<Input type="text" deco="input-default text-success" name="search" value={data.search} placeholder="search 입력" onChange={chageInput}>
+					<Input type="text" deco="input-default text-success" id="search" value={data.search} placeholder="search 입력" onChange={chageInput}>
 						<Box deco="box-round" />
 						<I icon="bx-search-alt-2" deco="text-primary" />
 					</Input>
-					<Input type="text" deco="input-default box-round text-success" icon="bx-search-alt-2" name="search" value={data.search} placeholder="search 입력" onChange={chageInput} disabled>
+					<Input
+						type="text"
+						deco="input-default box-round text-success"
+						icon="bx-search-alt-2"
+						id="search2"
+						value={data.search}
+						placeholder="search 입력"
+						onChange={chageInput}
+						disabled
+					>
 						{/* <BoxEx deco="box-round" /> */}
 						{/* <I icon="bx-search-alt-2" deco="text-primary" /> */}
 					</Input>
