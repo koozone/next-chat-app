@@ -1,14 +1,17 @@
+import {useRef} from 'react';
 import Header, {Header1, Header2, Header3} from '../component/header';
 import {Icon, A, Button, Img, Input, Label, Text, Basket, Toggle, Box} from '../component/ui_ds4';
+import {UseCount} from '../hook/useCount';
 import {UseData} from '../hook/useData';
 import {UseModal} from '../hook/useModal';
 import {UseSideMenu} from '../hook/useSideMenu';
+import Todo from './todo';
 
 const Fieldset = ({children, title}) => {
 	return (
-		<fieldset className="m-3 p-3 space-y-2 border-[1px] border-slate-500 rounded-lg">
+		<fieldset className="m-3 p-3 space-y-2 border-[1px] border-slate-400 rounded-lg bg-black/5">
 			<legend>
-				<span className="p-2 text-xl font-semibold">{title}</span>
+				<span className="p-2 text-xl text-black/80 font-semibold">{title}</span>
 			</legend>
 			{children}
 		</fieldset>
@@ -18,10 +21,214 @@ const Group = ({children}) => {
 	return <div className="space-x-2">{children}</div>;
 };
 
-export default function code() {
+const Item2 = (props) => {
+	const {value, data, changeRadio} = props;
+
+	return (
+		<Toggle deco="toggle-default" team="align" name={value} checked={data.align.includes(value)} onChange={changeRadio}>
+			<Box deco="box-item" />
+			<Icon deco="font-warning" className="pr-2">{`bx-align-${value}`}</Icon>
+			<Text deco="font-default">{value}</Text>
+		</Toggle>
+	);
+};
+
+const Item = (props) => {
+	const {value, data, changeRadio} = props;
+
+	return (
+		<Toggle deco="toggle-list-col" team="align" name={value} checked={data.align.includes(value)} onChange={changeRadio}>
+			<Box deco="box-list-col" />
+			<Icon deco="font-warning" className="pr-2">{`bx-align-${value}`}</Icon>
+			<Text deco="font-default">{value}</Text>
+		</Toggle>
+	);
+};
+
+const CodeUseData = () => {
+	const idInput = useRef(null);
 	const [data, runData] = UseData({
 		id: 'koozone',
 		password: '123',
+	});
+
+	const onChageInput = (event) => {
+		const {name, value} = event.currentTarget;
+
+		runData.change(name, value);
+	};
+	const onClickReset = (event) => {
+		const {name} = event.currentTarget;
+
+		runData.reset(name);
+	};
+	const onClickResetAll = (event) => {
+		runData.reset();
+
+		idInput.current.focus();
+	};
+
+	return (
+		<>
+			<Group>
+				<Text deco="font-danger">id : </Text>
+				<Input
+					type="text"
+					deco="input-default box-success font-input-primary"
+					value={data.id}
+					name="id"
+					placeholder="id 입력"
+					onChange={onChageInput}
+					className="w-[150px]"
+					ref={idInput}
+				>
+					<Icon deco="font-warning" className="pr-2">
+						bx-user
+					</Icon>
+				</Input>
+				<Button deco="button-default box-primary" name="id" onClick={onClickReset}>
+					<Text deco="font-primary">reset</Text>
+				</Button>
+				<Label deco="font-success" text={data.id} />
+			</Group>
+			<Group>
+				<Text deco="font-danger">password : </Text>
+				<Input
+					type="password"
+					deco="input-default box-success font-input-primary"
+					value={data.password}
+					name="password"
+					placeholder="password 입력"
+					onChange={onChageInput}
+					className="w-[150px]"
+				>
+					<Icon deco="font-warning" className="pr-2">
+						bx-key
+					</Icon>
+				</Input>
+				<Button deco="button-default box-primary" name="password" onClick={onClickReset}>
+					<Text deco="font-primary">reset</Text>
+				</Button>
+				<Label deco="font-success" text={data.password} />
+			</Group>
+
+			<Group>
+				<Button deco="button-default box-danger" onClick={onClickResetAll}>
+					<Text deco="font-danger">reset</Text>
+				</Button>
+				<Label deco="font-success" text={JSON.stringify(data)} />
+			</Group>
+		</>
+	);
+};
+
+const CodeUseCount = () => {
+	const [count, runCount] = UseCount({
+		coffee: 0,
+		bread: 10,
+	});
+
+	const onChageInput = (event) => {
+		const {name, value} = event.currentTarget;
+
+		runCount.change({
+			name,
+			value,
+		});
+	};
+	const onClickIncrement = (event) => {
+		const {name} = event.currentTarget;
+
+		runCount.increment({
+			name,
+		});
+	};
+	const onClickDecrement = (event) => {
+		const {name} = event.currentTarget;
+
+		runCount.decrement({
+			name,
+		});
+	};
+	const onClickReset = (event) => {
+		const {name} = event.currentTarget;
+
+		runCount.reset({
+			name,
+		});
+	};
+	const onClickResetAll = (event) => {
+		runCount.reset();
+	};
+
+	return (
+		<>
+			<Group>
+				<Text deco="font-danger">coffee : </Text>
+				<Input
+					type="text"
+					deco="input-default box-success font-input-primary"
+					value={count.coffee}
+					name="coffee"
+					placeholder="coffee 입력"
+					onChange={onChageInput}
+					className="w-[80px]"
+				>
+					<Icon deco="font-warning" className="pr-2">
+						bx-coffee-togo
+					</Icon>
+				</Input>
+				<Button deco="button-default box-primary" name="coffee" onClick={onClickIncrement}>
+					<Icon deco="font-primary">bx-message-square-add</Icon>
+				</Button>
+				<Button deco="button-default box-primary" name="coffee" onClick={onClickDecrement}>
+					<Icon deco="font-primary">bx-message-square-minus</Icon>
+				</Button>
+				<Button deco="button-default box-primary" name="coffee" onClick={onClickReset}>
+					<Text deco="font-primary">reset</Text>
+				</Button>
+				<Label deco="font-success" text={count.coffee.toString()} />
+			</Group>
+			<Group>
+				<Text deco="font-danger">bread : </Text>
+				<Input
+					type="text"
+					deco="input-default box-success font-input-primary"
+					value={count.bread}
+					name="bread"
+					placeholder="bread 입력"
+					onChange={onChageInput}
+					className="w-[80px]"
+				>
+					<Icon deco="font-warning" className="pr-2">
+						bx-baguette
+					</Icon>
+				</Input>
+				<Button deco="button-default box-primary" name="bread" onClick={onClickIncrement}>
+					<Icon deco="font-primary">bx-message-square-add</Icon>
+				</Button>
+				<Button deco="button-default box-primary" name="bread" onClick={onClickDecrement}>
+					<Icon deco="font-primary">bx-message-square-minus</Icon>
+				</Button>
+				<Button deco="button-default box-primary" name="bread" onClick={onClickReset}>
+					<Text deco="font-primary">reset</Text>
+				</Button>
+				<Label deco="font-success" text={count.bread.toString()} />
+			</Group>
+			<Group>
+				<Button deco="button-default box-danger" onClick={onClickResetAll}>
+					<Text deco="font-danger">reset</Text>
+				</Button>
+				<Label deco="font-success" text={JSON.stringify(count)} />
+			</Group>
+		</>
+	);
+};
+
+export default function code() {
+	const [data, runData] = UseData({
+		nick: 'pinkpanda',
+		key: '',
 		search: '',
 		fruite: ['orange', 'banana'],
 		color: ['yellow'],
@@ -37,7 +244,7 @@ export default function code() {
 
 	const clickButton = (event) => {
 		const {name} = event.currentTarget;
-		console.log('name', name);
+
 		if (name == 'openModal') {
 			runModal.open();
 		} else if (name == 'showSidemenu') {
@@ -89,7 +296,7 @@ export default function code() {
 			<Fieldset title="data">
 				<Group>
 					{Object.entries(data).map((item, index) => (
-						<div key={index}>{`${item[0]} : ${JSON.stringify(item[1])}`}</div>
+						<Text key={index} deco="font-success" className="block">{`${item[0]} : ${JSON.stringify(item[1])}`}</Text>
 					))}
 				</Group>
 			</Fieldset>
@@ -149,7 +356,7 @@ export default function code() {
 					<Basket deco="basket-mini box-round font-primary" icon="bxs-heart">
 						<Label deco="font-danger" text="772" />
 					</Basket>
-					<Basket deco="basket-mini box-round font-primary" icon="bxs-heart" text="321" />
+					<Basket deco="basket-mini box-round font-warning" icon="bxs-heart" text="321" />
 					<Basket deco="basket-mini box-round font-primary" icon="bxs-heart" text="567" checked />
 					<Basket deco="basket-default">
 						<Box deco="box-round" />
@@ -178,6 +385,11 @@ export default function code() {
 
 			<Fieldset title="a">
 				<Group>
+					<A href="/" deco="a-primary" className="underline-offset-2">
+						<Text deco="font-primary" className="text-xl font-semibold">
+							HOME
+						</Text>
+					</A>
 					<A href="/view/sample" deco="a-default box-primary">
 						<Icon deco="font-default">bx-user-plus</Icon>
 					</A>
@@ -223,10 +435,10 @@ export default function code() {
 						<Text deco="font-danger">Sample</Text>
 					</Button>
 					<Button deco="button-default box-success font-primary" icon="bxs-like" text="like:" name="countLike" onClick={clickButton}>
-						<Text deco="font-danger">{String(data.countLike)}</Text>
+						<Text deco="font-danger">{data.countLike.toString()}</Text>
 					</Button>
 					<Button deco="button-default box-warning font-danger" icon="bxs-dislike" text="hate:" name="countHate" onClick={clickButton}>
-						<Text deco="font-primary">{String(data.countHate)}</Text>
+						<Text deco="font-primary">{data.countHate.toString()}</Text>
 					</Button>
 				</Group>
 
@@ -251,10 +463,6 @@ export default function code() {
 						<Box deco="box-danger" />
 						<Label deco="font-danger" text="Danger" />
 					</Button>
-					<Button deco="button-default" name="openModal" onClick={clickButton}>
-						<Box deco="box-default" />
-						<Label deco="font-default" text="open modal" />
-					</Button>
 				</Group>
 
 				<Group>
@@ -277,10 +485,6 @@ export default function code() {
 					<Button deco="button-default" checked>
 						<Box deco="box-danger" />
 						<Label deco="font-danger" text="Danger" />
-					</Button>
-					<Button deco="button-default" name="showSidemenu" onClick={clickButton} checked disabled>
-						<Box deco="box-default" />
-						<Label deco="font-default" text="show sidemonu" />
 					</Button>
 				</Group>
 			</Fieldset>
@@ -516,87 +720,6 @@ export default function code() {
 				</Group>
 			</Fieldset>
 
-			<Fieldset title="input">
-				<Group>
-					<Text deco="font-danger">id : </Text>
-					<Input type="text" deco="input-default font-input-primary" name="id" value={data.id} placeholder="id 입력" onChange={chageInput}>
-						<Box deco="box-default" />
-						<Icon deco="font-danger">bx-user</Icon>
-						<Text deco="font-success">ID : </Text>
-					</Input>
-					<Input
-						type="text"
-						deco="input-default box-default font-input-primary"
-						icon="bx-user"
-						name="id2"
-						value={data.id}
-						placeholder="id 입력"
-						onChange={chageInput}
-						disabled
-					>
-						{/* <BoxEx deco="box-default" /> */}
-						{/* <Icon deco="font-danger">bx-user</Icon> */}
-						<Text deco="font-success">ID : </Text>
-					</Input>
-				</Group>
-
-				<Group>
-					<Text deco="font-danger">password : </Text>
-					<Input
-						type="password"
-						deco="input-default font-input-primary"
-						name="password"
-						value={data.password}
-						placeholder="password 입력"
-						onChange={chageInput}
-					>
-						<Box deco="box-danger" />
-						<Icon deco="font-danger">bx-key</Icon>
-					</Input>
-					<Input
-						type="text"
-						deco="input-default box-danger font-input-primary"
-						icon="bx-key"
-						name="password2"
-						value={data.password}
-						placeholder="password 입력"
-						onChange={chageInput}
-						disabled
-					>
-						{/* <BoxEx deco="box-round" /> */}
-						{/* <Icon deco="font-danger">bx-key</Icon> */}
-					</Input>
-				</Group>
-
-				<Group>
-					<Text deco="font-danger">search : </Text>
-					<Input
-						type="text"
-						deco="input-default font-input-primary"
-						name="search"
-						value={data.search}
-						placeholder="search 입력"
-						onChange={chageInput}
-					>
-						<Box deco="box-round" />
-						<Icon deco="font-primary">bx-search-alt-2</Icon>
-					</Input>
-					<Input
-						type="text"
-						deco="input-default box-round font-input-primary"
-						icon="bx-search-alt-2"
-						name="search2"
-						value={data.search}
-						placeholder="search 입력"
-						onChange={chageInput}
-						disabled
-					>
-						{/* <BoxEx deco="box-round" /> */}
-						{/* <Icon deco="font-primary">bx-search-alt-2</Icon> */}
-					</Input>
-				</Group>
-			</Fieldset>
-
 			<Fieldset title="list">
 				<Group>
 					<ul className="flex items-center divide-x divide-black/20">
@@ -650,30 +773,139 @@ export default function code() {
 					</div>
 				</Group>
 			</Fieldset>
+
+			<Fieldset title="input">
+				<Group>
+					<Text deco="font-danger">nick : </Text>
+					<Input
+						type="text"
+						deco="input-default font-input-primary"
+						className="w-[180px]"
+						name="nick"
+						value={data.nick}
+						placeholder="nick 입력"
+						onChange={chageInput}
+					>
+						<Box deco="box-default" />
+						<Icon deco="font-danger" className="pr-0">
+							bx-user
+						</Icon>
+						<Text deco="font-warning" className="pr-2">
+							NICK
+						</Text>
+					</Input>
+					<Input
+						type="text"
+						deco="input-default box-default font-input-primary"
+						icon="bx-user"
+						name="nick"
+						value={data.nick}
+						placeholder="nick 입력"
+						onChange={chageInput}
+						disabled
+					>
+						{/* <BoxEx deco="box-default" /> */}
+						{/* <Icon deco="font-danger">bx-user</Icon> */}
+						<Text deco="font-success">nick : </Text>
+					</Input>
+				</Group>
+
+				<Group>
+					<Text deco="font-danger">key : </Text>
+					<Input
+						type="key"
+						deco="input-default font-input-primary"
+						className="w-[120px]"
+						name="key"
+						value={data.key}
+						placeholder="key 입력"
+						onChange={chageInput}
+					>
+						<Box deco="box-success" />
+						<Icon deco="font-danger" className="pr-2">
+							bx-key
+						</Icon>
+					</Input>
+					<Input
+						type="text"
+						deco="input-default box-danger font-input-primary"
+						icon="bx-key"
+						name="key2"
+						value={data.key}
+						placeholder="key 입력"
+						onChange={chageInput}
+						disabled
+					>
+						{/* <BoxEx deco="box-round" /> */}
+						{/* <Icon deco="font-danger">bx-key</Icon> */}
+					</Input>
+				</Group>
+
+				<Group>
+					<Text deco="font-danger">search : </Text>
+					<Input
+						type="text"
+						deco="input-default font-input-primary"
+						className="w-[180px] text-xl"
+						name="search"
+						value={data.search}
+						placeholder="search 입력"
+						onChange={chageInput}
+					>
+						<Box deco="box-round" />
+						<Icon deco="font-primary" className="pr-2">
+							bx-search-alt-2
+						</Icon>
+					</Input>
+					<Input
+						type="text"
+						deco="input-default box-round font-input-primary"
+						icon="bx-search-alt-2"
+						name="search2"
+						value={data.search}
+						placeholder="search 입력"
+						onChange={chageInput}
+						disabled
+					>
+						{/* <BoxEx deco="box-round" /> */}
+						{/* <Icon deco="font-primary">bx-search-alt-2</Icon> */}
+					</Input>
+				</Group>
+			</Fieldset>
+
+			<Fieldset title="UseData (useState 사용)">
+				<CodeUseData />
+			</Fieldset>
+
+			<Fieldset title="UseCount (useReducer 사용)">
+				<CodeUseCount />
+			</Fieldset>
+
+			<Fieldset title="Todo">
+				<Todo />
+			</Fieldset>
+
+			<Fieldset title="UseModal (useContext 사용)">
+				<Group>
+					<Button deco="button-default" name="openModal" onClick={clickButton}>
+						<Box deco="box-default" />
+						<Label deco="font-default" text="open modal" />
+					</Button>
+					<Button deco="button-default" name="openModal" onClick={clickButton} disabled>
+						<Box deco="box-default" />
+						<Label deco="font-default" text="open modal" />
+					</Button>
+				</Group>
+			</Fieldset>
+
+			<Fieldset title="UseSideMenu (useContext 사용)">
+				<Group>
+					<Button deco="button-default" name="showSidemenu" onClick={clickButton} checked>
+						<Box deco="box-default" />
+						<Label deco="font-default" text="show sidemonu" />
+					</Button>
+				</Group>
+			</Fieldset>
 		</>
 	);
 }
-
-const Item2 = (props) => {
-	const {value, data, changeRadio} = props;
-
-	return (
-		<Toggle deco="toggle-default" team="align" name={value} checked={data.align.includes(value)} onChange={changeRadio}>
-			<Box deco="box-item" />
-			<Icon deco="font-warning" className="pr-2">{`bx-align-${value}`}</Icon>
-			<Text deco="font-default">{value}</Text>
-		</Toggle>
-	);
-};
-
-const Item = (props) => {
-	const {value, data, changeRadio} = props;
-
-	return (
-		<Toggle deco="toggle-list-col" team="align" name={value} checked={data.align.includes(value)} onChange={changeRadio}>
-			<Box deco="box-list-col" />
-			<Icon deco="font-warning" className="pr-2">{`bx-align-${value}`}</Icon>
-			<Text deco="font-default">{value}</Text>
-		</Toggle>
-	);
-};

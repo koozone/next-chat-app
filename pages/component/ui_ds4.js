@@ -295,7 +295,7 @@ export const A = (props) => {
 	return (
 		<Link href={href}>
 			<a target={target}>
-				<Basket {...newProps} type="button" checked={checked} />
+				<Basket {...newProps} type="checkbox" checked={checked} />
 			</a>
 		</Link>
 	);
