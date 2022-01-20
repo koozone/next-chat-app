@@ -1,5 +1,5 @@
 import Header, {Header1, Header2, Header3} from '../component/header';
-import {I, Icon, A, Button, Img, Input, Label, Text, Basket, Toggle, Box} from '../component/ui_ds4';
+import {Icon, A, Button, Img, Input, Label, Text, Basket, Toggle, Box} from '../component/ui_ds4';
 import {UseData} from '../hook/useData';
 import {UseModal} from '../hook/useModal';
 import {UseSideMenu} from '../hook/useSideMenu';
@@ -29,17 +29,23 @@ export default function code() {
 		dog: false,
 		cat: true,
 		bird: false,
+		countLike: 0,
+		countHate: 0,
 	});
 	const [modal, runModal] = UseModal();
 	const [sideMenu, runSideMenu] = UseSideMenu();
 
 	const clickButton = (event) => {
 		const {name} = event.currentTarget;
-
+		console.log('name', name);
 		if (name == 'openModal') {
 			runModal.open();
 		} else if (name == 'showSidemenu') {
 			runSideMenu.open();
+		} else if (name == 'countLike') {
+			runData.change(name, data[name] + 1);
+		} else if (name == 'countHate') {
+			runData.change(name, data[name] + 1);
 		}
 	};
 
@@ -90,60 +96,75 @@ export default function code() {
 
 			<Fieldset title="icon">
 				<Group>
-					<Icon deco="text-default">bx-user-plus</Icon>
-					<I icon="bx-user-plus" deco="text-default" />
-					<I icon="bx-leaf" deco="text-default" />
-					<I icon="bx-align-middle" deco="text-danger" />
-					<I icon="bx-search-alt-2" deco="text-primary" />
+					<Icon deco="font-default">bx-user-plus</Icon>
+					<Icon deco="font-default">bx-leaf</Icon>
+					<Icon deco="font-danger">bx-align-middle</Icon>
+					<Icon deco="font-primary">bx-search-alt-2</Icon>
 				</Group>
 			</Fieldset>
 
 			<Fieldset title="text">
 				<Group>
-					<Text deco="text-primary">lorem story</Text>
-					<Text deco="text-default">
-						Lorem ipsum dolor sit amet consectetur adipisicing elit.{' '}
-						<Text deco="text-danger" className="underline">
-							<I icon="bx-leaf" deco="text-primary" />
+					<Text deco="font-primary" className="italic">
+						lorem story
+					</Text>
+					<Text deco="font-default">
+						Lorem ipsum dolor sit amet consectetur adipisicing elit.
+						<Text deco="font-danger" className="underline">
+							<Icon deco="font-primary">bx-leaf</Icon>
 							Aliquam sequi hic sint!
+						</Text>
+						Earum suscipit repellat officia quibusdam ipsum nisi optio,{' '}
+						<Text deco="font-success" className="line-through">
+							omnis ut saepe,
 						</Text>{' '}
-						Earum suscipit repellat officia quibusdam ipsum nisi optio, <Text deco="text-success">omnis ut saepe,</Text> nihil voluptatibus commodi
-						placeat iure fugit explicabo!
+						nihil voluptatibus commodi placeat iure fugit explicabo!
 					</Text>
 				</Group>
 			</Fieldset>
 
 			<Fieldset title="label">
 				<Group>
-					<Label deco="text-primary" icon="bx-star" text="Start : ">
-						<Text deco="text-warning">Earum suscipit repellat officia quibusdam ipsum nisi optio</Text>
+					<Label deco="font-primary" icon="bx-star" text="Start : ">
+						<Text deco="font-warning">Earum suscipit repellat officia quibusdam ipsum nisi optio</Text>
 					</Label>
-					<Label deco="label-default text-primary" icon="bx-leaf" text="leaf" />
-					<Label deco="text-primary" text="asdas" />
-					<Label deco="text-danger" text="Sample" />
+					<Label deco="font-primary" icon="bx-leaf" text="leaf" />
+					<Label deco="font-primary" text="asdas" />
+					<Label deco="font-danger" text="Sample" />
 				</Group>
 			</Fieldset>
 
 			<Fieldset title="basket">
 				<Group>
-					<Basket deco="basket-mini" checked>
-						<Box deco="box-round" />
-						<Label deco="text-default" text="3" />
+					<Basket deco="basket-mini box-round" checked>
+						<Icon deco="font-primary">bxs-heart</Icon>
+						<Text deco="font-danger">910</Text>
 					</Basket>
+					<Basket deco="basket-mini box-round">
+						<Label deco="font-danger" icon="bxs-heart" text="472" />
+					</Basket>
+					<Basket deco="basket-mini box-round font-primary" text="288" disabled>
+						<Label deco="font-danger" icon="bxs-heart" />
+					</Basket>
+					<Basket deco="basket-mini box-round font-primary" icon="bxs-heart">
+						<Label deco="font-danger" text="772" />
+					</Basket>
+					<Basket deco="basket-mini box-round font-primary" icon="bxs-heart" text="321" />
+					<Basket deco="basket-mini box-round font-primary" icon="bxs-heart" text="567" checked />
 					<Basket deco="basket-default">
 						<Box deco="box-round" />
-						<Label deco="text-default" text="134" />
+						<Label deco="font-default" text="134" />
 					</Basket>
 					<Basket deco="basket-mini" checked>
 						<Box deco="box-danger" />
-						<Label deco="text-danger" text="8798" />
+						<Label deco="font-danger" text="8798" />
 					</Basket>
-					<Basket deco="basket-mini box-round text-danger" text="234" checked></Basket>
+					<Basket deco="basket-mini box-round font-danger" text="234" checked></Basket>
 				</Group>
 
 				<Group>
-					<Basket deco="basket-default label-default box-primary text-success" icon="bx-user-plus" text="KOOZone" />
-					<Basket deco="basket-default text-success" text="..." checked>
+					<Basket deco="basket-default box-primary font-success" icon="bx-user-plus" text="KOOZone" />
+					<Basket deco="basket-default font-success" text="..." checked>
 						<Box deco="box-success" />
 					</Basket>
 					<Basket deco="basket-default" className="w-[200px] h-[50px]">
@@ -158,22 +179,22 @@ export default function code() {
 			<Fieldset title="a">
 				<Group>
 					<A href="/view/sample" deco="a-default box-primary">
-						<I icon="bx-user-plus" deco="text-default" />
+						<Icon deco="font-default">bx-user-plus</Icon>
 					</A>
 					<A href="/view/room" deco="a-default">
-						<I icon="bx-search-alt-2" deco="text-primary" />
+						<Icon deco="font-primary">bx-search-alt-2</Icon>
 					</A>
 					<A href="http://www.google.com" deco="a-primary box-success" checked>
-						<I icon="bxl-google" deco="text-primary" />
-						<Text deco="text-primary">google</Text>
+						<Icon deco="font-primary">bxl-google</Icon>
+						<Text deco="font-primary">google</Text>
 					</A>
 					<A href="http://www.naver.com" deco="a-primary">
-						<Text deco="text-default">naver</Text>
+						<Text deco="font-default">naver</Text>
 					</A>
-					<A href="http://www.meta.com" deco="a-primary box-warning text-warning" icon="bxl-meta" text="meta">
+					<A href="http://www.meta.com" deco="a-primary box-warning font-warning" icon="bxl-meta" text="meta" checked>
 						{/* <Box deco="box-warning" /> */}
-						{/* <I icon="bxl-meta" deco="text-primary" /> */}
-						{/* <Text deco="text-default">meta</Text> */}
+						{/* <Icon deco="font-primary">bxl-meta</Icon> */}
+						{/* <Text deco="font-default">meta</Text> */}
 					</A>
 				</Group>
 			</Fieldset>
@@ -182,77 +203,84 @@ export default function code() {
 				<Group>
 					<Button deco="button-default box-primary">
 						{/* <BoxEx deco="box-primary" /> */}
-						<Text deco="text-primary" className="text-xl">
+						<Text deco="font-primary" className="font-xl">
 							BG
 						</Text>
-						<I deco="text-primary" icon="bxs-chevron-right" />
-						<Text deco="text-danger">Sample</Text>
+						<Icon deco="font-primary">bxs-chevron-right</Icon>
+						<Text deco="font-danger">Sample</Text>
 					</Button>
-					<Button deco="button-default box-danger text-danger">
-						<Text deco="text-default">asdfasd</Text>
+					<Button deco="button-default box-success font-danger" name="happy" icon="bx-user">
+						<Text deco="font-success">named</Text>
 					</Button>
-					<Button deco="button-default label-default box-primary text-success" icon="bx-user-plus" text="KOOZone" />
-					<Button deco="button-default box-primary text-danger" icon="bx-user-plus" iconR="bxs-chevron-right" text="...">
-						<I deco="text-primary" icon="bxs-chevron-left" />
-						<Text deco="text-primary">asdas</Text>
+					<Button deco="button-default box-danger font-success" icon="bx-user-x" text="no name" />
+					<Button deco="button-default box-primary font-success" icon="bx-user-plus" text="KOOZone" />
+					<Button deco="button-default box-primary font-danger" className="text-2xl" icon="bx-user-plus" iconR="bxs-chevron-right" text="...">
+						<Icon deco="font-primary">bxs-chevron-left</Icon>
+						<Text deco="font-primary">asdas</Text>
 					</Button>
 					<Button deco="button-default box-danger" checked>
 						{/* <BoxEx deco="box-danger" /> */}
-						<Text deco="text-danger">Sample</Text>
+						<Text deco="font-danger">Sample</Text>
+					</Button>
+					<Button deco="button-default box-success font-primary" icon="bxs-like" text="like:" name="countLike" onClick={clickButton}>
+						<Text deco="font-danger">{String(data.countLike)}</Text>
+					</Button>
+					<Button deco="button-default box-warning font-danger" icon="bxs-dislike" text="hate:" name="countHate" onClick={clickButton}>
+						<Text deco="font-primary">{String(data.countHate)}</Text>
 					</Button>
 				</Group>
 
 				<Group>
 					<Button deco="button-default">
 						<Box deco="box-default" />
-						<Label deco="text-default" text="Default" />
+						<Label deco="font-default" text="Default" />
 					</Button>
 					<Button deco="button-default">
 						<Box deco="box-primary" />
-						<Label deco="text-primary" text="Primary" />
+						<Label deco="font-primary" text="Primary" />
 					</Button>
 					<Button deco="button-default">
 						<Box deco="box-success" />
-						<Label deco="text-success" text="Success" />
+						<Label deco="font-success" text="Success" />
 					</Button>
 					<Button deco="button-default">
 						<Box deco="box-warning" />
-						<Label deco="text-warning" text="Warning" />
+						<Label deco="font-warning" text="Warning" />
 					</Button>
 					<Button deco="button-default" disabled>
 						<Box deco="box-danger" />
-						<Label deco="text-danger" text="Danger" />
+						<Label deco="font-danger" text="Danger" />
 					</Button>
 					<Button deco="button-default" name="openModal" onClick={clickButton}>
 						<Box deco="box-default" />
-						<Label deco="text-default" text="open modal" />
+						<Label deco="font-default" text="open modal" />
 					</Button>
 				</Group>
 
 				<Group>
 					<Button deco="button-default" checked>
 						<Box deco="box-default" />
-						<Label deco="text-default" text="Default" />
+						<Label deco="font-default" text="Default" />
 					</Button>
 					<Button deco="button-default" checked>
 						<Box deco="box-primary" />
-						<Label deco="text-primary" text="Primary" />
+						<Label deco="font-primary" text="Primary" />
 					</Button>
 					<Button deco="button-default" checked>
 						<Box deco="box-success" />
-						<Label deco="text-success" text="Success" />
+						<Label deco="font-success" text="Success" />
 					</Button>
 					<Button deco="button-default" checked>
 						<Box deco="box-warning" />
-						<Label deco="text-warning" text="Warning" />
+						<Label deco="font-warning" text="Warning" />
 					</Button>
 					<Button deco="button-default" checked>
 						<Box deco="box-danger" />
-						<Label deco="text-danger" text="Danger" />
+						<Label deco="font-danger" text="Danger" />
 					</Button>
-					<Button deco="button-default" name="showSidemenu" onClick={clickButton} checked>
+					<Button deco="button-default" name="showSidemenu" onClick={clickButton} checked disabled>
 						<Box deco="box-default" />
-						<Label deco="text-default" text="show sidemonu" />
+						<Label deco="font-default" text="show sidemonu" />
 					</Button>
 				</Group>
 			</Fieldset>
@@ -261,33 +289,33 @@ export default function code() {
 				<Group>
 					<Toggle deco="toggle-default">
 						<Box deco="box-default" />
-						<Text deco="text-default">Default</Text>
+						<Text deco="font-default">Default</Text>
 					</Toggle>
 					<Toggle deco="toggle-default">
 						<Box deco="box-primary" />
-						<Text deco="text-primary">Primary</Text>
+						<Text deco="font-primary">Primary</Text>
 					</Toggle>
 					<Toggle deco="toggle-default">
 						<Box deco="box-primary" />
-						<I icon="bx-leaf" deco="text-default" />
-						{/* <Text deco="text-primary">Primary</Text> */}
+						<Icon deco="font-default">bx-leaf</Icon>
+						{/* <Text deco="font-primary">Primary</Text> */}
 					</Toggle>
 					<Toggle deco="toggle-default">
 						<Box deco="box-primary" />
-						<I icon="bx-leaf" deco="text-danger" />
-						<Text deco="text-primary">다음단계</Text>
+						<Icon deco="font-danger">bx-leaf</Icon>
+						<Text deco="font-primary">다음단계</Text>
 					</Toggle>
 					<Toggle deco="toggle-default">
 						<Box deco="box-success" />
-						<I icon="bx-leaf" deco="text-default" />
-						<Text deco="text-success">다음단계</Text>
-						<I icon="bxs-chevron-right" deco="text-success" />
+						<Icon deco="font-default">bx-leaf</Icon>
+						<Text deco="font-success">다음단계</Text>
+						<Icon deco="font-success">bxs-chevron-right</Icon>
 					</Toggle>
 					<Toggle deco="toggle-default" disabled>
 						<Box deco="box-danger" />
-						<I icon="bx-leaf" deco="text-default" />
-						<Text deco="text-danger">다음단계</Text>
-						<I icon="bxs-chevron-right" deco="text-danger" />
+						<Icon deco="font-default">bx-leaf</Icon>
+						<Text deco="font-danger">다음단계</Text>
+						<Icon deco="font-danger">bxs-chevron-right</Icon>
 					</Toggle>
 				</Group>
 			</Fieldset>
@@ -296,73 +324,73 @@ export default function code() {
 				<Group>
 					<Toggle deco="toggle-default">
 						<Box deco="box-checkbox" />
-						<I icon="bxs-chevron-down" deco="text-checkbox-dot" />
+						<Icon deco="font-checkbox-dot">bxs-chevron-down</Icon>
 						{/* <I icon="bxs-checkbox" className={css_on} />
 						<I icon="bx-checkbox-checked" className={css_off} /> */}
-						<Text deco="text-toggle">Checkbox</Text>
+						<Text deco="font-toggle">Checkbox</Text>
 					</Toggle>
 					<Toggle deco="toggle-default" checked>
 						<Box deco="box-checkbox" />
-						<I icon="bxs-chevron-down" deco="text-checkbox-dot" />
-						<Text deco="text-toggle">Checked Checkbox</Text>
+						<Icon deco="font-checkbox-dot">bxs-chevron-down</Icon>
+						<Text deco="font-toggle">Checked Checkbox</Text>
 					</Toggle>
 					<Toggle deco="toggle-default" disabled>
 						<Box deco="box-checkbox" />
-						<I icon="bxs-chevron-down" deco="text-checkbox-dot" />
-						<Text deco="text-toggle">Disabled Checkbox</Text>
+						<Icon deco="font-checkbox-dot">bxs-chevron-down</Icon>
+						<Text deco="font-toggle">Disabled Checkbox</Text>
 					</Toggle>
 					<Toggle deco="toggle-default" checked disabled>
 						<Box deco="box-checkbox" />
-						<I icon="bxs-chevron-down" deco="text-checkbox-dot" />
-						<Text deco="text-toggle">Disabled Checked Checkbox</Text>
+						<Icon deco="font-checkbox-dot">bxs-chevron-down</Icon>
+						<Text deco="font-toggle">Disabled Checked Checkbox</Text>
 					</Toggle>
 				</Group>
 
 				<Group>
-					<Text deco="text-danger">fruite : </Text>
+					<Text deco="font-danger">fruite : </Text>
 					<Toggle deco="toggle-default" team="fruite" name="banana" checked={data.fruite.includes('banana')} onChange={changeCheckbox}>
 						<Box deco="box-checkbox" />
-						<I icon="bxs-chevron-down" deco="text-checkbox-dot" />
-						<Text deco="text-toggle">banana</Text>
+						<Icon deco="font-checkbox-dot">bxs-chevron-down</Icon>
+						<Text deco="font-toggle">banana</Text>
 					</Toggle>
 					<Toggle deco="toggle-default" team="fruite" name="apple" checked={data.fruite.includes('apple')} onChange={changeCheckbox}>
 						<Box deco="box-checkbox" />
-						<I icon="bxs-chevron-down" deco="text-checkbox-dot" />
-						<Text deco="text-toggle">apple</Text>
+						<Icon deco="font-checkbox-dot">bxs-chevron-down</Icon>
+						<Text deco="font-toggle">apple</Text>
 					</Toggle>
 					<Toggle deco="toggle-default" team="fruite" name="orange" checked={data.fruite.includes('orange')} onChange={changeCheckbox}>
 						<Box deco="box-checkbox" />
-						<I icon="bxs-chevron-down" deco="text-checkbox-dot" />
-						<Text deco="text-toggle">orange</Text>
+						<Icon deco="font-checkbox-dot">bxs-chevron-down</Icon>
+						<Text deco="font-toggle">orange</Text>
 					</Toggle>
 					<Toggle deco="toggle-default" team="fruite" name="melon" checked={data.fruite.includes('melon')} onChange={changeCheckbox}>
 						<Box deco="box-checkbox" />
-						<I icon="bxs-chevron-down" deco="text-checkbox-dot" />
-						<Text deco="text-toggle">melon</Text>
+						<Icon deco="font-checkbox-dot">bxs-chevron-down</Icon>
+						<Text deco="font-toggle">melon</Text>
 					</Toggle>
 				</Group>
 
 				<Group>
-					<Text deco="text-danger">fruite : </Text>
+					<Text deco="font-danger">fruite : </Text>
 					<Toggle deco="toggle-default" team="fruite" name="banana" checked={data.fruite.includes('banana')} onChange={changeCheckbox}>
 						<Box deco="box-success" />
-						<I icon="bx-leaf" deco="text-default" />
-						<Text deco="text-success">banana</Text>
+						<Icon deco="font-default">bx-leaf</Icon>
+						<Text deco="font-success">banana</Text>
 					</Toggle>
 					<Toggle deco="toggle-default" team="fruite" name="apple" checked={data.fruite.includes('apple')} onChange={changeCheckbox}>
 						<Box deco="box-success" />
-						<I icon="bx-leaf" deco="text-default" />
-						<Text deco="text-success">apple</Text>
+						<Icon deco="font-default">bx-leaf</Icon>
+						<Text deco="font-success">apple</Text>
 					</Toggle>
 					<Toggle deco="toggle-default" team="fruite" name="orange" checked={data.fruite.includes('orange')} onChange={changeCheckbox}>
 						<Box deco="box-success" />
-						<I icon="bx-leaf" deco="text-default" />
-						<Text deco="text-success">orange</Text>
+						<Icon deco="font-default">bx-leaf</Icon>
+						<Text deco="font-success">orange</Text>
 					</Toggle>
-					<Toggle deco="toggle-default" team="fruite" name="melon" checked={data.fruite.includes('melon')} onChange={changeCheckbox}>
+					<Toggle deco="toggle-default" team="fruite" name="melon" checked={data.fruite.includes('melon')} onChange={changeCheckbox} disabled>
 						<Box deco="box-success" />
-						<I icon="bx-leaf" deco="text-default" />
-						<Text deco="text-success">melon</Text>
+						<Icon deco="font-default">bx-leaf</Icon>
+						<Text deco="font-success">melon</Text>
 					</Toggle>
 				</Group>
 			</Fieldset>
@@ -374,70 +402,70 @@ export default function code() {
 						<Box deco="box-radio-dot" />
 						{/* <I icon="bxs-checkbox" className={css_on} />
 						<I icon="bx-checkbox-checked" className={css_off} /> */}
-						<Text deco="text-toggle">Radio</Text>
+						<Text deco="font-toggle">Radio</Text>
 					</Toggle>
 					<Toggle deco="toggle-default" checked>
 						<Box deco="box-radio" />
 						<Box deco="box-radio-dot" />
-						<Text deco="text-toggle">Checked Radio</Text>
+						<Text deco="font-toggle">Checked Radio</Text>
 					</Toggle>
 					<Toggle deco="toggle-default" disabled>
 						<Box deco="box-radio" />
 						<Box deco="box-radio-dot" />
-						<Text deco="text-toggle">Disabled Radio</Text>
+						<Text deco="font-toggle">Disabled Radio</Text>
 					</Toggle>
 					<Toggle deco="toggle-default" checked disabled>
 						<Box deco="box-radio" />
 						<Box deco="box-radio-dot" />
-						<Text deco="text-toggle">Disabled Checked Radio</Text>
+						<Text deco="font-toggle">Disabled Checked Radio</Text>
 					</Toggle>
 				</Group>
 
 				<Group>
-					<Text deco="text-danger">color : </Text>
+					<Text deco="font-danger">color : </Text>
 					<Toggle deco="toggle-default" team="color" name="red" checked={data.color.includes('red')} onChange={changeRadio}>
 						<Box deco="box-radio" />
 						<Box deco="box-radio-dot" />
-						<Text deco="text-toggle">red</Text>
+						<Text deco="font-toggle">red</Text>
 					</Toggle>
 					<Toggle deco="toggle-default" team="color" name="blue" checked={data.color.includes('blue')} onChange={changeRadio}>
 						<Box deco="box-radio" />
 						<Box deco="box-radio-dot" />
-						<Text deco="text-toggle">blue</Text>
+						<Text deco="font-toggle">blue</Text>
 					</Toggle>
 					<Toggle deco="toggle-default" team="color" name="yellow" checked={data.color.includes('yellow')} onChange={changeRadio}>
 						<Box deco="box-radio" />
 						<Box deco="box-radio-dot" />
-						<Text deco="text-toggle">yellow</Text>
+						<Text deco="font-toggle">yellow</Text>
 					</Toggle>
 					<Toggle deco="toggle-default" team="color" name="green" checked={data.color.includes('green')} onChange={changeRadio}>
 						<Box deco="box-radio" />
 						<Box deco="box-radio-dot" />
-						<Text deco="text-toggle">green</Text>
+						<Text deco="font-toggle">green</Text>
 					</Toggle>
 				</Group>
 
 				<Group>
-					<Text deco="text-success">color : </Text>
+					<Text deco="font-success">color : </Text>
 					<Toggle deco="toggle-default" team="color" name="red" checked={data.color.includes('red')} onChange={changeRadio}>
 						<Box deco="box-warning" />
-						<I icon="bx-leaf" deco="text-default" />
-						<Text deco="text-warning">red</Text>
+						<Icon deco="font-default">bx-leaf</Icon>
+						<Text deco="font-warning">red</Text>
 					</Toggle>
 					<Toggle deco="toggle-default" team="color" name="blue" checked={data.color.includes('blue')} onChange={changeRadio}>
 						<Box deco="box-warning" />
-						<I icon="bx-leaf" deco="text-default" />
-						<Text deco="text-warning">blue</Text>
+						<Icon deco="font-default">bx-leaf</Icon>
+						<Text deco="font-warning">blue</Text>
 					</Toggle>
 					<Toggle deco="toggle-default" team="color" name="yellow" checked={data.color.includes('yellow')} onChange={changeRadio}>
 						<Box deco="box-warning" />
-						<I icon="bx-leaf" deco="text-default" />
-						<Text deco="text-warning">yellow</Text>
+						<Icon deco="font-default">bx-leaf</Icon>
+						<Text deco="font-warning">yellow</Text>
 					</Toggle>
-					<Toggle deco="toggle-default" team="color" name="green" checked={data.color.includes('green')} onChange={changeRadio}>
+					<Toggle deco="toggle-default" team="color" name="green" checked={data.color.includes('green')} onChange={changeRadio} disabled>
 						<Box deco="box-warning" />
-						<I icon="bx-leaf" deco="text-default" />
-						<Text deco="text-warning">green</Text>
+						<Icon deco="font-default">bx-leaf</Icon>
+						<Text deco="font-warning">green</Text>
 					</Toggle>
 				</Group>
 			</Fieldset>
@@ -449,56 +477,56 @@ export default function code() {
 						<Box deco="box-switch-dot" />
 						{/* <I icon="bxs-checkbox" className={css_on} />
 						<I icon="bx-checkbox-checked" className={css_off} /> */}
-						<Text deco="text-toggle">Switch</Text>
+						<Text deco="font-toggle">Switch</Text>
 					</Toggle>
 					<Toggle deco="toggle-default" checked>
 						<Box deco="box-switch" />
 						<Box deco="box-switch-dot" />
-						<Text deco="text-toggle">Checked Switch</Text>
+						<Text deco="font-toggle">Checked Switch</Text>
 					</Toggle>
 					<Toggle deco="toggle-default" disabled>
 						<Box deco="box-switch" />
 						<Box deco="box-switch-dot" />
-						<Text deco="text-toggle">Disabled Switch</Text>
+						<Text deco="font-toggle">Disabled Switch</Text>
 					</Toggle>
 					<Toggle deco="toggle-default" checked disabled>
 						<Box deco="box-switch" />
 						<Box deco="box-switch-dot" />
-						<Text deco="text-toggle">Disabled Checked Switch</Text>
+						<Text deco="font-toggle">Disabled Checked Switch</Text>
 					</Toggle>
 				</Group>
 
 				<Group>
-					<Text deco="text-danger">animal : </Text>
+					<Text deco="font-danger">animal : </Text>
 					<Toggle deco="toggle-default" name="dog" checked={data.dog} onChange={changeSwitch}>
 						<Box deco="box-switch" />
 						<Box deco="box-switch-dot" />
-						<Text deco="text-toggle">dog</Text>
+						<Text deco="font-toggle">dog</Text>
 					</Toggle>
 					<Toggle deco="toggle-default" name="cat" checked={data.cat} onChange={changeSwitch}>
 						<Box deco="box-switch" />
 						<Box deco="box-switch-dot" />
-						<Text deco="text-toggle">cat</Text>
+						<Text deco="font-toggle">cat</Text>
 					</Toggle>
 					<Toggle deco="toggle-default" name="bird" checked={data.bird} onChange={changeSwitch}>
 						<Box deco="box-switch" />
 						<Box deco="box-switch-dot" />
-						<Text deco="text-toggle">bird</Text>
+						<Text deco="font-toggle">bird</Text>
 					</Toggle>
 				</Group>
 			</Fieldset>
 
 			<Fieldset title="input">
 				<Group>
-					<Text deco="text-danger">id : </Text>
-					<Input type="text" deco="input-default text-primary" name="id" value={data.id} placeholder="id 입력" onChange={chageInput}>
+					<Text deco="font-danger">id : </Text>
+					<Input type="text" deco="input-default font-input-primary" name="id" value={data.id} placeholder="id 입력" onChange={chageInput}>
 						<Box deco="box-default" />
-						<I icon="bx-user" deco="text-danger" />
-						<Text deco="text-success">ID : </Text>
+						<Icon deco="font-danger">bx-user</Icon>
+						<Text deco="font-success">ID : </Text>
 					</Input>
 					<Input
 						type="text"
-						deco="input-default box-default text-primary"
+						deco="input-default box-default font-input-primary"
 						icon="bx-user"
 						name="id2"
 						value={data.id}
@@ -507,27 +535,27 @@ export default function code() {
 						disabled
 					>
 						{/* <BoxEx deco="box-default" /> */}
-						{/* <I icon="bx-user" deco="text-danger" /> */}
-						<Text deco="text-success">ID : </Text>
+						{/* <Icon deco="font-danger">bx-user</Icon> */}
+						<Text deco="font-success">ID : </Text>
 					</Input>
 				</Group>
 
 				<Group>
-					<Text deco="text-danger">password : </Text>
+					<Text deco="font-danger">password : </Text>
 					<Input
 						type="password"
-						deco="input-default text-danger"
+						deco="input-default font-input-primary"
 						name="password"
 						value={data.password}
 						placeholder="password 입력"
 						onChange={chageInput}
 					>
 						<Box deco="box-danger" />
-						<I icon="bx-key" deco="text-danger" />
+						<Icon deco="font-danger">bx-key</Icon>
 					</Input>
 					<Input
 						type="text"
-						deco="input-default box-danger text-danger"
+						deco="input-default box-danger font-input-primary"
 						icon="bx-key"
 						name="password2"
 						value={data.password}
@@ -536,19 +564,26 @@ export default function code() {
 						disabled
 					>
 						{/* <BoxEx deco="box-round" /> */}
-						{/* <I icon="bx-key" deco="text-danger" /> */}
+						{/* <Icon deco="font-danger">bx-key</Icon> */}
 					</Input>
 				</Group>
 
 				<Group>
-					<Text deco="text-danger">search : </Text>
-					<Input type="text" deco="input-default text-success" name="search" value={data.search} placeholder="search 입력" onChange={chageInput}>
+					<Text deco="font-danger">search : </Text>
+					<Input
+						type="text"
+						deco="input-default font-input-primary"
+						name="search"
+						value={data.search}
+						placeholder="search 입력"
+						onChange={chageInput}
+					>
 						<Box deco="box-round" />
-						<I icon="bx-search-alt-2" deco="text-primary" />
+						<Icon deco="font-primary">bx-search-alt-2</Icon>
 					</Input>
 					<Input
 						type="text"
-						deco="input-default box-round text-success"
+						deco="input-default box-round font-input-primary"
 						icon="bx-search-alt-2"
 						name="search2"
 						value={data.search}
@@ -557,96 +592,88 @@ export default function code() {
 						disabled
 					>
 						{/* <BoxEx deco="box-round" /> */}
-						{/* <I icon="bx-search-alt-2" deco="text-primary" /> */}
+						{/* <Icon deco="font-primary">bx-search-alt-2</Icon> */}
 					</Input>
 				</Group>
 			</Fieldset>
 
 			<Fieldset title="list">
 				<Group>
-					<ul className="flex items-center divide-x divide-black/20 list-none">
+					<ul className="flex items-center divide-x divide-black/20">
 						<li className="px-4 first:pl-0 last:pr-0">
 							<Button deco="button-default">
 								<Box deco="box-trans" />
-								<I icon="bx-user-plus" deco="text-default" />
-								<Label deco="text-default" text="Share" />
+								<Icon deco="font-default">bx-user-plus</Icon>
+								<Label deco="font-default" text="Share" />
 							</Button>
 						</li>
 						<li className="px-4 first:pl-0 last:pr-0">
 							<Button deco="button-default">
 								<Box deco="box-trans" />
-								<I icon="bx-trash" deco="text-default" />
-								<Label deco="text-default" text="Delete" />
+								<Icon deco="font-default">bx-trash</Icon>
+								<Label deco="font-default" text="Delete" />
 							</Button>
 						</li>
 						<li className="px-4 first:pl-0 last:pr-0">
 							<Button deco="button-default">
 								<Box deco="box-trans" />
-								<I icon="bx-edit-alt" deco="text-default" />
-								<Label deco="text-default" text="Rename" />
+								<Icon deco="font-default">bx-edit-alt</Icon>
+								<Label deco="font-default" text="Rename" />
 							</Button>
 						</li>
 						<li className="px-4 first:pl-0 last:pr-0">
 							<Button deco="button-default">
 								<Box deco="box-trans" />
-								<I icon="bx-file" deco="text-default" />
-								<Label deco="text-default" text="Move" />
+								<Icon deco="font-default">bx-file</Icon>
+								<Label deco="font-default" text="Move" />
 							</Button>
 						</li>
 					</ul>
 				</Group>
 
 				<Group>
-					<Text deco="text-danger">align : </Text>
+					<Text deco="font-danger">align : </Text>
 					<span>
-						<Toggle deco="toggle-default" team="align" name="left" checked={data.align.includes('left')} onChange={changeRadio}>
-							<Box deco="box-item" />
-							<I icon="bx-align-left" deco="text-default" />
-							<Text deco="text-default">Left</Text>
-						</Toggle>
-						<Toggle deco="toggle-default" team="align" name="middle" checked={data.align.includes('middle')} onChange={changeRadio}>
-							<Box deco="box-item" />
-							<I icon="bx-align-middle" deco="text-default" />
-							<Text deco="text-default">Middle</Text>
-						</Toggle>
-						<Toggle deco="toggle-default" team="align" name="right" checked={data.align.includes('right')} onChange={changeRadio}>
-							<Box deco="box-item" />
-							<I icon="bx-align-right" deco="text-default" />
-							<Text deco="text-default">Right</Text>
-						</Toggle>
-						<Toggle deco="toggle-default" team="align" name="justify" checked={data.align.includes('justify')} onChange={changeRadio}>
-							<Box deco="box-item" />
-							<I icon="bx-align-justify" deco="text-default" />
-							<Text deco="text-default">Justify</Text>
-						</Toggle>
+						<Item2 value="left" data={data} changeRadio={changeRadio} />
+						<Item2 value="middle" data={data} changeRadio={changeRadio} />
+						<Item2 value="right" data={data} changeRadio={changeRadio} />
+						<Item2 value="justify" data={data} changeRadio={changeRadio} />
 					</span>
 				</Group>
 
 				<Group>
-					<span>
-						<Toggle deco="toggle-default" team="align" name="left" checked={data.align.includes('left')} onChange={changeRadio}>
-							<Box deco="box-list-col" />
-							<I icon="bx-align-left" deco="text-warning" />
-							<Text deco="text-default">Left</Text>
-						</Toggle>
-						<Toggle deco="toggle-default" team="align" name="middle" checked={data.align.includes('middle')} onChange={changeRadio}>
-							<Box deco="box-list-col" />
-							<I icon="bx-align-middle" deco="text-warning" />
-							<Text deco="text-default">Middle</Text>
-						</Toggle>
-						<Toggle deco="toggle-default" team="align" name="right" checked={data.align.includes('right')} onChange={changeRadio}>
-							<Box deco="box-list-col" />
-							<I icon="bx-align-right" deco="text-warning" />
-							<Text deco="text-default">Right</Text>
-						</Toggle>
-						<Toggle deco="toggle-default" team="align" name="justify" checked={data.align.includes('justify')} onChange={changeRadio}>
-							<Box deco="box-list-col" />
-							<I icon="bx-align-justify" deco="text-warning" />
-							<Text deco="text-default">Justify</Text>
-						</Toggle>
-					</span>
+					<div className="flex flex-col items-stretch w-[200px]">
+						<Item value="justify" data={data} changeRadio={changeRadio} />
+						<Item value="left" data={data} changeRadio={changeRadio} />
+						<Item value="middle" data={data} changeRadio={changeRadio} />
+						<Item value="right" data={data} changeRadio={changeRadio} />
+					</div>
 				</Group>
 			</Fieldset>
 		</>
 	);
 }
+
+const Item2 = (props) => {
+	const {value, data, changeRadio} = props;
+
+	return (
+		<Toggle deco="toggle-default" team="align" name={value} checked={data.align.includes(value)} onChange={changeRadio}>
+			<Box deco="box-item" />
+			<Icon deco="font-warning" className="pr-2">{`bx-align-${value}`}</Icon>
+			<Text deco="font-default">{value}</Text>
+		</Toggle>
+	);
+};
+
+const Item = (props) => {
+	const {value, data, changeRadio} = props;
+
+	return (
+		<Toggle deco="toggle-list-col" team="align" name={value} checked={data.align.includes(value)} onChange={changeRadio}>
+			<Box deco="box-list-col" />
+			<Icon deco="font-warning" className="pr-2">{`bx-align-${value}`}</Icon>
+			<Text deco="font-default">{value}</Text>
+		</Toggle>
+	);
+};

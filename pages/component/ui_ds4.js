@@ -9,14 +9,17 @@ const getDefaultElement = (props) => {
 		case 'img':
 			return <div className={``} />;
 
-		case 'text':
-			return <div className={`bg-transparent outline-none truncate peer-disabled:opacity-30 peer-disabled:pointer-events-none`} />;
+		case 'label':
+			return <div className={``} />;
+
+		case 'font':
+			return <div className={`peer-disabled:opacity-30 peer-disabled:pointer-events-none`} />;
 
 		case 'box':
 			return <div className={`peer-disabled:opacity-30 peer-disabled:pointer-events-none`} />;
 
 		case 'formCheck':
-			return <div className={`peer absolute top-0 left-0 appearance-none pointer-events-none`} />;
+			return <div className={`peer absolute top-0 left-0 w-0 h-0 appearance-none pointer-events-none`} />;
 
 		case 'basket':
 			return <div className={`inline-flex justify-center items-center relative`} />;
@@ -46,20 +49,26 @@ const getElement = (props) => {
 	const {tag, myDeco, icon} = props;
 
 	switch (myDeco) {
-		case 'text-default':
+		case 'font-default':
 			return <div className={`text-slate-800 peer-checked:text-white`} />;
-		case 'text-primary':
+		case 'font-primary':
 			return <div className={`text-sky-800 group-focus-within:text-sky-400 peer-checked:text-white placeholder-slate-400`} />;
-		case 'text-success':
+		case 'font-success':
 			return <div className={`text-emerald-800 peer-checked:text-white`} />;
-		case 'text-warning':
+		case 'font-warning':
 			return <div className={`text-amber-800 peer-checked:text-white`} />;
-		case 'text-danger':
+		case 'font-danger':
 			return <div className={`text-rose-800 group-focus-within:text-rose-400 peer-checked:text-white`} />;
-		case 'text-toggle':
+		case 'font-toggle':
 			return <div className={`text-sky-800 peer-checked:underline`} />;
-		case 'text-checkbox-dot':
+		case 'font-checkbox-dot':
 			return <div className={`absolute text-lg text-white left-[7px] invisible peer-checked:visible`} />;
+		case 'font-input-primary':
+			return (
+				<div
+					className={`bg-transparent outline-none truncate text-sky-800 group-focus-within:text-sky-400 peer-checked:text-white placeholder-slate-400`}
+				/>
+			);
 
 		case 'box-default':
 			return (
@@ -130,7 +139,7 @@ const getElement = (props) => {
 		case 'box-list-col':
 			return (
 				<div
-					className={`absolute w-full h-full -z-20 ring-1 ring-slate-400 bg-slate-100 group-hover:bg-white peer-checked:bg-slate-500 peer-checked:ring-slate-700 group-hover:peer-checked:bg-slate-600 group-first:rounded-t-lg group-last:rounded-b-lg`}
+					className={`absolute w-full h-full -z-20 top-0 left-0 ring-1 ring-slate-400 bg-slate-100 group-hover:bg-white peer-checked:bg-slate-500 peer-checked:ring-slate-700 group-hover:peer-checked:bg-slate-600 group-first:rounded-t-lg group-last:rounded-b-lg`}
 				/>
 			);
 
@@ -141,6 +150,8 @@ const getElement = (props) => {
 
 		case 'toggle-default':
 			return <div className={`px-2 py-1 space-x-1 text-sm`} />;
+		case 'toggle-list-col':
+			return <div className={`px-5 py-1 text-sm !justify-start`} />;
 
 		case 'a-default':
 			return <div className={`px-1 py-0 space-x-1 text-sm`} />;
@@ -170,10 +181,10 @@ const getProps = (props) => {
 		className = '',
 		href = '',
 		onClick = (event) => {
-			console.log(`${event.currentTarget.name} click!`);
+			console.log(`${event.currentTarget.name || '{noname}'} click!`);
 		},
 		onChange = (event) => {
-			console.log(`${event.currentTarget.name} change!`);
+			console.log(`${event.currentTarget.name || '{noname}'} change!`);
 		},
 	} = props;
 
@@ -201,28 +212,19 @@ const getProps = (props) => {
 const FormCheck = (props) => {
 	const {children, deco, style, className, team, name, href, type, onChange, checked, disabled} = getProps({...props, tag: 'formCheck'});
 
-	return props.tag == 'input' ? (
-		<input type={type} className={`${style} | ${className}`} disabled={disabled} />
+	return props.tag == 'toggle' ? (
+		<input type={type} className={`${style} | `} id={name} name={name} data-team={team} checked={checked} disabled={disabled} onChange={onChange} />
 	) : (
-		<input
-			type={type}
-			className={`${style} | ${className}`}
-			id={name}
-			name={name}
-			data-team={team}
-			onChange={onChange}
-			checked={checked}
-			disabled={disabled}
-		/>
+		<input type={type} className={`${style} | `} checked={checked} disabled={disabled} onChange={onChange} />
 	);
 };
 const FormInput = forwardRef((props, ref) => {
-	const {children, deco, style, className, name, href, type, value, placeholder, onChange, checked, disabled} = getProps({...props, tag: 'text'});
+	const {children, deco, style, className, name, href, type, value, placeholder, onChange, checked, disabled} = getProps({...props, tag: 'font'});
 
 	return disabled ? (
-		<input type={type} className={`${style} | ${className}`} name={name} ref={ref} onChange={onChange} value={value} placeholder={placeholder} />
+		<input type={type} className={`${style} | `} ref={ref} placeholder={placeholder} value={value} onChange={onChange} />
 	) : (
-		<input type={type} className={`${style} | ${className}`} id={name} name={name} ref={ref} onChange={onChange} value={value} placeholder={placeholder} />
+		<input type={type} className={`${style} | `} id={name} name={name} ref={ref} placeholder={placeholder} value={value} onChange={onChange} />
 	);
 });
 
@@ -232,19 +234,14 @@ export const Img = (props) => {
 	return <img className={`${`${style} | ${className}`} | ${className}`} name={name} src={src} />;
 };
 
-export const I = (props) => {
-	const {deco, style, className, icon} = getProps({...props, tag: 'text'});
-
-	return icon ? <i className={`bx ${icon} pointer-events-none ${style} | ${className}`} /> : <></>;
-};
 export const Icon = (props) => {
-	const {children, deco, style, className, icon} = getProps({...props, tag: 'text'});
+	const {children, deco, style, className, icon} = getProps({...props, tag: 'font'});
 
 	return children ? <i className={`bx ${children} pointer-events-none ${style} | ${className}`} /> : <></>;
 };
 
 export const Text = (props) => {
-	const {children, deco, style, className, icon, iconL, iconR, name} = getProps({...props, tag: 'text'});
+	const {children, deco, style, className, icon, iconL, iconR, name} = getProps({...props, tag: 'font'});
 
 	return children ? <span className={`${style} | ${className}`}>{children}</span> : <></>;
 };
@@ -260,10 +257,10 @@ export const Label = (props) => {
 
 	return (
 		<>
-			<I deco={deco} icon={icon || iconL} />
+			<Icon deco={deco}>{icon || iconL}</Icon>
 			<Text deco={deco}>{text}</Text>
 			{children}
-			<I deco={deco} icon={iconR} />
+			<Icon deco={deco}>{iconR}</Icon>
 		</>
 	);
 };
@@ -272,8 +269,11 @@ export const Basket = (props) => {
 	const newProps = props.tag ? props : getProps({...props, type: 'checkbox', tag: 'basket'});
 	const {children, deco, style, className, icon, iconL, iconR, name, text, type, onChange, checked = false, disabled} = newProps;
 
+	// toggle을 제외한 다른 ui의 change 이벤트 발생을 방지하기 위한 코드
+	const forName = name ? name : props.tag == 'toggle' ? null : '';
+
 	return (
-		<label htmlFor={name} className={`${style} | ${className}`}>
+		<label htmlFor={forName} className={`${style} | ${className}`}>
 			<FormCheck {...props} type={type} checked={checked} />
 			<Box deco={deco} />
 			<Label deco={deco} icon={icon || iconL} iconR={iconR} text={text} />
@@ -305,8 +305,11 @@ export const Button = (props) => {
 	const newProps = getProps({...props, tag: 'button'});
 	const {children, name, onClick, checked = false, disabled} = newProps;
 
+	// disabled 상태일때를 위한 코드
+	const clickHandler = disabled ? () => {} : onClick;
+
 	return (
-		<button type="button" name={name} onClick={onClick}>
+		<button type="button" name={name} onClick={clickHandler}>
 			<Basket {...newProps} type="checkbox" checked={checked} />
 		</button>
 	);
