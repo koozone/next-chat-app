@@ -270,7 +270,7 @@ export const Basket = (props) => {
 	const {children, deco, style, className, icon, iconL, iconR, name, text, type, onChange, checked = false, disabled} = newProps;
 
 	// toggle을 제외한 다른 ui의 change 이벤트 발생을 방지하기 위한 코드
-	const forName = name ? name : props.tag == 'toggle' ? null : '';
+	const forName = props.tag == 'toggle' ? (name ? name : null) : '';
 
 	return (
 		<label htmlFor={forName} className={`${style} | ${className}`}>

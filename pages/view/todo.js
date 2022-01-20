@@ -4,7 +4,7 @@ import {useRef, useEffect} from 'react';
 import uid from 'tiny-uid';
 import {Input, Label, Button, Toggle, A, Icon, Text, Box} from '../component/ui_ds4';
 
-const initData = {name: 'koozone', email: ''};
+const initData = {name: '', email: ''};
 const initUserList = [
 	{id: uid(), name: 'hiroo', email: 'hiroo@gmail.com', active: true},
 	{id: uid(), name: 'happy', email: 'happy@gmail.com', active: false},
@@ -136,11 +136,11 @@ export default function Todo() {
 				<ul className="space-y-2">
 					{userList.map((item) => (
 						<li key={item.id} className="space-x-2">
-							<Toggle deco="toggle-default" team="fruite" name={item.id} checked={checkList.includes(item.id)} onChange={changeItem}>
+							<Toggle deco="toggle-default" name={item.id} checked={checkList.includes(item.id)} onChange={changeItem}>
 								<Box deco="box-switch" />
 								<Box deco="box-switch-dot" />
-								<A href="#" deco="a-default" className={checkList.includes(item.id) ? 'line-through' : 'no-underline'}>
-									<Text deco="font-primary" className="text-lg font-semibold">
+								<A href="#" deco="a-default" className={checkList.includes(item.id) ? 'line-through decoration-red-500/50' : 'no-underline'}>
+									<Text deco="font-primary" className={`text-lg font-semibold ${checkList.includes(item.id) ? ' text-transparent/30' : ''}`}>
 										{item.name} ({item.email})
 									</Text>
 								</A>

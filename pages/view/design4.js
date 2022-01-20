@@ -790,8 +790,8 @@ export default function code() {
 						<Icon deco="font-danger" className="pr-0">
 							bx-user
 						</Icon>
-						<Text deco="font-warning" className="pr-2">
-							NICK
+						<Text deco="font-warning" className="pr-2 flex-none">
+							NICK :
 						</Text>
 					</Input>
 					<Input
