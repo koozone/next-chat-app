@@ -1,5 +1,6 @@
 import {useRef} from 'react';
 import Header, {Header1, Header2, Header3} from '../component/header';
+import {ButtonPrimary, Fieldset, Group, Item, Item2, ToggleCheckbox, ToggleRadio, ToggleSuccess, ToggleSwitch, ToggleWarning} from '../component/temp_ds';
 import {Icon, A, Button, Img, Input, Label, Text, Basket, Toggle, Box} from '../component/ui_ds4';
 import {UseCount} from '../hook/useCount';
 import {UseData} from '../hook/useData';
@@ -7,73 +8,133 @@ import {UseModal} from '../hook/useModal';
 import {UseSideMenu} from '../hook/useSideMenu';
 import Todo from './todo';
 
-const Fieldset = ({children, title}) => {
-	return (
-		<fieldset className="m-3 p-3 space-y-2 border-[1px] border-slate-400 rounded-lg bg-black/5">
-			<legend>
-				<span className="p-2 text-xl text-black/80 font-semibold">{title}</span>
-			</legend>
-			{children}
-		</fieldset>
-	);
-};
-const Group = ({children}) => {
-	return <div className="space-x-2">{children}</div>;
-};
+// const Fieldset = ({children, title}) => {
+// 	return (
+// 		<fieldset className="m-3 p-3 space-y-2 border-[1px] border-slate-400 rounded-lg bg-black/5">
+// 			<legend>
+// 				<span className="p-2 text-xl text-black/80 font-semibold">{title}</span>
+// 			</legend>
+// 			{children}
+// 		</fieldset>
+// 	);
+// };
+// const Group = ({children}) => {
+// 	return <div className="space-x-2">{children}</div>;
+// };
 
-const Item2 = (props) => {
-	const {value, data, changeRadio} = props;
+// const Item2 = (props) => {
+// 	const {value, data, changeRadio} = props;
 
-	return (
-		<Toggle deco="basket-default" team="align" name={value} checked={data.align.includes(value)} onChange={changeRadio}>
-			<Box deco="box-item" />
-			<Icon deco="font-warning">{`bx-align-${value}`}</Icon>
-			<Text deco="font-default">{value}</Text>
-		</Toggle>
-	);
-};
+// 	return (
+// 		<Toggle deco="basket-default" team="align" name={value} checked={data.align.includes(value)} onChange={changeRadio}>
+// 			<Box deco="box-item" />
+// 			<Icon deco="font-warning">{`bx-align-${value}`}</Icon>
+// 			<Text deco="font-default">{value}</Text>
+// 		</Toggle>
+// 	);
+// };
 
-const Item = (props) => {
-	const {value, data, changeRadio} = props;
+// const Item = (props) => {
+// 	const {value, data, changeRadio} = props;
 
-	return (
-		<Toggle deco="basket-list-col" team="align" name={value} checked={data.align.includes(value)} onChange={changeRadio}>
-			<Box deco="box-list-col" />
-			<Icon deco="font-warning">{`bx-align-${value}`}</Icon>
-			<Text deco="font-default">{value}</Text>
-		</Toggle>
-	);
-};
+// 	return (
+// 		<Toggle deco="basket-list-col" team="align" name={value} checked={data.align.includes(value)} onChange={changeRadio}>
+// 			<Box deco="box-list-col" />
+// 			<Icon deco="font-warning">{`bx-align-${value}`}</Icon>
+// 			<Text deco="font-default">{value}</Text>
+// 		</Toggle>
+// 	);
+// };
 
-const ButtonPrimary = (props) => {
-	const {children, className, icon, iconR, text, name, onClick, checked, disabled} = props;
+// const ButtonPrimary = (props) => {
+// 	const {children, className, icon, iconR, text, team, name, onClick, onChange, checked, disabled} = props;
 
-	return (
-		<Button deco="basket-default box-primary" className={className} name={name} onClick={onClick} checked={checked} disabled={disabled}>
-			<Icon deco="font-danger" className="text-lg mr-2 last:mr-0">
-				{icon}
-			</Icon>
-			<Text deco="font-primary">{text}</Text>
-			{children}
-			<Icon deco="font-primary" className="text-lg ml-2 first:ml-0">
-				{iconR}
-			</Icon>
-		</Button>
-	);
-};
+// 	return (
+// 		<Button deco="basket-default box-primary" className={className} name={name} onClick={onClick} checked={checked} disabled={disabled}>
+// 			<Icon deco="font-default" className="text-lg mr-2 last:mr-0">
+// 				{icon}
+// 			</Icon>
+// 			<Text deco="font-primary">{text}</Text>
+// 			{children}
+// 			<Icon deco="font-primary" className="text-lg ml-2 first:ml-0">
+// 				{iconR}
+// 			</Icon>
+// 		</Button>
+// 	);
+// };
 
-const ToggleSwitch = (props) => {
-	const {children, className, icon, iconR, text, name, onChange, onClick, checked, disabled} = props;
+// const ToggleSuccess = (props) => {
+// 	const {children, className, icon, iconR, text, team, name, onClick, onChange, checked, disabled} = props;
 
-	return (
-		<Toggle deco="basket-default" className={className} name={name} checked={checked} onChange={onChange}>
-			<Box deco="box-switch" className="mr-2 last:mr-0" />
-			<Box deco="box-switch-dot" />
-			<Text deco="font-toggle">{text}</Text>
-			{children}
-		</Toggle>
-	);
-};
+// 	return (
+// 		<Toggle deco="basket-default box-success" className={className} name={name} onChange={onChange} checked={checked} disabled={disabled}>
+// 			<Icon deco="font-default" className="text-lg mr-2 last:mr-0">
+// 				{icon}
+// 			</Icon>
+// 			<Text deco="font-success">{text}</Text>
+// 			{children}
+// 			<Icon deco="font-success" className="text-lg ml-2 first:ml-0">
+// 				{iconR}
+// 			</Icon>
+// 		</Toggle>
+// 	);
+// };
+
+// const ToggleWarning = (props) => {
+// 	const {children, className, icon, iconR, text, team, name, onClick, onChange, checked, disabled} = props;
+
+// 	return (
+// 		<Toggle deco="basket-default box-warning" className={className} name={name} onChange={onChange} checked={checked} disabled={disabled}>
+// 			<Icon deco="font-default" className="text-lg mr-2 last:mr-0">
+// 				{icon}
+// 			</Icon>
+// 			<Text deco="font-warning">{text}</Text>
+// 			{children}
+// 			<Icon deco="font-warning" className="text-lg ml-2 first:ml-0">
+// 				{iconR}
+// 			</Icon>
+// 		</Toggle>
+// 	);
+// };
+
+// const ToggleCheckbox = (props) => {
+// 	const {children, className, icon, iconR, text, team, name, onClick, onChange, checked, disabled} = props;
+
+// 	return (
+// 		<Toggle deco="basket-default" className={className} team={team} name={name} onChange={onChange} checked={checked} disabled={disabled}>
+// 			<Box deco="box-checkbox" className="mr-2 last:mr-0" />
+// 			<Icon deco="font-checkbox-dot">bxs-chevron-down</Icon>
+// 			<Text deco="font-toggle">{text}</Text>
+// 			{children}
+// 		</Toggle>
+// 	);
+// };
+
+// const ToggleRadio = (props) => {
+// 	const {children, className, icon, iconR, text, team, name, onClick, onChange, checked, disabled} = props;
+
+// 	return (
+// 		<Toggle deco="basket-default" className={className} team={team} name={name} onChange={onChange} checked={checked} disabled={disabled}>
+// 			<Box deco="box-radio" className="mr-2 last:mr-0" />
+// 			<Box deco="box-radio-dot" />
+// 			<Text deco="font-toggle">{text}</Text>
+// 			{children}
+// 		</Toggle>
+// 	);
+// };
+
+// const ToggleSwitch = (props) => {
+// 	const {children, className, icon, iconR, text, team, name, onChange, onClick, checked, disabled} = props;
+
+// 	return (
+// 		<Toggle deco="basket-default" className={className} name={name} onChange={onChange} checked={checked} disabled={disabled}>
+// 			<Box deco="box-switch" className="mr-2 last:mr-0" />
+// 			<Box deco="box-switch-dot" />
+// 			<Text deco="font-toggle">{text}</Text>
+// 			{children}
+// 		</Toggle>
+// 	);
+// };
 
 const CodeUseData = () => {
 	const idInput = useRef(null);
@@ -551,197 +612,105 @@ export default function code() {
 
 			<Fieldset title="Toggle (checkbox)">
 				<Group>
-					<Toggle deco="basket-default">
-						<Box deco="box-checkbox" />
-						<Icon deco="font-checkbox-dot">bxs-chevron-down</Icon>
-						{/* <I icon="bxs-checkbox" className={css_on} />
-						<I icon="bx-checkbox-checked" className={css_off} /> */}
+					<ToggleCheckbox>
 						<Text deco="font-toggle">Checkbox</Text>
-					</Toggle>
-					<Toggle deco="basket-default" checked>
-						<Box deco="box-checkbox" />
-						<Icon deco="font-checkbox-dot">bxs-chevron-down</Icon>
+					</ToggleCheckbox>
+					<ToggleCheckbox checked>
 						<Text deco="font-toggle">Checked Checkbox</Text>
-					</Toggle>
-					<Toggle deco="basket-default" disabled>
-						<Box deco="box-checkbox" />
-						<Icon deco="font-checkbox-dot">bxs-chevron-down</Icon>
+					</ToggleCheckbox>
+					<ToggleCheckbox disabled>
 						<Text deco="font-toggle">Disabled Checkbox</Text>
-					</Toggle>
-					<Toggle deco="basket-default" checked disabled>
-						<Box deco="box-checkbox" />
-						<Icon deco="font-checkbox-dot">bxs-chevron-down</Icon>
+					</ToggleCheckbox>
+					<ToggleCheckbox checked disabled>
 						<Text deco="font-toggle">Disabled Checked Checkbox</Text>
-					</Toggle>
+					</ToggleCheckbox>
 				</Group>
 
 				<Group>
 					<Text deco="font-danger">fruite : </Text>
-					<Toggle deco="basket-default" team="fruite" name="banana" checked={data.fruite.includes('banana')} onChange={changeCheckbox}>
-						<Box deco="box-checkbox" />
-						<Icon deco="font-checkbox-dot">bxs-chevron-down</Icon>
-						<Text deco="font-toggle">banana</Text>
-					</Toggle>
-					<Toggle deco="basket-default" team="fruite" name="apple" checked={data.fruite.includes('apple')} onChange={changeCheckbox}>
-						<Box deco="box-checkbox" />
-						<Icon deco="font-checkbox-dot">bxs-chevron-down</Icon>
-						<Text deco="font-toggle">apple</Text>
-					</Toggle>
-					<Toggle deco="basket-default" team="fruite" name="orange" checked={data.fruite.includes('orange')} onChange={changeCheckbox}>
-						<Box deco="box-checkbox" />
-						<Icon deco="font-checkbox-dot">bxs-chevron-down</Icon>
-						<Text deco="font-toggle">orange</Text>
-					</Toggle>
-					<Toggle deco="basket-default" team="fruite" name="melon" checked={data.fruite.includes('melon')} onChange={changeCheckbox}>
-						<Box deco="box-checkbox" />
-						<Icon deco="font-checkbox-dot">bxs-chevron-down</Icon>
-						<Text deco="font-toggle">melon</Text>
-					</Toggle>
+					<ToggleRadio text="바나나" team="fruite" name="banana" checked={data.fruite.includes('banana')} onChange={changeCheckbox} />
+					<ToggleRadio text="사과" team="fruite" name="apple" checked={data.fruite.includes('apple')} onChange={changeCheckbox} />
+					<ToggleRadio text="오렌지" team="fruite" name="orange" checked={data.fruite.includes('orange')} onChange={changeCheckbox} />
+					<ToggleRadio text="멜론" team="fruite" name="melon" checked={data.fruite.includes('melon')} onChange={changeCheckbox} />
 				</Group>
 
 				<Group>
 					<Text deco="font-danger">fruite : </Text>
-					<Toggle deco="basket-default" team="fruite" name="banana" checked={data.fruite.includes('banana')} onChange={changeCheckbox}>
-						<Box deco="box-success" />
-						<Icon deco="font-danger">bx-leaf</Icon>
-						<Text deco="font-success">banana</Text>
-					</Toggle>
-					<Toggle deco="basket-default" team="fruite" name="apple" checked={data.fruite.includes('apple')} onChange={changeCheckbox}>
-						<Box deco="box-success" />
-						<Icon deco="font-danger">bx-leaf</Icon>
-						<Text deco="font-success">apple</Text>
-					</Toggle>
-					<Toggle deco="basket-default" team="fruite" name="orange" checked={data.fruite.includes('orange')} onChange={changeCheckbox}>
-						<Box deco="box-success" />
-						<Icon deco="font-danger">bx-leaf</Icon>
-						<Text deco="font-success">orange</Text>
-					</Toggle>
-					<Toggle deco="basket-default" team="fruite" name="melon" checked={data.fruite.includes('melon')} onChange={changeCheckbox} disabled>
-						<Box deco="box-success" />
-						<Icon deco="font-danger">bx-leaf</Icon>
-						<Text deco="font-success">melon</Text>
-					</Toggle>
+					<ToggleSuccess
+						icon="bx-leaf"
+						text="banana"
+						team="fruite"
+						name="banana"
+						checked={data.fruite.includes('banana')}
+						onChange={changeCheckbox}
+					/>
+					<ToggleSuccess icon="bx-leaf" text="apple" team="fruite" name="apple" checked={data.fruite.includes('apple')} onChange={changeCheckbox} />
+					<ToggleSuccess
+						icon="bx-leaf"
+						text="orange"
+						team="fruite"
+						name="orange"
+						checked={data.fruite.includes('orange')}
+						onChange={changeCheckbox}
+					/>
+					<ToggleSuccess icon="bx-leaf" text="melon" team="fruite" name="melon" checked={data.fruite.includes('melon')} onChange={changeCheckbox} />
 				</Group>
 			</Fieldset>
 
 			<Fieldset title="Toggle (radio)">
 				<Group>
-					<Toggle deco="basket-default">
-						<Box deco="box-radio" />
-						<Box deco="box-radio-dot" />
-						{/* <I icon="bxs-checkbox" className={css_on} />
-						<I icon="bx-checkbox-checked" className={css_off} /> */}
+					<ToggleRadio>
 						<Text deco="font-toggle">Radio</Text>
-					</Toggle>
-					<Toggle deco="basket-default" checked>
-						<Box deco="box-radio" />
-						<Box deco="box-radio-dot" />
+					</ToggleRadio>
+					<ToggleRadio checked>
 						<Text deco="font-toggle">Checked Radio</Text>
-					</Toggle>
-					<Toggle deco="basket-default" disabled>
-						<Box deco="box-radio" />
-						<Box deco="box-radio-dot" />
+					</ToggleRadio>
+					<ToggleRadio disabled>
 						<Text deco="font-toggle">Disabled Radio</Text>
-					</Toggle>
-					<Toggle deco="basket-default" checked disabled>
-						<Box deco="box-radio" />
-						<Box deco="box-radio-dot" />
+					</ToggleRadio>
+					<ToggleRadio checked disabled>
 						<Text deco="font-toggle">Disabled Checked Radio</Text>
-					</Toggle>
+					</ToggleRadio>
 				</Group>
 
 				<Group>
 					<Text deco="font-danger">color : </Text>
-					<Toggle deco="basket-default" team="color" name="red" checked={data.color.includes('red')} onChange={changeRadio}>
-						<Box deco="box-radio" />
-						<Box deco="box-radio-dot" />
-						<Text deco="font-toggle">red</Text>
-					</Toggle>
-					<Toggle deco="basket-default" team="color" name="blue" checked={data.color.includes('blue')} onChange={changeRadio}>
-						<Box deco="box-radio" />
-						<Box deco="box-radio-dot" />
-						<Text deco="font-toggle">blue</Text>
-					</Toggle>
-					<Toggle deco="basket-default" team="color" name="yellow" checked={data.color.includes('yellow')} onChange={changeRadio}>
-						<Box deco="box-radio" />
-						<Box deco="box-radio-dot" />
-						<Text deco="font-toggle">yellow</Text>
-					</Toggle>
-					<Toggle deco="basket-default" team="color" name="green" checked={data.color.includes('green')} onChange={changeRadio}>
-						<Box deco="box-radio" />
-						<Box deco="box-radio-dot" />
-						<Text deco="font-toggle">green</Text>
-					</Toggle>
+					<ToggleRadio text="빨강" team="color" name="red" checked={data.color.includes('red')} onChange={changeRadio} />
+					<ToggleRadio text="파랑" team="color" name="blue" checked={data.color.includes('blue')} onChange={changeRadio} />
+					<ToggleRadio text="노랑" team="color" name="yellow" checked={data.color.includes('yellow')} onChange={changeRadio} />
+					<ToggleRadio text="초록" team="color" name="green" checked={data.color.includes('green')} onChange={changeRadio} />
 				</Group>
 
 				<Group>
 					<Text deco="font-success">color : </Text>
-					<Toggle deco="basket-default" team="color" name="red" checked={data.color.includes('red')} onChange={changeRadio}>
-						<Box deco="box-warning" />
-						<Icon deco="font-default">bx-leaf</Icon>
-						<Text deco="font-warning">red</Text>
-					</Toggle>
-					<Toggle deco="basket-default" team="color" name="blue" checked={data.color.includes('blue')} onChange={changeRadio}>
-						<Box deco="box-warning" />
-						<Icon deco="font-default">bx-leaf</Icon>
-						<Text deco="font-warning">blue</Text>
-					</Toggle>
-					<Toggle deco="basket-default" team="color" name="yellow" checked={data.color.includes('yellow')} onChange={changeRadio}>
-						<Box deco="box-warning" />
-						<Icon deco="font-default">bx-leaf</Icon>
-						<Text deco="font-warning">yellow</Text>
-					</Toggle>
-					<Toggle deco="basket-default" team="color" name="green" checked={data.color.includes('green')} onChange={changeRadio} disabled>
-						<Box deco="box-warning" />
-						<Icon deco="font-default">bx-leaf</Icon>
-						<Text deco="font-warning">green</Text>
-					</Toggle>
+					<ToggleWarning icon="bx-leaf" text="red" team="color" name="red" checked={data.color.includes('red')} onChange={changeRadio} />
+					<ToggleWarning icon="bx-leaf" text="blue" team="color" name="blue" checked={data.color.includes('blue')} onChange={changeRadio} />
+					<ToggleWarning icon="bx-leaf" text="yellow" team="color" name="yellow" checked={data.color.includes('yellow')} onChange={changeRadio} />
+					<ToggleWarning icon="bx-leaf" text="green" team="color" name="green" checked={data.color.includes('green')} onChange={changeRadio} />
 				</Group>
 			</Fieldset>
 
 			<Fieldset title="Toggle (switch)">
 				<Group>
-					<Toggle deco="basket-default">
-						<Box deco="box-switch" />
-						<Box deco="box-switch-dot" />
-						{/* <I icon="bxs-checkbox" className={css_on} />
-						<I icon="bx-checkbox-checked" className={css_off} /> */}
+					<ToggleSwitch>
 						<Text deco="font-toggle">Switch</Text>
-					</Toggle>
-					<Toggle deco="basket-default" checked>
-						<Box deco="box-switch" />
-						<Box deco="box-switch-dot" />
+					</ToggleSwitch>
+					<ToggleSwitch checked>
 						<Text deco="font-toggle">Checked Switch</Text>
-					</Toggle>
-					<Toggle deco="basket-default" disabled>
-						<Box deco="box-switch" />
-						<Box deco="box-switch-dot" />
+					</ToggleSwitch>
+					<ToggleSwitch disabled>
 						<Text deco="font-toggle">Disabled Switch</Text>
-					</Toggle>
-					<Toggle deco="basket-default" checked disabled>
-						<Box deco="box-switch" />
-						<Box deco="box-switch-dot" />
+					</ToggleSwitch>
+					<ToggleSwitch checked disabled>
 						<Text deco="font-toggle">Disabled Checked Switch</Text>
-					</Toggle>
+					</ToggleSwitch>
 				</Group>
 
 				<Group>
 					<Text deco="font-danger">animal : </Text>
-					<Toggle deco="basket-default" name="dog" checked={data.dog} onChange={changeSwitch}>
-						<Box deco="box-switch" />
-						<Box deco="box-switch-dot" />
-						<Text deco="font-toggle">dog</Text>
-					</Toggle>
-					<Toggle deco="basket-default" name="cat" checked={data.cat} onChange={changeSwitch}>
-						<Box deco="box-switch" />
-						<Box deco="box-switch-dot" />
-						<Text deco="font-toggle">cat</Text>
-					</Toggle>
-					<Toggle deco="basket-default" name="bird" checked={data.bird} onChange={changeSwitch}>
-						<Box deco="box-switch" />
-						<Box deco="box-switch-dot" />
-						<Text deco="font-toggle">bird</Text>
-					</Toggle>
+					<ToggleSwitch text="강아지" name="dog" checked={data.dog} onChange={changeSwitch} />
+					<ToggleSwitch text="고양이" name="cat" checked={data.cat} onChange={changeSwitch} />
+					<ToggleSwitch text="비둘기" name="bird" checked={data.bird} onChange={changeSwitch} />
 				</Group>
 			</Fieldset>
 
@@ -929,11 +898,45 @@ export default function code() {
 			<Fieldset title="template">
 				<Group>
 					<Text deco="font-danger">ButtonPrimary : </Text>
-					<ButtonPrimary icon="bx-user" iconR="bx-chevrons-right" text="hot button" name="hot" onClick={clickButton} />
-					<ButtonPrimary icon="bx-user" text="hot button" name="hot" onClick={clickButton} checked />
+					<ButtonPrimary icon="bx-user" iconR="bx-chevrons-right" text="Next Step" name="hot" onClick={clickButton} />
+					<ButtonPrimary icon="bx-user" text="Next Step" name="hot" onClick={clickButton} checked />
 					<ButtonPrimary iconR="bx-chevrons-right" text="다음 단계" name="hot" onClick={clickButton} />
 					<ButtonPrimary icon="bx-key" name="key" checked />
 					<ButtonPrimary text="Menu" name="menu" disabled />
+				</Group>
+				<Group>
+					<Text deco="font-danger">ToggleSuccess : </Text>
+					<ToggleSuccess icon="bx-user" iconR="bx-chevrons-right" text="Next Step" name="hot" onClick={clickButton} />
+					<ToggleSuccess icon="bx-user" text="Next Step" name="hot" onClick={clickButton} checked />
+					<ToggleSuccess iconR="bx-chevrons-right" text="다음 단계" name="hot" onClick={clickButton} />
+					<ToggleSuccess icon="bx-key" name="key" checked />
+					<ToggleSuccess text="Menu" name="menu" disabled />
+				</Group>
+				<Group>
+					<Text deco="font-danger">ToggleWarning : </Text>
+					<ToggleWarning icon="bx-user" iconR="bx-chevrons-right" text="Next Step" name="hot" onClick={clickButton} />
+					<ToggleWarning icon="bx-user" text="Next Step" name="hot" onClick={clickButton} checked />
+					<ToggleWarning iconR="bx-chevrons-right" text="다음 단계" name="hot" onClick={clickButton} />
+					<ToggleWarning icon="bx-key" name="key" checked />
+					<ToggleWarning text="Menu" name="menu" disabled />
+				</Group>
+				<Group>
+					<Text deco="font-danger">ToggleCheckbox : </Text>
+					<ToggleCheckbox name="checkbox" checked={data.checkbox} onChange={changeSwitch}>
+						<Text deco="font-toggle">다음 내용을 확인했습니다.</Text>
+					</ToggleCheckbox>
+					<ToggleCheckbox />
+					<ToggleCheckbox text="동의" checked />
+					<ToggleCheckbox text="비동의" disabled />
+				</Group>
+				<Group>
+					<Text deco="font-danger">ToggleRadio : </Text>
+					<ToggleRadio name="radio" checked={data.radio} onChange={changeSwitch}>
+						<Text deco="font-toggle">다음 내용을 확인했습니다.</Text>
+					</ToggleRadio>
+					<ToggleRadio />
+					<ToggleRadio text="동의" checked />
+					<ToggleRadio text="비동의" disabled />
 				</Group>
 				<Group>
 					<Text deco="font-danger">ToggleSwitch : </Text>
@@ -942,7 +945,7 @@ export default function code() {
 					</ToggleSwitch>
 					<ToggleSwitch />
 					<ToggleSwitch text="동의" checked />
-					<ToggleSwitch text="비동의" />
+					<ToggleSwitch text="비동의" disabled />
 				</Group>
 			</Fieldset>
 		</>
