@@ -86,18 +86,16 @@ export default function Todo() {
 						<Text deco="font-danger">name : </Text>
 						<Input
 							type="text"
-							deco="input-default box-success font-input-primary"
+							deco="basket-default box-success font-default"
 							name="name"
 							placeholder="name 입력"
 							value={data.name}
 							onChange={changeInput}
 							ref={nameInput}
 						>
-							<Icon deco="font-primary" className="pr-2">
-								bx-id-card
-							</Icon>
+							<Icon deco="font-primary">bx-id-card</Icon>
 						</Input>
-						<Button deco="button-default box-primary" name="name" onClick={clickReset}>
+						<Button deco="basket-default box-primary" name="name" onClick={clickReset}>
 							<Text deco="font-primary">reset</Text>
 						</Button>
 					</span>
@@ -105,24 +103,22 @@ export default function Todo() {
 						<Text deco="font-danger">email : </Text>
 						<Input
 							type="email"
-							deco="input-default box-success font-input-primary"
+							deco="basket-default box-success font-default"
 							name="email"
 							placeholder="email 입력"
 							value={data.email}
 							onChange={changeInput}
 						>
-							<Icon deco="font-primary" className="pr-2">
-								bx-mail-send
-							</Icon>
+							<Icon deco="font-primary">bx-mail-send</Icon>
 						</Input>
-						<Button deco="button-default box-primary" name="email" onClick={clickReset}>
+						<Button deco="basket-default box-primary" name="email" onClick={clickReset}>
 							<Text deco="font-primary">reset</Text>
 						</Button>
 					</span>
-					<Button deco="button-default box-primary" onClick={clickSave} checked>
+					<Button deco="basket-default box-primary" onClick={clickSave} checked>
 						<Text deco="font-primary">저장</Text>
 					</Button>
-					<Button deco="button-default box-warning" onClick={clickResetAll} checked>
+					<Button deco="basket-default box-warning" onClick={clickResetAll} checked>
 						<Text deco="font-primary">초기화</Text>
 					</Button>
 				</div>
@@ -136,19 +132,23 @@ export default function Todo() {
 				<ul className="space-y-2">
 					{userList.map((item) => (
 						<li key={item.id} className="space-x-2">
-							<Toggle deco="toggle-default" name={item.id} checked={checkList.includes(item.id)} onChange={changeItem}>
+							<Toggle deco="basket-default" name={item.id} checked={checkList.includes(item.id)} onChange={changeItem}>
 								<Box deco="box-switch" />
 								<Box deco="box-switch-dot" />
-								<A href="#" deco="a-default" className={checkList.includes(item.id) ? 'line-through decoration-red-500/50' : 'no-underline'}>
-									<Text deco="font-primary" className={`text-lg font-semibold ${checkList.includes(item.id) ? ' text-transparent/30' : ''}`}>
+								<A
+									href="#"
+									deco="basket-a-default"
+									className={checkList.includes(item.id) ? 'line-through decoration-red-500 opacity-60' : 'no-underline'}
+								>
+									<Text deco="font-primary" className={`text-lg font-semibold ${checkList.includes(item.id) ? 'opacity-60' : 'opacity-100'}`}>
 										{item.name} ({item.email})
 									</Text>
 								</A>
 							</Toggle>
-							<Button deco="button-default box-default" name={item.id} onClick={clickModify}>
+							<Button deco="basket-default box-default" name={item.id} onClick={clickModify}>
 								<Icon deco="font-primary">bxs-message-square-edit</Icon>
 							</Button>
-							<Button deco="button-default box-default" name={item.id} onClick={clickRemove}>
+							<Button deco="basket-default box-default" name={item.id} onClick={clickRemove}>
 								<Icon deco="font-danger">bxs-message-square-x</Icon>
 							</Button>
 						</li>
