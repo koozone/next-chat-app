@@ -1,6 +1,6 @@
 import {useRef} from 'react';
 import Header, {Header1, Header2, Header3} from '../component/header';
-import {ButtonPrimary, Fieldset, Group, Item, Item2, ToggleCheckbox, ToggleRadio, ToggleSuccess, ToggleSwitch, ToggleWarning} from '../component/temp_ds';
+import {ButtonNormal, Fieldset, Group, Item, Item2, ToggleCheckbox, ToggleRadio, ToggleSwitch, ToggleNormal} from '../component/temp_ds';
 import {Icon, A, Button, Img, Input, Label, Text, Basket, Toggle, Box} from '../component/ui_ds4';
 import {UseCount} from '../hook/useCount';
 import {UseData} from '../hook/useData';
@@ -163,16 +163,7 @@ const CodeUseData = () => {
 		<>
 			<Group>
 				<Text deco="font-danger">id : </Text>
-				<Input
-					type="text"
-					deco="basket-default box-success font-primary"
-					value={data.id}
-					name="id"
-					placeholder="id 입력"
-					onChange={onChageInput}
-					className="w-[150px]"
-					ref={idInput}
-				>
+				<Input type="text" deco="basket-default box-success font-primary" value={data.id} name="id" placeholder="id 입력" onChange={onChageInput} className="w-[150px]" ref={idInput}>
 					<Icon deco="font-warning">bx-user</Icon>
 				</Input>
 				<Button deco="basket-default box-primary" name="id" onClick={onClickReset}>
@@ -182,15 +173,7 @@ const CodeUseData = () => {
 			</Group>
 			<Group>
 				<Text deco="font-danger">password : </Text>
-				<Input
-					type="password"
-					deco="basket-default box-success font-primary"
-					value={data.password}
-					name="password"
-					placeholder="password 입력"
-					onChange={onChageInput}
-					className="w-[150px]"
-				>
+				<Input type="password" deco="basket-default box-success font-primary" value={data.password} name="password" placeholder="password 입력" onChange={onChageInput} className="w-[150px]">
 					<Icon deco="font-warning">bx-key</Icon>
 				</Input>
 				<Button deco="basket-default box-primary" name="password" onClick={onClickReset}>
@@ -252,15 +235,7 @@ const CodeUseCount = () => {
 		<>
 			<Group>
 				<Text deco="font-danger">coffee : </Text>
-				<Input
-					type="text"
-					deco="basket-default box-success font-primary"
-					value={count.coffee}
-					name="coffee"
-					placeholder="coffee 입력"
-					onChange={onChageInput}
-					className="w-[80px]"
-				>
+				<Input type="text" deco="basket-default box-success font-primary" value={count.coffee} name="coffee" placeholder="coffee 입력" onChange={onChageInput} className="w-[80px]">
 					<Icon deco="font-warning">bx-coffee-togo</Icon>
 				</Input>
 				<Button deco="basket-default box-primary" name="coffee" onClick={onClickIncrement}>
@@ -276,15 +251,7 @@ const CodeUseCount = () => {
 			</Group>
 			<Group>
 				<Text deco="font-danger">bread : </Text>
-				<Input
-					type="text"
-					deco="basket-default box-success font-primary"
-					value={count.bread}
-					name="bread"
-					placeholder="bread 입력"
-					onChange={onChageInput}
-					className="w-[80px]"
-				>
+				<Input type="text" deco="basket-default box-success font-primary" value={count.bread} name="bread" placeholder="bread 입력" onChange={onChageInput} className="w-[80px]">
 					<Icon deco="font-warning">bx-baguette</Icon>
 				</Input>
 				<Button deco="basket-default box-primary" name="bread" onClick={onClickIncrement}>
@@ -331,8 +298,6 @@ export default function code() {
 		if (name == 'openModal') {
 			runModal.open();
 		} else if (name == 'showSidemenu') {
-			runSideMenu.open();
-		} else if (name == 'hot') {
 			runSideMenu.open();
 		} else if (name == 'countLike') {
 			runData.change(name, data[name] + 1);
@@ -628,32 +593,18 @@ export default function code() {
 
 				<Group>
 					<Text deco="font-danger">fruite : </Text>
-					<ToggleRadio text="바나나" team="fruite" name="banana" checked={data.fruite.includes('banana')} onChange={changeCheckbox} />
-					<ToggleRadio text="사과" team="fruite" name="apple" checked={data.fruite.includes('apple')} onChange={changeCheckbox} />
-					<ToggleRadio text="오렌지" team="fruite" name="orange" checked={data.fruite.includes('orange')} onChange={changeCheckbox} />
-					<ToggleRadio text="멜론" team="fruite" name="melon" checked={data.fruite.includes('melon')} onChange={changeCheckbox} />
+					<ToggleCheckbox text="바나나" team="fruite" name="banana" checked={data.fruite.includes('banana')} onChange={changeCheckbox} />
+					<ToggleCheckbox text="사과" team="fruite" name="apple" checked={data.fruite.includes('apple')} onChange={changeCheckbox} />
+					<ToggleCheckbox text="오렌지" team="fruite" name="orange" checked={data.fruite.includes('orange')} onChange={changeCheckbox} />
+					<ToggleCheckbox text="멜론" team="fruite" name="melon" checked={data.fruite.includes('melon')} onChange={changeCheckbox} />
 				</Group>
 
 				<Group>
 					<Text deco="font-danger">fruite : </Text>
-					<ToggleSuccess
-						icon="bx-leaf"
-						text="banana"
-						team="fruite"
-						name="banana"
-						checked={data.fruite.includes('banana')}
-						onChange={changeCheckbox}
-					/>
-					<ToggleSuccess icon="bx-leaf" text="apple" team="fruite" name="apple" checked={data.fruite.includes('apple')} onChange={changeCheckbox} />
-					<ToggleSuccess
-						icon="bx-leaf"
-						text="orange"
-						team="fruite"
-						name="orange"
-						checked={data.fruite.includes('orange')}
-						onChange={changeCheckbox}
-					/>
-					<ToggleSuccess icon="bx-leaf" text="melon" team="fruite" name="melon" checked={data.fruite.includes('melon')} onChange={changeCheckbox} />
+					<ToggleNormal theme="primary" icon="bx-leaf" text="banana" team="fruite" name="banana" checked={data.fruite.includes('banana')} onChange={changeCheckbox} />
+					<ToggleNormal theme="primary" icon="bx-leaf" text="apple" team="fruite" name="apple" checked={data.fruite.includes('apple')} onChange={changeCheckbox} />
+					<ToggleNormal theme="primary" icon="bx-leaf" text="orange" team="fruite" name="orange" checked={data.fruite.includes('orange')} onChange={changeCheckbox} />
+					<ToggleNormal theme="primary" icon="bx-leaf" text="melon" team="fruite" name="melon" checked={data.fruite.includes('melon')} onChange={changeCheckbox} />
 				</Group>
 			</Fieldset>
 
@@ -683,10 +634,10 @@ export default function code() {
 
 				<Group>
 					<Text deco="font-success">color : </Text>
-					<ToggleWarning icon="bx-leaf" text="red" team="color" name="red" checked={data.color.includes('red')} onChange={changeRadio} />
-					<ToggleWarning icon="bx-leaf" text="blue" team="color" name="blue" checked={data.color.includes('blue')} onChange={changeRadio} />
-					<ToggleWarning icon="bx-leaf" text="yellow" team="color" name="yellow" checked={data.color.includes('yellow')} onChange={changeRadio} />
-					<ToggleWarning icon="bx-leaf" text="green" team="color" name="green" checked={data.color.includes('green')} onChange={changeRadio} />
+					<ToggleNormal theme="success" icon="bx-leaf" text="red" team="color" name="red" checked={data.color.includes('red')} onChange={changeRadio} />
+					<ToggleNormal theme="success" icon="bx-leaf" text="blue" team="color" name="blue" checked={data.color.includes('blue')} onChange={changeRadio} />
+					<ToggleNormal theme="success" icon="bx-leaf" text="yellow" team="color" name="yellow" checked={data.color.includes('yellow')} onChange={changeRadio} />
+					<ToggleNormal theme="success" icon="bx-leaf" text="green" team="color" name="green" checked={data.color.includes('green')} onChange={changeRadio} />
 				</Group>
 			</Fieldset>
 
@@ -711,6 +662,13 @@ export default function code() {
 					<ToggleSwitch text="강아지" name="dog" checked={data.dog} onChange={changeSwitch} />
 					<ToggleSwitch text="고양이" name="cat" checked={data.cat} onChange={changeSwitch} />
 					<ToggleSwitch text="비둘기" name="bird" checked={data.bird} onChange={changeSwitch} />
+				</Group>
+
+				<Group>
+					<Text deco="font-success">color : </Text>
+					<ToggleNormal theme="warning" icon="bx-leaf" text="dog" name="dog" checked={data.dog} onChange={changeSwitch} />
+					<ToggleNormal theme="warning" icon="bx-leaf" text="cat" name="cat" checked={data.cat} onChange={changeSwitch} />
+					<ToggleNormal theme="warning" icon="bx-leaf" text="bird" name="bird" checked={data.bird} onChange={changeSwitch} />
 				</Group>
 			</Fieldset>
 
@@ -771,31 +729,14 @@ export default function code() {
 			<Fieldset title="Input">
 				<Group>
 					<Text deco="font-danger">nick : </Text>
-					<Input
-						type="text"
-						deco="basket-default font-default"
-						className="w-[280px]"
-						name="nick"
-						value={data.nick}
-						placeholder="nick 입력"
-						onChange={chageInput}
-					>
+					<Input type="text" deco="basket-default font-default" className="w-[280px]" name="nick" value={data.nick} placeholder="nick 입력" onChange={chageInput}>
 						<Box deco="box-default" />
 						<Icon deco="font-danger">bx-user</Icon>
 						<Text deco="font-warning" className="flex-none">
 							NICK :
 						</Text>
 					</Input>
-					<Input
-						type="text"
-						deco="basket-default box-default font-default"
-						icon="bx-user"
-						name="nick"
-						value={data.nick}
-						placeholder="nick 입력"
-						onChange={chageInput}
-						disabled
-					>
+					<Input type="text" deco="basket-default box-default font-default" icon="bx-user" name="nick" value={data.nick} placeholder="nick 입력" onChange={chageInput} disabled>
 						{/* <BoxEx deco="box-default" /> */}
 						{/* <Icon deco="font-danger">bx-user</Icon> */}
 						<Text deco="font-success">nick : </Text>
@@ -804,28 +745,11 @@ export default function code() {
 
 				<Group>
 					<Text deco="font-danger">key : </Text>
-					<Input
-						type="password"
-						deco="basket-default font-danger"
-						className="w-[120px]"
-						name="key"
-						value={data.key}
-						placeholder="key 입력"
-						onChange={chageInput}
-					>
+					<Input type="password" deco="basket-default font-danger" className="w-[120px]" name="key" value={data.key} placeholder="key 입력" onChange={chageInput}>
 						<Box deco="box-success" />
 						<Icon deco="font-danger">bx-key</Icon>
 					</Input>
-					<Input
-						type="text"
-						deco="basket-default box-danger font-danger"
-						icon="bx-key"
-						name="key2"
-						value={data.key}
-						placeholder="key 입력"
-						onChange={chageInput}
-						disabled
-					>
+					<Input type="text" deco="basket-default box-danger font-danger" icon="bx-key" name="key2" value={data.key} placeholder="key 입력" onChange={chageInput} disabled>
 						{/* <BoxEx deco="box-round" /> */}
 						{/* <Icon deco="font-danger">bx-key</Icon> */}
 					</Input>
@@ -833,28 +757,11 @@ export default function code() {
 
 				<Group>
 					<Text deco="font-danger">search : </Text>
-					<Input
-						type="text"
-						deco="basket-default font-primary"
-						className="w-[180px] text-xl"
-						name="search"
-						value={data.search}
-						placeholder="search 입력"
-						onChange={chageInput}
-					>
+					<Input type="text" deco="basket-default font-primary" className="w-[180px] text-xl" name="search" value={data.search} placeholder="search 입력" onChange={chageInput}>
 						<Box deco="box-round" />
 						<Icon deco="font-primary">bx-search-alt-2</Icon>
 					</Input>
-					<Input
-						type="text"
-						deco="basket-default box-round font-primary"
-						icon="bx-search-alt-2"
-						name="search2"
-						value={data.search}
-						placeholder="search 입력"
-						onChange={chageInput}
-						disabled
-					>
+					<Input type="text" deco="basket-default box-round font-primary" icon="bx-search-alt-2" name="search2" value={data.search} placeholder="search 입력" onChange={chageInput} disabled>
 						{/* <BoxEx deco="box-round" /> */}
 						{/* <Icon deco="font-primary">bx-search-alt-2</Icon> */}
 					</Input>
@@ -895,33 +802,35 @@ export default function code() {
 				</Group>
 			</Fieldset>
 
-			<Fieldset title="template">
+			<Fieldset title="ButtonNormal">
+				{['default', 'primary', 'success', 'warning', 'danger'].map((item, index) => (
+					<Group key={index}>
+						<Text deco="font-danger">{item} : </Text>
+						<ButtonNormal theme={item} icon="bx-leaf" iconR="bxs-chevron-right" text="Next Step" name="" onClick={() => {}} />
+						<ButtonNormal theme={item} icon="bx-leaf" text="Next Step" checked />
+						<ButtonNormal theme={item} iconR="bxs-chevron-right" text="다음 단계" />
+						<ButtonNormal theme={item} icon="bx-leaf" name="key" checked />
+						<ButtonNormal theme={item} text="Menu" name="menu" disabled />
+					</Group>
+				))}
+			</Fieldset>
+
+			<Fieldset title="ToggleNormal">
+				{['default', 'primary', 'success', 'warning', 'danger'].map((item, index) => (
+					<Group key={index}>
+						<Text deco="font-danger">{item} : </Text>
+						<ToggleNormal theme={item} icon="bx-leaf" iconR="bxs-chevron-right" text="Next Step" name="" onChange={() => {}} />
+						<ToggleNormal theme={item} icon="bx-leaf" text="Next Step" checked />
+						<ToggleNormal theme={item} iconR="bxs-chevron-right" text="다음 단계" />
+						<ToggleNormal theme={item} icon="bx-leaf" name="key" checked />
+						<ToggleNormal theme={item} text="Menu" name="menu" disabled />
+					</Group>
+				))}
+			</Fieldset>
+
+			<Fieldset title="ToggleCheckbox">
 				<Group>
-					<Text deco="font-danger">ButtonPrimary : </Text>
-					<ButtonPrimary icon="bx-user" iconR="bx-chevrons-right" text="Next Step" name="hot" onClick={clickButton} />
-					<ButtonPrimary icon="bx-user" text="Next Step" name="hot" onClick={clickButton} checked />
-					<ButtonPrimary iconR="bx-chevrons-right" text="다음 단계" name="hot" onClick={clickButton} />
-					<ButtonPrimary icon="bx-key" name="key" checked />
-					<ButtonPrimary text="Menu" name="menu" disabled />
-				</Group>
-				<Group>
-					<Text deco="font-danger">ToggleSuccess : </Text>
-					<ToggleSuccess icon="bx-user" iconR="bx-chevrons-right" text="Next Step" name="hot" onClick={clickButton} />
-					<ToggleSuccess icon="bx-user" text="Next Step" name="hot" onClick={clickButton} checked />
-					<ToggleSuccess iconR="bx-chevrons-right" text="다음 단계" name="hot" onClick={clickButton} />
-					<ToggleSuccess icon="bx-key" name="key" checked />
-					<ToggleSuccess text="Menu" name="menu" disabled />
-				</Group>
-				<Group>
-					<Text deco="font-danger">ToggleWarning : </Text>
-					<ToggleWarning icon="bx-user" iconR="bx-chevrons-right" text="Next Step" name="hot" onClick={clickButton} />
-					<ToggleWarning icon="bx-user" text="Next Step" name="hot" onClick={clickButton} checked />
-					<ToggleWarning iconR="bx-chevrons-right" text="다음 단계" name="hot" onClick={clickButton} />
-					<ToggleWarning icon="bx-key" name="key" checked />
-					<ToggleWarning text="Menu" name="menu" disabled />
-				</Group>
-				<Group>
-					<Text deco="font-danger">ToggleCheckbox : </Text>
+					<Text deco="font-danger">default : </Text>
 					<ToggleCheckbox name="checkbox" checked={data.checkbox} onChange={changeSwitch}>
 						<Text deco="font-toggle">다음 내용을 확인했습니다.</Text>
 					</ToggleCheckbox>
@@ -929,8 +838,11 @@ export default function code() {
 					<ToggleCheckbox text="동의" checked />
 					<ToggleCheckbox text="비동의" disabled />
 				</Group>
+			</Fieldset>
+
+			<Fieldset title="ToggleRadio">
 				<Group>
-					<Text deco="font-danger">ToggleRadio : </Text>
+					<Text deco="font-danger">default : </Text>
 					<ToggleRadio name="radio" checked={data.radio} onChange={changeSwitch}>
 						<Text deco="font-toggle">다음 내용을 확인했습니다.</Text>
 					</ToggleRadio>
@@ -938,8 +850,11 @@ export default function code() {
 					<ToggleRadio text="동의" checked />
 					<ToggleRadio text="비동의" disabled />
 				</Group>
+			</Fieldset>
+
+			<Fieldset title="ToggleSwitch">
 				<Group>
-					<Text deco="font-danger">ToggleSwitch : </Text>
+					<Text deco="font-danger">default : </Text>
 					<ToggleSwitch name="agree" checked={data.agree} onChange={changeSwitch}>
 						<Text deco="font-toggle">다음 내용을 확인했습니다.</Text>
 					</ToggleSwitch>

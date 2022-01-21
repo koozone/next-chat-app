@@ -38,53 +38,53 @@ export const Item = (props) => {
 	);
 };
 
-export const ButtonPrimary = (props) => {
+const getDeco = (props) => {
+	const {theme = 'default'} = props;
+
+	return {
+		default: {box: 'box-default', font: 'font-default'},
+		primary: {box: 'box-primary', font: 'font-primary'},
+		success: {box: 'box-success', font: 'font-success'},
+		warning: {box: 'box-warning', font: 'font-warning'},
+		danger: {box: 'box-danger', font: 'font-danger'},
+	}[theme];
+};
+
+const Aaa = (props) => {
+	const {children, className, icon, iconR, text, team, name, onClick, onChange, checked, disabled} = props;
+	const decoData = getDeco(props);
+
+	return (
+		<>
+			<Box deco={decoData.box} />
+			<Icon deco={decoData.font} className="mr-2 last:mr-0">
+				{icon}
+			</Icon>
+			<Text deco={decoData.font}>{text}</Text>
+			{children}
+			<Icon deco={decoData.font} className="ml-2 first:ml-0">
+				{iconR}
+			</Icon>
+		</>
+	);
+};
+
+export const ButtonNormal = (props) => {
 	const {children, className, icon, iconR, text, team, name, onClick, onChange, checked, disabled} = props;
 
 	return (
-		<Button deco="basket-default box-primary" className={className} name={name} onClick={onClick} checked={checked} disabled={disabled}>
-			<Icon deco="font-default" className="text-lg mr-2 last:mr-0">
-				{icon}
-			</Icon>
-			<Text deco="font-primary">{text}</Text>
-			{children}
-			<Icon deco="font-primary" className="text-lg ml-2 first:ml-0">
-				{iconR}
-			</Icon>
+		<Button deco="basket-default" className={className} name={name} onClick={onClick} checked={checked} disabled={disabled}>
+			<Aaa {...props} />
 		</Button>
 	);
 };
 
-export const ToggleSuccess = (props) => {
+export const ToggleNormal = (props) => {
 	const {children, className, icon, iconR, text, team, name, onClick, onChange, checked, disabled} = props;
 
 	return (
-		<Toggle deco="basket-default box-success" className={className} name={name} onChange={onChange} checked={checked} disabled={disabled}>
-			<Icon deco="font-default" className="text-lg mr-2 last:mr-0">
-				{icon}
-			</Icon>
-			<Text deco="font-success">{text}</Text>
-			{children}
-			<Icon deco="font-success" className="text-lg ml-2 first:ml-0">
-				{iconR}
-			</Icon>
-		</Toggle>
-	);
-};
-
-export const ToggleWarning = (props) => {
-	const {children, className, icon, iconR, text, team, name, onClick, onChange, checked, disabled} = props;
-
-	return (
-		<Toggle deco="basket-default box-warning" className={className} name={name} onChange={onChange} checked={checked} disabled={disabled}>
-			<Icon deco="font-default" className="text-lg mr-2 last:mr-0">
-				{icon}
-			</Icon>
-			<Text deco="font-warning">{text}</Text>
-			{children}
-			<Icon deco="font-warning" className="text-lg ml-2 first:ml-0">
-				{iconR}
-			</Icon>
+		<Toggle deco="basket-default" className={className} name={name} onChange={onChange} checked={checked} disabled={disabled}>
+			<Aaa {...props} />
 		</Toggle>
 	);
 };
