@@ -17,7 +17,7 @@ const getDefaultElement = (props) => {
 				return <div className={`bx ${children} pointer-events-none peer-disabled:opacity-30 peer-disabled:pointer-events-none`} />;
 
 			case 'font':
-				return <div className={`flex-auto peer-disabled:opacity-30 peer-disabled:pointer-events-none`} />;
+				return <div className={`peer-disabled:opacity-30 peer-disabled:pointer-events-none`} />;
 
 			case 'box':
 				return <div className={`-z-20 top-0 left-0 peer-disabled:opacity-30 peer-disabled:pointer-events-none`} />;
@@ -139,7 +139,11 @@ const getElement = (props) => {
 					/>
 				);
 			case 'box-switch-dot':
-				return <div className={`absolute w-3 h-3 rounded-full ring-1 ring-slate-400 bg-white top-[8px] left-[11px] peer-checked:left-[22px]`} />;
+				return (
+					<div
+						className={`absolute w-3 h-3 rounded-full ring-1 ring-slate-400 bg-white top-1/2 transform -translate-y-1/2 left-[11px] peer-checked:left-[22px]`}
+					/>
+				);
 			case 'box-list-col':
 				return (
 					<div

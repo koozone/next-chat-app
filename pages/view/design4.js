@@ -45,6 +45,36 @@ const Item = (props) => {
 	);
 };
 
+const ButtonPrimary = (props) => {
+	const {children, className, icon, iconR, text, name, onClick, checked, disabled} = props;
+
+	return (
+		<Button deco="basket-default box-primary" className={className} name={name} onClick={onClick} checked={checked} disabled={disabled}>
+			<Icon deco="font-danger" className="text-lg mr-2 last:mr-0">
+				{icon}
+			</Icon>
+			<Text deco="font-primary">{text}</Text>
+			{children}
+			<Icon deco="font-primary" className="text-lg ml-2 first:ml-0">
+				{iconR}
+			</Icon>
+		</Button>
+	);
+};
+
+const ToggleSwitch = (props) => {
+	const {children, className, icon, iconR, text, name, onChange, onClick, checked, disabled} = props;
+
+	return (
+		<Toggle deco="basket-default" className={className} name={name} checked={checked} onChange={onChange}>
+			<Box deco="box-switch" className="mr-2 last:mr-0" />
+			<Box deco="box-switch-dot" />
+			<Text deco="font-toggle">{text}</Text>
+			{children}
+		</Toggle>
+	);
+};
+
 const CodeUseData = () => {
 	const idInput = useRef(null);
 	const [data, runData] = UseData({
@@ -241,6 +271,8 @@ export default function code() {
 			runModal.open();
 		} else if (name == 'showSidemenu') {
 			runSideMenu.open();
+		} else if (name == 'hot') {
+			runSideMenu.open();
 		} else if (name == 'countLike') {
 			runData.change(name, data[name] + 1);
 		} else if (name == 'countHate') {
@@ -293,40 +325,16 @@ export default function code() {
 				</Group>
 			</Fieldset>
 
-			<Fieldset title="icon">
+			<Fieldset title="Icon">
 				<Group>
 					<Icon deco="font-default">bx-user-plus</Icon>
 					<Icon deco="font-default">bx-leaf</Icon>
 					<Icon deco="font-danger">bx-align-middle</Icon>
 					<Icon deco="font-primary">bx-search-alt-2</Icon>
 				</Group>
-				<Group>
-					<div>
-						<input type="checkbox" className="peer"></input>
-						<div className="text-blue-500 peer-checked:text-red-500">
-							First
-							<div className="text-blue-500 peer-checked:text-red-500">Last</div>
-						</div>
-					</div>
-					<div class="border border-blue-300 shadow rounded-md p-4 max-w-sm w-full mx-auto">
-						<div class="animate-pulse flex space-x-4">
-							<div class="rounded-full bg-slate-700 h-10 w-10"></div>
-							<div class="flex-1 space-y-6 py-1">
-								<div class="h-2 bg-slate-700 rounded"></div>
-								<div class="space-y-3">
-									<div class="grid grid-cols-3 gap-4">
-										<div class="h-2 bg-slate-700 rounded col-span-2"></div>
-										<div class="h-2 bg-slate-700 rounded col-span-1"></div>
-									</div>
-									<div class="h-2 bg-slate-700 rounded"></div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</Group>
 			</Fieldset>
 
-			<Fieldset title="text">
+			<Fieldset title="Text">
 				<Group>
 					<Text deco="font-primary" className="italic">
 						lorem story
@@ -346,7 +354,7 @@ export default function code() {
 				</Group>
 			</Fieldset>
 
-			<Fieldset title="label">
+			<Fieldset title="Label">
 				<Group>
 					<Label deco="font-primary" icon="bx-star" text="Start : ">
 						<Text deco="font-warning">Earum suscipit repellat officia quibusdam ipsum nisi optio</Text>
@@ -357,7 +365,7 @@ export default function code() {
 				</Group>
 			</Fieldset>
 
-			<Fieldset title="basket">
+			<Fieldset title="Basket">
 				<Group>
 					<Basket deco="basket-mini box-round" checked>
 						<Icon deco="font-primary">bxs-heart</Icon>
@@ -399,7 +407,7 @@ export default function code() {
 				</Group>
 			</Fieldset>
 
-			<Fieldset title="a">
+			<Fieldset title="A">
 				<Group>
 					<A href="/" deco="basket-a-primary" className="underline-offset-2">
 						<Text deco="font-primary" className="text-xl font-semibold">
@@ -427,7 +435,7 @@ export default function code() {
 				</Group>
 			</Fieldset>
 
-			<Fieldset title="button">
+			<Fieldset title="Button">
 				<Group>
 					<Button deco="basket-default box-primary">
 						{/* <BoxEx deco="box-primary" /> */}
@@ -437,7 +445,8 @@ export default function code() {
 						<Icon deco="font-primary">bxs-chevron-right</Icon>
 						<Text deco="font-danger">Sample</Text>
 					</Button>
-					<Button deco="basket-default box-success font-danger" name="happy" icon="bx-user">
+					<Button deco="basket-default box-success" name="happy">
+						<Icon deco="font-danger">bx-user</Icon>
 						<Text deco="font-success">named</Text>
 					</Button>
 					<Button deco="basket-default box-danger font-success" icon="bx-user-x" text="no name" />
@@ -505,7 +514,7 @@ export default function code() {
 				</Group>
 			</Fieldset>
 
-			<Fieldset title="toggle">
+			<Fieldset title="Toggle">
 				<Group>
 					<Toggle deco="basket-default">
 						<Box deco="box-default" />
@@ -540,7 +549,7 @@ export default function code() {
 				</Group>
 			</Fieldset>
 
-			<Fieldset title="toggle (checkbox)">
+			<Fieldset title="Toggle (checkbox)">
 				<Group>
 					<Toggle deco="basket-default">
 						<Box deco="box-checkbox" />
@@ -615,7 +624,7 @@ export default function code() {
 				</Group>
 			</Fieldset>
 
-			<Fieldset title="toggle (radio)">
+			<Fieldset title="Toggle (radio)">
 				<Group>
 					<Toggle deco="basket-default">
 						<Box deco="box-radio" />
@@ -690,7 +699,7 @@ export default function code() {
 				</Group>
 			</Fieldset>
 
-			<Fieldset title="toggle (switch)">
+			<Fieldset title="Toggle (switch)">
 				<Group>
 					<Toggle deco="basket-default">
 						<Box deco="box-switch" />
@@ -736,7 +745,7 @@ export default function code() {
 				</Group>
 			</Fieldset>
 
-			<Fieldset title="list">
+			<Fieldset title="List">
 				<Group>
 					<ul className="flex items-center divide-x divide-black/20">
 						<li className="px-4 first:pl-0 last:pr-0">
@@ -790,7 +799,7 @@ export default function code() {
 				</Group>
 			</Fieldset>
 
-			<Fieldset title="input">
+			<Fieldset title="Input">
 				<Group>
 					<Text deco="font-danger">nick : </Text>
 					<Input
@@ -914,6 +923,26 @@ export default function code() {
 						<Box deco="box-default" />
 						<Label deco="font-default" text="show sidemonu" />
 					</Button>
+				</Group>
+			</Fieldset>
+
+			<Fieldset title="template">
+				<Group>
+					<Text deco="font-danger">ButtonPrimary : </Text>
+					<ButtonPrimary icon="bx-user" iconR="bx-chevrons-right" text="hot button" name="hot" onClick={clickButton} />
+					<ButtonPrimary icon="bx-user" text="hot button" name="hot" onClick={clickButton} checked />
+					<ButtonPrimary iconR="bx-chevrons-right" text="다음 단계" name="hot" onClick={clickButton} />
+					<ButtonPrimary icon="bx-key" name="key" checked />
+					<ButtonPrimary text="Menu" name="menu" disabled />
+				</Group>
+				<Group>
+					<Text deco="font-danger">ToggleSwitch : </Text>
+					<ToggleSwitch name="agree" checked={data.agree} onChange={changeSwitch}>
+						<Text deco="font-toggle">다음 내용을 확인했습니다.</Text>
+					</ToggleSwitch>
+					<ToggleSwitch />
+					<ToggleSwitch text="동의" checked />
+					<ToggleSwitch text="비동의" />
 				</Group>
 			</Fieldset>
 		</>
