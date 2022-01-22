@@ -7,6 +7,7 @@ import {UseData} from '../hook/useData';
 import {UseModal} from '../hook/useModal';
 import {UseSideMenu} from '../hook/useSideMenu';
 import Todo from './todo';
+import {Chip} from './../component/temp_ds';
 
 // const Fieldset = ({children, title}) => {
 // 	return (
@@ -799,6 +800,12 @@ export default function code() {
 						<Box deco="box-default" />
 						<Label deco="font-default" text="show sidemonu" />
 					</Button>
+				</Group>
+			</Fieldset>
+
+			<Fieldset title="Chip">
+				<Group>
+					<Chip theme="success-xs-sm" icon="bx-leaf" iconR="bxs-chevron-right" text="Next Step" />
 				</Group>
 			</Fieldset>
 

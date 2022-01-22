@@ -67,19 +67,19 @@ const getElement = (props) => {
 				return <div className={`absolute text-lg text-white top-[5px] left-[7px] invisible peer-checked:visible`} />;
 
 			case 'box-default':
-				return <div className={`absolute w-full h-full rounded ring-1 ring-slate-400 bg-slate-100 group-hover:bg-white peer-checked:bg-slate-500 peer-checked:ring-slate-700 group-hover:peer-checked:bg-slate-600 group-focus-within:ring-slate-400 group-focus-within:bg-white`} />;
+				return <div className={`absolute w-full h-full ring-1 ring-slate-600 bg-white group-hover:bg-slate-50 peer-checked:bg-slate-500 peer-checked:ring-slate-700 group-hover:peer-checked:bg-slate-600 group-focus-within:ring-slate-600 group-focus-within:bg-white`} />;
 			case 'box-primary':
-				return <div className={`absolute w-full h-full rounded ring-1 ring-sky-400 bg-sky-100 group-hover:bg-white peer-checked:bg-sky-500 peer-checked:ring-sky-700 group-hover:peer-checked:bg-sky-600 group-focus-within:ring-sky-400 group-focus-within:bg-white`} />;
+				return <div className={`absolute w-full h-full ring-1 ring-sky-600 bg-white group-hover:bg-sky-50 peer-checked:bg-sky-500 peer-checked:ring-sky-700 group-hover:peer-checked:bg-sky-600 group-focus-within:ring-sky-600 group-focus-within:bg-white`} />;
 			case 'box-success':
-				return <div className={`absolute w-full h-full rounded ring-1 ring-emerald-400 bg-emerald-100 group-hover:bg-white peer-checked:bg-emerald-500 peer-checked:ring-emerald-700 group-hover:peer-checked:bg-emerald-600`} />;
+				return <div className={`absolute w-full h-full ring-1 ring-emerald-600 bg-white group-hover:bg-emerald-50 peer-checked:bg-emerald-500 peer-checked:ring-emerald-700 group-hover:peer-checked:bg-emerald-600`} />;
 			case 'box-warning':
-				return <div className={`absolute w-full h-full rounded ring-1 ring-amber-400 bg-amber-100 group-hover:bg-white peer-checked:bg-amber-500 peer-checked:ring-amber-700 group-hover:peer-checked:bg-amber-600`} />;
+				return <div className={`absolute w-full h-full ring-1 ring-amber-600 bg-white group-hover:bg-amber-50 peer-checked:bg-amber-500 peer-checked:ring-amber-700 group-hover:peer-checked:bg-amber-600`} />;
 			case 'box-danger':
-				return <div className={`absolute w-full h-full rounded ring-1 ring-rose-400 bg-rose-100 group-hover:bg-white peer-checked:bg-rose-500 peer-checked:ring-rose-700 group-hover:peer-checked:bg-rose-600 group-focus-within:ring-rose-400 group-focus-within:bg-white`} />;
+				return <div className={`absolute w-full h-full ring-1 ring-rose-600 bg-white group-hover:bg-rose-50 peer-checked:bg-rose-500 peer-checked:ring-rose-700 group-hover:peer-checked:bg-rose-600 group-focus-within:ring-rose-400 group-focus-within:bg-white`} />;
 			case 'box-round':
 				return <div className={`absolute w-full h-full rounded-full ring-1 ring-sky-400 bg-sky-100 group-hover:bg-white peer-checked:bg-sky-500 peer-checked:ring-sky-700 group-hover:peer-checked:bg-sky-600 group-focus-within:ring-sky-400 group-focus-within:bg-white`} />;
 			case 'box-trans':
-				return <div className={`absolute w-full h-full rounded bg-black/0 group-hover:bg-black/5`} />;
+				return <div className={`absolute w-full h-full bg-black/0 group-hover:bg-black/5`} />;
 			case 'box-item':
 				return <div className={`absolute w-full h-full ring-1 ring-slate-400 bg-slate-100 group-hover:bg-white peer-checked:bg-slate-500 peer-checked:ring-slate-700 group-hover:peer-checked:bg-slate-600 group-first:rounded-l-full group-last:rounded-r-full`} />;
 			case 'box-checkbox':

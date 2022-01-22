@@ -56,8 +56,8 @@ const Aaa = (props) => {
 
 	return (
 		<>
-			{/* <Box deco={decoData.box} /> */}
-			<Box deco={decoData.box} className="!rounded-full" />
+			<Box deco={decoData.box} />
+			{/* <Box deco={decoData.box} className="!rounded-full" /> */}
 			<Icon deco={decoData.font} className="mr-1 last:mr-0">
 				{icon}
 			</Icon>
@@ -70,12 +70,44 @@ const Aaa = (props) => {
 	);
 };
 
+export const Chip = (props) => {
+	const {children, theme, className, icon, iconR, text, team, name, onClick, onChange, checked, disabled} = props;
+
+	const themeList = String(theme).split('-') || [];
+	const padding = {
+		xs: 1,
+		sm: 2,
+		md: 3,
+		lg: 4,
+		x1: 5,
+	};
+
+	const color = themeList[0] || 'danger';
+	const size = themeList[1] || 'xs';
+	const gab = padding[size];
+	const round = themeList[2] || 'full';
+
+	return (
+		<Button className={`px-${gab} py-${gab / 2} text-${size} ${className}`} name={name} onClick={onClick} checked={checked} disabled={disabled}>
+			<Box deco={`box-${color}`} className={`rounded-${round}`} />
+			<Icon deco={`font-${color}`} className={`mr-${gab} last:mr-0`}>
+				{icon}
+			</Icon>
+			<Text deco={`font-${color}`}>{text}</Text>
+			{children}
+			<Icon deco={`font-${color}`} className={`ml-${gab} first:ml-0`}>
+				{iconR}
+			</Icon>
+		</Button>
+	);
+};
+
 export const ButtonNormal = (props) => {
 	const {children, className, icon, iconR, text, team, name, onClick, onChange, checked, disabled} = props;
 
 	return (
-		// <Button deco="basket-default" className={className} name={name} onClick={onClick} checked={checked} disabled={disabled}>
-		<Button className="px-1 py-0.5 text-xs" name={name} onClick={onClick} checked={checked} disabled={disabled}>
+		<Button deco="basket-default" className={className} name={name} onClick={onClick} checked={checked} disabled={disabled}>
+			{/* <Button className="px-1 py-0.5 text-xs" name={name} onClick={onClick} checked={checked} disabled={disabled}> */}
 			<Aaa {...props} />
 		</Button>
 	);
