@@ -209,6 +209,19 @@ export const Label = (props) => {
 	);
 };
 
+export const Case = (props) => {
+	const newProps = props.tag ? props : getProps({...props, type: 'checkbox', tag: 'basket'});
+	const {children, deco, style, className, icon, iconL, iconR, name, text, type, onChange, checked = false, disabled} = newProps;
+
+	return (
+		<>
+			<Box deco={deco} />
+			<Label deco={deco} icon={icon || iconL} iconR={iconR} text={text} />
+			{children}
+		</>
+	);
+};
+
 export const Basket = (props) => {
 	const newProps = props.tag ? props : getProps({...props, type: 'checkbox', tag: 'basket'});
 	const {children, deco, style, className, icon, iconL, iconR, name, text, type, onChange, checked = false, disabled} = newProps;
@@ -234,12 +247,12 @@ export const Toggle = (props) => {
 
 export const A = (props) => {
 	const newProps = getProps({...props, tag: 'a'});
-	const {name, href, target = '_self', checked = false} = newProps;
+	const {style, className, name, href, target = '_self', checked = false} = newProps;
 
 	return (
 		<Link href={href}>
-			<a target={target}>
-				<Basket {...newProps} type="checkbox" checked={checked} />
+			<a target={target} className={`${style} | ${className}`}>
+				<Case {...newProps} />
 			</a>
 		</Link>
 	);
@@ -247,14 +260,14 @@ export const A = (props) => {
 
 export const Button = (props) => {
 	const newProps = getProps({...props, tag: 'button'});
-	const {children, name, onClick, checked = false, disabled} = newProps;
+	const {style, className, name, onClick, checked = false, disabled} = newProps;
 
 	// disabled 상태일때를 위한 코드
 	const clickHandler = disabled ? () => {} : onClick;
 
 	return (
-		<button type="button" name={name} onClick={clickHandler}>
-			<Basket {...newProps} type="checkbox" checked={checked} />
+		<button type="button" className={`${style} | ${className}`} name={name} onClick={clickHandler}>
+			<Case {...newProps} />
 		</button>
 	);
 };
