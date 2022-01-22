@@ -56,13 +56,14 @@ const Aaa = (props) => {
 
 	return (
 		<>
-			<Box deco={decoData.box} />
-			<Icon deco={decoData.font} className="mr-2 last:mr-0">
+			{/* <Box deco={decoData.box} /> */}
+			<Box deco={decoData.box} className="!rounded-full" />
+			<Icon deco={decoData.font} className="mr-1 last:mr-0">
 				{icon}
 			</Icon>
 			<Text deco={decoData.font}>{text}</Text>
 			{children}
-			<Icon deco={decoData.font} className="ml-2 first:ml-0">
+			<Icon deco={decoData.font} className="ml-1 first:ml-0">
 				{iconR}
 			</Icon>
 		</>
@@ -73,7 +74,8 @@ export const ButtonNormal = (props) => {
 	const {children, className, icon, iconR, text, team, name, onClick, onChange, checked, disabled} = props;
 
 	return (
-		<Button deco="basket-default" className={className} name={name} onClick={onClick} checked={checked} disabled={disabled}>
+		// <Button deco="basket-default" className={className} name={name} onClick={onClick} checked={checked} disabled={disabled}>
+		<Button className="px-1 py-0.5 text-xs" name={name} onClick={onClick} checked={checked} disabled={disabled}>
 			<Aaa {...props} />
 		</Button>
 	);
