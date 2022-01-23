@@ -10,8 +10,8 @@ export const Fieldset = ({children, title}) => {
 		</fieldset>
 	);
 };
-export const Group = ({children}) => {
-	return <div className="space-x-2">{children}</div>;
+export const Group = ({children, className=""}) => {
+	return <div className={`space-x-2 ${className}`}>{children}</div>;
 };
 
 export const Item2 = (props) => {
@@ -83,11 +83,11 @@ export const Chip = (props) => {
 	const trans2 = ['2'].includes(mode) ? '-trans' : '';
 	const checked = ['2', '4'].includes(mode) ? true : false;
 	const gab = {
-		xs: {x: 1, y: 0.5},
-		sm: {x: 2, y: 0.5},
-		md: {x: 2, y: 1},
-		lg: {x: 3, y: 1},
-		xl: {x: 3, y: 2},
+		xs: {x: 1, y: 1},
+		sm: {x: 1, y: 1},
+		md: {x: 1, y: 1},
+		lg: {x: 1, y: 1},
+		xl: {x: 1, y: 1},
 	}[size];
 
 	return (
@@ -96,11 +96,11 @@ export const Chip = (props) => {
 			<Icon deco={`font-${color}${trans2}`} className={`mr-${gab.x} last:mr-0`}>
 				{icon}
 			</Icon>
-			<Text deco={`font-${color}${trans2}`}>{text}</Text>
+			<Text deco={`font-${color}${trans2}`} className={`mr-${gab.x} last:mr-0 px-${gab.x}`}>
+				{text}
+			</Text>
 			{children}
-			<Icon deco={`font-${color}${trans2}`} className={`ml-${gab.x} first:ml-0`}>
-				{iconR}
-			</Icon>
+			<Icon deco={`font-${color}${trans2}`}>{iconR}</Icon>
 		</Button>
 	);
 };

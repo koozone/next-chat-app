@@ -1,4 +1,4 @@
-import {useRef} from 'react';
+import {useEffect, useRef} from 'react';
 import Header, {Header1, Header2, Header3} from '../component/header';
 import {ButtonNormal, Fieldset, Group, Item, Item2, ToggleCheckbox, ToggleRadio, ToggleSwitch, ToggleNormal, Chip} from '../component/temp_ds';
 import {Icon, A, Button, Img, Input, Label, Text, Basket, Toggle, Box} from '../component/ui_ds4';
@@ -7,6 +7,11 @@ import {UseData} from '../hook/useData';
 import {UseModal} from '../hook/useModal';
 import {UseSideMenu} from '../hook/useSideMenu';
 import Todo from './todo';
+import hljs from 'highlight.js';
+import 'highlight.js/styles/night-owl.css';
+import javascript from 'highlight.js/lib/languages/javascript';
+
+hljs.registerLanguage('javascript', javascript);
 
 // const Fieldset = ({children, title}) => {
 // 	return (
@@ -296,6 +301,7 @@ export default function code() {
 		mode: ['3'],
 		icon: ['true'],
 		iconR: ['true'],
+		text: ['true'],
 	});
 	const [modal, runModal] = UseModal();
 	const [sideMenu, runSideMenu] = UseSideMenu();
@@ -353,6 +359,10 @@ export default function code() {
 
 		runData.change(name, value);
 	};
+
+	useEffect(() => {
+		hljs.initHighlighting();
+	}, [chioData]);
 
 	return (
 		<>
@@ -858,9 +868,8 @@ export default function code() {
 					<Chip theme="primary-xs-full-3" icon="bx-leaf" iconR="bxs-chevron-right" text="Next Step" />
 					<Chip theme="primary-xs-full-4" icon="bx-leaf" iconR="bxs-chevron-right" text="Next Step" />
 				</Group>
-				{console.log('chioData', chioData)}
 				<Group>
-					<Chip theme={[chioData.color, chioData.size, chioData.round, chioData.mode].join('-')} icon={chioData.icon[0] == 'true' ? 'bx-leaf' : ''} iconR={chioData.iconR[0] == 'true' ? 'bxs-chevron-right' : ''} text="Next Step" />
+					<Chip theme={[chioData.color, chioData.size, chioData.round, chioData.mode].join('-')} icon={chioData.icon[0] == 'true' ? 'bx-leaf' : null} iconR={chioData.iconR[0] == 'true' ? 'bxs-chevron-right' : null} text={chioData.text[0] == 'true' ? 'Next Step' : null} />
 				</Group>
 				<Group>
 					<Text deco="font-danger">color : </Text>
@@ -903,6 +912,17 @@ export default function code() {
 					<ToggleRadio text="true" team="iconR" name="true" checked={chioData.iconR.includes('true')} onChange={changeChipRadio} />
 					<ToggleRadio text="false" team="iconR" name="false" checked={chioData.iconR.includes('false')} onChange={changeChipRadio} />
 				</Group>
+				<Group>
+					<Text deco="font-danger">text : </Text>
+					<ToggleRadio text="true" team="text" name="true" checked={chioData.text.includes('true')} onChange={changeChipRadio} />
+					<ToggleRadio text="false" team="text" name="false" checked={chioData.text.includes('false')} onChange={changeChipRadio} />
+				</Group>
+				<pre>
+					<code className="html">
+						{`<Chip theme="${[chioData.color, chioData.size, chioData.round, chioData.mode].join('-')}"${chioData.icon[0] == 'true' ? ' icon="bx-leaf"' : ''}${chioData.iconR[0] == 'true' ? ' iconR="bxs-chevron-right"' : ''}${chioData.text[0] == 'true' ? ' text="Next Step"' : ''} />
+`}
+					</code>
+				</pre>
 			</Fieldset>
 
 			<Fieldset title="ButtonNormal">
