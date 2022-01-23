@@ -71,31 +71,34 @@ const Aaa = (props) => {
 };
 
 export const Chip = (props) => {
-	const {children, theme, className, icon, iconR, text, team, name, onClick, onChange, checked, disabled} = props;
+	const {children, theme, className = '', icon, iconR, text, team, name, onClick, onChange, disabled} = props;
 
 	const themeList = String(theme).split('-') || [];
-	const padding = {
-		xs: 1,
-		sm: 2,
-		md: 3,
-		lg: 4,
-		x1: 5,
-	};
-
 	const color = themeList[0] || 'danger';
 	const size = themeList[1] || 'xs';
-	const gab = padding[size];
 	const round = themeList[2] || 'full';
+	const mode = themeList[3] || '1';
+
+	const trans = ['1', '2'].includes(mode) ? '-trans' : '';
+	const trans2 = ['2'].includes(mode) ? '-trans' : '';
+	const checked = ['2', '4'].includes(mode) ? true : false;
+	const gab = {
+		xs: {x: 1, y: 0.5},
+		sm: {x: 2, y: 0.5},
+		md: {x: 2, y: 1},
+		lg: {x: 3, y: 1},
+		xl: {x: 3, y: 2},
+	}[size];
 
 	return (
-		<Button className={`px-${gab} py-${gab / 2} text-${size} ${className}`} name={name} onClick={onClick} checked={checked} disabled={disabled}>
-			<Box deco={`box-${color}`} className={`rounded-${round}`} />
-			<Icon deco={`font-${color}`} className={`mr-${gab} last:mr-0`}>
+		<Button className={`px-${gab.x} py-${gab.y} text-${size} ${className}`} name={name} onClick={onClick} checked={checked} disabled={disabled}>
+			<Box deco={`box-${color}${trans}`} className={`rounded-${round}`} />
+			<Icon deco={`font-${color}${trans2}`} className={`mr-${gab.x} last:mr-0`}>
 				{icon}
 			</Icon>
-			<Text deco={`font-${color}`}>{text}</Text>
+			<Text deco={`font-${color}${trans2}`}>{text}</Text>
 			{children}
-			<Icon deco={`font-${color}`} className={`ml-${gab} first:ml-0`}>
+			<Icon deco={`font-${color}${trans2}`} className={`ml-${gab.x} first:ml-0`}>
 				{iconR}
 			</Icon>
 		</Button>

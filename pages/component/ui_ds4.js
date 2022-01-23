@@ -52,30 +52,54 @@ const getElement = (props) => {
 
 		switch (useDeco) {
 			case 'font-default':
-				return <div className={`text-slate-800 peer-checked:text-white`} />;
+				return <div className={`text-slate-800 peer-checked:text-white group-focus-within:text-slate-400 placeholder-slate-400`} />;
 			case 'font-primary':
-				return <div className={`text-sky-800 group-focus-within:text-sky-400 peer-checked:text-white placeholder-slate-400`} />;
+				return <div className={`text-sky-800 peer-checked:text-white group-focus-within:text-sky-400 placeholder-slate-400`} />;
 			case 'font-success':
-				return <div className={`text-emerald-800 peer-checked:text-white`} />;
+				return <div className={`text-emerald-800 peer-checked:text-white group-focus-within:text-emerald-400 placeholder-slate-400`} />;
 			case 'font-warning':
-				return <div className={`text-amber-800 peer-checked:text-white`} />;
+				return <div className={`text-amber-800 peer-checked:text-white group-focus-within:text-amber-400 placeholder-slate-400`} />;
 			case 'font-danger':
-				return <div className={`text-rose-800 group-focus-within:text-rose-400 peer-checked:text-white`} />;
+				return <div className={`text-rose-800 peer-checked:text-white group-focus-within:text-rose-400 placeholder-slate-400`} />;
+
+			case 'font-default-trans':
+				return <div className={`text-white group-hover:text-slate-800 peer-checked:text-slate-800 group-hover:peer-checked:text-white group-focus-within:text-slate-400 placeholder-slate-400`} />;
+			case 'font-primary-trans':
+				return <div className={`text-white group-hover:text-sky-800 peer-checked:text-sky-800 group-hover:peer-checked:text-white group-focus-within:text-sky-400 placeholder-slate-400`} />;
+			case 'font-success-trans':
+				return <div className={`text-white group-hover:text-emerald-800 peer-checked:text-emerald-800 group-hover:peer-checked:text-white group-focus-within:text-emerald-400 placeholder-slate-400`} />;
+			case 'font-warning-trans':
+				return <div className={`text-white group-hover:text-amber-800 peer-checked:text-amber-800 group-hover:peer-checked:text-white group-focus-within:text-amber-400 placeholder-slate-400`} />;
+			case 'font-danger-trans':
+				return <div className={`text-white group-hover:text-rose-800 peer-checked:text-rose-800 group-hover:peer-checked:text-white group-focus-within:text-rose-400 placeholder-slate-400`} />;
+
 			case 'font-toggle':
 				return <div className={`text-sky-800 peer-checked:underline`} />;
 			case 'font-checkbox-dot':
 				return <div className={`absolute text-lg text-white top-[5px] left-[7px] invisible peer-checked:visible`} />;
 
 			case 'box-default':
-				return <div className={`absolute w-full h-full ring-1 ring-slate-600 bg-white group-hover:bg-slate-50 peer-checked:bg-slate-500 peer-checked:ring-slate-700 group-hover:peer-checked:bg-slate-600 group-focus-within:ring-slate-600 group-focus-within:bg-white`} />;
+				return <div className={`absolute w-full h-full ring-1 ring-slate-600 bg-white/0 group-hover:bg-slate-50 peer-checked:bg-slate-500 peer-checked:ring-slate-700 group-hover:peer-checked:bg-slate-600 group-focus-within:ring-slate-600 group-focus-within:bg-white`} />;
 			case 'box-primary':
-				return <div className={`absolute w-full h-full ring-1 ring-sky-600 bg-white group-hover:bg-sky-50 peer-checked:bg-sky-500 peer-checked:ring-sky-700 group-hover:peer-checked:bg-sky-600 group-focus-within:ring-sky-600 group-focus-within:bg-white`} />;
+				return <div className={`absolute w-full h-full ring-1 ring-sky-600 bg-white/0 group-hover:bg-sky-50 peer-checked:bg-sky-500 peer-checked:ring-sky-700 group-hover:peer-checked:bg-sky-600 group-focus-within:ring-sky-600 group-focus-within:bg-white`} />;
 			case 'box-success':
-				return <div className={`absolute w-full h-full ring-1 ring-emerald-600 bg-white group-hover:bg-emerald-50 peer-checked:bg-emerald-500 peer-checked:ring-emerald-700 group-hover:peer-checked:bg-emerald-600`} />;
+				return <div className={`absolute w-full h-full ring-1 ring-emerald-600 bg-white/0 group-hover:bg-emerald-50 peer-checked:bg-emerald-500 peer-checked:ring-emerald-700 group-hover:peer-checked:bg-emerald-600`} />;
 			case 'box-warning':
-				return <div className={`absolute w-full h-full ring-1 ring-amber-600 bg-white group-hover:bg-amber-50 peer-checked:bg-amber-500 peer-checked:ring-amber-700 group-hover:peer-checked:bg-amber-600`} />;
+				return <div className={`absolute w-full h-full ring-1 ring-amber-600 bg-white/0 group-hover:bg-amber-50 peer-checked:bg-amber-500 peer-checked:ring-amber-700 group-hover:peer-checked:bg-amber-600`} />;
 			case 'box-danger':
-				return <div className={`absolute w-full h-full ring-1 ring-rose-600 bg-white group-hover:bg-rose-50 peer-checked:bg-rose-500 peer-checked:ring-rose-700 group-hover:peer-checked:bg-rose-600 group-focus-within:ring-rose-400 group-focus-within:bg-white`} />;
+				return <div className={`absolute w-full h-full ring-1 ring-rose-600 bg-white/0 group-hover:bg-rose-50 peer-checked:bg-rose-500 peer-checked:ring-rose-700 group-hover:peer-checked:bg-rose-600 group-focus-within:ring-rose-600 group-focus-within:bg-white`} />;
+
+			case 'box-default-trans':
+				return <div className={`absolute w-full h-full ring-1 ring-slate-600/0 bg-white/0 group-hover:bg-slate-50 peer-checked:bg-slate-500/0 peer-checked:ring-slate-700/0 group-hover:peer-checked:bg-slate-600 group-focus-within:ring-slate-600 group-focus-within:bg-white`} />;
+			case 'box-primary-trans':
+				return <div className={`absolute w-full h-full ring-1 ring-sky-600/0 bg-white/0 group-hover:bg-sky-50 peer-checked:bg-sky-500/0 peer-checked:ring-sky-700/0 group-hover:peer-checked:bg-sky-600 group-focus-within:ring-sky-600 group-focus-within:bg-white`} />;
+			case 'box-success-trans':
+				return <div className={`absolute w-full h-full ring-1 ring-emerald-600/0 bg-white/0 group-hover:bg-emerald-50 peer-checked:bg-emerald-500/0 peer-checked:ring-emerald-700/0 group-hover:peer-checked:bg-emerald-600 group-focus-within:ring-emerald-600 group-focus-within:bg-white`} />;
+			case 'box-warning-trans':
+				return <div className={`absolute w-full h-full ring-1 ring-amber-600/0 bg-white/0 group-hover:bg-amber-50 peer-checked:bg-amber-500/0 peer-checked:ring-amber-700/0 group-hover:peer-checked:bg-amber-600 group-focus-within:ring-amber-600 group-focus-within:bg-white`} />;
+			case 'box-danger-trans':
+				return <div className={`absolute w-full h-full ring-1 ring-rose-600/0 bg-white/0 group-hover:bg-rose-50 peer-checked:bg-rose-500/0 peer-checked:ring-rose-700/0 group-hover:peer-checked:bg-rose-600 group-focus-within:ring-rose-600 group-focus-within:bg-white`} />;
+
 			case 'box-round':
 				return <div className={`absolute w-full h-full rounded-full ring-1 ring-sky-400 bg-sky-100 group-hover:bg-white peer-checked:bg-sky-500 peer-checked:ring-sky-700 group-hover:peer-checked:bg-sky-600 group-focus-within:ring-sky-400 group-focus-within:bg-white`} />;
 			case 'box-trans':
@@ -162,9 +186,13 @@ const getProps = (props) => {
 };
 
 const FormCheck = (props) => {
-	const {children, deco, style, className, team, name, href, type, onChange, checked, disabled} = getProps({...props, tag: 'formCheck'});
+	const {children, deco, style, className, team = '', name, href, type, onChange, checked, disabled} = getProps({...props, tag: 'formCheck'});
 
-	return props.tag == 'toggle' ? <input type={type} className={`${style} | `} id={name} name={name} data-team={team} checked={checked} disabled={disabled} onChange={onChange} /> : <input type={type} className={`${style} | `} checked={checked} disabled={disabled} onChange={onChange} />;
+	return props.tag == 'toggle' ? (
+		<input type={type} className={`${style} | `} id={[team, name].join('-')} name={name} data-team={team} checked={checked} disabled={disabled} onChange={onChange} />
+	) : (
+		<input type={type} className={`${style} | `} checked={checked} disabled={disabled} onChange={onChange} />
+	);
 };
 const FormInput = forwardRef((props, ref) => {
 	const {children, deco, style, className, name, href, type, value, placeholder, onChange, checked, disabled} = getProps({...props, tag: 'formInput'});
@@ -200,34 +228,21 @@ export const Label = (props) => {
 	const {children, deco, style, className, icon, iconL, iconR, text} = getProps({...props, tag: 'label'});
 
 	return (
-		<Fragment>
+		<>
 			<Icon deco={deco}>{icon || iconL}</Icon>
 			<Text deco={deco}>{text}</Text>
 			{children}
 			<Icon deco={deco}>{iconR}</Icon>
-		</Fragment>
-	);
-};
-
-export const Case = (props) => {
-	const newProps = props.tag ? props : getProps({...props, type: 'checkbox', tag: 'basket'});
-	const {children, deco, style, className, icon, iconL, iconR, name, text, type, onChange, checked = false, disabled} = newProps;
-
-	return (
-		<>
-			<Box deco={deco} />
-			<Label deco={deco} icon={icon || iconL} iconR={iconR} text={text} />
-			{children}
 		</>
 	);
 };
 
 export const Basket = (props) => {
 	const newProps = props.tag ? props : getProps({...props, type: 'checkbox', tag: 'basket'});
-	const {children, deco, style, className, icon, iconL, iconR, name, text, type, onChange, checked = false, disabled} = newProps;
+	const {children, deco, style, className, icon, iconL, iconR, team = '', name, text, type, onChange, checked = false, disabled} = newProps;
 
 	// 특정 ui의 change 이벤트 발생을 방지하기 위한 코드
-	const forName = ['toggle', 'input'].includes(props.tag) ? (name ? name : null) : '';
+	const forName = ['toggle', 'input'].includes(props.tag) ? (name ? [team, name].join('-') : null) : '';
 
 	return (
 		<label htmlFor={forName} className={`${style} | ${className}`}>
@@ -247,12 +262,12 @@ export const Toggle = (props) => {
 
 export const A = (props) => {
 	const newProps = getProps({...props, tag: 'a'});
-	const {style, className, name, href, target = '_self', checked = false} = newProps;
+	const {name, href, target = '_self', checked = false} = newProps;
 
 	return (
 		<Link href={href}>
-			<a target={target} className={`${style} | ${className}`}>
-				<Case {...newProps} />
+			<a target={target}>
+				<Basket {...newProps} type="checkbox" checked={checked} />
 			</a>
 		</Link>
 	);
@@ -260,14 +275,14 @@ export const A = (props) => {
 
 export const Button = (props) => {
 	const newProps = getProps({...props, tag: 'button'});
-	const {style, className, name, onClick, checked = false, disabled} = newProps;
+	const {children, name, onClick, checked = false, disabled} = newProps;
 
 	// disabled 상태일때를 위한 코드
 	const clickHandler = disabled ? () => {} : onClick;
 
 	return (
-		<button type="button" className={`${style} | ${className}`} name={name} onClick={clickHandler}>
-			<Case {...newProps} />
+		<button type="button" name={name} onClick={clickHandler}>
+			<Basket {...newProps} type="checkbox" checked={checked} />
 		</button>
 	);
 };

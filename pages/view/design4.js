@@ -1,13 +1,12 @@
 import {useRef} from 'react';
 import Header, {Header1, Header2, Header3} from '../component/header';
-import {ButtonNormal, Fieldset, Group, Item, Item2, ToggleCheckbox, ToggleRadio, ToggleSwitch, ToggleNormal} from '../component/temp_ds';
+import {ButtonNormal, Fieldset, Group, Item, Item2, ToggleCheckbox, ToggleRadio, ToggleSwitch, ToggleNormal, Chip} from '../component/temp_ds';
 import {Icon, A, Button, Img, Input, Label, Text, Basket, Toggle, Box} from '../component/ui_ds4';
 import {UseCount} from '../hook/useCount';
 import {UseData} from '../hook/useData';
 import {UseModal} from '../hook/useModal';
 import {UseSideMenu} from '../hook/useSideMenu';
 import Todo from './todo';
-import {Chip} from './../component/temp_ds';
 
 // const Fieldset = ({children, title}) => {
 // 	return (
@@ -290,6 +289,14 @@ export default function code() {
 		countLike: 0,
 		countHate: 0,
 	});
+	const [chioData, runChipData] = UseData({
+		color: ['default'],
+		size: ['sm'],
+		round: ['md'],
+		mode: ['3'],
+		icon: ['true'],
+		iconR: ['true'],
+	});
 	const [modal, runModal] = UseModal();
 	const [sideMenu, runSideMenu] = UseSideMenu();
 
@@ -326,6 +333,13 @@ export default function code() {
 		const {team} = event.currentTarget.dataset;
 
 		runData.change(team, [name]);
+	};
+
+	const changeChipRadio = (event) => {
+		const {name} = event.currentTarget;
+		const {team} = event.currentTarget.dataset;
+
+		runChipData.change(team, [name]);
 	};
 
 	const changeSwitch = (event) => {
@@ -436,20 +450,54 @@ export default function code() {
 
 			<Fieldset title="A">
 				<Group>
+					<Text deco="font-danger">checked(true) : </Text>
+					<A href="http://www.google.com" deco="basket-a-primary box-primary">
+						<Icon deco="font-danger">bxl-google</Icon>
+						<Text deco="font-primary">google</Text>
+					</A>
+					<A href="http://www.google.com" deco="basket-a-primary box-primary-trans">
+						<Icon deco="font-danger">bxl-google</Icon>
+						<Text deco="font-primary">google</Text>
+					</A>
+					<A href="http://www.google.com" deco="basket-a-primary box-primary">
+						<Icon deco="font-danger-trans">bxl-google</Icon>
+						<Text deco="font-primary-trans">google</Text>
+					</A>
+					<A href="http://www.google.com" deco="basket-a-primary box-primary-trans">
+						<Icon deco="font-danger-trans">bxl-google</Icon>
+						<Text deco="font-primary-trans">google</Text>
+					</A>
+				</Group>
+				<Group>
+					<Text deco="font-danger">checked(false) : </Text>
+					<A href="http://www.google.com" deco="basket-a-primary box-primary" checked>
+						<Icon deco="font-danger">bxl-google</Icon>
+						<Text deco="font-primary">google</Text>
+					</A>
+					<A href="http://www.google.com" deco="basket-a-primary box-primary-trans" checked>
+						<Icon deco="font-danger">bxl-google</Icon>
+						<Text deco="font-primary">google</Text>
+					</A>
+					<A href="http://www.google.com" deco="basket-a-primary box-primary" checked>
+						<Icon deco="font-danger-trans">bxl-google</Icon>
+						<Text deco="font-primary-trans">google</Text>
+					</A>
+					<A href="http://www.google.com" deco="basket-a-primary box-primary-trans" checked>
+						<Icon deco="font-danger-trans">bxl-google</Icon>
+						<Text deco="font-primary-trans">google</Text>
+					</A>
+				</Group>
+				<Group>
 					<A href="/" deco="basket-a-primary" className="underline-offset-2">
 						<Text deco="font-primary" className="text-xl font-semibold">
 							HOME
 						</Text>
 					</A>
-					<A href="/view/sample" deco="basket-a-default box-primary">
-						<Icon deco="font-default">bx-user-plus</Icon>
+					<A href="/view/sample" deco="basket-a-default box-primary-trans">
+						<Icon deco="font-primary-trans">bx-user-plus</Icon>
 					</A>
-					<A href="/view/room" deco="basket-a-default">
-						<Icon deco="font-primary">bx-search-alt-2</Icon>
-					</A>
-					<A href="http://www.google.com" deco="basket-a-primary box-success" checked>
-						<Icon deco="font-primary">bxl-google</Icon>
-						<Text deco="font-primary">google</Text>
+					<A href="/view/room" deco="basket-a-default box-primary-trans" checked>
+						<Icon deco="font-primary-trans">bx-search-alt-2</Icon>
 					</A>
 					<A href="http://www.naver.com" deco="basket-a-primary">
 						<Text deco="font-default">naver</Text>
@@ -805,7 +853,55 @@ export default function code() {
 
 			<Fieldset title="Chip">
 				<Group>
-					<Chip theme="success-xs-sm" icon="bx-leaf" iconR="bxs-chevron-right" text="Next Step" />
+					<Chip theme="primary-xs-full-1" icon="bx-leaf" iconR="bxs-chevron-right" text="Next Step" />
+					<Chip theme="primary-xs-full-2" icon="bx-leaf" iconR="bxs-chevron-right" text="Next Step" />
+					<Chip theme="primary-xs-full-3" icon="bx-leaf" iconR="bxs-chevron-right" text="Next Step" />
+					<Chip theme="primary-xs-full-4" icon="bx-leaf" iconR="bxs-chevron-right" text="Next Step" />
+				</Group>
+				{console.log('chioData', chioData)}
+				<Group>
+					<Chip theme={[chioData.color, chioData.size, chioData.round, chioData.mode].join('-')} icon={chioData.icon[0] == 'true' ? 'bx-leaf' : ''} iconR={chioData.iconR[0] == 'true' ? 'bxs-chevron-right' : ''} text="Next Step" />
+				</Group>
+				<Group>
+					<Text deco="font-danger">color : </Text>
+					<ToggleRadio text="default" team="color" name="default" checked={chioData.color.includes('default')} onChange={changeChipRadio} />
+					<ToggleRadio text="primary" team="color" name="primary" checked={chioData.color.includes('primary')} onChange={changeChipRadio} />
+					<ToggleRadio text="success" team="color" name="success" checked={chioData.color.includes('success')} onChange={changeChipRadio} />
+					<ToggleRadio text="warning" team="color" name="warning" checked={chioData.color.includes('warning')} onChange={changeChipRadio} />
+					<ToggleRadio text="danger" team="color" name="danger" checked={chioData.color.includes('danger')} onChange={changeChipRadio} />
+				</Group>
+				<Group>
+					<Text deco="font-danger">size : </Text>
+					<ToggleRadio text="xs" team="size" name="xs" checked={chioData.size.includes('xs')} onChange={changeChipRadio} />
+					<ToggleRadio text="sm" team="size" name="sm" checked={chioData.size.includes('sm')} onChange={changeChipRadio} />
+					<ToggleRadio text="md" team="size" name="md" checked={chioData.size.includes('md')} onChange={changeChipRadio} />
+					<ToggleRadio text="lg" team="size" name="lg" checked={chioData.size.includes('lg')} onChange={changeChipRadio} />
+					<ToggleRadio text="xl" team="size" name="xl" checked={chioData.size.includes('xl')} onChange={changeChipRadio} />
+				</Group>
+				<Group>
+					<Text deco="font-danger">round : </Text>
+					<ToggleRadio text="xs" team="round" name="xs" checked={chioData.round.includes('xs')} onChange={changeChipRadio} />
+					<ToggleRadio text="sm" team="round" name="sm" checked={chioData.round.includes('sm')} onChange={changeChipRadio} />
+					<ToggleRadio text="md" team="round" name="md" checked={chioData.round.includes('md')} onChange={changeChipRadio} />
+					<ToggleRadio text="lg" team="round" name="lg" checked={chioData.round.includes('lg')} onChange={changeChipRadio} />
+					<ToggleRadio text="full" team="round" name="full" checked={chioData.round.includes('full')} onChange={changeChipRadio} />
+				</Group>
+				<Group>
+					<Text deco="font-danger">mode : </Text>
+					<ToggleRadio text="1" team="mode" name="1" checked={chioData.mode.includes('1')} onChange={changeChipRadio} />
+					<ToggleRadio text="2" team="mode" name="2" checked={chioData.mode.includes('2')} onChange={changeChipRadio} />
+					<ToggleRadio text="3" team="mode" name="3" checked={chioData.mode.includes('3')} onChange={changeChipRadio} />
+					<ToggleRadio text="4" team="mode" name="4" checked={chioData.mode.includes('4')} onChange={changeChipRadio} />
+				</Group>
+				<Group>
+					<Text deco="font-danger">icon : </Text>
+					<ToggleRadio text="true" team="icon" name="true" checked={chioData.icon.includes('true')} onChange={changeChipRadio} />
+					<ToggleRadio text="false" team="icon" name="false" checked={chioData.icon.includes('false')} onChange={changeChipRadio} />
+				</Group>
+				<Group>
+					<Text deco="font-danger">iconR : </Text>
+					<ToggleRadio text="true" team="iconR" name="true" checked={chioData.iconR.includes('true')} onChange={changeChipRadio} />
+					<ToggleRadio text="false" team="iconR" name="false" checked={chioData.iconR.includes('false')} onChange={changeChipRadio} />
 				</Group>
 			</Fieldset>
 
