@@ -50,28 +50,28 @@ const getElement = (props) => {
 	return ((props) => {
 		const {tag, useDeco, icon} = props;
 
+		const color = {
+			default: 'slate',
+			primary: 'sky',
+			success: 'emerald',
+			warning: 'amber',
+			danger: 'rose',
+		}[useDeco?.split('-').pop()];
+
 		switch (useDeco) {
 			case 'font-default':
-				return <div className={`text-slate-800 peer-checked:text-white group-focus-within:text-slate-400 placeholder-slate-400`} />;
 			case 'font-primary':
-				return <div className={`text-sky-800 peer-checked:text-white group-focus-within:text-sky-400 placeholder-slate-400`} />;
 			case 'font-success':
-				return <div className={`text-emerald-800 peer-checked:text-white group-focus-within:text-emerald-400 placeholder-slate-400`} />;
 			case 'font-warning':
-				return <div className={`text-amber-800 peer-checked:text-white group-focus-within:text-amber-400 placeholder-slate-400`} />;
 			case 'font-danger':
-				return <div className={`text-rose-800 peer-checked:text-white group-focus-within:text-rose-400 placeholder-slate-400`} />;
+				return <div className={`text-${color}-800 peer-checked:text-white group-focus-within:text-${color}-400 placeholder-slate-400`} />;
 
-			case 'font-default-trans':
-				return <div className={`text-white group-hover:text-slate-800 peer-checked:text-slate-800 group-hover:peer-checked:text-white group-focus-within:text-slate-400 placeholder-slate-400`} />;
-			case 'font-primary-trans':
-				return <div className={`text-white group-hover:text-sky-800 peer-checked:text-sky-800 group-hover:peer-checked:text-white group-focus-within:text-sky-400 placeholder-slate-400`} />;
-			case 'font-success-trans':
-				return <div className={`text-white group-hover:text-emerald-800 peer-checked:text-emerald-800 group-hover:peer-checked:text-white group-focus-within:text-emerald-400 placeholder-slate-400`} />;
-			case 'font-warning-trans':
-				return <div className={`text-white group-hover:text-amber-800 peer-checked:text-amber-800 group-hover:peer-checked:text-white group-focus-within:text-amber-400 placeholder-slate-400`} />;
-			case 'font-danger-trans':
-				return <div className={`text-white group-hover:text-rose-800 peer-checked:text-rose-800 group-hover:peer-checked:text-white group-focus-within:text-rose-400 placeholder-slate-400`} />;
+			case 'font-trans-default':
+			case 'font-trans-primary':
+			case 'font-trans-success':
+			case 'font-trans-warning':
+			case 'font-trans-danger':
+				return <div className={`text-white group-hover:text-${color}-800 peer-checked:text-${color}-800 group-hover:peer-checked:text-white group-focus-within:text-${color}-400 placeholder-slate-400`} />;
 
 			case 'font-toggle':
 				return <div className={`text-sky-800 peer-checked:underline`} />;
@@ -79,26 +79,20 @@ const getElement = (props) => {
 				return <div className={`absolute text-lg text-white top-[5px] left-[7px] invisible peer-checked:visible`} />;
 
 			case 'box-default':
-				return <div className={`absolute w-full h-full ring-1 ring-slate-600 bg-white/0 group-hover:bg-slate-50 peer-checked:bg-slate-500 peer-checked:ring-slate-700 group-hover:peer-checked:bg-slate-600 group-focus-within:ring-slate-600 group-focus-within:bg-white`} />;
 			case 'box-primary':
-				return <div className={`absolute w-full h-full ring-1 ring-sky-600 bg-white/0 group-hover:bg-sky-50 peer-checked:bg-sky-500 peer-checked:ring-sky-700 group-hover:peer-checked:bg-sky-600 group-focus-within:ring-sky-600 group-focus-within:bg-white`} />;
 			case 'box-success':
-				return <div className={`absolute w-full h-full ring-1 ring-emerald-600 bg-white/0 group-hover:bg-emerald-50 peer-checked:bg-emerald-500 peer-checked:ring-emerald-700 group-hover:peer-checked:bg-emerald-600`} />;
 			case 'box-warning':
-				return <div className={`absolute w-full h-full ring-1 ring-amber-600 bg-white/0 group-hover:bg-amber-50 peer-checked:bg-amber-500 peer-checked:ring-amber-700 group-hover:peer-checked:bg-amber-600`} />;
 			case 'box-danger':
-				return <div className={`absolute w-full h-full ring-1 ring-rose-600 bg-white/0 group-hover:bg-rose-50 peer-checked:bg-rose-500 peer-checked:ring-rose-700 group-hover:peer-checked:bg-rose-600 group-focus-within:ring-rose-600 group-focus-within:bg-white`} />;
+				return <div className={`absolute w-full h-full ring-1 ring-${color}-600 bg-white group-hover:bg-${color}-50 peer-checked:bg-${color}-500 peer-checked:ring-${color}-700 group-hover:peer-checked:bg-${color}-600 group-focus-within:ring-${color}-600 group-focus-within:bg-white`} />;
 
-			case 'box-default-trans':
-				return <div className={`absolute w-full h-full ring-1 ring-slate-600/0 bg-white/0 group-hover:bg-slate-50 peer-checked:bg-slate-500/0 peer-checked:ring-slate-700/0 group-hover:peer-checked:bg-slate-600 group-focus-within:ring-slate-600 group-focus-within:bg-white`} />;
-			case 'box-primary-trans':
-				return <div className={`absolute w-full h-full ring-1 ring-sky-600/0 bg-white/0 group-hover:bg-sky-50 peer-checked:bg-sky-500/0 peer-checked:ring-sky-700/0 group-hover:peer-checked:bg-sky-600 group-focus-within:ring-sky-600 group-focus-within:bg-white`} />;
-			case 'box-success-trans':
-				return <div className={`absolute w-full h-full ring-1 ring-emerald-600/0 bg-white/0 group-hover:bg-emerald-50 peer-checked:bg-emerald-500/0 peer-checked:ring-emerald-700/0 group-hover:peer-checked:bg-emerald-600 group-focus-within:ring-emerald-600 group-focus-within:bg-white`} />;
-			case 'box-warning-trans':
-				return <div className={`absolute w-full h-full ring-1 ring-amber-600/0 bg-white/0 group-hover:bg-amber-50 peer-checked:bg-amber-500/0 peer-checked:ring-amber-700/0 group-hover:peer-checked:bg-amber-600 group-focus-within:ring-amber-600 group-focus-within:bg-white`} />;
-			case 'box-danger-trans':
-				return <div className={`absolute w-full h-full ring-1 ring-rose-600/0 bg-white/0 group-hover:bg-rose-50 peer-checked:bg-rose-500/0 peer-checked:ring-rose-700/0 group-hover:peer-checked:bg-rose-600 group-focus-within:ring-rose-600 group-focus-within:bg-white`} />;
+			case 'box-trans-default':
+			case 'box-trans-primary':
+			case 'box-trans-success':
+			case 'box-trans-warning':
+			case 'box-trans-danger':
+				return (
+					<div className={`absolute w-full h-full ring-1 ring-${color}-600/0 bg-white/0 group-hover:bg-${color}-50 peer-checked:bg-${color}-500/0 peer-checked:ring-${color}-700/0 group-hover:peer-checked:bg-${color}-600 group-focus-within:ring-${color}-600 group-focus-within:bg-white`} />
+				);
 
 			case 'box-round':
 				return <div className={`absolute w-full h-full rounded-full ring-1 ring-sky-400 bg-sky-100 group-hover:bg-white peer-checked:bg-sky-500 peer-checked:ring-sky-700 group-hover:peer-checked:bg-sky-600 group-focus-within:ring-sky-400 group-focus-within:bg-white`} />;

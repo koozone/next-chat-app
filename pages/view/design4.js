@@ -1,17 +1,12 @@
 import {useEffect, useRef} from 'react';
 import Header, {Header1, Header2, Header3} from '../component/header';
-import {ButtonNormal, Fieldset, Group, Item, Item2, ToggleCheckbox, ToggleRadio, ToggleSwitch, ToggleNormal, Chip} from '../component/temp_ds';
+import {ButtonNormal, Fieldset, Group, Item, Item2, ToggleCheckbox, ToggleRadio, ToggleSwitch, ToggleNormal, Chip, Highlight} from '../component/temp_ds';
 import {Icon, A, Button, Img, Input, Label, Text, Basket, Toggle, Box} from '../component/ui_ds4';
 import {UseCount} from '../hook/useCount';
 import {UseData} from '../hook/useData';
 import {UseModal} from '../hook/useModal';
 import {UseSideMenu} from '../hook/useSideMenu';
 import Todo from './todo';
-import hljs from 'highlight.js';
-import 'highlight.js/styles/night-owl.css';
-import javascript from 'highlight.js/lib/languages/javascript';
-
-hljs.registerLanguage('javascript', javascript);
 
 // const Fieldset = ({children, title}) => {
 // 	return (
@@ -360,10 +355,6 @@ export default function code() {
 		runData.change(name, value);
 	};
 
-	useEffect(() => {
-		hljs.initHighlighting();
-	}, [chioData]);
-
 	return (
 		<>
 			<Header />
@@ -465,17 +456,17 @@ export default function code() {
 						<Icon deco="font-danger">bxl-google</Icon>
 						<Text deco="font-primary">google</Text>
 					</A>
-					<A href="http://www.google.com" deco="basket-a-primary box-primary-trans">
+					<A href="http://www.google.com" deco="basket-a-primary box-trans-primary">
 						<Icon deco="font-danger">bxl-google</Icon>
 						<Text deco="font-primary">google</Text>
 					</A>
 					<A href="http://www.google.com" deco="basket-a-primary box-primary">
-						<Icon deco="font-danger-trans">bxl-google</Icon>
-						<Text deco="font-primary-trans">google</Text>
+						<Icon deco="font-trans-danger">bxl-google</Icon>
+						<Text deco="font-trans-primary">google</Text>
 					</A>
-					<A href="http://www.google.com" deco="basket-a-primary box-primary-trans">
-						<Icon deco="font-danger-trans">bxl-google</Icon>
-						<Text deco="font-primary-trans">google</Text>
+					<A href="http://www.google.com" deco="basket-a-primary box-trans-primary">
+						<Icon deco="font-trans-danger">bxl-google</Icon>
+						<Text deco="font-trans-primary">google</Text>
 					</A>
 				</Group>
 				<Group>
@@ -484,17 +475,17 @@ export default function code() {
 						<Icon deco="font-danger">bxl-google</Icon>
 						<Text deco="font-primary">google</Text>
 					</A>
-					<A href="http://www.google.com" deco="basket-a-primary box-primary-trans" checked>
+					<A href="http://www.google.com" deco="basket-a-primary box-trans-primary" checked>
 						<Icon deco="font-danger">bxl-google</Icon>
 						<Text deco="font-primary">google</Text>
 					</A>
 					<A href="http://www.google.com" deco="basket-a-primary box-primary" checked>
-						<Icon deco="font-danger-trans">bxl-google</Icon>
-						<Text deco="font-primary-trans">google</Text>
+						<Icon deco="font-trans-danger">bxl-google</Icon>
+						<Text deco="font-trans-primary">google</Text>
 					</A>
-					<A href="http://www.google.com" deco="basket-a-primary box-primary-trans" checked>
-						<Icon deco="font-danger-trans">bxl-google</Icon>
-						<Text deco="font-primary-trans">google</Text>
+					<A href="http://www.google.com" deco="basket-a-primary box-trans-primary" checked>
+						<Icon deco="font-trans-danger">bxl-google</Icon>
+						<Text deco="font-trans-primary">google</Text>
 					</A>
 				</Group>
 				<Group>
@@ -503,11 +494,11 @@ export default function code() {
 							HOME
 						</Text>
 					</A>
-					<A href="/view/sample" deco="basket-a-default box-primary-trans">
-						<Icon deco="font-primary-trans">bx-user-plus</Icon>
+					<A href="/view/sample" deco="basket-a-default box-trans-primary">
+						<Icon deco="font-trans-primary">bx-user-plus</Icon>
 					</A>
-					<A href="/view/room" deco="basket-a-default box-primary-trans" checked>
-						<Icon deco="font-primary-trans">bx-search-alt-2</Icon>
+					<A href="/view/room" deco="basket-a-default box-trans-primary" checked>
+						<Icon deco="font-trans-primary">bx-search-alt-2</Icon>
 					</A>
 					<A href="http://www.naver.com" deco="basket-a-primary">
 						<Text deco="font-default">naver</Text>
@@ -862,15 +853,27 @@ export default function code() {
 			</Fieldset>
 
 			<Fieldset title="Chip">
-				<Group>
+				{/* <Group>
 					<Chip theme="primary-xs-full-1" icon="bx-leaf" iconR="bxs-chevron-right" text="Next Step" />
 					<Chip theme="primary-xs-full-2" icon="bx-leaf" iconR="bxs-chevron-right" text="Next Step" />
 					<Chip theme="primary-xs-full-3" icon="bx-leaf" iconR="bxs-chevron-right" text="Next Step" />
 					<Chip theme="primary-xs-full-4" icon="bx-leaf" iconR="bxs-chevron-right" text="Next Step" />
+				</Group> */}
+				<Group className="flex justify-center">
+					<Chip theme={[1, chioData.color, chioData.size, chioData.round].join('-')} icon={chioData.icon[0] == 'true' ? 'bx-leaf' : ''} iconR={chioData.iconR[0] == 'true' ? 'bxs-chevron-right' : ''} text={chioData.text[0] == 'true' ? 'Next Step' : ''} />
+					<Chip theme={[2, chioData.color, chioData.size, chioData.round].join('-')} icon={chioData.icon[0] == 'true' ? 'bx-leaf' : ''} iconR={chioData.iconR[0] == 'true' ? 'bxs-chevron-right' : ''} text={chioData.text[0] == 'true' ? 'Next Step' : ''} />
+					<Chip theme={[3, chioData.color, chioData.size, chioData.round].join('-')} icon={chioData.icon[0] == 'true' ? 'bx-leaf' : ''} iconR={chioData.iconR[0] == 'true' ? 'bxs-chevron-right' : ''} text={chioData.text[0] == 'true' ? 'Next Step' : ''} />
+					<Chip theme={[4, chioData.color, chioData.size, chioData.round].join('-')} icon={chioData.icon[0] == 'true' ? 'bx-leaf' : ''} iconR={chioData.iconR[0] == 'true' ? 'bxs-chevron-right' : ''} text={chioData.text[0] == 'true' ? 'Next Step' : ''} />
+					<Chip theme={[5, chioData.color, chioData.size, chioData.round].join('-')} icon={chioData.icon[0] == 'true' ? 'bx-leaf' : ''} iconR={chioData.iconR[0] == 'true' ? 'bxs-chevron-right' : ''} text={chioData.text[0] == 'true' ? 'Next Step' : ''} />
+					<Chip theme={[6, chioData.color, chioData.size, chioData.round].join('-')} icon={chioData.icon[0] == 'true' ? 'bx-leaf' : ''} iconR={chioData.iconR[0] == 'true' ? 'bxs-chevron-right' : ''} text={chioData.text[0] == 'true' ? 'Next Step' : ''} />
 				</Group>
-				<Group>
-					<Chip theme={[chioData.color, chioData.size, chioData.round, chioData.mode].join('-')} icon={chioData.icon[0] == 'true' ? 'bx-leaf' : null} iconR={chioData.iconR[0] == 'true' ? 'bxs-chevron-right' : null} text={chioData.text[0] == 'true' ? 'Next Step' : null} />
-				</Group>
+				{/* <Group>
+					<Text deco="font-danger">mode : </Text>
+					<ToggleRadio text="1" team="mode" name="1" checked={chioData.mode.includes('1')} onChange={changeChipRadio} />
+					<ToggleRadio text="2" team="mode" name="2" checked={chioData.mode.includes('2')} onChange={changeChipRadio} />
+					<ToggleRadio text="3" team="mode" name="3" checked={chioData.mode.includes('3')} onChange={changeChipRadio} />
+					<ToggleRadio text="4" team="mode" name="4" checked={chioData.mode.includes('4')} onChange={changeChipRadio} />
+				</Group> */}
 				<Group>
 					<Text deco="font-danger">color : </Text>
 					<ToggleRadio text="default" team="color" name="default" checked={chioData.color.includes('default')} onChange={changeChipRadio} />
@@ -896,13 +899,6 @@ export default function code() {
 					<ToggleRadio text="full" team="round" name="full" checked={chioData.round.includes('full')} onChange={changeChipRadio} />
 				</Group>
 				<Group>
-					<Text deco="font-danger">mode : </Text>
-					<ToggleRadio text="1" team="mode" name="1" checked={chioData.mode.includes('1')} onChange={changeChipRadio} />
-					<ToggleRadio text="2" team="mode" name="2" checked={chioData.mode.includes('2')} onChange={changeChipRadio} />
-					<ToggleRadio text="3" team="mode" name="3" checked={chioData.mode.includes('3')} onChange={changeChipRadio} />
-					<ToggleRadio text="4" team="mode" name="4" checked={chioData.mode.includes('4')} onChange={changeChipRadio} />
-				</Group>
-				<Group>
 					<Text deco="font-danger">icon : </Text>
 					<ToggleRadio text="true" team="icon" name="true" checked={chioData.icon.includes('true')} onChange={changeChipRadio} />
 					<ToggleRadio text="false" team="icon" name="false" checked={chioData.icon.includes('false')} onChange={changeChipRadio} />
@@ -917,12 +913,13 @@ export default function code() {
 					<ToggleRadio text="true" team="text" name="true" checked={chioData.text.includes('true')} onChange={changeChipRadio} />
 					<ToggleRadio text="false" team="text" name="false" checked={chioData.text.includes('false')} onChange={changeChipRadio} />
 				</Group>
-				<pre>
-					<code className="html">
-						{`<Chip theme="${[chioData.color, chioData.size, chioData.round, chioData.mode].join('-')}"${chioData.icon[0] == 'true' ? ' icon="bx-leaf"' : ''}${chioData.iconR[0] == 'true' ? ' iconR="bxs-chevron-right"' : ''}${chioData.text[0] == 'true' ? ' text="Next Step"' : ''} />
-`}
-					</code>
-				</pre>
+				<Group>
+					<Highlight className="html">
+						{`
+						<Chip theme="${[chioData.mode, chioData.color, chioData.size, chioData.round].join('-')}"${chioData.icon[0] == 'true' ? ' icon="bx-leaf"' : ''}${chioData.iconR[0] == 'true' ? ' iconR="bxs-chevron-right"' : ''}${chioData.text[0] == 'true' ? ' text="Next Step"' : ''} />
+						`}
+					</Highlight>
+				</Group>
 			</Fieldset>
 
 			<Fieldset title="ButtonNormal">

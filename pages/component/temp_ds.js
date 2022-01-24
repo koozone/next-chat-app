@@ -1,4 +1,10 @@
+import {useEffect} from 'react';
 import {Icon, A, Button, Img, Input, Label, Text, Basket, Toggle, Box} from '../component/ui_ds4';
+import hljs from 'highlight.js';
+import 'highlight.js/styles/night-owl.css';
+import javascript from 'highlight.js/lib/languages/javascript';
+
+hljs.registerLanguage('js', javascript);
 
 export const Fieldset = ({children, title}) => {
 	return (
@@ -10,7 +16,7 @@ export const Fieldset = ({children, title}) => {
 		</fieldset>
 	);
 };
-export const Group = ({children, className=""}) => {
+export const Group = ({children, className = ''}) => {
 	return <div className={`space-x-2 ${className}`}>{children}</div>;
 };
 
@@ -70,18 +76,38 @@ const Aaa = (props) => {
 	);
 };
 
+export const Highlight = (props) => {
+	const {children, className = ''} = props;
+
+	const tabCount = children.match(/\t*$/g)[0].length;
+	const tabReg = new RegExp(`^\t{${tabCount}}`, 'gm');
+	const content = children.replace(/^\t*\n|\n\t*$/g, '').replace(tabReg, '');
+
+	useEffect(() => {
+		hljs.highlightAll();
+	}, [content]);
+
+	return (
+		<>
+			<pre className="grid">
+				<code className={`rounded-lg ${className}`}>{content}</code>
+			</pre>
+		</>
+	);
+};
+
 export const Chip = (props) => {
 	const {children, theme, className = '', icon, iconR, text, team, name, onClick, onChange, disabled} = props;
 
 	const themeList = String(theme).split('-') || [];
-	const color = themeList[0] || 'danger';
-	const size = themeList[1] || 'xs';
-	const round = themeList[2] || 'full';
-	const mode = themeList[3] || '1';
+	const mode = themeList[0] || '1';
+	const color = themeList[1] || 'danger';
+	const size = themeList[2] || 'xs';
+	const round = themeList[3] || 'full';
 
 	const trans = ['1', '2'].includes(mode) ? '-trans' : '';
 	const trans2 = ['2'].includes(mode) ? '-trans' : '';
-	const checked = ['2', '4'].includes(mode) ? true : false;
+	const checked = ['2', '4', '6'].includes(mode) ? true : false;
 	const gab = {
 		xs: {x: 1, y: 1},
 		sm: {x: 1, y: 1},
@@ -92,15 +118,15 @@ export const Chip = (props) => {
 
 	return (
 		<Button className={`px-${gab.x} py-${gab.y} text-${size} ${className}`} name={name} onClick={onClick} checked={checked} disabled={disabled}>
-			<Box deco={`box-${color}${trans}`} className={`rounded-${round}`} />
-			<Icon deco={`font-${color}${trans2}`} className={`mr-${gab.x} last:mr-0`}>
+			<Box deco={`box${trans}-${color}`} className={`rounded-${round}`} />
+			<Icon deco={`font${trans2}-${color}`} className={`mr-${gab.x} last:mr-0`}>
 				{icon}
 			</Icon>
-			<Text deco={`font-${color}${trans2}`} className={`mr-${gab.x} last:mr-0 px-${gab.x}`}>
+			<Text deco={`font${trans2}-${color}`} className={`mr-${gab.x} last:mr-0 px-${gab.x}`}>
 				{text}
 			</Text>
 			{children}
-			<Icon deco={`font-${color}${trans2}`}>{iconR}</Icon>
+			<Icon deco={`font${trans2}-${color}`}>{iconR}</Icon>
 		</Button>
 	);
 };
