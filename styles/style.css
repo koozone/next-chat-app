@@ -4,7 +4,7 @@
 
 @layer base {
 	body {
-		@apply bg-white/50 sm:bg-green-300/50 md:bg-blue-300/50 lg:bg-red-300/50;
+		@apply bg-gray-300/50 sm:bg-green-300/50 md:bg-blue-300/50 lg:bg-red-300/50;
 	}
 }
 

@@ -290,13 +290,14 @@ export default function code() {
 		countHate: 0,
 	});
 	const [chioData, runChipData] = UseData({
-		color: ['default'],
+		color: ['primary'],
 		size: ['sm'],
 		round: ['md'],
-		mode: ['3'],
-		icon: ['true'],
-		iconR: ['true'],
-		text: ['true'],
+		mode: ['6'],
+		left: ['icon'],
+		right: ['none'],
+		center: ['text'],
+		text: 'Next Step',
 	});
 	const [modal, runModal] = UseModal();
 	const [sideMenu, runSideMenu] = UseSideMenu();
@@ -336,13 +337,6 @@ export default function code() {
 		runData.change(team, [name]);
 	};
 
-	const changeChipRadio = (event) => {
-		const {name} = event.currentTarget;
-		const {team} = event.currentTarget.dataset;
-
-		runChipData.change(team, [name]);
-	};
-
 	const changeSwitch = (event) => {
 		const {name, checked} = event.currentTarget;
 
@@ -353,6 +347,19 @@ export default function code() {
 		const {name, value} = event.currentTarget;
 
 		runData.change(name, value);
+	};
+
+	const changeChipRadio = (event) => {
+		const {name} = event.currentTarget;
+		const {team} = event.currentTarget.dataset;
+
+		runChipData.change(team, [name]);
+	};
+
+	const chageChipInput = (event) => {
+		const {name, value} = event.currentTarget;
+
+		runChipData.change(name, value);
 	};
 
 	return (
@@ -860,12 +867,12 @@ export default function code() {
 					<Chip theme="primary-xs-full-4" icon="bx-leaf" iconR="bxs-chevron-right" text="Next Step" />
 				</Group> */}
 				<Group className="flex justify-center">
-					<Chip theme={[1, chioData.color, chioData.size, chioData.round].join('-')} icon={chioData.icon[0] == 'true' ? 'bx-leaf' : ''} iconR={chioData.iconR[0] == 'true' ? 'bxs-chevron-right' : ''} text={chioData.text[0] == 'true' ? 'Next Step' : ''} />
-					<Chip theme={[2, chioData.color, chioData.size, chioData.round].join('-')} icon={chioData.icon[0] == 'true' ? 'bx-leaf' : ''} iconR={chioData.iconR[0] == 'true' ? 'bxs-chevron-right' : ''} text={chioData.text[0] == 'true' ? 'Next Step' : ''} />
-					<Chip theme={[3, chioData.color, chioData.size, chioData.round].join('-')} icon={chioData.icon[0] == 'true' ? 'bx-leaf' : ''} iconR={chioData.iconR[0] == 'true' ? 'bxs-chevron-right' : ''} text={chioData.text[0] == 'true' ? 'Next Step' : ''} />
-					<Chip theme={[4, chioData.color, chioData.size, chioData.round].join('-')} icon={chioData.icon[0] == 'true' ? 'bx-leaf' : ''} iconR={chioData.iconR[0] == 'true' ? 'bxs-chevron-right' : ''} text={chioData.text[0] == 'true' ? 'Next Step' : ''} />
-					<Chip theme={[5, chioData.color, chioData.size, chioData.round].join('-')} icon={chioData.icon[0] == 'true' ? 'bx-leaf' : ''} iconR={chioData.iconR[0] == 'true' ? 'bxs-chevron-right' : ''} text={chioData.text[0] == 'true' ? 'Next Step' : ''} />
-					<Chip theme={[6, chioData.color, chioData.size, chioData.round].join('-')} icon={chioData.icon[0] == 'true' ? 'bx-leaf' : ''} iconR={chioData.iconR[0] == 'true' ? 'bxs-chevron-right' : ''} text={chioData.text[0] == 'true' ? 'Next Step' : ''} />
+					<Chip theme={[1, chioData.color, chioData.size, chioData.round].join('-')} icon={chioData.left[0] == 'icon' ? 'bx-leaf' : ''} iconR={chioData.right[0] == 'icon' ? 'bxs-chevron-right' : ''} text={chioData.center[0] == 'text' ? chioData.text : ''} />
+					<Chip theme={[2, chioData.color, chioData.size, chioData.round].join('-')} icon={chioData.left[0] == 'icon' ? 'bx-leaf' : ''} iconR={chioData.right[0] == 'icon' ? 'bxs-chevron-right' : ''} text={chioData.center[0] == 'text' ? chioData.text : ''} />
+					<Chip theme={[3, chioData.color, chioData.size, chioData.round].join('-')} icon={chioData.left[0] == 'icon' ? 'bx-leaf' : ''} iconR={chioData.right[0] == 'icon' ? 'bxs-chevron-right' : ''} text={chioData.center[0] == 'text' ? chioData.text : ''} />
+					<Chip theme={[4, chioData.color, chioData.size, chioData.round].join('-')} icon={chioData.left[0] == 'icon' ? 'bx-leaf' : ''} iconR={chioData.right[0] == 'icon' ? 'bxs-chevron-right' : ''} text={chioData.center[0] == 'text' ? chioData.text : ''} />
+					<Chip theme={[5, chioData.color, chioData.size, chioData.round].join('-')} icon={chioData.left[0] == 'icon' ? 'bx-leaf' : ''} iconR={chioData.right[0] == 'icon' ? 'bxs-chevron-right' : ''} text={chioData.center[0] == 'text' ? chioData.text : ''} />
+					<Chip theme={[6, chioData.color, chioData.size, chioData.round].join('-')} icon={chioData.left[0] == 'icon' ? 'bx-leaf' : ''} iconR={chioData.right[0] == 'icon' ? 'bxs-chevron-right' : ''} text={chioData.center[0] == 'text' ? chioData.text : ''} />
 				</Group>
 				{/* <Group>
 					<Text deco="font-danger">mode : </Text>
@@ -899,24 +906,30 @@ export default function code() {
 					<ToggleRadio text="full" team="round" name="full" checked={chioData.round.includes('full')} onChange={changeChipRadio} />
 				</Group>
 				<Group>
-					<Text deco="font-danger">icon : </Text>
-					<ToggleRadio text="true" team="icon" name="true" checked={chioData.icon.includes('true')} onChange={changeChipRadio} />
-					<ToggleRadio text="false" team="icon" name="false" checked={chioData.icon.includes('false')} onChange={changeChipRadio} />
+					<Text deco="font-danger">left : </Text>
+					<ToggleRadio text="none" team="left" name="none" checked={chioData.left.includes('none')} onChange={changeChipRadio} />
+					<ToggleRadio text="icon" team="left" name="icon" checked={chioData.left.includes('icon')} onChange={changeChipRadio} />
 				</Group>
 				<Group>
-					<Text deco="font-danger">iconR : </Text>
-					<ToggleRadio text="true" team="iconR" name="true" checked={chioData.iconR.includes('true')} onChange={changeChipRadio} />
-					<ToggleRadio text="false" team="iconR" name="false" checked={chioData.iconR.includes('false')} onChange={changeChipRadio} />
+					<Text deco="font-danger">right : </Text>
+					<ToggleRadio text="none" team="right" name="none" checked={chioData.right.includes('none')} onChange={changeChipRadio} />
+					<ToggleRadio text="icon" team="right" name="icon" checked={chioData.right.includes('icon')} onChange={changeChipRadio} />
 				</Group>
 				<Group>
-					<Text deco="font-danger">text : </Text>
-					<ToggleRadio text="true" team="text" name="true" checked={chioData.text.includes('true')} onChange={changeChipRadio} />
-					<ToggleRadio text="false" team="text" name="false" checked={chioData.text.includes('false')} onChange={changeChipRadio} />
+					<Text deco="font-danger">center : </Text>
+					<ToggleRadio text="none" team="center" name="none" checked={chioData.center.includes('none')} onChange={changeChipRadio} />
+					<ToggleRadio text="text" team="center" name="text" checked={chioData.center.includes('text')} onChange={changeChipRadio} />
+					<Input type="text" deco="basket-default box-default font-default" className="w-[200px]" name="text" value={chioData.text} placeholder="text 입력" onChange={chageChipInput} disabled={chioData.center != 'text'}>
+						<Icon deco="font-danger">bx-user</Icon>
+						<Text deco="font-primary" className="flex-none">
+							TEXT :
+						</Text>
+					</Input>
 				</Group>
 				<Group>
 					<Highlight className="html">
 						{`
-						<Chip theme="${[chioData.mode, chioData.color, chioData.size, chioData.round].join('-')}"${chioData.icon[0] == 'true' ? ' icon="bx-leaf"' : ''}${chioData.iconR[0] == 'true' ? ' iconR="bxs-chevron-right"' : ''}${chioData.text[0] == 'true' ? ' text="Next Step"' : ''} />
+						<Chip theme="${[chioData.mode, chioData.color, chioData.size, chioData.round].join('-')}"${chioData.left[0] == 'icon' ? ' icon="bx-leaf"' : ''}${chioData.right[0] == 'icon' ? ' iconR="bxs-chevron-right"' : ''}${chioData.center[0] == 'text' ? ' text="' + chioData.text + '"' : ''} />
 						`}
 					</Highlight>
 				</Group>

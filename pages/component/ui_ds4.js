@@ -85,6 +85,13 @@ const getElement = (props) => {
 			case 'box-danger':
 				return <div className={`absolute w-full h-full ring-1 ring-${color}-600 bg-white group-hover:bg-${color}-50 peer-checked:bg-${color}-500 peer-checked:ring-${color}-700 group-hover:peer-checked:bg-${color}-600 group-focus-within:ring-${color}-600 group-focus-within:bg-white`} />;
 
+			case 'box-outline-default':
+			case 'box-outline-primary':
+			case 'box-outline-success':
+			case 'box-outline-warning':
+			case 'box-outline-danger':
+				return <div className={`absolute w-full h-full ring-1 ring-${color}-600 bg-white/0 group-hover:bg-${color}-50 peer-checked:bg-${color}-500/0 peer-checked:ring-${color}-700 group-hover:peer-checked:bg-${color}-600 group-focus-within:ring-${color}-600 group-focus-within:bg-white`} />;
+
 			case 'box-trans-default':
 			case 'box-trans-primary':
 			case 'box-trans-success':

@@ -88,11 +88,9 @@ export const Highlight = (props) => {
 	}, [content]);
 
 	return (
-		<>
-			<pre className="grid">
-				<code className={`rounded-lg ${className}`}>{content}</code>
-			</pre>
-		</>
+		<pre className="grid">
+			<code className={`rounded-lg ${className}`}>{content}</code>
+		</pre>
 	);
 };
 
@@ -105,8 +103,8 @@ export const Chip = (props) => {
 	const size = themeList[2] || 'xs';
 	const round = themeList[3] || 'full';
 
-	const trans = ['1', '2'].includes(mode) ? '-trans' : '';
-	const trans2 = ['2'].includes(mode) ? '-trans' : '';
+	const boxMode = ['1', '2'].includes(mode) ? '-trans' : ['3', '4'].includes(mode) ? '-outline' : '';
+	const fontMode = ['2', '4'].includes(mode) ? '-trans' : '';
 	const checked = ['2', '4', '6'].includes(mode) ? true : false;
 	const gab = {
 		xs: {x: 1, y: 1},
@@ -118,15 +116,15 @@ export const Chip = (props) => {
 
 	return (
 		<Button className={`px-${gab.x} py-${gab.y} text-${size} ${className}`} name={name} onClick={onClick} checked={checked} disabled={disabled}>
-			<Box deco={`box${trans}-${color}`} className={`rounded-${round}`} />
-			<Icon deco={`font${trans2}-${color}`} className={`mr-${gab.x} last:mr-0`}>
+			<Box deco={`box${boxMode}-${color}`} className={`rounded-${round}`} />
+			<Icon deco={`font${fontMode}-${color}`} className={`mr-${gab.x} last:mr-0`}>
 				{icon}
 			</Icon>
-			<Text deco={`font${trans2}-${color}`} className={`mr-${gab.x} last:mr-0 px-${gab.x}`}>
+			<Text deco={`font${fontMode}-${color}`} className={`mr-${gab.x} last:mr-0 px-${gab.x}`}>
 				{text}
 			</Text>
 			{children}
-			<Icon deco={`font${trans2}-${color}`}>{iconR}</Icon>
+			<Icon deco={`font${fontMode}-${color}`}>{iconR}</Icon>
 		</Button>
 	);
 };
