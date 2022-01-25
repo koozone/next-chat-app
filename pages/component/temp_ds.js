@@ -98,29 +98,31 @@ export const Chip = (props) => {
 	const {children, theme, className = '', icon, iconR, text, team, name, onClick, onChange, disabled} = props;
 
 	const themeList = String(theme).split('-') || [];
-	const mode = themeList[0] || '1';
-	const color = themeList[1] || 'danger';
-	const size = themeList[2] || 'xs';
-	const round = themeList[3] || 'full';
+	const mode = themeList[0] || '6';
+	const color = themeList[1] || 'default';
+	const size = themeList[2] || 'sm';
+	const space = themeList[3] || 'md';
+	const round = themeList[4] || 'sm';
 
-	const boxMode = ['1', '2'].includes(mode) ? '-trans' : ['3', '4'].includes(mode) ? '-outline' : '';
-	const fontMode = ['2', '4'].includes(mode) ? '-trans' : '';
-	const checked = ['2', '4', '6'].includes(mode) ? true : false;
-	const gab = {
-		xs: {x: 1, y: 1},
-		sm: {x: 1, y: 1},
+	const boxMode = ['1', '2'].includes(mode) ? '-trans' : ['3', '4'].includes(mode) ? '-outline' : ['7', '8'].includes(mode) ? '-underline' : '';
+	const fontMode = ['2', '4'].includes(mode) ? '-trans' : ['7', '8'].includes(mode) ? '-underline' : '';
+	const checked = ['2', '4', '6', '8'].includes(mode) ? true : false;
+	const gap = {
+		xs: {x: 1, y: 0},
+		sm: {x: 1, y: 0.5},
 		md: {x: 1, y: 1},
-		lg: {x: 1, y: 1},
-		xl: {x: 1, y: 1},
-	}[size];
+		lg: {x: 2, y: 2},
+		xl: {x: 3, y: 3},
+		'2xl': {x: 4, y: 4},
+	}[space];
 
 	return (
-		<Button className={`px-${gab.x} py-${gab.y} text-${size} ${className}`} name={name} onClick={onClick} checked={checked} disabled={disabled}>
+		<Button className={`px-${gap.x} py-${gap.y} text-${size} ${className}`} name={name} onClick={onClick} checked={checked} disabled={disabled}>
 			<Box deco={`box${boxMode}-${color}`} className={`rounded-${round}`} />
-			<Icon deco={`font${fontMode}-${color}`} className={`mr-${gab.x} last:mr-0`}>
+			<Icon deco={`font${fontMode}-${color}`} className={`mr-${gap.x} last:mr-0`}>
 				{icon}
 			</Icon>
-			<Text deco={`font${fontMode}-${color}`} className={`mr-${gab.x} last:mr-0 px-${gab.x}`}>
+			<Text deco={`font${fontMode}-${color}`} className={`mr-${gap.x} last:mr-0 px-${gap.x}`}>
 				{text}
 			</Text>
 			{children}
@@ -144,7 +146,7 @@ export const ToggleNormal = (props) => {
 	const {children, className, icon, iconR, text, team, name, onClick, onChange, checked, disabled} = props;
 
 	return (
-		<Toggle deco="basket-default" className={className} name={name} onChange={onChange} checked={checked} disabled={disabled}>
+		<Toggle deco="basket-default" className={className} team={team} name={name} onChange={onChange} checked={checked} disabled={disabled}>
 			<Aaa {...props} />
 		</Toggle>
 	);
