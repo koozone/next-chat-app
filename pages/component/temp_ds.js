@@ -94,42 +94,42 @@ export const Highlight = (props) => {
 	);
 };
 
-export const Chip = (props) => {
-	const {children, theme, className = '', icon, iconR, text, team, name, onClick, onChange, disabled} = props;
+// export const Chip = (props) => {
+// 	const {children, theme, className = '', icon, iconR, text, team, name, onClick, onChange, disabled} = props;
 
-	const themeList = String(theme).split('-') || [];
-	const mode = themeList[0] || '6';
-	const color = themeList[1] || 'default';
-	const size = themeList[2] || 'sm';
-	const space = themeList[3] || 'md';
-	const round = themeList[4] || 'sm';
+// 	const themeList = String(theme).split('-') || [];
+// 	const mode = themeList[0] || '8';
+// 	const color = themeList[1] || 'default';
+// 	const size = themeList[2] || 'sm';
+// 	const space = themeList[3] || 'md';
+// 	const round = themeList[4] || 'sm';
+// 	const underline = themeList[5] || '';
 
-	const boxMode = ['1', '2'].includes(mode) ? '-trans' : ['3', '4'].includes(mode) ? '-outline' : ['7', '8'].includes(mode) ? '-underline' : '';
-	const fontMode = ['2', '4'].includes(mode) ? '-trans' : ['7', '8'].includes(mode) ? '-underline' : '';
-	const checked = ['2', '4', '6', '8'].includes(mode) ? true : false;
-	const gap = {
-		xs: {x: 1, y: 0},
-		sm: {x: 1, y: 0.5},
-		md: {x: 1, y: 1},
-		lg: {x: 2, y: 2},
-		xl: {x: 3, y: 3},
-		'2xl': {x: 4, y: 4},
-	}[space];
+// 	const boxMode = ['1', '2'].includes(mode) ? '-underline' : ['3', '4'].includes(mode) ? '-trans' : ['5', '6'].includes(mode) ? '-outline' : ['7', '8'].includes(mode) ? '' : '';
+// 	const fontMode = ['1', '2'].includes(mode) ? '-underline' : ['3', '4', '5', '6'].includes(mode) ? '-trans' : ['7', '8'].includes(mode) ? '' : '';
+// 	const checked = ['2', '4', '6', '8'].includes(mode) ? true : false;
+// 	const gap = {
+// 		xs: {x: 1, y: 0},
+// 		sm: {x: 1, y: 0.5},
+// 		md: {x: 1, y: 1},
+// 		lg: {x: 2, y: 2},
+// 		xl: {x: 3, y: 3},
+// 		'2xl': {x: 4, y: 4},
+// 	}[space];
 
-	return (
-		<Button className={`px-${gap.x} py-${gap.y} text-${size} ${className}`} name={name} onClick={onClick} checked={checked} disabled={disabled}>
-			<Box deco={`box${boxMode}-${color}`} className={`rounded-${round}`} />
-			<Icon deco={`font${fontMode}-${color}`} className={`mr-${gap.x} last:mr-0`}>
-				{icon}
-			</Icon>
-			<Text deco={`font${fontMode}-${color}`} className={`mr-${gap.x} last:mr-0 px-${gap.x}`}>
-				{text}
-			</Text>
-			{children}
-			<Icon deco={`font${fontMode}-${color}`}>{iconR}</Icon>
-		</Button>
-	);
-};
+// 	return (
+// 		<Basket className={`px-${gap.x} py-${gap.y} text-${size} ${className}`} name={name} onClick={onClick} checked={checked} disabled={disabled}>
+// 			<Box deco={`box${boxMode}-${color}`} className={`rounded-${round}`} />
+// 			<Icon deco={`font${fontMode}-${color}`} className={`mr-${gap.x} last:mr-0`}>
+// 				{icon}
+// 			</Icon>
+// 			<Text deco={`font${fontMode}-${color}`} className={`mr-${gap.x} last:mr-0 px-${gap.x} underline-offset-1 group-hover:${underline == '_' ? 'underline' : 'no-underline'}`}>
+// 				{text || children}
+// 			</Text>
+// 			<Icon deco={`font${fontMode}-${color}`}>{iconR}</Icon>
+// 		</Basket>
+// 	);
+// };
 
 export const ButtonNormal = (props) => {
 	const {children, className, icon, iconR, text, team, name, onClick, onChange, checked, disabled} = props;

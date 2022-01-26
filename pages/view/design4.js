@@ -367,7 +367,11 @@ export default function code() {
 						lorem story
 					</Text>
 					<Text deco="font-default">
-						Lorem ipsum dolor sit amet consectetur adipisicing elit.
+						Lorem ipsum dolor sit amet{' '}
+						<Text deco="font-danger" className="bg-yellow-500 rounded-md">
+							consectetur
+						</Text>{' '}
+						adipisicing elit.
 						<Text deco="font-danger" className="underline">
 							<Icon deco="font-primary">bx-leaf</Icon>
 							Aliquam sequi hic sint!
@@ -435,6 +439,25 @@ export default function code() {
 			</Fieldset>
 
 			<Fieldset title="A">
+				<Group>
+					<Text deco="font-default" className="leading-10">
+						Lorem ipsum <A theme="A-danger-md-xs-md-_" text="consectetur" /> dolor sit <A theme="B-danger-md-xs-md-" text="consectetur" /> amet consectetur <A theme="C-danger-md-xs-md-" text="consectetur" /> adipisicing elit. <A theme="D-danger-md-xs-md-" text="consectetur" />{' '}
+						Consectetur distinctio <A theme="E-danger-md-xs-md-" text="consectetur" />
+						suscipit,{' '}
+						<a href="#" className="group p-1 relative">
+							<Box deco="box-test-danger" />
+							<Text deco="font-test-danger">possimus</Text>
+						</a>{' '}
+						esse a fugiat <A theme="F-danger-md-xs-md-" text="consectetur" /> veritatis? Laudantium, quis? A <A theme="G-danger-md-xs-md-" text="consectetur" /> recusandae ab expedita rem repudiandae architecto possimus magni quisquam molestias tempore?
+					</Text>
+				</Group>
+				<Group>
+					<Text deco="font-default" className="leading-10">
+						Lorem ipsum <A theme="A-danger-md-xs-md-" text="consectetur" checked /> dolor sit <A theme="B-danger-md-xs-md-" text="consectetur" checked /> amet consectetur <A theme="C-danger-md-xs-md-" text="consectetur" checked /> adipisicing elit.{' '}
+						<A theme="D-danger-md-xs-md-" text="consectetur" checked /> Consectetur distinctio <A theme="E-danger-md-xs-md-" text="consectetur" checked />
+						suscipit, possimus esse a fugiat <A theme="F-danger-md-xs-md-" text="consectetur" checked /> veritatis? Laudantium, quis? A <A theme="G-danger-md-xs-md-" text="consectetur" checked /> recusandae ab expedita rem repudiandae architecto possimus magni quisquam molestias tempore?
+					</Text>
+				</Group>
 				<Group>
 					<Text deco="font-danger">checked(true) : </Text>
 					<A href="http://www.google.com" deco="basket-a-primary box-primary">
