@@ -1,5 +1,5 @@
 import {Chip, Group, Highlight, ToggleRadio} from '../component/temp_ds';
-import {A, Basket, Button, Icon, Input, Text, Toggle} from '../component/ui_ds4';
+import {A, Basket, Button, Icon, Input, Text, Toggle} from '../component/ui_ds5';
 import {UseData} from '../hook/useData';
 
 export default function ChipSample() {
@@ -157,7 +157,7 @@ export default function ChipSample() {
 			<Group>
 				<Highlight className="html">
 					{`
-						<{node} theme="${['A', color, size, space, round, underline].join('-')}"${left[0] == 'icon' ? ' icon="bx-leaf"' : ''}${right[0] == 'icon' ? ' iconR="bxs-chevron-right"' : ''}${center[0] == 'text' ? ' text="' + text + '"' : ''} />
+						<Toggle theme="${['A', color, size, space, round, underline].join('-')}"${left[0] == 'icon' ? ' icon="bx-leaf"' : ''}${right[0] == 'icon' ? ' iconR="bxs-chevron-right"' : ''}${center[0] == 'text' ? ' text="' + text + '"' : ''} />
 						`}
 				</Highlight>
 			</Group>

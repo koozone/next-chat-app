@@ -1,6 +1,6 @@
 import Header from '../component/header';
 import {Chip} from '../component/temp_ds';
-import {Basket} from '../component/ui_ds4';
+import {Basket} from '../component/ui_ds5';
 
 const getImage = () => {
 	return `https://source.unsplash.com/collection/190727/400x300?random=${Math.round(Math.random() * 9999)}`;

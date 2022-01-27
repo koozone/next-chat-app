@@ -2,7 +2,7 @@ import Header from '../component/header';
 import {UseData} from '../hook/useData';
 import {useRef, useEffect} from 'react';
 import uid from 'tiny-uid';
-import {Input, Label, Button, Toggle, A, Icon, Text, Box} from '../component/ui_ds4';
+import {Input, Label, Button, Toggle, A, Icon, Text, Box} from '../component/ui_ds5';
 
 const initData = {name: '', email: ''};
 const initUserList = [
@@ -84,15 +84,7 @@ export default function Todo() {
 				<div className="space-x-2">
 					<span className="space-x-1">
 						<Text deco="font-danger">name : </Text>
-						<Input
-							type="text"
-							deco="basket-default box-success font-default"
-							name="name"
-							placeholder="name 입력"
-							value={data.name}
-							onChange={changeInput}
-							ref={nameInput}
-						>
+						<Input type="text" deco="basket-default box-success font-default" name="name" placeholder="name 입력" value={data.name} onChange={changeInput} ref={nameInput}>
 							<Icon deco="font-primary">bx-id-card</Icon>
 						</Input>
 						<Button deco="basket-default box-primary" name="name" onClick={clickReset}>
@@ -101,14 +93,7 @@ export default function Todo() {
 					</span>
 					<span className="space-x-1">
 						<Text deco="font-danger">email : </Text>
-						<Input
-							type="email"
-							deco="basket-default box-success font-default"
-							name="email"
-							placeholder="email 입력"
-							value={data.email}
-							onChange={changeInput}
-						>
+						<Input type="email" deco="basket-default box-success font-default" name="email" placeholder="email 입력" value={data.email} onChange={changeInput}>
 							<Icon deco="font-primary">bx-mail-send</Icon>
 						</Input>
 						<Button deco="basket-default box-primary" name="email" onClick={clickReset}>
@@ -135,11 +120,7 @@ export default function Todo() {
 							<Toggle deco="basket-default" name={item.id} checked={checkList.includes(item.id)} onChange={changeItem}>
 								<Box deco="box-switch" />
 								<Box deco="box-switch-dot" />
-								<A
-									href="#"
-									deco="basket-a-default"
-									className={checkList.includes(item.id) ? 'line-through decoration-red-500 opacity-60' : 'no-underline'}
-								>
+								<A href="#" deco="basket-a-default" className={checkList.includes(item.id) ? 'line-through decoration-red-500 opacity-60' : 'no-underline'}>
 									<Text deco="font-primary" className={`text-lg font-semibold ${checkList.includes(item.id) ? 'opacity-60' : 'opacity-100'}`}>
 										{item.name} ({item.email})
 									</Text>

@@ -1,7 +1,7 @@
 import {useEffect, useRef} from 'react';
 import Header, {Header1, Header2, Header3} from '../component/header';
 import {ButtonNormal, Fieldset, Group, Item, Item2, ToggleCheckbox, ToggleRadio, ToggleSwitch, ToggleNormal, Chip, Highlight} from '../component/temp_ds';
-import {Icon, A, Button, Img, Input, Label, Text, Basket, Toggle, Box} from '../component/ui_ds4';
+import {Icon, A, Button, Img, Input, Label, Text, Basket, Toggle, Box} from '../component/ui_ds5';
 import {UseCount} from '../hook/useCount';
 import {UseData} from '../hook/useData';
 import {UseModal} from '../hook/useModal';
@@ -368,7 +368,7 @@ export default function code() {
 					</Text>
 					<Text deco="font-default">
 						Lorem ipsum dolor sit amet{' '}
-						<Text deco="font-danger" className="bg-yellow-500 rounded-md">
+						<Text deco="font-danger" className="bg-yellow-500 rounded-md px-1 py-4">
 							consectetur
 						</Text>{' '}
 						adipisicing elit.
@@ -439,25 +439,6 @@ export default function code() {
 			</Fieldset>
 
 			<Fieldset title="A">
-				<Group>
-					<Text deco="font-default" className="leading-10">
-						Lorem ipsum <A theme="A-danger-md-xs-md-_" text="consectetur" /> dolor sit <A theme="B-danger-md-xs-md-" text="consectetur" /> amet consectetur <A theme="C-danger-md-xs-md-" text="consectetur" /> adipisicing elit. <A theme="D-danger-md-xs-md-" text="consectetur" />{' '}
-						Consectetur distinctio <A theme="E-danger-md-xs-md-" text="consectetur" />
-						suscipit,{' '}
-						<a href="#" className="group p-1 relative">
-							<Box deco="box-test-danger" />
-							<Text deco="font-test-danger">possimus</Text>
-						</a>{' '}
-						esse a fugiat <A theme="F-danger-md-xs-md-" text="consectetur" /> veritatis? Laudantium, quis? A <A theme="G-danger-md-xs-md-" text="consectetur" /> recusandae ab expedita rem repudiandae architecto possimus magni quisquam molestias tempore?
-					</Text>
-				</Group>
-				<Group>
-					<Text deco="font-default" className="leading-10">
-						Lorem ipsum <A theme="A-danger-md-xs-md-" text="consectetur" checked /> dolor sit <A theme="B-danger-md-xs-md-" text="consectetur" checked /> amet consectetur <A theme="C-danger-md-xs-md-" text="consectetur" checked /> adipisicing elit.{' '}
-						<A theme="D-danger-md-xs-md-" text="consectetur" checked /> Consectetur distinctio <A theme="E-danger-md-xs-md-" text="consectetur" checked />
-						suscipit, possimus esse a fugiat <A theme="F-danger-md-xs-md-" text="consectetur" checked /> veritatis? Laudantium, quis? A <A theme="G-danger-md-xs-md-" text="consectetur" checked /> recusandae ab expedita rem repudiandae architecto possimus magni quisquam molestias tempore?
-					</Text>
-				</Group>
 				<Group>
 					<Text deco="font-danger">checked(true) : </Text>
 					<A href="http://www.google.com" deco="basket-a-primary box-primary">
@@ -857,6 +838,28 @@ export default function code() {
 						<Box deco="box-default" />
 						<Label deco="font-default" text="show sidemonu" />
 					</Button>
+				</Group>
+			</Fieldset>
+
+			<Fieldset title="A">
+				<Group>
+					<Text deco="font-success" className="leading-8">
+						Lorem ipsum <A theme="A-primary-md-sm-md" text="A1" />
+						dolor sit amet <A theme="B-primary-md-sm-md" text="B1" />
+						consectetur adipisicing <A theme="C-primary-md-sm-md" text="C1" />
+						elit. Reiciendis <A theme="D-primary-md-sm-md" text="D1" />
+						placeat nobis <A theme="E-primary-md-sm-md" text="E1" />
+						voluptas saepe <A theme="F-primary-md-sm-md" text="F1" />
+						incidunt animi <A theme="G-primary-md-sm-md" text="G1" />
+						beatae, eligendi <A theme="A2-danger-md-sm-md" text="A2" />
+						consequuntur, neque <A theme="B2-danger-md-sm-md" text="B2" />
+						amet debitis <A theme="C2-danger-md-sm-md" text="C2" />
+						obcaecati quisquam <A theme="D2-danger-md-sm-md" text="D2" />
+						numquam necessitatibus <A theme="E2-danger-md-sm-md" text="E2" />
+						praesentium iste <A theme="F2-danger-md-sm-md" text="F2" />
+						a ullam <A theme="G2-danger-md-sm-md" text="G2" />
+						cumque?
+					</Text>
 				</Group>
 			</Fieldset>
 
