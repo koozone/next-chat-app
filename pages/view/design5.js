@@ -841,38 +841,23 @@ export default function code() {
 				</Group>
 			</Fieldset>
 
-			<Fieldset title="Style">
-				<Group>
-					<Toggle theme="A1-danger-md-md-md-" text="A1" />
-					<Toggle theme="D1-danger-md-md-md-" text="D1" />
-					<Toggle theme="F1-danger-md-md-md-" text="F1" />
-					<Toggle theme="F10-danger-md-md-md-" text="F10" />
-					<Toggle theme="F2-danger-md-md-md-" text="F2" />
-					<Toggle theme="F20-danger-md-md-md-" text="F20" />
-					<Toggle theme="G1-danger-md-md-md-" text="G1" />
-					<Toggle theme="G10-danger-md-md-md-" text="G10" />
-					<Toggle theme="G2-danger-md-md-md-" text="G2" />
-					<Toggle theme="G20-danger-md-md-md-" text="G20" />
-				</Group>
-			</Fieldset>
-
 			<Fieldset title="A">
 				<Group>
 					<Text deco="font-success" className="leading-8">
-						Lorem ipsum <A theme="A1-primary-md-sm-md" text="A1" />
-						dolor sit amet <A theme="B1-primary-md-sm-md" text="B1" />
-						consectetur adipisicing <A theme="C1-primary-md-sm-md" text="C1" />
-						elit. Reiciendis <A theme="D1-primary-md-sm-md" text="D1" />
-						placeat nobis <A theme="E1-primary-md-sm-md" text="E1" />
-						voluptas saepe <A theme="F1-primary-md-sm-md" text="F1" />
-						incidunt animi <A theme="G1-primary-md-sm-md" text="G1" />
-						beatae, eligendi <A theme="A2-danger-md-sm-md" text="A2" />
-						consequuntur, neque <A theme="B2-danger-md-sm-md" text="B2" />
-						amet debitis <A theme="C2-danger-md-sm-md" text="C2" />
-						obcaecati quisquam <A theme="D2-danger-md-sm-md" text="D2" />
-						numquam necessitatibus <A theme="E2-danger-md-sm-md" text="E2" />
-						praesentium iste <A theme="F2-danger-md-sm-md" text="F2" />
-						a ullam <A theme="G2-danger-md-sm-md" text="G2" />
+						Lorem ipsum <A theme="AB-primary-md-sm-md" text="A1" />
+						dolor sit amet <A theme="BB-primary-md-sm-md" text="B1" />
+						consectetur adipisicing <A theme="CB-primary-md-sm-md" text="C1" />
+						elit. Reiciendis <A theme="DB-primary-md-sm-md" text="D1" />
+						placeat nobis <A theme="EB-primary-md-sm-md" text="E1" />
+						voluptas saepe <A theme="FB-primary-md-sm-md" text="F1" />
+						incidunt animi <A theme="GB-primary-md-sm-md" text="G1" />
+						beatae, eligendi <A theme="AC-danger-md-sm-md" text="A2" />
+						consequuntur, neque <A theme="BC-danger-md-sm-md" text="B2" />
+						amet debitis <A theme="CC-danger-md-sm-md" text="C2" />
+						obcaecati quisquam <A theme="DC-danger-md-sm-md" text="D2" />
+						numquam necessitatibus <A theme="EC-danger-md-sm-md" text="E2" />
+						praesentium iste <A theme="FC-danger-md-sm-md" text="F2" />
+						a ullam <A theme="GC-danger-md-sm-md" text="G2" />
 						cumque?
 					</Text>
 				</Group>

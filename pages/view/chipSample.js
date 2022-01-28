@@ -19,12 +19,15 @@ export default function ChipSample() {
 		G1: false,
 		G2: true,
 	});
-	const [{mode, color, size, space, round, underline, left, right, center, text}, runChipData] = UseData({
+	const [{typeOut, modeOut, typeOver, modeOver, color, size, space, round, left, right, center, text}, runChipData] = UseData({
+		typeOut: ['B'],
+		modeOut: ['1'],
+		typeOver: ['C'],
+		modeOver: ['1'],
 		color: ['primary'],
-		size: ['sm'],
+		size: ['md'],
 		space: ['md'],
 		round: ['md'],
-		underline: [''],
 		left: ['icon'],
 		right: ['none'],
 		center: ['text'],
@@ -52,15 +55,8 @@ export default function ChipSample() {
 
 	return (
 		<>
-			{/* <Group>
-					<Chip theme="primary-xs-full-1" icon="bx-leaf" iconR="bxs-chevron-right" text="Next Step" />
-					<Chip theme="primary-xs-full-2" icon="bx-leaf" iconR="bxs-chevron-right" text="Next Step" />
-					<Chip theme="primary-xs-full-3" icon="bx-leaf" iconR="bxs-chevron-right" text="Next Step" />
-					<Chip theme="primary-xs-full-4" icon="bx-leaf" iconR="bxs-chevron-right" text="Next Step" />
-				</Group> */}
-			<Group className="p-5 space-y-3 flex justify-center items-center flex-wrap ring-2 ring-gray-500 rounded-lg">
+			{/* <Group className="p-5 space-y-3 flex justify-center items-center flex-wrap ring-2 ring-gray-500 rounded-lg">
 				{['A1', 'A2', 'B1', 'B2', 'C1', 'C2', 'D1', 'D2', 'E1', 'E2', 'F1', 'F2', 'G1', 'G2'].map((item, index) => (
-					// <Chip key={index} theme={[item, color, size, space, round, underline].join('-')} icon={left[0] == 'icon' ? 'bx-leaf' : ''} iconR={right[0] == 'icon' ? 'bxs-chevron-right' : ''} text={center[0] == 'text' ? text : ''} />
 					<Toggle
 						key={index}
 						name={item}
@@ -69,7 +65,7 @@ export default function ChipSample() {
 							alert('click');
 						}}
 						onChange={changeSwitch}
-						theme={[item.split('')[0], color, size, space, round, underline].join('-')}
+						theme={[item, color, size, space, round, underline].join('-')}
 						icon={left[0] == 'icon' ? 'bx-leaf' : ''}
 						iconR={right[0] == 'icon' ? 'bxs-x-circle' : ''}
 						text={center[0] == 'text' ? text : ''}
@@ -77,62 +73,112 @@ export default function ChipSample() {
 						checked={data[item]}
 					/>
 				))}
-				{/* <Chip theme={[1, color, size, space, round, underline].join('-')} icon={left[0] == 'icon' ? 'bx-leaf' : ''} iconR={right[0] == 'icon' ? 'bxs-chevron-right' : ''} text={center[0] == 'text' ? text : ''} />
-				<Chip theme={[2, color, size, space, round, underline].join('-')} icon={left[0] == 'icon' ? 'bx-leaf' : ''} iconR={right[0] == 'icon' ? 'bxs-chevron-right' : ''} text={center[0] == 'text' ? text : ''} />
-				<Chip theme={[3, color, size, space, round, underline].join('-')} icon={left[0] == 'icon' ? 'bx-leaf' : ''} iconR={right[0] == 'icon' ? 'bxs-chevron-right' : ''} text={center[0] == 'text' ? text : ''} />
-				<Chip theme={[4, color, size, space, round, underline].join('-')} icon={left[0] == 'icon' ? 'bx-leaf' : ''} iconR={right[0] == 'icon' ? 'bxs-chevron-right' : ''} text={center[0] == 'text' ? text : ''} />
-				<Chip theme={[5, color, size, space, round, underline].join('-')} icon={left[0] == 'icon' ? 'bx-leaf' : ''} iconR={right[0] == 'icon' ? 'bxs-chevron-right' : ''} text={center[0] == 'text' ? text : ''} />
-				<Chip theme={[6, color, size, space, round, underline].join('-')} icon={left[0] == 'icon' ? 'bx-leaf' : ''} iconR={right[0] == 'icon' ? 'bxs-chevron-right' : ''} text={center[0] == 'text' ? text : ''} />
-				<Chip theme={[7, color, size, space, round, underline].join('-')} icon={left[0] == 'icon' ? 'bx-leaf' : ''} iconR={right[0] == 'icon' ? 'bxs-chevron-right' : ''} text={center[0] == 'text' ? text : ''} />
-				<Chip theme={[8, color, size, space, round, underline].join('-')} icon={left[0] == 'icon' ? 'bx-leaf' : ''} iconR={right[0] == 'icon' ? 'bxs-chevron-right' : ''} text={center[0] == 'text' ? text : ''} /> */}
+			</Group> */}
+			<Group className="p-5 ring-2 ring-gray-500 rounded-lg">
+				<Text deco="font-success" className="leading-8">
+					Lorem ipsum <A theme={[`A${modeOut}${typeOver}${modeOver}`, color, 'md', space, round].join('-')} text={text} />
+					dolor sit amet <A theme={[`B${modeOut}${typeOver}${modeOver}`, color, 'md', space, round].join('-')} text={text} />
+					consectetur adipisicing <A theme={[`C${modeOut}${typeOver}${modeOver}`, color, 'md', space, round].join('-')} text={text} />
+					elit. Reiciendis <A theme={[`D${modeOut}${typeOver}${modeOver}`, color, 'md', space, round].join('-')} text={text} />
+					placeat nobis <A theme={[`E${modeOut}${typeOver}${modeOver}`, color, 'md', space, round].join('-')} text={text} />
+					voluptas saepe <A theme={[`F${modeOut}${typeOver}${modeOver}`, color, 'md', space, round].join('-')} text={text} />
+					incidunt animi <A theme={[`G${modeOut}${typeOver}${modeOver}`, color, 'md', space, round].join('-')} text={text} />
+					beatae, eligendi <A theme={[`H${modeOut}${typeOver}${modeOver}`, color, 'md', space, round].join('-')} text={text} />
+					consequuntur, neque <A theme={[`I${modeOut}${typeOver}${modeOver}`, color, 'md', space, round].join('-')} text={text} />
+					amet debitis <A theme={[`J${modeOut}${typeOver}${modeOver}`, color, 'md', space, round].join('-')} text={text} />
+					obcaecati quisquam <A theme={[`K${modeOut}${typeOver}${modeOver}`, color, 'md', space, round].join('-')} text={text} />
+					numquam necessitatibus <A theme={[`L${modeOut}${typeOver}${modeOver}`, color, 'md', space, round].join('-')} text={text} />
+					cumque?
+				</Text>
 			</Group>
-			{/* <Group>
-					<Text deco="font-danger">mode : </Text>
-					<ToggleRadio text="1" team="mode" name="1" checked={mode.includes('1')} onChange={changeChipRadio} />
-					<ToggleRadio text="2" team="mode" name="2" checked={mode.includes('2')} onChange={changeChipRadio} />
-					<ToggleRadio text="3" team="mode" name="3" checked={mode.includes('3')} onChange={changeChipRadio} />
-					<ToggleRadio text="4" team="mode" name="4" checked={mode.includes('4')} onChange={changeChipRadio} />
-				</Group> */}
+			<Group className="p-5 space-y-3 flex justify-center items-center flex-wrap ring-2 ring-gray-500 rounded-lg">
+				{['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L'].map((item, index) => (
+					<Toggle
+						key={index}
+						name={`${item}${modeOut}${typeOver}${modeOver}`}
+						href="/view/sample"
+						onClick={() => {
+							alert('click');
+						}}
+						onChange={changeSwitch}
+						theme={[`${item}${modeOut}${typeOver}${modeOver}`, color, size, space, round].join('-')}
+						icon={left[0] == 'icon' ? 'bx-leaf' : ''}
+						iconR={right[0] == 'icon' ? 'bxs-x-circle' : ''}
+						text={center[0] == 'text' ? text : ''}
+						// checked={['2', '4', '6', '8'].includes(item)}
+						// checked={data[item]}
+					/>
+				))}
+			</Group>
+			<Group className="p-5 space-y-3 flex justify-center items-center flex-wrap ring-2 ring-gray-500 rounded-lg">
+				<Toggle
+					name={`${typeOut}${modeOut}${typeOver}${modeOver}`}
+					href="/view/sample"
+					onClick={() => {
+						alert('click');
+					}}
+					onChange={changeSwitch}
+					theme={[`${typeOut}${modeOut}${typeOver}${modeOver}`, color, size, space, round].join('-')}
+					icon={left[0] == 'icon' ? 'bx-leaf' : ''}
+					iconR={right[0] == 'icon' ? 'bxs-x-circle' : ''}
+					text={center[0] == 'text' ? text : ''}
+					// checked={['2', '4', '6', '8'].includes(item)}
+					// checked={data[item]}
+				/>
+			</Group>
+			<Group>
+				<Text deco="font-danger">typeOut : </Text>
+				{['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L'].map((item, index) => (
+					<ToggleRadio key={index} text={item} team="typeOut" name={item} checked={typeOut.includes(item)} onChange={changeChipRadio} />
+				))}
+			</Group>
+			<Group>
+				<Text deco="font-danger">modeOut : </Text>
+				{['1', '2', '3', '4', '5', '6', '7', '8'].map((item, index) => (
+					<ToggleRadio key={index} text={item} team="modeOut" name={item} checked={modeOut.includes(item)} onChange={changeChipRadio} />
+				))}
+			</Group>
+			<Group>
+				<Text deco="font-danger">typeOver : </Text>
+				{['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L'].map((item, index) => (
+					<ToggleRadio key={index} text={item} team="typeOver" name={item} checked={typeOver.includes(item)} onChange={changeChipRadio} />
+				))}
+			</Group>
+			<Group>
+				<Text deco="font-danger">modeOver : </Text>
+				{['1', '2', '3', '4', '5', '6', '7', '8'].map((item, index) => (
+					<ToggleRadio key={index} text={item} team="modeOver" name={item} checked={modeOver.includes(item)} onChange={changeChipRadio} />
+				))}
+			</Group>
 			<Group>
 				<Text deco="font-danger">color : </Text>
-				<ToggleRadio text="default" team="color" name="default" checked={color.includes('default')} onChange={changeChipRadio} />
-				<ToggleRadio text="primary" team="color" name="primary" checked={color.includes('primary')} onChange={changeChipRadio} />
-				<ToggleRadio text="success" team="color" name="success" checked={color.includes('success')} onChange={changeChipRadio} />
-				<ToggleRadio text="warning" team="color" name="warning" checked={color.includes('warning')} onChange={changeChipRadio} />
-				<ToggleRadio text="danger" team="color" name="danger" checked={color.includes('danger')} onChange={changeChipRadio} />
+				{['default', 'primary', 'success', 'warning', 'danger'].map((item, index) => (
+					<ToggleRadio key={index} text={item} team="color" name={item} checked={color.includes(item)} onChange={changeChipRadio} />
+				))}
 			</Group>
 			<Group>
 				<Text deco="font-danger">size : </Text>
-				<ToggleRadio text="xs" team="size" name="xs" checked={size.includes('xs')} onChange={changeChipRadio} />
-				<ToggleRadio text="sm" team="size" name="sm" checked={size.includes('sm')} onChange={changeChipRadio} />
-				<ToggleRadio text="md" team="size" name="md" checked={size.includes('md')} onChange={changeChipRadio} />
-				<ToggleRadio text="lg" team="size" name="lg" checked={size.includes('lg')} onChange={changeChipRadio} />
-				<ToggleRadio text="xl" team="size" name="xl" checked={size.includes('xl')} onChange={changeChipRadio} />
-				<ToggleRadio text="2xl" team="size" name="2xl" checked={size.includes('2xl')} onChange={changeChipRadio} />
+				{['xs', 'sm', 'md', 'lg', 'xl', '2xl'].map((item, index) => (
+					<ToggleRadio key={index} text={item} team="size" name={item} checked={size.includes(item)} onChange={changeChipRadio} />
+				))}
 			</Group>
 			<Group>
 				<Text deco="font-danger">space : </Text>
-				<ToggleRadio text="xs" team="space" name="xs" checked={space.includes('xs')} onChange={changeChipRadio} />
-				<ToggleRadio text="sm" team="space" name="sm" checked={space.includes('sm')} onChange={changeChipRadio} />
-				<ToggleRadio text="md" team="space" name="md" checked={space.includes('md')} onChange={changeChipRadio} />
-				<ToggleRadio text="lg" team="space" name="lg" checked={space.includes('lg')} onChange={changeChipRadio} />
-				<ToggleRadio text="xl" team="space" name="xl" checked={space.includes('xl')} onChange={changeChipRadio} />
-				<ToggleRadio text="2xl" team="space" name="2xl" checked={space.includes('2xl')} onChange={changeChipRadio} />
+				{['xs', 'sm', 'md', 'lg', 'xl', '2xl'].map((item, index) => (
+					<ToggleRadio key={index} text={item} team="space" name={item} checked={space.includes(item)} onChange={changeChipRadio} />
+				))}
 			</Group>
 			<Group>
 				<Text deco="font-danger">round : </Text>
-				<ToggleRadio text="xs" team="round" name="xs" checked={round.includes('xs')} onChange={changeChipRadio} />
-				<ToggleRadio text="sm" team="round" name="sm" checked={round.includes('sm')} onChange={changeChipRadio} />
-				<ToggleRadio text="md" team="round" name="md" checked={round.includes('md')} onChange={changeChipRadio} />
-				<ToggleRadio text="lg" team="round" name="lg" checked={round.includes('lg')} onChange={changeChipRadio} />
-				<ToggleRadio text="xl" team="round" name="xl" checked={round.includes('xl')} onChange={changeChipRadio} />
-				<ToggleRadio text="full" team="round" name="full" checked={round.includes('full')} onChange={changeChipRadio} />
+				{['xs', 'sm', 'md', 'lg', 'xl', 'full'].map((item, index) => (
+					<ToggleRadio key={index} text={item} team="round" name={item} checked={round.includes(item)} onChange={changeChipRadio} />
+				))}
 			</Group>
-			<Group>
+			{/* <Group>
 				<Text deco="font-danger">underline : </Text>
 				<ToggleRadio text="none" team="underline" name="" checked={underline.includes('')} onChange={changeChipRadio} />
 				<ToggleRadio text="underline" team="underline" name="_" checked={underline.includes('_')} onChange={changeChipRadio} />
-			</Group>
+			</Group> */}
 			<Group>
 				<Text deco="font-danger">left : </Text>
 				<ToggleRadio text="none" team="left" name="none" checked={left.includes('none')} onChange={changeChipRadio} />
@@ -157,8 +203,8 @@ export default function ChipSample() {
 			<Group>
 				<Highlight className="html">
 					{`
-						<Toggle theme="${['A', color, size, space, round, underline].join('-')}"${left[0] == 'icon' ? ' icon="bx-leaf"' : ''}${right[0] == 'icon' ? ' iconR="bxs-chevron-right"' : ''}${center[0] == 'text' ? ' text="' + text + '"' : ''} />
-						`}
+					<Toggle theme="${[`${typeOut}${modeOut}${typeOver}${modeOver}`, color, size, space, round].join('-')}"${left[0] == 'icon' ? ' icon="bx-leaf"' : ''}${right[0] == 'icon' ? ' iconR="bxs-chevron-right"' : ''}${center[0] == 'text' ? ' text="' + text + '"' : ''} />
+					`}
 				</Highlight>
 			</Group>
 		</>
