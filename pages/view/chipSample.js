@@ -4,25 +4,12 @@ import {UseData} from '../hook/useData';
 
 export default function ChipSample() {
 	const [data, runData] = UseData({
-		A1: false,
-		A2: true,
-		B1: false,
-		B2: true,
-		C1: false,
-		C2: true,
-		D1: false,
-		D2: true,
-		E1: false,
-		E2: true,
-		F1: false,
-		F2: true,
-		G1: false,
-		G2: true,
+		checked: false,
 	});
-	const [{typeOut, modeOut, typeOver, modeOver, color, size, space, round, left, right, center, text}, runChipData] = UseData({
-		typeOut: ['B'],
+	const [{typeOut, modeOut, typeOver, modeOver, color, size, space, round, left, right, center, icon, iconR, text}, runChipData] = UseData({
+		typeOut: ['G'],
 		modeOut: ['1'],
-		typeOver: ['C'],
+		typeOver: ['L'],
 		modeOver: ['1'],
 		color: ['primary'],
 		size: ['md'],
@@ -31,6 +18,8 @@ export default function ChipSample() {
 		left: ['icon'],
 		right: ['none'],
 		center: ['text'],
+		icon: 'bx-leaf',
+		iconR: 'bxs-x-circle',
 		text: 'Next',
 	});
 
@@ -47,10 +36,15 @@ export default function ChipSample() {
 		runChipData.change(name, value);
 	};
 
-	const changeSwitch = (event) => {
+	const clickButton = (event) => {
+		alert('click button');
+	};
+
+	const changeToggle = (event) => {
+		// alert('toggle change');
 		const {name, checked} = event.currentTarget;
 
-		runData.change(name, checked);
+		runData.change('checked', checked);
 	};
 
 	return (
@@ -64,7 +58,7 @@ export default function ChipSample() {
 						onClick={() => {
 							alert('click');
 						}}
-						onChange={changeSwitch}
+						onChange={changeToggle}
 						theme={[item, color, size, space, round, underline].join('-')}
 						icon={left[0] == 'icon' ? 'bx-leaf' : ''}
 						iconR={right[0] == 'icon' ? 'bxs-x-circle' : ''}
@@ -76,19 +70,11 @@ export default function ChipSample() {
 			</Group> */}
 			<Group className="p-5 ring-2 ring-gray-500 rounded-lg">
 				<Text deco="font-success" className="leading-8">
-					Lorem ipsum <A theme={[`A${modeOut}${typeOver}${modeOver}`, color, 'md', space, round].join('-')} text={text} />
-					dolor sit amet <A theme={[`B${modeOut}${typeOver}${modeOver}`, color, 'md', space, round].join('-')} text={text} />
-					consectetur adipisicing <A theme={[`C${modeOut}${typeOver}${modeOver}`, color, 'md', space, round].join('-')} text={text} />
-					elit. Reiciendis <A theme={[`D${modeOut}${typeOver}${modeOver}`, color, 'md', space, round].join('-')} text={text} />
-					placeat nobis <A theme={[`E${modeOut}${typeOver}${modeOver}`, color, 'md', space, round].join('-')} text={text} />
-					voluptas saepe <A theme={[`F${modeOut}${typeOver}${modeOver}`, color, 'md', space, round].join('-')} text={text} />
-					incidunt animi <A theme={[`G${modeOut}${typeOver}${modeOver}`, color, 'md', space, round].join('-')} text={text} />
-					beatae, eligendi <A theme={[`H${modeOut}${typeOver}${modeOver}`, color, 'md', space, round].join('-')} text={text} />
-					consequuntur, neque <A theme={[`I${modeOut}${typeOver}${modeOver}`, color, 'md', space, round].join('-')} text={text} />
-					amet debitis <A theme={[`J${modeOut}${typeOver}${modeOver}`, color, 'md', space, round].join('-')} text={text} />
-					obcaecati quisquam <A theme={[`K${modeOut}${typeOver}${modeOver}`, color, 'md', space, round].join('-')} text={text} />
-					numquam necessitatibus <A theme={[`L${modeOut}${typeOver}${modeOver}`, color, 'md', space, round].join('-')} text={text} />
-					cumque?
+					{['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L'].map((item, index) => (
+						<span key={index}>
+							Reiciendis consectetur <A theme={[`${item}${modeOut}${typeOver}${modeOver}`, color, 'sm', 'xs', round].join('-')} icon={left[0] == 'icon' ? icon : ''} iconR={right[0] == 'icon' ? iconR : ''} text={text} /> adipisicing cumque?{` `}
+						</span>
+					))}
 				</Text>
 			</Group>
 			<Group className="p-5 space-y-3 flex justify-center items-center flex-wrap ring-2 ring-gray-500 rounded-lg">
@@ -97,34 +83,16 @@ export default function ChipSample() {
 						key={index}
 						name={`${item}${modeOut}${typeOver}${modeOver}`}
 						href="/view/sample"
-						onClick={() => {
-							alert('click');
-						}}
-						onChange={changeSwitch}
+						onClick={clickButton}
+						onChange={changeToggle}
 						theme={[`${item}${modeOut}${typeOver}${modeOver}`, color, size, space, round].join('-')}
-						icon={left[0] == 'icon' ? 'bx-leaf' : ''}
-						iconR={right[0] == 'icon' ? 'bxs-x-circle' : ''}
+						icon={left[0] == 'icon' ? icon : ''}
+						iconR={right[0] == 'icon' ? iconR : ''}
 						text={center[0] == 'text' ? text : ''}
-						// checked={['2', '4', '6', '8'].includes(item)}
-						// checked={data[item]}
+						checked={data.checked}
+						disabled={false}
 					/>
 				))}
-			</Group>
-			<Group className="p-5 space-y-3 flex justify-center items-center flex-wrap ring-2 ring-gray-500 rounded-lg">
-				<Toggle
-					name={`${typeOut}${modeOut}${typeOver}${modeOver}`}
-					href="/view/sample"
-					onClick={() => {
-						alert('click');
-					}}
-					onChange={changeSwitch}
-					theme={[`${typeOut}${modeOut}${typeOver}${modeOver}`, color, size, space, round].join('-')}
-					icon={left[0] == 'icon' ? 'bx-leaf' : ''}
-					iconR={right[0] == 'icon' ? 'bxs-x-circle' : ''}
-					text={center[0] == 'text' ? text : ''}
-					// checked={['2', '4', '6', '8'].includes(item)}
-					// checked={data[item]}
-				/>
 			</Group>
 			<Group>
 				<Text deco="font-danger">typeOut : </Text>
@@ -174,20 +142,17 @@ export default function ChipSample() {
 					<ToggleRadio key={index} text={item} team="round" name={item} checked={round.includes(item)} onChange={changeChipRadio} />
 				))}
 			</Group>
-			{/* <Group>
-				<Text deco="font-danger">underline : </Text>
-				<ToggleRadio text="none" team="underline" name="" checked={underline.includes('')} onChange={changeChipRadio} />
-				<ToggleRadio text="underline" team="underline" name="_" checked={underline.includes('_')} onChange={changeChipRadio} />
-			</Group> */}
 			<Group>
 				<Text deco="font-danger">left : </Text>
 				<ToggleRadio text="none" team="left" name="none" checked={left.includes('none')} onChange={changeChipRadio} />
 				<ToggleRadio text="icon" team="left" name="icon" checked={left.includes('icon')} onChange={changeChipRadio} />
+				<Input type="text" deco="basket-default box-default font-default" className="w-[200px]" name="icon" value={icon} placeholder="icon 입력" onChange={chageChipInput} disabled={left != 'icon'} />
 			</Group>
 			<Group>
 				<Text deco="font-danger">right : </Text>
 				<ToggleRadio text="none" team="right" name="none" checked={right.includes('none')} onChange={changeChipRadio} />
 				<ToggleRadio text="icon" team="right" name="icon" checked={right.includes('icon')} onChange={changeChipRadio} />
+				<Input type="text" deco="basket-default box-default font-default" className="w-[200px]" name="iconR" value={iconR} placeholder="iconR 입력" onChange={chageChipInput} disabled={right != 'icon'} />
 			</Group>
 			<Group>
 				<Text deco="font-danger">center : </Text>

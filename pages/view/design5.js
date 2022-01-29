@@ -841,28 +841,6 @@ export default function code() {
 				</Group>
 			</Fieldset>
 
-			<Fieldset title="A">
-				<Group>
-					<Text deco="font-success" className="leading-8">
-						Lorem ipsum <A theme="AB-primary-md-sm-md" text="A1" />
-						dolor sit amet <A theme="BB-primary-md-sm-md" text="B1" />
-						consectetur adipisicing <A theme="CB-primary-md-sm-md" text="C1" />
-						elit. Reiciendis <A theme="DB-primary-md-sm-md" text="D1" />
-						placeat nobis <A theme="EB-primary-md-sm-md" text="E1" />
-						voluptas saepe <A theme="FB-primary-md-sm-md" text="F1" />
-						incidunt animi <A theme="GB-primary-md-sm-md" text="G1" />
-						beatae, eligendi <A theme="AC-danger-md-sm-md" text="A2" />
-						consequuntur, neque <A theme="BC-danger-md-sm-md" text="B2" />
-						amet debitis <A theme="CC-danger-md-sm-md" text="C2" />
-						obcaecati quisquam <A theme="DC-danger-md-sm-md" text="D2" />
-						numquam necessitatibus <A theme="EC-danger-md-sm-md" text="E2" />
-						praesentium iste <A theme="FC-danger-md-sm-md" text="F2" />
-						a ullam <A theme="GC-danger-md-sm-md" text="G2" />
-						cumque?
-					</Text>
-				</Group>
-			</Fieldset>
-
 			<Fieldset title="Chip">
 				<ChipSample />
 			</Fieldset>
