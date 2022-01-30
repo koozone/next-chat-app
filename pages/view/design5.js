@@ -502,80 +502,29 @@ export default function code() {
 
 			<Fieldset title="Button">
 				<Group>
-					<Button deco="basket-default box-primary">
-						{/* <BoxEx deco="box-primary" /> */}
-						<Text deco="font-primary" className="font-xl">
-							BG
-						</Text>
-						<Icon deco="font-primary">bxs-chevron-right</Icon>
-						<Text deco="font-danger">Sample</Text>
-					</Button>
-					<Button deco="basket-default box-success" name="happy">
-						<Icon deco="font-danger">bx-user</Icon>
-						<Text deco="font-success">named</Text>
-					</Button>
-					<Button deco="basket-default box-danger font-success" icon="bx-user-x" text="no name" />
-					<Button deco="basket-default box-primary font-success" icon="bx-user-plus" text="KOOZone" />
-					<Button deco="basket-default box-primary font-danger" className="text-2xl" icon="bx-user-plus" iconR="bxs-chevron-right" text="...">
-						<Icon deco="font-primary">bxs-chevron-left</Icon>
-						<Text deco="font-primary">asdas</Text>
-					</Button>
-					<Button deco="basket-default box-danger" checked>
-						{/* <BoxEx deco="box-danger" /> */}
-						<Text deco="font-danger">Sample</Text>
-					</Button>
-					<Button deco="basket-default box-success font-primary" icon="bxs-like" text="like:" name="countLike" onClick={clickButton}>
-						<Text deco="font-danger">{data.countLike.toString()}</Text>
-					</Button>
-					<Button deco="basket-default box-warning font-danger" icon="bxs-dislike" text="hate:" name="countHate" onClick={clickButton}>
-						<Text deco="font-primary">{data.countHate.toString()}</Text>
-					</Button>
+					<Button theme="HI-danger-sm-sm-md" icon="bxs-chevron-right" text="Sample" />
+					<Button theme="DI-success-sm-sm-xs" icon="bx-user" text="named" name="happy" />
+					<Button theme="DI-danger-sm-sm-xs" icon="bx-user-x" text="no named" />
+					<Button theme="CK-default-md-md-md" className={'w-[140px]'} icon="bx-user-plus" text="KOOZone" />
+					<Button theme="D4G7-warning-lg-lg-md" icon="bxs-chevron-left" iconR="bxs-chevron-right" text="Arrow Button" />
+					<Button theme="DG-primary-sm-sm-full" icon="bxs-like" text={`like: ${data.countLike}`} name="countLike" onClick={clickButton} />
+					<Button theme="DG-default-sm-sm-full" icon="bxs-dislike" text={`hate: ${data.countHate}`} name="countHate" onClick={clickButton} />
 				</Group>
 
 				<Group>
-					<Button deco="basket-default">
-						<Box deco="box-default" />
-						<Text deco="font-default">Default</Text>
-					</Button>
-					<Button deco="basket-default">
-						<Box deco="box-primary" />
-						<Text deco="font-primary">Primary</Text>
-					</Button>
-					<Button deco="basket-default">
-						<Box deco="box-success" />
-						<Text deco="font-success">Success</Text>
-					</Button>
-					<Button deco="basket-default">
-						<Box deco="box-warning" />
-						<Text deco="font-warning">Warning</Text>
-					</Button>
-					<Button deco="basket-default" disabled>
-						<Box deco="box-danger" />
-						<Text deco="font-danger">Danger</Text>
-					</Button>
+					<Button theme="HI-default-sm-sm-xs" text="Default" />
+					<Button theme="HI-primary-sm-sm-xs" text="Primary" />
+					<Button theme="HI-success-sm-sm-xs" text="Success" />
+					<Button theme="HI-warning-sm-sm-xs" text="Warning" />
+					<Button theme="HI-danger-sm-sm-xs" text="Danger" disabled />
 				</Group>
 
 				<Group>
-					<Button deco="basket-default" checked>
-						<Box deco="box-default" />
-						<Text deco="font-default">Default</Text>
-					</Button>
-					<Button deco="basket-default" checked>
-						<Box deco="box-primary" />
-						<Text deco="font-primary">Primary</Text>
-					</Button>
-					<Button deco="basket-default" checked>
-						<Box deco="box-success" />
-						<Text deco="font-success">Success</Text>
-					</Button>
-					<Button deco="basket-default" checked>
-						<Box deco="box-warning" />
-						<Text deco="font-warning">Warning</Text>
-					</Button>
-					<Button deco="basket-default" checked>
-						<Box deco="box-danger" />
-						<Text deco="font-danger">Danger</Text>
-					</Button>
+					<Button theme="KL-default-sm-sm-xs" text="Default" />
+					<Button theme="KL-primary-sm-sm-xs" text="Primary" />
+					<Button theme="KL-success-sm-sm-xs" text="Success" />
+					<Button theme="KL-warning-sm-sm-xs" text="Warning" />
+					<Button theme="KL-danger-sm-sm-xs" text="Danger" disabled />
 				</Group>
 			</Fieldset>
 

@@ -43,7 +43,7 @@ export default function ChipSample() {
 		const {name, checked} = event.currentTarget;
 		console.log(`[toggle change]: ${checked}`);
 
-		runChipData.change('checked', checked);
+		runChipData.change('checked', [`${checked}`]);
 	};
 
 	return (

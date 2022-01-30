@@ -5,7 +5,7 @@ import {forwardRef, Fragment} from 'react';
 const dummyElement = () => {
 	return (
 		<>
-			<div className={`font-normal font-semibold italic not-italic underline no-underline group-hover:font-normal group-hover:font-semibold group-hover:italic group-hover:not-italic group-hover:underline group-hover:no-underline`} />;
+			<div className={`font-normal font-semibold italic not-italic underline no-underline bg-transparent group-hover:font-normal group-hover:font-semibold group-hover:italic group-hover:not-italic group-hover:underline group-hover:no-underline group-hover:bg-transparent`} />;
 			<div className={`text-slate-800 ring-slate-800 bg-slate-100 bg-slate-300 bg-slate-500 bg-slate-600 group-hover:text-slate-800 group-hover:ring-slate-800 group-hover:bg-slate-100 group-hover:bg-slate-300 group-hover:bg-slate-500 group-hover:bg-slate-600`} />;
 			<div className={`text-sky-800 ring-sky-800 bg-sky-100 bg-sky-300 bg-sky-500 bg-sky-600 group-hover:text-sky-800 group-hover:ring-sky-800 group-hover:bg-sky-100 group-hover:bg-sky-300 group-hover:bg-sky-500 group-hover:bg-sky-600`} />;
 			<div className={`text-emerald-800 ring-emerald-800 bg-emerald-100 bg-emerald-300 bg-emerald-500 bg-emerald-600 group-hover:text-emerald-800 group-hover:ring-emerald-800 group-hover:bg-emerald-100 group-hover:bg-emerald-300 group-hover:bg-emerald-500 group-hover:bg-emerald-600`} />;
@@ -102,19 +102,19 @@ const getDefaultElement = (props) => {
 const getDecoElement = (props) => {
 	const {tag, useDeco = '', action, icon} = props;
 
-	const aaa = useDeco?.split('-').pop();
+	const stylecolor = useDeco?.split('-').pop();
 	const tailcolor = {
 		default: 'slate',
 		primary: 'sky',
 		success: 'emerald',
 		warning: 'amber',
 		danger: 'rose',
-	}[aaa];
+	}[stylecolor];
 
-	const decoReg = new RegExp(`((font|box).*)-${aaa}`, 'gm');
-	const decoStr = tailcolor ? useDeco.replace(decoReg, '$1-*') : useDeco;
+	const decoReg = new RegExp(`((font|box).*)-${stylecolor}`, 'gm');
+	const shotDeco = tailcolor ? useDeco.replace(decoReg, '$1-*') : useDeco;
 
-	switch (decoStr) {
+	switch (shotDeco) {
 		case 'font-*':
 			return <div className={`text-${tailcolor}-800 peer-checked:text-white`} />;
 
@@ -331,7 +331,7 @@ const LabelTheme = (props) => {
 	const {children, theme, deco, style, className, icon, iconL, iconR, text, checked} = getProps({...props, tag: 'label'});
 
 	const themeList = String(theme).split('-') || [];
-	const tyde = themeList[0] || 'B1C1';
+	const typemode = themeList[0] || 'B1C1';
 	const color = themeList[1] || 'default';
 	const size = themeList[2] || 'md';
 	const space = themeList[3] || 'md';
@@ -346,11 +346,14 @@ const LabelTheme = (props) => {
 		'2xl': {x: 4, y: 4},
 	}[space];
 
+	const aaa = typemode.match(/([A-Z])([0-9]?)([A-Z])([0-9]?)/);
+	const ttt = `${aaa[1]}${aaa[2] || '1'}${aaa[3]}${aaa[4] || '1'}`;
+
 	// box, type 타입모드 (ex> 'box-A1B2-default', 'font-A1B2-primary')
 	const regex = /^(.*)-([A-Z])([0-9]?)([A-Z])([0-9]?)-(.*)$/;
-	const boxType = `box-${tyde}-${color}`.replace(regex, checked ? '$1-$4$2-$6' : '$1-$2$4-$6'); // 'box-AB-default'
-	const fontType = `font-${tyde}-${color}`.replace(regex, checked ? '$1-$4$2-$6' : '$1-$2$4-$6'); // 'font-AB-primary'
-	const fontMode = `font-${tyde}-${color}`.replace(regex, checked ? '$1-$5$3-$6' : '$1-$3$5-$6'); // 'font-12-primary'
+	const boxType = `box-${ttt}-${color}`.replace(regex, checked ? '$1-$4$2-$6' : '$1-$2$4-$6'); // 'box-AB-default'
+	const fontType = `font-${ttt}-${color}`.replace(regex, checked ? '$1-$4$2-$6' : '$1-$2$4-$6'); // 'font-AB-primary'
+	const fontMode = `font-${ttt}-${color}`.replace(regex, checked ? '$1-$5$3-$6' : '$1-$3$5-$6'); // 'font-12-primary'
 	const fontModeClass = `${mixDecoElement({...props, useDeco: fontMode}).props.className}`;
 
 	return (
