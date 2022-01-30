@@ -3,10 +3,7 @@ import {A, Basket, Button, Icon, Input, Text, Toggle} from '../component/ui_ds5'
 import {UseData} from '../hook/useData';
 
 export default function ChipSample() {
-	const [data, runData] = UseData({
-		checked: false,
-	});
-	const [{typeOut, modeOut, typeOver, modeOver, color, size, space, round, left, right, center, icon, iconR, text}, runChipData] = UseData({
+	const [{typeOut, modeOut, typeOver, modeOver, color, size, space, round, left, right, center, icon, iconR, text, checked, disabled}, runChipData] = UseData({
 		typeOut: ['G'],
 		modeOut: ['1'],
 		typeOver: ['L'],
@@ -21,6 +18,8 @@ export default function ChipSample() {
 		icon: 'bx-leaf',
 		iconR: 'bxs-x-circle',
 		text: 'Next',
+		checked: ['false'],
+		disabled: ['false'],
 	});
 
 	const changeChipRadio = (event) => {
@@ -37,42 +36,32 @@ export default function ChipSample() {
 	};
 
 	const clickButton = (event) => {
-		alert('click button');
+		console.log(`[click button]`);
 	};
 
 	const changeToggle = (event) => {
-		// alert('toggle change');
 		const {name, checked} = event.currentTarget;
+		console.log(`[toggle change]: ${checked}`);
 
-		runData.change('checked', checked);
+		runChipData.change('checked', checked);
 	};
 
 	return (
 		<>
-			{/* <Group className="p-5 space-y-3 flex justify-center items-center flex-wrap ring-2 ring-gray-500 rounded-lg">
-				{['A1', 'A2', 'B1', 'B2', 'C1', 'C2', 'D1', 'D2', 'E1', 'E2', 'F1', 'F2', 'G1', 'G2'].map((item, index) => (
-					<Toggle
-						key={index}
-						name={item}
-						href="/view/sample"
-						onClick={() => {
-							alert('click');
-						}}
-						onChange={changeToggle}
-						theme={[item, color, size, space, round, underline].join('-')}
-						icon={left[0] == 'icon' ? 'bx-leaf' : ''}
-						iconR={right[0] == 'icon' ? 'bxs-x-circle' : ''}
-						text={center[0] == 'text' ? text : ''}
-						// checked={['2', '4', '6', '8'].includes(item)}
-						checked={data[item]}
-					/>
-				))}
-			</Group> */}
 			<Group className="p-5 ring-2 ring-gray-500 rounded-lg">
 				<Text deco="font-success" className="leading-8">
 					{['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L'].map((item, index) => (
 						<span key={index}>
-							Reiciendis consectetur <A theme={[`${item}${modeOut}${typeOver}${modeOver}`, color, 'sm', 'xs', round].join('-')} icon={left[0] == 'icon' ? icon : ''} iconR={right[0] == 'icon' ? iconR : ''} text={text} /> adipisicing cumque?{` `}
+							Reiciendis consectetur{' '}
+							<A
+								theme={[`${item}${modeOut}${typeOver}${modeOver}`, color, 'sm', 'xs', round].join('-')}
+								icon={left[0] == 'icon' ? icon : ''}
+								iconR={right[0] == 'icon' ? iconR : ''}
+								text={center[0] == 'text' ? text : ''}
+								checked={checked[0] == 'true'}
+								disabled={disabled[0] == 'true'}
+							/>{' '}
+							adipisicing cumque?{` `}
 						</span>
 					))}
 				</Text>
@@ -89,10 +78,24 @@ export default function ChipSample() {
 						icon={left[0] == 'icon' ? icon : ''}
 						iconR={right[0] == 'icon' ? iconR : ''}
 						text={center[0] == 'text' ? text : ''}
-						checked={data.checked}
-						disabled={false}
+						checked={checked[0] == 'true'}
+						disabled={disabled[0] == 'true'}
 					/>
 				))}
+			</Group>
+			<Group className="p-5 space-y-3 flex justify-center items-center flex-wrap ring-2 ring-gray-500 rounded-lg">
+				<Toggle
+					name={`${typeOut}${modeOut}${typeOver}${modeOver}`}
+					href="/view/sample"
+					onClick={clickButton}
+					onChange={changeToggle}
+					theme={[`${typeOut}${modeOut}${typeOver}${modeOver}`, color, size, space, round].join('-')}
+					icon={left[0] == 'icon' ? icon : ''}
+					iconR={right[0] == 'icon' ? iconR : ''}
+					text={center[0] == 'text' ? text : ''}
+					checked={checked[0] == 'true'}
+					disabled={disabled[0] == 'true'}
+				/>
 			</Group>
 			<Group>
 				<Text deco="font-danger">typeOut : </Text>
@@ -166,9 +169,23 @@ export default function ChipSample() {
 				</Input>
 			</Group>
 			<Group>
+				<Text deco="font-danger">checked : </Text>
+				{['false', 'true'].map((item, index) => (
+					<ToggleRadio key={index} text={item} team="checked" name={item} checked={checked.includes(item)} onChange={changeChipRadio} />
+				))}
+			</Group>
+			<Group>
+				<Text deco="font-danger">disabled : </Text>
+				{['false', 'true'].map((item, index) => (
+					<ToggleRadio key={index} text={item} team="disabled" name={item} checked={disabled.includes(item)} onChange={changeChipRadio} />
+				))}
+			</Group>
+			<Group>
 				<Highlight className="html">
 					{`
-					<Toggle theme="${[`${typeOut}${modeOut}${typeOver}${modeOver}`, color, size, space, round].join('-')}"${left[0] == 'icon' ? ' icon="bx-leaf"' : ''}${right[0] == 'icon' ? ' iconR="bxs-chevron-right"' : ''}${center[0] == 'text' ? ' text="' + text + '"' : ''} />
+					<Toggle theme="${[`${typeOut}${modeOut}${typeOver}${modeOver}`, color, size, space, round].join('-')}"${left[0] == 'icon' ? ' icon="' + icon + '"' : ''}${right[0] == 'icon' ? ' iconR="' + iconR + '"' : ''}${center[0] == 'text' ? ' text="' + text + '"' : ''}${checked[0] == 'true' ? ' checked' : ''}${
+						disabled[0] == 'true' ? ' disabled' : ''
+					} />
 					`}
 				</Highlight>
 			</Group>

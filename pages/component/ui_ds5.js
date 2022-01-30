@@ -15,6 +15,46 @@ const dummyElement = () => {
 	);
 };
 
+const mixDecoElement = (props) => {
+	const {tag, useDeco = '', icon} = props;
+
+	// box 타입 (ex> 'box-AB-default')
+	const boxTypeReg = /^(box)-([A-Z])([A-Z])-(.*)$/;
+	// font 타입 (ex> 'font-AB-default')
+	const fontTypeReg = /^(font)-([A-Z])([A-Z])-(.*)$/;
+	// font 모드 (ex> 'font-12-default')
+	const fontModeReg = /^(font)-([0-9])([0-9])-(.*)$/;
+
+	switch (useDeco) {
+		case useDeco.match(boxTypeReg)?.input:
+			const boxTypeNormal = useDeco.replace(boxTypeReg, '$1-$2-$4'); // 'box-A-default'
+			const boxTypeHover = useDeco.replace(boxTypeReg, '$1-$3-$4'); // 'box-B-default'
+			const boxTypeClassNormal = `${getDecoElement({useDeco: boxTypeNormal, action: ''}).props.className}`;
+			const boxTypeClassHover = `${getDecoElement({useDeco: boxTypeHover, action: 'group-hover:'}).props.className}`;
+
+			return <div className={`absolute w-full h-full transition ${boxTypeClassNormal} ${boxTypeClassHover}`} />;
+
+		case useDeco.match(fontTypeReg)?.input:
+			const fontTypeNormal = useDeco.replace(fontTypeReg, '$1-$2-$4'); // 'font-A-default'
+			const fontTypeHover = useDeco.replace(fontTypeReg, '$1-$3-$4'); // 'font-B-default'
+			const fontTypeClassNormal = `${getDecoElement({useDeco: fontTypeNormal, action: ''}).props.className}`;
+			const fontTypeClassHover = `${getDecoElement({useDeco: fontTypeHover, action: 'group-hover:'}).props.className}`;
+
+			return <div className={`transition ${fontTypeClassNormal} ${fontTypeClassHover}`} />;
+
+		case useDeco.match(fontModeReg)?.input:
+			const fontModeNormal = useDeco.replace(fontModeReg, '$1-$2-$4'); // 'font-1-default'
+			const fontModeHover = useDeco.replace(fontModeReg, '$1-$3-$4'); // 'font-2-default'
+			const fontModeClassNormal = `${getDecoElement({useDeco: fontModeNormal, action: ''}).props.className}`;
+			const fontModeClassHover = `${getDecoElement({useDeco: fontModeHover, action: 'group-hover:'}).props.className}`;
+
+			return <div className={`transition underline-offset-1 ${fontModeClassNormal} ${fontModeClassHover}`} />;
+
+		default:
+			return getDecoElement(props);
+	}
+};
+
 const getDefaultElement = (props) => {
 	const {children, tag, disabled} = props;
 
@@ -59,19 +99,25 @@ const getDefaultElement = (props) => {
 	}
 };
 
-const getThemeElement = (props) => {
-	const {useDeco, action} = props;
-	const decoSlice = useDeco?.split('-');
+const getDecoElement = (props) => {
+	const {tag, useDeco = '', action, icon} = props;
 
+	const aaa = useDeco?.split('-').pop();
 	const tailcolor = {
 		default: 'slate',
 		primary: 'sky',
 		success: 'emerald',
 		warning: 'amber',
 		danger: 'rose',
-	}[decoSlice.pop()];
+	}[aaa];
 
-	switch ([...decoSlice, '*'].join('-')) {
+	const decoReg = new RegExp(`((font|box).*)-${aaa}`, 'gm');
+	const decoStr = tailcolor ? useDeco.replace(decoReg, '$1-*') : useDeco;
+
+	switch (decoStr) {
+		case 'font-*':
+			return <div className={`text-${tailcolor}-800 peer-checked:text-white`} />;
+
 		case 'font-1-*':
 			return <div className={`${action}no-underline ${action}not-italic ${action}font-normal`} />;
 
@@ -96,12 +142,6 @@ const getThemeElement = (props) => {
 		case 'font-8-*':
 			return <div className={`${action}underline ${action}italic ${action}font-semibold`} />;
 
-		case 'font-F-*':
-		case 'font-G-*':
-		case 'font-K-*':
-		case 'font-L-*':
-			return <div className={`${action}text-white`} />;
-
 		case 'font-A-*':
 		case 'font-B-*':
 		case 'font-C-*':
@@ -111,6 +151,20 @@ const getThemeElement = (props) => {
 		case 'font-I-*':
 		case 'font-J-*':
 			return <div className={`${action}text-${tailcolor}-800`} />;
+
+		case 'font-F-*':
+		case 'font-G-*':
+		case 'font-K-*':
+		case 'font-L-*':
+			return <div className={`${action}text-white`} />;
+
+		case 'font-toggle':
+			return <div className={`text-sky-800 peer-checked:underline`} />;
+		case 'font-checkbox-dot':
+			return <div className={`absolute text-lg text-white top-[5px] left-[7px] invisible peer-checked:visible`} />;
+
+		case 'box-*':
+			return <div className={`absolute w-full h-full ring-1 ring-${tailcolor}-600 bg-white group-hover:bg-${tailcolor}-100 peer-checked:bg-${tailcolor}-400 peer-checked:ring-${tailcolor}-800 group-hover:peer-checked:bg-${tailcolor}-600`} />;
 
 		case 'box-A-*':
 			return <div className={`${action}ring-0 ${action}bg-transparent`} />;
@@ -147,275 +201,6 @@ const getThemeElement = (props) => {
 
 		case 'box-L-*':
 			return <div className={`${action}ring-1 ${action}ring-${tailcolor}-800 ${action}bg-${tailcolor}-600`} />;
-
-		default:
-			return <div className={``} />;
-	}
-};
-
-const getElement = (props) => {
-	const {tag, useDeco = '', icon} = props;
-
-	const tailcolor = {
-		default: 'slate',
-		primary: 'sky',
-		success: 'emerald',
-		warning: 'amber',
-		danger: 'rose',
-	}[useDeco?.split('-').pop()];
-
-	switch (useDeco) {
-		case 'font-default':
-		case 'font-primary':
-		case 'font-success':
-		case 'font-warning':
-		case 'font-danger':
-			return <div className={`text-${tailcolor}-800 peer-checked:text-white`} />;
-
-		// case 'font-high-default':
-		// case 'font-high-primary':
-		// case 'font-high-success':
-		// case 'font-high-warning':
-		// case 'font-high-danger':
-		// 	return <div className={`text-${tailcolor}-800`} />;
-
-		// case 'font-low-default':
-		// case 'font-low-primary':
-		// case 'font-low-success':
-		// case 'font-low-warning':
-		// case 'font-low-danger':
-		// 	return <div className={`text-white`} />;
-
-		// case 'font-high2low-default':
-		// case 'font-high2low-primary':
-		// case 'font-high2low-success':
-		// case 'font-high2low-warning':
-		// case 'font-high2low-danger':
-		// 	return <div className={`text-${tailcolor}-800 group-hover:text-white`} />;
-
-		case 'font-toggle':
-			return <div className={`text-sky-800 peer-checked:underline`} />;
-		case 'font-checkbox-dot':
-			return <div className={`absolute text-lg text-white top-[5px] left-[7px] invisible peer-checked:visible`} />;
-
-		case 'box-default':
-		case 'box-primary':
-		case 'box-success':
-		case 'box-warning':
-		case 'box-danger':
-			return <div className={`absolute w-full h-full ring-1 ring-${tailcolor}-600 bg-white group-hover:bg-${tailcolor}-100 peer-checked:bg-${tailcolor}-400 peer-checked:ring-${tailcolor}-800 group-hover:peer-checked:bg-${tailcolor}-600`} />;
-
-		// case 'box-low:xx2xx-default':
-		// case 'box-low:xx2xx-primary':
-		// case 'box-low:xx2xx-success':
-		// case 'box-low:xx2xx-warning':
-		// case 'box-low:xx2xx-danger':
-		// 	return <div className={`absolute w-full h-full`} />;
-
-		// case 'box-low:xx2lx-default':
-		// case 'box-low:xx2lx-primary':
-		// case 'box-low:xx2lx-success':
-		// case 'box-low:xx2lx-warning':
-		// case 'box-low:xx2lx-danger':
-		// 	return <div className={`absolute w-full h-full group-hover:ring-1 group-hover:ring-${tailcolor}-800`} />;
-
-		// case 'box-low:xx2xf-default':
-		// case 'box-low:xx2xf-primary':
-		// case 'box-low:xx2xf-success':
-		// case 'box-low:xx2xf-warning':
-		// case 'box-low:xx2xf-danger':
-		// 	return <div className={`absolute w-full h-full group-hover:bg-${tailcolor}-100`} />;
-
-		// case 'box-high:xx2xf-default':
-		// case 'box-high:xx2xf-primary':
-		// case 'box-high:xx2xf-success':
-		// case 'box-high:xx2xf-warning':
-		// case 'box-high:xx2xf-danger':
-		// 	return <div className={`absolute w-full h-full group-hover:bg-${tailcolor}-600`} />;
-
-		// case 'box-low:xx2lf-default':
-		// case 'box-low:xx2lf-primary':
-		// case 'box-low:xx2lf-success':
-		// case 'box-low:xx2lf-warning':
-		// case 'box-low:xx2lf-danger':
-		// 	return <div className={`absolute w-full h-full group-hover:ring-1 group-hover:ring-${tailcolor}-800 group-hover:bg-${tailcolor}-100`} />;
-
-		// case 'box-high:xx2lf-default':
-		// case 'box-high:xx2lf-primary':
-		// case 'box-high:xx2lf-success':
-		// case 'box-high:xx2lf-warning':
-		// case 'box-high:xx2lf-danger':
-		// 	return <div className={`absolute w-full h-full group-hover:ring-1 group-hover:ring-${tailcolor}-800 group-hover:bg-${tailcolor}-600`} />;
-
-		// case 'box-low:lx2xf-default':
-		// case 'box-low:lx2xf-primary':
-		// case 'box-low:lx2xf-success':
-		// case 'box-low:lx2xf-warning':
-		// case 'box-low:lx2xf-danger':
-		// 	return <div className={`absolute w-full h-full ring-1 ring-${tailcolor}-800 group-hover:ring-0 group-hover:bg-${tailcolor}-100`} />;
-
-		// case 'box-high:lx2xf-default':
-		// case 'box-high:lx2xf-primary':
-		// case 'box-high:lx2xf-success':
-		// case 'box-high:lx2xf-warning':
-		// case 'box-high:lx2xf-danger':
-		// 	return <div className={`absolute w-full h-full ring-1 ring-${tailcolor}-800 group-hover:ring-0 group-hover:bg-${tailcolor}-600`} />;
-
-		// case 'box-low:lx2lf-default':
-		// case 'box-low:lx2lf-primary':
-		// case 'box-low:lx2lf-success':
-		// case 'box-low:lx2lf-warning':
-		// case 'box-low:lx2lf-danger':
-		// 	return <div className={`absolute w-full h-full ring-1 ring-${tailcolor}-800 group-hover:bg-${tailcolor}-100`} />;
-
-		// case 'box-high:lx2lf-default':
-		// case 'box-high:lx2lf-primary':
-		// case 'box-high:lx2lf-success':
-		// case 'box-high:lx2lf-warning':
-		// case 'box-high:lx2lf-danger':
-		// 	return <div className={`absolute w-full h-full ring-1 ring-${tailcolor}-800 group-hover:bg-${tailcolor}-600`} />;
-
-		// case 'box-low:xf2lf-default':
-		// case 'box-low:xf2lf-primary':
-		// case 'box-low:xf2lf-success':
-		// case 'box-low:xf2lf-warning':
-		// case 'box-low:xf2lf-danger':
-		// 	return <div className={`absolute w-full h-full bg-white group-hover:ring-1 group-hover:ring-${tailcolor}-800 group-hover:bg-${tailcolor}-100`} />;
-
-		// case 'box-low:xf10-default':
-		// case 'box-low:xf10-primary':
-		// case 'box-low:xf10-success':
-		// case 'box-low:xf10-warning':
-		// case 'box-low:xf10-danger':
-		// 	return <div className={`absolute w-full h-full bg-${tailcolor}-100`} />;
-
-		// case 'box-high:xf2lf-default':
-		// case 'box-high:xf2lf-primary':
-		// case 'box-high:xf2lf-success':
-		// case 'box-high:xf2lf-warning':
-		// case 'box-high:xf2lf-danger':
-		// 	return <div className={`absolute w-full h-full bg-${tailcolor}-400 group-hover:ring-1 group-hover:ring-${tailcolor}-800 group-hover:bg-${tailcolor}-600`} />;
-
-		// case 'box-low:xf20-default':
-		// case 'box-low:xf20-primary':
-		// case 'box-low:xf20-success':
-		// case 'box-low:xf20-warning':
-		// case 'box-low:xf20-danger':
-		// 	return <div className={`absolute w-full h-full bg-${tailcolor}-600`} />;
-
-		// case 'box-low:lf2lf-default':
-		// case 'box-low:lf2lf-primary':
-		// case 'box-low:lf2lf-success':
-		// case 'box-low:lf2lf-warning':
-		// case 'box-low:lf2lf-danger':
-		// 	return <div className={`absolute w-full h-full ring-1 ring-${tailcolor}-800 bg-white group-hover:bg-${tailcolor}-100`} />;
-
-		// case 'box-low:lf20-default':
-		// case 'box-low:lf20-primary':
-		// case 'box-low:lf20-success':
-		// case 'box-low:lf20-warning':
-		// case 'box-low:lf20-danger':
-		// 	return <div className={`absolute w-full h-full ring-1 ring-${tailcolor}-800 bg-${tailcolor}-100`} />;
-
-		// case 'box-high:lf2lf-default':
-		// case 'box-high:lf2lf-primary':
-		// case 'box-high:lf2lf-success':
-		// case 'box-high:lf2lf-warning':
-		// case 'box-high:lf2lf-danger':
-		// 	return <div className={`absolute w-full h-full ring-1 ring-${tailcolor}-800 bg-${tailcolor}-400 group-hover:bg-${tailcolor}-600`} />;
-
-		// case 'box-high:lf20-default':
-		// case 'box-high:lf20-primary':
-		// case 'box-high:lf20-success':
-		// case 'box-high:lf20-warning':
-		// case 'box-high:lf20-danger':
-		// 	return <div className={`absolute w-full h-full ring-1 ring-${tailcolor}-800 bg-${tailcolor}-600`} />;
-
-		// case 'box-A-default':
-		// case 'box-A-primary':
-		// case 'box-A-success':
-		// case 'box-A-warning':
-		// case 'box-A-danger':
-		// 	return <div className={`absolute w-full h-full`} />;
-
-		// case 'box-B-default':
-		// case 'box-B-primary':
-		// case 'box-B-success':
-		// case 'box-B-warning':
-		// case 'box-B-danger':
-		// 	return <div className={`absolute w-full h-full ring-1 ring-${tailcolor}-800`} />;
-
-		// case 'box-C-default':
-		// case 'box-C-primary':
-		// case 'box-C-success':
-		// case 'box-C-warning':
-		// case 'box-C-danger':
-		// 	return <div className={`absolute w-full h-full bg-white`} />;
-
-		// case 'box-D-default':
-		// case 'box-D-primary':
-		// case 'box-D-success':
-		// case 'box-D-warning':
-		// case 'box-D-danger':
-		// 	return <div className={`absolute w-full h-full bg-${tailcolor}-100`} />;
-
-		// case 'box-E-default':
-		// case 'box-E-primary':
-		// case 'box-E-success':
-		// case 'box-E-warning':
-		// case 'box-E-danger':
-		// 	return <div className={`absolute w-full h-full bg-${tailcolor}-400`} />;
-
-		// case 'box-F-default':
-		// case 'box-F-primary':
-		// case 'box-F-success':
-		// case 'box-F-warning':
-		// case 'box-F-danger':
-		// 	return <div className={`absolute w-full h-full bg-${tailcolor}-600`} />;
-
-		// case 'box-G-default':
-		// case 'box-G-primary':
-		// case 'box-G-success':
-		// case 'box-G-warning':
-		// case 'box-G-danger':
-		// 	return <div className={`absolute w-full h-full ring-1 ring-${tailcolor}-800 bg-white`} />;
-
-		// case 'box-H-default':
-		// case 'box-H-primary':
-		// case 'box-H-success':
-		// case 'box-H-warning':
-		// case 'box-H-danger':
-		// 	return <div className={`absolute w-full h-full ring-1 ring-${tailcolor}-800 bg-${tailcolor}-100`} />;
-
-		// case 'box-I-default':
-		// case 'box-I-primary':
-		// case 'box-I-success':
-		// case 'box-I-warning':
-		// case 'box-I-danger':
-		// 	return <div className={`absolute w-full h-full ring-1 ring-${tailcolor}-800 bg-${tailcolor}-400`} />;
-
-		// case 'box-J-default':
-		// case 'box-J-primary':
-		// case 'box-J-success':
-		// case 'box-J-warning':
-		// case 'box-J-danger':
-		// 	return <div className={`absolute w-full h-full ring-1 ring-${tailcolor}-800 bg-${tailcolor}-600`} />;
-
-		case useDeco.match(/font-[A-Z][0-9]?[A-Z][0-9]?-.*/)?.input:
-			const fontNormal = useDeco.replace(/(font-)([A-Z])[0-9]?[A-Z][0-9]?(-.*)/, '$1$2$3');
-			const fontHover = useDeco.replace(/(font-)[A-Z][0-9]?([A-Z])[0-9]?(-.*)/, '$1$2$3');
-			const classFontNormal = `${getThemeElement({useDeco: fontNormal, action: ''}).props.className}`;
-			const classFontHover = `${getThemeElement({useDeco: fontHover, action: 'group-hover:'}).props.className}`;
-
-			return <div className={`${classFontNormal} ${classFontHover}`} />;
-
-		case useDeco.match(/box-[A-Z][0-9]?[A-Z][0-9]?-.*/)?.input:
-			const boxNormal = useDeco.replace(/(box-)([A-Z])[0-9]?[A-Z][0-9]?(-.*)/, '$1$2$3');
-			const boxHover = useDeco.replace(/(box-)[A-Z][0-9]?([A-Z])[0-9]?(-.*)/, '$1$2$3');
-			const classBoxNormal = `${getThemeElement({useDeco: boxNormal, action: ''}).props.className}`;
-			const classBoxHover = `${getThemeElement({useDeco: boxHover, action: 'group-hover:'}).props.className}`;
-
-			return <div className={`absolute w-full h-full ${classBoxNormal} ${classBoxHover}`} />;
 
 		case 'box-round':
 			return <div className={`absolute w-full h-full rounded-full ring-1 ring-sky-400 bg-sky-100 group-hover:bg-white peer-checked:bg-sky-500 peer-checked:ring-sky-700 group-hover:peer-checked:bg-sky-600 group-focus-within:ring-sky-400`} />;
@@ -480,13 +265,15 @@ const getProps = (props) => {
 		toggle: 'basket',
 		input: 'basket',
 	}[tag];
+
 	const useDeco = String(deco)
 		.replace(/\s+/gm, '##')
 		.split('##')
 		.filter((item) => item.split('-')[0] == useTag)[0];
 
-	// const style = getStyle({...props, useDeco});
-	const style = `${getDefaultElement(props).props.className} | ${getElement({...props, useDeco}).props.className}`;
+	const defaultElement = getDefaultElement(props);
+	const decoElement = mixDecoElement({...props, useDeco});
+	const style = `${defaultElement.props.className} | ${decoElement.props.className}`;
 
 	return {
 		...props,
@@ -541,13 +328,7 @@ export const Box = (props) => {
 };
 
 const LabelTheme = (props) => {
-	// const newProps = props.tag ? props : getProps({...props, type: 'checkbox', tag: 'basket'});
-	// // const {children, theme, className = '', icon, iconR, text, team, name, onClick, onChange, disabled} = newProps;
-	// const {children, theme, deco, style, className, icon, iconL, iconR, team = '', name, text, type, onChange, checked = false, disabled} = newProps;
-	const {children, theme, deco, style, className, icon, iconL, iconR, text} = getProps({...props, tag: 'label'});
-
-	// // 특정 ui의 change 이벤트 발생을 방지하기 위한 코드
-	// const forName = ['toggle', 'input'].includes(props.tag) ? (name ? [team, name].join('-') : null) : '';
+	const {children, theme, deco, style, className, icon, iconL, iconR, text, checked} = getProps({...props, tag: 'label'});
 
 	const themeList = String(theme).split('-') || [];
 	const tyde = themeList[0] || 'B1C1';
@@ -555,75 +336,6 @@ const LabelTheme = (props) => {
 	const size = themeList[2] || 'md';
 	const space = themeList[3] || 'md';
 	const round = themeList[4] || 'md';
-
-	// const boxTyde = ['A1'].includes(tyde)
-	// 	? '-low:xx2xx'
-	// 	: ['A2'].includes(tyde)
-	// 	? '-low:xx2lx'
-	// 	: ['B1'].includes(tyde)
-	// 	? '-low:xx2xf'
-	// 	: ['B2'].includes(tyde)
-	// 	? '-high:xx2xf'
-	// 	: ['C1'].includes(tyde)
-	// 	? '-low:xx2lf'
-	// 	: ['C2'].includes(tyde)
-	// 	? '-high:xx2lf'
-	// 	: ['D1'].includes(tyde)
-	// 	? '-low:lx2xf'
-	// 	: ['D2'].includes(tyde)
-	// 	? '-high:lx2xf'
-	// 	: ['E1'].includes(tyde)
-	// 	? '-low:lx2lf'
-	// 	: ['E2'].includes(tyde)
-	// 	? '-high:lx2lf'
-	// 	: ['F1'].includes(tyde)
-	// 	? '-low:xf2lf'
-	// 	: ['F10'].includes(tyde)
-	// 	? '-low:xf10'
-	// 	: ['F2'].includes(tyde)
-	// 	? '-high:xf2lf'
-	// 	: ['F20'].includes(tyde)
-	// 	? '-low:xf20'
-	// 	: ['G1'].includes(tyde)
-	// 	? '-low:lf2lf'
-	// 	: ['G10'].includes(tyde)
-	// 	? '-low:lf20'
-	// 	: ['G2'].includes(tyde)
-	// 	? '-high:lf2lf'
-	// 	: ['G20'].includes(tyde)
-	// 	? '-high:lf20'
-	// 	: ['A'].includes(tyde)
-	// 	? '-A'
-	// 	: ['B'].includes(tyde)
-	// 	? '-B'
-	// 	: ['C'].includes(tyde)
-	// 	? '-C'
-	// 	: ['D'].includes(tyde)
-	// 	? '-D'
-	// 	: ['E'].includes(tyde)
-	// 	? '-E'
-	// 	: ['F'].includes(tyde)
-	// 	? '-F'
-	// 	: ['G'].includes(tyde)
-	// 	? '-G'
-	// 	: ['H'].includes(tyde)
-	// 	? '-H'
-	// 	: ['I'].includes(tyde)
-	// 	? '-I'
-	// 	: ['J'].includes(tyde)
-	// 	? '-J'
-	// 	: /[A-Z][0-9]?[A-Z][0-9]?/.test(tyde)
-	// 	? `-${tyde}`
-	// 	: '';
-	// const fontTyde = ['A1', 'A2', 'B1', 'C1', 'D1', 'E1', 'F1', 'G1', 'A', 'B', 'C', 'D', 'E', 'H', 'I', 'J'].includes(tyde)
-	// 	? '-high'
-	// 	: ['B2', 'C2', 'D2', 'E2'].includes(tyde)
-	// 	? '-high2low'
-	// 	: ['F2', 'G2', 'F20', 'G20', 'F', 'G', 'K', 'L'].includes(tyde)
-	// 	? '-low'
-	// 	: /[A-Z][0-9]?[A-Z][0-9]?/.test(tyde)
-	// 	? `-${tyde}`
-	// 	: '';
 
 	const gap = {
 		xs: {x: 1, y: 0},
@@ -634,29 +346,26 @@ const LabelTheme = (props) => {
 		'2xl': {x: 4, y: 4},
 	}[space];
 
-	// const boxDeco = `box${boxTyde}-${color}`;
-	// const fontDeco = `font${fontTyde}-${color}`;
-	const boxDeco = `box-${tyde}-${color}`;
-	const fontDeco = `font-${tyde}-${color}`;
-
-	const fontNormal = fontDeco.replace(/(font-)[A-Z]([0-9]?)[A-Z][0-9]?(-.*)/, '$1$2$3');
-	const fontHover = fontDeco.replace(/(font-)[A-Z][0-9]?[A-Z]([0-9]?)(-.*)/, '$1$2$3');
-	const classFontNormal = `${getThemeElement({useDeco: fontNormal, action: ''}).props.className}`;
-	const classFontHover = `${getThemeElement({useDeco: fontHover, action: 'group-hover:'}).props.className}`;
+	// box, type 타입모드 (ex> 'box-A1B2-default', 'font-A1B2-primary')
+	const regex = /^(.*)-([A-Z])([0-9]?)([A-Z])([0-9]?)-(.*)$/;
+	const boxType = `box-${tyde}-${color}`.replace(regex, checked ? '$1-$4$2-$6' : '$1-$2$4-$6'); // 'box-AB-default'
+	const fontType = `font-${tyde}-${color}`.replace(regex, checked ? '$1-$4$2-$6' : '$1-$2$4-$6'); // 'font-AB-primary'
+	const fontMode = `font-${tyde}-${color}`.replace(regex, checked ? '$1-$5$3-$6' : '$1-$3$5-$6'); // 'font-12-primary'
+	const fontModeClass = `${mixDecoElement({...props, useDeco: fontMode}).props.className}`;
 
 	return (
 		<div className={`${className} px-${gap.x} py-${gap.y} text-${size}`}>
 			{/* <label htmlFor={forName} className={`${style} | ${className} px-${gap.x} py-${gap.y} text-${size}`}> */}
 			{/* <FormCheck {...props} type={type} checked={checked} /> */}
-			<Box deco={boxDeco} className={`rounded-${round}`} />
-			<Icon deco={fontDeco} className={`mr-${gap.x} last:mr-0`}>
+			<Box deco={boxType} className={`rounded-${round}`} />
+			<Icon deco={fontType} className={`mr-${gap.x} last:mr-0`}>
 				{icon}
 			</Icon>
-			<Text deco={fontDeco} className={`mr-${gap.x} last:mr-0 px-${gap.x} underline-offset-1 ${classFontNormal} ${classFontHover}`}>
+			<Text deco={fontType} className={`mr-${gap.x} last:mr-0 px-${gap.x} ${fontModeClass}`}>
 				{text}
 			</Text>
 			{children}
-			<Icon deco={fontDeco}>{iconR}</Icon>
+			<Icon deco={fontType}>{iconR}</Icon>
 			{/* </label> */}
 		</div>
 	);
