@@ -346,7 +346,7 @@ const TextTheme = (props) => {
 	const fontMode = fontTypemode.replace(regex, checked ? '$1-$5$3-$6' : '$1-$3$5-$6'); // 'font-12-primary'
 	const fontModeClass = `${mixDecoElement({...props, useDeco: fontMode}).props.className}`;
 
-	return children ? <span className={`${style} | ${className} ${fontTypeClass} ${fontModeClass}`}>{children}</span> : <></>;
+	return [].concat(children).join('') ? <span className={`${style} | ${className} ${fontTypeClass} ${fontModeClass}`}>{children}</span> : <></>;
 };
 
 const TextReal = (props) => {

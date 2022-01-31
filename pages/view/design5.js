@@ -411,11 +411,13 @@ export default function code() {
 				</Group>
 				<Group>
 					<Label theme="C-primary" icon="bx-star" text="Start : ">
-						<Text theme="A-warning">Earum suscipit repellat officia quibusdam ipsum nisi optio</Text>
+						<Button theme="E2H1-warning-sm-xs-lg">Earum suscipit repellat officia quibusdam ipsum nisi optio</Button>
 					</Label>
 					<Label deco="font-primary" icon="bx-leaf" text="leaf" />
 					<Label deco="font-primary" text="asdas" />
-					<Label deco="font-danger" text="Sample" />
+					<Label theme="HL-default-md-xs-full" icon="bx-star" text="Sample ">
+						<Button theme="AD-danger-sm-md-full" icon="bxs-x-circle" />
+					</Label>
 				</Group>
 			</Fieldset>
 
