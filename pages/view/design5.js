@@ -347,31 +347,33 @@ export default function code() {
 			<Fieldset title="data">
 				<Group>
 					{Object.entries(data).map((item, index) => (
-						<Text key={index} deco="font-success" className="block">{`${item[0]} : ${JSON.stringify(item[1])}`}</Text>
+						<Text key={index} theme="A-success" className="block">{`${item[0]} : ${JSON.stringify(item[1])}`}</Text>
 					))}
 				</Group>
 			</Fieldset>
 
 			<Fieldset title="Icon">
-				<Group>
+				{/* <Group>
 					<Icon deco="font-default">bx-user-plus</Icon>
 					<Icon deco="font-default">bx-leaf</Icon>
 					<Icon deco="font-danger">bx-align-middle</Icon>
 					<Icon deco="font-primary">bx-search-alt-2</Icon>
+				</Group> */}
+				<Group>
+					<Label theme="C-default-sm-md-full" icon="bx-user-plus" />
+					<Label theme="B4-default-2xl-md-full" icon="bx-leaf" />
+					<Label theme="E-danger-2xl-lg-lg" icon="bx-align-middle" />
+					<Label theme="G-primary-xl-lg-full" icon="bx-search-alt-2" />
 				</Group>
 			</Fieldset>
 
 			<Fieldset title="Text">
-				<Group>
+				{/* <Group>
 					<Text deco="font-primary" className="italic">
 						lorem story
 					</Text>
 					<Text deco="font-default">
-						Lorem ipsum dolor sit amet{' '}
-						<Text deco="font-danger" className="bg-yellow-500 rounded-md px-1 py-4">
-							consectetur
-						</Text>{' '}
-						adipisicing elit.
+						Lorem ipsum dolor sit amet <Text deco="font-danger">consectetur</Text> adipisicing elit.
 						<Text deco="font-danger" className="underline">
 							<Icon deco="font-primary">bx-leaf</Icon>
 							Aliquam sequi hic sint!
@@ -382,6 +384,19 @@ export default function code() {
 						</Text>{' '}
 						nihil voluptatibus commodi placeat iure fugit explicabo!
 					</Text>
+				</Group> */}
+				<Group>
+					<Text theme="A-primary" className="leading-10">
+						Lorem ipsum <Text theme="A2-success">dolor sit amet</Text> consectetur <Text theme="A3-danger">Text Sample</Text> Iusto debitis nihil <Label theme="F-primary-sm-xs">Label Sample</Label> similique accusantium{' '}
+						<A theme="B2D1-danger-md-xs" href="/view/sample">
+							A Sample
+						</A>{' '}
+						ut, libero dolorem nulla quod dolorum. <Button theme="B2D1-danger-sm-sm">Button Sample</Button>, ipsam{' '}
+						<Toggle theme="B2D1-danger-sm-md" name="agree" checked={data.agree} onChange={changeSwitch}>
+							Toggle Sample{data.agree ? ' (ON)' : ' (OFF)'}
+						</Toggle>{' '}
+						dolore facere neque numquam saepe?
+					</Text>
 				</Group>
 			</Fieldset>
 
@@ -389,6 +404,14 @@ export default function code() {
 				<Group>
 					<Label deco="font-primary" icon="bx-star" text="Start : ">
 						<Text deco="font-warning">Earum suscipit repellat officia quibusdam ipsum nisi optio</Text>
+					</Label>
+					<Label deco="font-primary" icon="bx-leaf" text="leaf" />
+					<Label deco="font-primary" text="asdas" />
+					<Label deco="font-danger" text="Sample" />
+				</Group>
+				<Group>
+					<Label theme="C-primary" icon="bx-star" text="Start : ">
+						<Text theme="A-warning">Earum suscipit repellat officia quibusdam ipsum nisi optio</Text>
 					</Label>
 					<Label deco="font-primary" icon="bx-leaf" text="leaf" />
 					<Label deco="font-primary" text="asdas" />
@@ -506,17 +529,23 @@ export default function code() {
 					<Button theme="DI-success-sm-sm-xs" icon="bx-user" text="named" name="happy" />
 					<Button theme="DI-danger-sm-sm-xs" icon="bx-user-x" text="no named" />
 					<Button theme="CK-default-md-md-md" className={'w-[140px]'} icon="bx-user-plus" text="KOOZone" />
+					<Button theme="DG-primary-sm-sm-full" icon="bxs-like" text={`like: `} name="countLike" onClick={clickButton}>
+						<Text theme="A2L1-danger">{data.countLike}</Text>
+					</Button>
+					<Button theme="DG-danger-sm-sm-full" icon="bxs-dislike" text={`hate: `} name="countHate" onClick={clickButton}>
+						<Text theme="A2L1-primary">{data.countHate}</Text>
+					</Button>
 					<Button theme="D4G7-warning-lg-lg-md" icon="bxs-chevron-left" iconR="bxs-chevron-right" text="Arrow Button" />
-					<Button theme="DG-primary-sm-sm-full" icon="bxs-like" text={`like: ${data.countLike}`} name="countLike" onClick={clickButton} />
-					<Button theme="DG-default-sm-sm-full" icon="bxs-dislike" text={`hate: ${data.countHate}`} name="countHate" onClick={clickButton} />
 				</Group>
 
 				<Group>
-					<Button theme="HI-default-sm-sm-xs" text="Default" />
-					<Button theme="HI-primary-sm-sm-xs" text="Primary" />
-					<Button theme="HI-success-sm-sm-xs" text="Success" />
-					<Button theme="HI-warning-sm-sm-xs" text="Warning" />
-					<Button theme="HI-danger-sm-sm-xs" text="Danger" disabled />
+					<Button theme="HI-default-sm-sm-xs">Default</Button>
+					<Button theme="HI-primary-sm-sm-xs">Primary</Button>
+					<Button theme="HI-success-sm-sm-xs">Success</Button>
+					<Button theme="HI-warning-sm-sm-xs">Warning</Button>
+					<Button theme="HI-danger-sm-sm-xs" disabled>
+						Danger
+					</Button>
 				</Group>
 
 				<Group>

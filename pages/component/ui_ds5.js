@@ -63,7 +63,7 @@ const getDefaultElement = (props) => {
 			return <div className={``} />;
 
 		case 'label':
-			return <div className={`group relative inline-flex justify-center items-center`} />;
+			return <div className={`relative inline-flex justify-center items-center`} />;
 
 		case 'icon':
 			return <div className={`bx ${children} pointer-events-none peer-disabled:opacity-50 peer-disabled:pointer-events-none`} />;
@@ -100,7 +100,7 @@ const getDefaultElement = (props) => {
 };
 
 const getDecoElement = (props) => {
-	const {tag, useDeco = '', action, icon} = props;
+	const {tag, useDeco = '', action = '', icon} = props;
 
 	const stylecolor = useDeco?.split('-').pop();
 	const tailcolor = {
@@ -315,10 +315,48 @@ export const Icon = (props) => {
 	return children ? <i className={`${style} | ${className}`} /> : <></>;
 };
 
-export const Text = (props) => {
+const TextTheme = (props) => {
+	const {children, theme, deco, style, className, icon, iconL, iconR, name, checked} = getProps({...props, tag: 'font'});
+
+	const themeList = String(theme).split('-') || [];
+	const typemode = themeList[0] || 'B1C1';
+	const color = themeList[1] || 'default';
+	const size = themeList[2] || 'md';
+	const space = themeList[3] || 'md';
+	const round = themeList[4] || 'md';
+
+	// const gap = {
+	// 	xs: {x: 1, y: 0},
+	// 	sm: {x: 1, y: 0.5},
+	// 	md: {x: 1, y: 1},
+	// 	lg: {x: 2, y: 2},
+	// 	xl: {x: 3, y: 3},
+	// 	'2xl': {x: 4, y: 4},
+	// }[space];
+
+	const aaa = typemode.match(/([A-Z])([0-9]?)([A-Z]?)([0-9]?)/);
+	const ttt = `${aaa[1]}${aaa[2] || '1'}${aaa[3] || aaa[1]}${aaa[4] || aaa[2] || '1'}`;
+
+	const fontTypemode = `font-${ttt}-${color}`;
+
+	// box, type 타입모드 (ex> 'box-A1B2-default', 'font-A1B2-primary')
+	const regex = /^(.*)-([A-Z])([0-9]?)([A-Z])([0-9]?)-(.*)$/;
+	const fontType = fontTypemode.replace(regex, checked ? '$1-$4$2-$6' : '$1-$2$4-$6'); // 'font-AB-primary'
+	const fontTypeClass = `${mixDecoElement({...props, useDeco: fontType}).props.className}`;
+	const fontMode = fontTypemode.replace(regex, checked ? '$1-$5$3-$6' : '$1-$3$5-$6'); // 'font-12-primary'
+	const fontModeClass = `${mixDecoElement({...props, useDeco: fontMode}).props.className}`;
+
+	return children ? <span className={`${style} | ${className} ${fontTypeClass} ${fontModeClass}`}>{children}</span> : <></>;
+};
+
+const TextReal = (props) => {
 	const {children, deco, style, className, icon, iconL, iconR, name} = getProps({...props, tag: 'font'});
 
 	return children ? <span className={`${style} | ${className}`}>{children}</span> : <></>;
+};
+
+export const Text = (props) => {
+	return props.theme ? TextTheme(props) : TextReal(props);
 };
 
 export const Box = (props) => {
@@ -328,7 +366,8 @@ export const Box = (props) => {
 };
 
 const LabelTheme = (props) => {
-	const {children, theme, deco, style, className, icon, iconL, iconR, text, checked} = getProps({...props, tag: 'label'});
+	const newProps = getProps({...props, tag: 'label'});
+	const {children, theme, deco, style, className, icon, iconL, iconR, text, checked} = newProps;
 
 	const themeList = String(theme).split('-') || [];
 	const typemode = themeList[0] || 'B1C1';
@@ -346,28 +385,33 @@ const LabelTheme = (props) => {
 		'2xl': {x: 4, y: 4},
 	}[space];
 
-	const aaa = typemode.match(/([A-Z])([0-9]?)([A-Z])([0-9]?)/);
-	const ttt = `${aaa[1]}${aaa[2] || '1'}${aaa[3]}${aaa[4] || '1'}`;
+	const aaa = typemode.match(/([A-Z])([0-9]?)([A-Z]?)([0-9]?)/);
+	const ttt = `${aaa[1]}${aaa[2] || '1'}${aaa[3] || aaa[1]}${aaa[4] || aaa[2] || '1'}`;
+
+	const boxTypemode = `box-${ttt}-${color}`;
+	const fontTypemode = `font-${ttt}-${color}`;
 
 	// box, type 타입모드 (ex> 'box-A1B2-default', 'font-A1B2-primary')
 	const regex = /^(.*)-([A-Z])([0-9]?)([A-Z])([0-9]?)-(.*)$/;
-	const boxType = `box-${ttt}-${color}`.replace(regex, checked ? '$1-$4$2-$6' : '$1-$2$4-$6'); // 'box-AB-default'
-	const fontType = `font-${ttt}-${color}`.replace(regex, checked ? '$1-$4$2-$6' : '$1-$2$4-$6'); // 'font-AB-primary'
-	const fontMode = `font-${ttt}-${color}`.replace(regex, checked ? '$1-$5$3-$6' : '$1-$3$5-$6'); // 'font-12-primary'
-	const fontModeClass = `${mixDecoElement({...props, useDeco: fontMode}).props.className}`;
+	const boxType = boxTypemode.replace(regex, checked ? '$1-$4$2-$6' : '$1-$2$4-$6'); // 'box-AB-default'
+	const fontType = fontTypemode.replace(regex, checked ? '$1-$4$2-$6' : '$1-$2$4-$6'); // 'font-AB-primary'
+	// const fontMode = fontTypemode.replace(regex, checked ? '$1-$5$3-$6' : '$1-$3$5-$6'); // 'font-12-primary'
+	// const fontModeClass = `${mixDecoElement({...props, useDeco: fontMode}).props.className}`;
 
 	return (
-		<div className={`${className} px-${gap.x} py-${gap.y} text-${size}`}>
+		<div className={`${style} | ${className} px-${gap.x} py-${gap.y} text-${size}`}>
 			{/* <label htmlFor={forName} className={`${style} | ${className} px-${gap.x} py-${gap.y} text-${size}`}> */}
 			{/* <FormCheck {...props} type={type} checked={checked} /> */}
 			<Box deco={boxType} className={`rounded-${round}`} />
 			<Icon deco={fontType} className={`mr-${gap.x} last:mr-0`}>
 				{icon}
 			</Icon>
-			<Text deco={fontType} className={`mr-${gap.x} last:mr-0 px-${gap.x} ${fontModeClass}`}>
+			{/* <Text deco={fontType} className={`mr-${gap.x} last:mr-0 px-${gap.x} ${fontModeClass}`}> */}
+			<Text {...newProps} className={`mr-${gap.x} last:mr-0 px-${gap.x}`}>
 				{text}
+				{children}
 			</Text>
-			{children}
+			{/* {children} */}
 			<Icon deco={fontType}>{iconR}</Icon>
 			{/* </label> */}
 		</div>

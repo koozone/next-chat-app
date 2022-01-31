@@ -1,5 +1,5 @@
 import {Chip, Group, Highlight, ToggleRadio} from '../component/temp_ds';
-import {A, Basket, Button, Icon, Input, Text, Toggle} from '../component/ui_ds5';
+import {A, Basket, Button, Icon, Input, Label, Text, Toggle} from '../component/ui_ds5';
 import {UseData} from '../hook/useData';
 
 export default function ChipSample() {
@@ -48,6 +48,16 @@ export default function ChipSample() {
 
 	return (
 		<>
+			<Group className="p-5 ring-2 ring-gray-500 rounded-lg">
+				<Label theme="B1-primary" className="leading-6">
+					Lorem ipsum dolor <Label theme="D2-danger-md-xs-md">sit amet consectetur adipisicing</Label> elit. Voluptatem <Label theme="E-success-xl-xl-full" icon="bx-leaf" /> repellat itaque commodi magni? <Label theme="G7-default-xl-md-xs">Consequatur illo</Label> perspiciatis
+					<Label theme="A-danger-md">non at aliquid</Label>itaque voluptatibus,{' '}
+					<Label theme="K2-primary-sm-sm-full" icon="bx-leaf">
+						한글 이야기
+					</Label>{' '}
+					maiores accusantium doloremque officia provident iusto? Ipsam, aut illum.
+				</Label>
+			</Group>
 			<Group className="p-5 ring-2 ring-gray-500 rounded-lg">
 				<Text deco="font-success" className="leading-8">
 					{['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L'].map((item, index) => (
