@@ -16,14 +16,15 @@ export default function ChipSample() {
 		right: ['none'],
 		center: ['text'],
 		icon: 'bx-leaf',
-		image: '/coffee.jpg',
 		iconR: 'bxs-x-circle',
+		image: '/coffee.jpg',
+		imageR: '/bean.jpg',
 		text: 'Next',
 		checked: ['false'],
 		disabled: ['false'],
 	});
 
-	const {typeOut, modeOut, typeOver, modeOver, color, size, space, round, left, right, center, image, icon, iconR, text, checked, disabled} = chipData;
+	const {typeOut, modeOut, typeOver, modeOver, color, size, space, round, left, right, center, image, imageR, icon, iconR, text, checked, disabled} = chipData;
 
 	const changeChipRadio = (event) => {
 		const {name} = event.currentTarget;
@@ -70,6 +71,8 @@ export default function ChipSample() {
 								theme={[`${item}${modeOut}${typeOver}${modeOver}`, color, 'sm', 'xs', round].join('-')}
 								icon={left[0] == 'icon' ? icon : ''}
 								iconR={right[0] == 'icon' ? iconR : ''}
+								img={left[0] == 'image' ? image : ''}
+								imgR={right[0] == 'image' ? imageR : ''}
 								text={center[0] == 'text' ? text : ''}
 								checked={checked[0] == 'true'}
 								disabled={disabled[0] == 'true'}
@@ -88,9 +91,10 @@ export default function ChipSample() {
 						onClick={clickButton}
 						onChange={changeToggle}
 						theme={[`${item}${modeOut}${typeOver}${modeOver}`, color, size, space, round].join('-')}
-						img={left[0] == 'image' ? image : ''}
 						icon={left[0] == 'icon' ? icon : ''}
 						iconR={right[0] == 'icon' ? iconR : ''}
+						img={left[0] == 'image' ? image : ''}
+						imgR={right[0] == 'image' ? imageR : ''}
 						text={center[0] == 'text' ? text : ''}
 						checked={checked[0] == 'true'}
 						disabled={disabled[0] == 'true'}
@@ -164,13 +168,14 @@ export default function ChipSample() {
 				<ToggleRadio text="none" team="left" name="none" checked={left.includes('none')} onChange={changeChipRadio} />
 				<ToggleRadio text="icon" team="left" name="icon" checked={left.includes('icon')} onChange={changeChipRadio} />
 				<ToggleRadio text="image" team="left" name="image" checked={left.includes('image')} onChange={changeChipRadio} />
-				<Input type="text" deco="basket-default box-default font-default" className="w-[200px]" name="left" value={chipData[left]} placeholder={`${left} 입력`} onChange={chageChipInput} disabled={left == 'none'} />
+				<Input type="text" deco="basket-default box-default font-default" className="w-[200px]" name="left" value={chipData[left]} placeholder="left 입력" onChange={chageChipInput} disabled={left == 'none'} />
 			</Group>
 			<Group>
 				<Text deco="font-danger">right : </Text>
 				<ToggleRadio text="none" team="right" name="none" checked={right.includes('none')} onChange={changeChipRadio} />
 				<ToggleRadio text="icon" team="right" name="icon" checked={right.includes('icon')} onChange={changeChipRadio} />
-				<Input type="text" deco="basket-default box-default font-default" className="w-[200px]" name="iconR" value={iconR} placeholder="iconR 입력" onChange={chageChipInput} disabled={right != 'icon'} />
+				<ToggleRadio text="image" team="right" name="image" checked={right.includes('image')} onChange={changeChipRadio} />
+				<Input type="text" deco="basket-default box-default font-default" className="w-[200px]" name="right" value={iconR} placeholder="right 입력" onChange={chageChipInput} disabled={right == 'none'} />
 			</Group>
 			<Group>
 				<Text deco="font-danger">center : </Text>

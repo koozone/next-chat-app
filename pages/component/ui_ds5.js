@@ -5,11 +5,18 @@ import {forwardRef, Fragment} from 'react';
 const dummyElement = () => {
 	return (
 		<>
-			<div className={`font-normal font-semibold italic not-italic underline no-underline bg-transparent group-hover:font-normal group-hover:font-semibold group-hover:italic group-hover:not-italic group-hover:underline group-hover:no-underline group-hover:bg-transparent`} />;
-			<div className={`text-slate-800 ring-slate-800 bg-slate-100 bg-slate-300 bg-slate-500 bg-slate-600 group-hover:text-slate-800 group-hover:ring-slate-800 group-hover:bg-slate-100 group-hover:bg-slate-300 group-hover:bg-slate-500 group-hover:bg-slate-600`} />;
-			<div className={`text-sky-800 ring-sky-800 bg-sky-100 bg-sky-300 bg-sky-500 bg-sky-600 group-hover:text-sky-800 group-hover:ring-sky-800 group-hover:bg-sky-100 group-hover:bg-sky-300 group-hover:bg-sky-500 group-hover:bg-sky-600`} />;
-			<div className={`text-emerald-800 ring-emerald-800 bg-emerald-100 bg-emerald-300 bg-emerald-500 bg-emerald-600 group-hover:text-emerald-800 group-hover:ring-emerald-800 group-hover:bg-emerald-100 group-hover:bg-emerald-300 group-hover:bg-emerald-500 group-hover:bg-emerald-600`} />;
-			<div className={`text-amber-800 ring-amber-800 bg-amber-100 bg-amber-300 bg-amber-500 bg-amber-600 group-hover:text-amber-800 group-hover:ring-amber-800 group-hover:bg-amber-100 group-hover:bg-amber-300 group-hover:bg-amber-500 group-hover:bg-amber-600`} />;
+			<div className={`w-4 w-6 w-8 w-10 w-12 w-14`} />
+			;
+			<div className={`font-normal font-semibold italic not-italic underline no-underline bg-transparent group-hover:font-normal group-hover:font-semibold group-hover:italic group-hover:not-italic group-hover:underline group-hover:no-underline group-hover:bg-transparent`} />
+			;
+			<div className={`text-slate-800 ring-slate-800 bg-slate-100 bg-slate-300 bg-slate-500 bg-slate-600 group-hover:text-slate-800 group-hover:ring-slate-800 group-hover:bg-slate-100 group-hover:bg-slate-300 group-hover:bg-slate-500 group-hover:bg-slate-600`} />
+			;
+			<div className={`text-sky-800 ring-sky-800 bg-sky-100 bg-sky-300 bg-sky-500 bg-sky-600 group-hover:text-sky-800 group-hover:ring-sky-800 group-hover:bg-sky-100 group-hover:bg-sky-300 group-hover:bg-sky-500 group-hover:bg-sky-600`} />
+			;
+			<div className={`text-emerald-800 ring-emerald-800 bg-emerald-100 bg-emerald-300 bg-emerald-500 bg-emerald-600 group-hover:text-emerald-800 group-hover:ring-emerald-800 group-hover:bg-emerald-100 group-hover:bg-emerald-300 group-hover:bg-emerald-500 group-hover:bg-emerald-600`} />
+			;
+			<div className={`text-amber-800 ring-amber-800 bg-amber-100 bg-amber-300 bg-amber-500 bg-amber-600 group-hover:text-amber-800 group-hover:ring-amber-800 group-hover:bg-amber-100 group-hover:bg-amber-300 group-hover:bg-amber-500 group-hover:bg-amber-600`} />
+			;
 			<div className={`text-rose-800 ring-rose-800 bg-rose-100 bg-rose-300 bg-rose-500 bg-rose-600 group-hover:text-rose-800 group-hover:ring-rose-800 group-hover:bg-rose-100 group-hover:bg-rose-300 group-hover:bg-rose-500 group-hover:bg-rose-600`} />;
 		</>
 	);
@@ -367,7 +374,7 @@ export const Box = (props) => {
 
 const LabelTheme = (props) => {
 	const newProps = getProps({...props, tag: 'label'});
-	const {children, theme, deco, style, className, img, icon, iconL, iconR, text, left, right, checked} = newProps;
+	const {children, theme, deco, style, className, img, imgR, icon, iconL, iconR, text, left, right, checked} = newProps;
 
 	const themeList = String(theme).split('-') || [];
 	const typemode = themeList[0] || 'B1C1';
@@ -377,13 +384,13 @@ const LabelTheme = (props) => {
 	const round = themeList[4] || 'md';
 
 	const gap = {
-		none: {x: 0, y: 0},
-		xs: {x: 1, y: 0},
-		sm: {x: 1, y: 0.5},
-		md: {x: 1, y: 1},
-		lg: {x: 2, y: 2},
-		xl: {x: 3, y: 3},
-		'2xl': {x: 4, y: 4},
+		none: {ss: 1, x: 0, y: 0},
+		xs: {ss: 1, x: 1, y: 0},
+		sm: {ss: 1, x: 1, y: 0.5},
+		md: {ss: 1, x: 1, y: 1},
+		lg: {ss: 2, x: 2, y: 2},
+		xl: {ss: 3, x: 3, y: 3},
+		'2xl': {ss: 4, x: 4, y: 4},
 	}[space];
 
 	const width = {
@@ -392,7 +399,7 @@ const LabelTheme = (props) => {
 		md: 8,
 		lg: 10,
 		xl: 12,
-		'2xl': 16,
+		'2xl': 14,
 	}[size];
 
 	const aaa = typemode.match(/([A-Z])([0-9]?)([A-Z]?)([0-9]?)/);
@@ -416,19 +423,19 @@ const LabelTheme = (props) => {
 			{left ? (
 				left
 			) : img ? (
-				<Img src={img} className={`mr-${gap.x} last:mr-0 w-${width} aspect-square rounded-${round}`} />
+				<Img src={img} className={`mr-${gap.ss} last:mr-0 w-${width} aspect-square rounded-${round}`} />
 			) : (
-				<Icon deco={fontType} className={`mr-${gap.x} last:mr-0`}>
+				<Icon deco={fontType} className={`mr-${gap.ss} last:mr-0`}>
 					{icon}
 				</Icon>
 			)}
-			{/* <Text deco={fontType} className={`mr-${gap.x} last:mr-0 px-${gap.x} ${fontModeClass}`}> */}
-			<Text {...newProps} className={`mr-${gap.x} last:mr-0 px-${gap.x}`}>
+			{/* <Text deco={fontType} className={`mr-${gap.ss} last:mr-0 px-${gap.ss} ${fontModeClass}`}> */}
+			<Text {...newProps} className={`mr-${gap.ss} last:mr-0 px-${gap.ss}`}>
 				{text}
 				{children}
 			</Text>
 			{/* {children} */}
-			{right ? right : <Icon deco={fontType}>{iconR}</Icon>}
+			{right ? right : imgR ? <Img src={imgR} className={`w-${width} aspect-square rounded-${round}`} /> : <Icon deco={fontType}>{iconR}</Icon>}
 			{/* </label> */}
 		</div>
 	);
