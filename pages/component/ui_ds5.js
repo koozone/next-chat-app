@@ -60,7 +60,7 @@ const getDefaultElement = (props) => {
 
 	switch (tag) {
 		case 'img':
-			return <div className={``} />;
+			return <div className={`object-cover`} />;
 
 		case 'label':
 			return <div className={`relative inline-flex justify-center items-center`} />;
@@ -304,9 +304,9 @@ const FormInput = forwardRef((props, ref) => {
 });
 
 export const Img = (props) => {
-	const {deco, style, className, name, src} = getProps({...props, tag: 'img'});
+	const {deco, style, className, name, src, alt} = getProps({...props, tag: 'img'});
 
-	return <img className={`${`${style} | ${className}`} | ${className}`} name={name} src={src} />;
+	return <img className={`${`${style} | ${className}`} | ${className}`} src={src} alt={alt} />;
 };
 
 export const Icon = (props) => {
@@ -367,7 +367,7 @@ export const Box = (props) => {
 
 const LabelTheme = (props) => {
 	const newProps = getProps({...props, tag: 'label'});
-	const {children, theme, deco, style, className, icon, iconL, iconR, text, checked} = newProps;
+	const {children, theme, deco, style, className, img, icon, iconL, iconR, text, left, right, checked} = newProps;
 
 	const themeList = String(theme).split('-') || [];
 	const typemode = themeList[0] || 'B1C1';
@@ -377,6 +377,7 @@ const LabelTheme = (props) => {
 	const round = themeList[4] || 'md';
 
 	const gap = {
+		none: {x: 0, y: 0},
 		xs: {x: 1, y: 0},
 		sm: {x: 1, y: 0.5},
 		md: {x: 1, y: 1},
@@ -384,6 +385,15 @@ const LabelTheme = (props) => {
 		xl: {x: 3, y: 3},
 		'2xl': {x: 4, y: 4},
 	}[space];
+
+	const width = {
+		xs: 4,
+		sm: 6,
+		md: 8,
+		lg: 10,
+		xl: 12,
+		'2xl': 16,
+	}[size];
 
 	const aaa = typemode.match(/([A-Z])([0-9]?)([A-Z]?)([0-9]?)/);
 	const ttt = `${aaa[1]}${aaa[2] || '1'}${aaa[3] || aaa[1]}${aaa[4] || aaa[2] || '1'}`;
@@ -403,16 +413,22 @@ const LabelTheme = (props) => {
 			{/* <label htmlFor={forName} className={`${style} | ${className} px-${gap.x} py-${gap.y} text-${size}`}> */}
 			{/* <FormCheck {...props} type={type} checked={checked} /> */}
 			<Box deco={boxType} className={`rounded-${round}`} />
-			<Icon deco={fontType} className={`mr-${gap.x} last:mr-0`}>
-				{icon}
-			</Icon>
+			{left ? (
+				left
+			) : img ? (
+				<Img src={img} className={`mr-${gap.x} last:mr-0 w-${width} aspect-square rounded-${round}`} />
+			) : (
+				<Icon deco={fontType} className={`mr-${gap.x} last:mr-0`}>
+					{icon}
+				</Icon>
+			)}
 			{/* <Text deco={fontType} className={`mr-${gap.x} last:mr-0 px-${gap.x} ${fontModeClass}`}> */}
 			<Text {...newProps} className={`mr-${gap.x} last:mr-0 px-${gap.x}`}>
 				{text}
 				{children}
 			</Text>
 			{/* {children} */}
-			<Icon deco={fontType}>{iconR}</Icon>
+			{right ? right : <Icon deco={fontType}>{iconR}</Icon>}
 			{/* </label> */}
 		</div>
 	);

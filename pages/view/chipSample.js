@@ -3,7 +3,7 @@ import {A, Basket, Button, Icon, Input, Label, Text, Toggle} from '../component/
 import {UseData} from '../hook/useData';
 
 export default function ChipSample() {
-	const [{typeOut, modeOut, typeOver, modeOver, color, size, space, round, left, right, center, icon, iconR, text, checked, disabled}, runChipData] = UseData({
+	const [chipData, runChipData] = UseData({
 		typeOut: ['G'],
 		modeOut: ['1'],
 		typeOver: ['L'],
@@ -16,11 +16,14 @@ export default function ChipSample() {
 		right: ['none'],
 		center: ['text'],
 		icon: 'bx-leaf',
+		image: '/coffee.jpg',
 		iconR: 'bxs-x-circle',
 		text: 'Next',
 		checked: ['false'],
 		disabled: ['false'],
 	});
+
+	const {typeOut, modeOut, typeOver, modeOver, color, size, space, round, left, right, center, image, icon, iconR, text, checked, disabled} = chipData;
 
 	const changeChipRadio = (event) => {
 		const {name} = event.currentTarget;
@@ -32,7 +35,7 @@ export default function ChipSample() {
 	const chageChipInput = (event) => {
 		const {name, value} = event.currentTarget;
 
-		runChipData.change(name, value);
+		runChipData.change(chipData[name][0], value);
 	};
 
 	const clickButton = (event) => {
@@ -85,6 +88,7 @@ export default function ChipSample() {
 						onClick={clickButton}
 						onChange={changeToggle}
 						theme={[`${item}${modeOut}${typeOver}${modeOver}`, color, size, space, round].join('-')}
+						img={left[0] == 'image' ? image : ''}
 						icon={left[0] == 'icon' ? icon : ''}
 						iconR={right[0] == 'icon' ? iconR : ''}
 						text={center[0] == 'text' ? text : ''}
@@ -145,13 +149,13 @@ export default function ChipSample() {
 			</Group>
 			<Group>
 				<Text deco="font-danger">space : </Text>
-				{['xs', 'sm', 'md', 'lg', 'xl', '2xl'].map((item, index) => (
+				{['none', 'xs', 'sm', 'md', 'lg', 'xl', '2xl'].map((item, index) => (
 					<ToggleRadio key={index} text={item} team="space" name={item} checked={space.includes(item)} onChange={changeChipRadio} />
 				))}
 			</Group>
 			<Group>
 				<Text deco="font-danger">round : </Text>
-				{['xs', 'sm', 'md', 'lg', 'xl', 'full'].map((item, index) => (
+				{['none', 'xs', 'sm', 'md', 'lg', 'xl', 'full'].map((item, index) => (
 					<ToggleRadio key={index} text={item} team="round" name={item} checked={round.includes(item)} onChange={changeChipRadio} />
 				))}
 			</Group>
@@ -159,7 +163,8 @@ export default function ChipSample() {
 				<Text deco="font-danger">left : </Text>
 				<ToggleRadio text="none" team="left" name="none" checked={left.includes('none')} onChange={changeChipRadio} />
 				<ToggleRadio text="icon" team="left" name="icon" checked={left.includes('icon')} onChange={changeChipRadio} />
-				<Input type="text" deco="basket-default box-default font-default" className="w-[200px]" name="icon" value={icon} placeholder="icon 입력" onChange={chageChipInput} disabled={left != 'icon'} />
+				<ToggleRadio text="image" team="left" name="image" checked={left.includes('image')} onChange={changeChipRadio} />
+				<Input type="text" deco="basket-default box-default font-default" className="w-[200px]" name="left" value={chipData[left]} placeholder={`${left} 입력`} onChange={chageChipInput} disabled={left == 'none'} />
 			</Group>
 			<Group>
 				<Text deco="font-danger">right : </Text>

@@ -352,6 +352,14 @@ export default function code() {
 				</Group>
 			</Fieldset>
 
+			<Fieldset title="Img">
+				<Group className="space-y-4">
+					<Img src="/coffee.jpg" className="w-[50px] aspect-square" />
+					<Img src="/soup.jpg" className="w-[100px]" />
+					<Img src="/soup.jpg" className="w-[100px] aspect-square" />
+				</Group>
+			</Fieldset>
+
 			<Fieldset title="Icon">
 				{/* <Group>
 					<Icon deco="font-default">bx-user-plus</Icon>
@@ -409,7 +417,7 @@ export default function code() {
 					<Label deco="font-primary" text="asdas" />
 					<Label deco="font-danger" text="Sample" />
 				</Group>
-				<Group>
+				<Group className="space-y-4">
 					<Label theme="C-primary" icon="bx-star" text="Start : ">
 						<Button theme="E2H1-warning-sm-xs-lg">Earum suscipit repellat officia quibusdam ipsum nisi optio</Button>
 					</Label>
@@ -418,6 +426,15 @@ export default function code() {
 					<Label theme="HL-default-md-xs-full" icon="bx-star" text="Sample ">
 						<Button theme="AD-danger-sm-md-full" icon="bxs-x-circle" />
 					</Label>
+					<Toggle theme="HL-default-md-md-full" icon="bx-star" text="Sample " name="agree" checked={data.agree} onChange={changeSwitch} left={<Label theme="BF-success-2xl-2xl-full" icon="bx-leaf" />} right={<Label theme="AF-danger-lg-md-full" icon="bxs-x-circle" />} />
+					<Toggle theme="DF-default-md-md-full" icon="bx-star" text="Sample " name="agree" checked={data.agree} onChange={changeSwitch} left={<Label theme="DF-success-xs-none-full" img="/bean.jpg" />} right={<Label theme="AF-danger-lg-md-full" icon="bxs-x-circle" />} />
+					<Basket theme="DF-default-md-md-full" icon="bx-star" text="Sample " name="agree" checked={data.agree} onChange={changeSwitch} left={<Label theme="DF-success-xs-none-full" img="/shell.jpg" />} right={<Button theme="AF-danger-lg-md-full" icon="bxs-x-circle" />} />
+					<Button theme="DF-default-xs-md-full" img="/noodle.jpg" text="Compose Coffee" />
+					<Button theme="DF-default-sm-md-full" img="/noodle.jpg" text="Compose Coffee" />
+					<Button theme="DF-default-md-md-full" img="/noodle.jpg" text="Compose Coffee" />
+					<Button theme="DF-default-lg-md-full" img="/noodle.jpg" text="Compose Coffee" />
+					<Button theme="DF-default-xl-md-full" img="/noodle.jpg" text="Compose Coffee" />
+					<Button theme="DF-default-2xl-md-lg" img="/noodle.jpg" text="Compose Coffee" />
 				</Group>
 			</Fieldset>
 
