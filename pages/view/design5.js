@@ -427,8 +427,8 @@ export default function code() {
 						<Button theme="AD-danger-sm-md-full" icon="bxs-x-circle" />
 					</Label>
 					<Toggle theme="HL-default-md-md-full" icon="bx-star" text="Sample " name="agree" checked={data.agree} onChange={changeSwitch} left={<Label theme="BF-success-2xl-2xl-full" icon="bx-leaf" />} right={<Label theme="AF-danger-lg-md-full" icon="bxs-x-circle" />} />
-					<Toggle theme="DF-default-md-md-full" icon="bx-star" text="Sample " name="agree" checked={data.agree} onChange={changeSwitch} left={<Label theme="DF-success-xs-none-full" img="/bean.jpg" />} right={<Label theme="AF-danger-lg-md-full" icon="bxs-x-circle" />} />
-					<Basket theme="DF-default-md-md-full" icon="bx-star" text="Sample " name="agree" checked={data.agree} onChange={changeSwitch} left={<Label theme="DF-success-xs-none-full" img="/shell.jpg" />} right={<Button theme="AF-danger-lg-md-full" icon="bxs-x-circle" />} />
+					<Toggle theme="DF-default-md-md-full" icon="bx-star" text="Sample " name="agree" checked={data.agree} onChange={changeSwitch} left={<Label theme="DF-success-xs-xs-full" img="/bean.jpg" />} right={<Label theme="AF-danger-lg-md-full" icon="bxs-x-circle" />} />
+					<Basket theme="DF-default-md-md-full" icon="bx-star" text="Sample " name="agree" checked={data.agree} onChange={changeSwitch} left={<Label theme="DF-success-xs-xs-full" img="/shell.jpg" />} right={<Button theme="AF-danger-lg-md-full" icon="bxs-x-circle" />} />
 					<Button theme="DF-default-xs-md-full" img="/noodle.jpg" text="Compose Coffee" />
 					<Button theme="DF-default-sm-md-full" img="/noodle.jpg" text="Compose Coffee" />
 					<Button theme="DF-default-md-md-full" img="/noodle.jpg" text="Compose Coffee" />

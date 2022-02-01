@@ -5,7 +5,11 @@ import {forwardRef, Fragment} from 'react';
 const dummyElement = () => {
 	return (
 		<>
-			<div className={`w-4 w-6 w-8 w-10 w-12 w-14`} />
+			<div className={`w-3 w-4 w-5 w-6 w-7 w-8 w-9 w-10 w-12 w-14`} />
+			;
+			<div className={`px-0 py-0 mr-0 px-0.5 py-0.5 mr-0.5 px-1 py-1 mr-1 px-2 py-2 mr-2 px-3 py-3 mr-3 px-4 py-4 mr-4 px-5 py-5 mr-5`} />
+			;
+			<div className={`text-xs text-sm text-base text-md text-lg text-xl text-2xl`} />
 			;
 			<div className={`font-normal font-semibold italic not-italic underline no-underline bg-transparent group-hover:font-normal group-hover:font-semibold group-hover:italic group-hover:not-italic group-hover:underline group-hover:no-underline group-hover:bg-transparent`} />
 			;
@@ -384,9 +388,9 @@ const LabelTheme = (props) => {
 	const round = themeList[4] || 'md';
 
 	const gap = {
-		none: {ss: 1, x: 0, y: 0},
-		xs: {ss: 1, x: 1, y: 0},
-		sm: {ss: 1, x: 1, y: 0.5},
+		none: {ss: 0.5, x: 0, y: 0},
+		xs: {ss: 0.5, x: 0.5, y: 0},
+		sm: {ss: 0.5, x: 0.5, y: 0.5},
 		md: {ss: 1, x: 1, y: 1},
 		lg: {ss: 2, x: 2, y: 2},
 		xl: {ss: 3, x: 3, y: 3},
@@ -395,11 +399,12 @@ const LabelTheme = (props) => {
 
 	const width = {
 		xs: 4,
-		sm: 6,
-		md: 8,
-		lg: 10,
-		xl: 12,
-		'2xl': 14,
+		sm: 5,
+		base: 6,
+		md: 6,
+		lg: 7,
+		xl: 7,
+		'2xl': 8,
 	}[size];
 
 	const aaa = typemode.match(/([A-Z])([0-9]?)([A-Z]?)([0-9]?)/);

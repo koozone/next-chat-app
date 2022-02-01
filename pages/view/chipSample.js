@@ -13,7 +13,7 @@ export default function ChipSample() {
 		space: ['md'],
 		round: ['md'],
 		left: ['icon'],
-		right: ['none'],
+		right: ['imageR'],
 		center: ['text'],
 		icon: 'bx-leaf',
 		iconR: 'bxs-x-circle',
@@ -70,9 +70,9 @@ export default function ChipSample() {
 							<A
 								theme={[`${item}${modeOut}${typeOver}${modeOver}`, color, 'sm', 'xs', round].join('-')}
 								icon={left[0] == 'icon' ? icon : ''}
-								iconR={right[0] == 'icon' ? iconR : ''}
+								iconR={right[0] == 'iconR' ? iconR : ''}
 								img={left[0] == 'image' ? image : ''}
-								imgR={right[0] == 'image' ? imageR : ''}
+								imgR={right[0] == 'imageR' ? imageR : ''}
 								text={center[0] == 'text' ? text : ''}
 								checked={checked[0] == 'true'}
 								disabled={disabled[0] == 'true'}
@@ -92,9 +92,9 @@ export default function ChipSample() {
 						onChange={changeToggle}
 						theme={[`${item}${modeOut}${typeOver}${modeOver}`, color, size, space, round].join('-')}
 						icon={left[0] == 'icon' ? icon : ''}
-						iconR={right[0] == 'icon' ? iconR : ''}
+						iconR={right[0] == 'iconR' ? iconR : ''}
 						img={left[0] == 'image' ? image : ''}
-						imgR={right[0] == 'image' ? imageR : ''}
+						imgR={right[0] == 'imageR' ? imageR : ''}
 						text={center[0] == 'text' ? text : ''}
 						checked={checked[0] == 'true'}
 						disabled={disabled[0] == 'true'}
@@ -109,7 +109,9 @@ export default function ChipSample() {
 					onChange={changeToggle}
 					theme={[`${typeOut}${modeOut}${typeOver}${modeOver}`, color, size, space, round].join('-')}
 					icon={left[0] == 'icon' ? icon : ''}
-					iconR={right[0] == 'icon' ? iconR : ''}
+					iconR={right[0] == 'iconR' ? iconR : ''}
+					img={left[0] == 'image' ? image : ''}
+					imgR={right[0] == 'imageR' ? imageR : ''}
 					text={center[0] == 'text' ? text : ''}
 					checked={checked[0] == 'true'}
 					disabled={disabled[0] == 'true'}
@@ -173,15 +175,15 @@ export default function ChipSample() {
 			<Group>
 				<Text deco="font-danger">right : </Text>
 				<ToggleRadio text="none" team="right" name="none" checked={right.includes('none')} onChange={changeChipRadio} />
-				<ToggleRadio text="icon" team="right" name="icon" checked={right.includes('icon')} onChange={changeChipRadio} />
-				<ToggleRadio text="image" team="right" name="image" checked={right.includes('image')} onChange={changeChipRadio} />
-				<Input type="text" deco="basket-default box-default font-default" className="w-[200px]" name="right" value={iconR} placeholder="right 입력" onChange={chageChipInput} disabled={right == 'none'} />
+				<ToggleRadio text="icon" team="right" name="iconR" checked={right.includes('iconR')} onChange={changeChipRadio} />
+				<ToggleRadio text="image" team="right" name="imageR" checked={right.includes('imageR')} onChange={changeChipRadio} />
+				<Input type="text" deco="basket-default box-default font-default" className="w-[200px]" name="right" value={chipData[right]} placeholder="right 입력" onChange={chageChipInput} disabled={right == 'none'} />
 			</Group>
 			<Group>
 				<Text deco="font-danger">center : </Text>
 				<ToggleRadio text="none" team="center" name="none" checked={center.includes('none')} onChange={changeChipRadio} />
 				<ToggleRadio text="text" team="center" name="text" checked={center.includes('text')} onChange={changeChipRadio} />
-				<Input type="text" deco="basket-default box-default font-default" className="w-[200px]" name="text" value={text} placeholder="text 입력" onChange={chageChipInput} disabled={center != 'text'}>
+				<Input type="text" deco="basket-default box-default font-default" className="w-[200px]" name="center" value={chipData[center]} placeholder="text 입력" onChange={chageChipInput} disabled={center == 'none'}>
 					<Icon deco="font-danger">bx-user</Icon>
 					<Text deco="font-primary" className="flex-none">
 						TEXT :
@@ -203,9 +205,9 @@ export default function ChipSample() {
 			<Group>
 				<Highlight className="html">
 					{`
-					<Toggle theme="${[`${typeOut}${modeOut}${typeOver}${modeOver}`, color, size, space, round].join('-')}"${left[0] == 'icon' ? ' icon="' + icon + '"' : ''}${right[0] == 'icon' ? ' iconR="' + iconR + '"' : ''}${center[0] == 'text' ? ' text="' + text + '"' : ''}${checked[0] == 'true' ? ' checked' : ''}${
-						disabled[0] == 'true' ? ' disabled' : ''
-					} />
+					<Toggle theme="${[`${typeOut}${modeOut}${typeOver}${modeOver}`, color, size, space, round].join('-')}"${left[0] == 'icon' ? ' icon="' + icon + '"' : ''}${left[0] == 'image' ? ' image="' + image + '"' : ''}${right[0] == 'iconR' ? ' iconR="' + iconR + '"' : ''}${
+						right[0] == 'imageR' ? ' imageR="' + imageR + '"' : ''
+					}${center[0] == 'text' ? ' text="' + text + '"' : ''}${checked[0] == 'true' ? ' checked' : ''}${disabled[0] == 'true' ? ' disabled' : ''} />
 					`}
 				</Highlight>
 			</Group>
