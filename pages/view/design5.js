@@ -1,6 +1,6 @@
 import {useEffect, useRef} from 'react';
 import Header, {Header1, Header2, Header3} from '../component/header';
-import {ButtonNormal, Fieldset, Group, Item, Item2, ToggleCheckbox, ToggleRadio, ToggleSwitch, ToggleNormal, Chip, Highlight} from '../component/temp_ds';
+import {Fieldset, Group, Item, Item2, ToggleCheckbox, ToggleRadio, ToggleSwitch, Chip, Highlight} from '../component/temp_ds';
 import {Icon, A, Button, Img, Input, Label, Text, Basket, Toggle, Box} from '../component/ui_ds5';
 import {UseCount} from '../hook/useCount';
 import {UseData} from '../hook/useData';
@@ -637,10 +637,10 @@ export default function code() {
 
 				<Group>
 					<Text deco="font-danger">fruite : </Text>
-					<ToggleNormal theme="primary" icon="bx-leaf" text="banana" team="fruite" name="banana" checked={data.fruite.includes('banana')} onChange={changeCheckbox} />
-					<ToggleNormal theme="primary" icon="bx-leaf" text="apple" team="fruite" name="apple" checked={data.fruite.includes('apple')} onChange={changeCheckbox} />
-					<ToggleNormal theme="primary" icon="bx-leaf" text="orange" team="fruite" name="orange" checked={data.fruite.includes('orange')} onChange={changeCheckbox} />
-					<ToggleNormal theme="primary" icon="bx-leaf" text="melon" team="fruite" name="melon" checked={data.fruite.includes('melon')} onChange={changeCheckbox} />
+					<Toggle theme="AL-primary" icon="bx-leaf" text="banana" team="fruite" name="banana" checked={data.fruite.includes('banana')} onChange={changeCheckbox} />
+					<Toggle theme="AL-primary" icon="bx-leaf" text="apple" team="fruite" name="apple" checked={data.fruite.includes('apple')} onChange={changeCheckbox} />
+					<Toggle theme="AL-primary" icon="bx-leaf" text="orange" team="fruite" name="orange" checked={data.fruite.includes('orange')} onChange={changeCheckbox} />
+					<Toggle theme="AL-primary" icon="bx-leaf" text="melon" team="fruite" name="melon" checked={data.fruite.includes('melon')} onChange={changeCheckbox} />
 				</Group>
 			</Fieldset>
 
@@ -670,10 +670,10 @@ export default function code() {
 
 				<Group>
 					<Text deco="font-success">color : </Text>
-					<ToggleNormal theme="success" icon="bx-leaf" text="red" team="color" name="red" checked={data.color.includes('red')} onChange={changeRadio} />
-					<ToggleNormal theme="success" icon="bx-leaf" text="blue" team="color" name="blue" checked={data.color.includes('blue')} onChange={changeRadio} />
-					<ToggleNormal theme="success" icon="bx-leaf" text="yellow" team="color" name="yellow" checked={data.color.includes('yellow')} onChange={changeRadio} />
-					<ToggleNormal theme="success" icon="bx-leaf" text="green" team="color" name="green" checked={data.color.includes('green')} onChange={changeRadio} />
+					<Toggle theme="BF-success" icon="bx-leaf" text="red" team="color" name="red" checked={data.color.includes('red')} onChange={changeRadio} />
+					<Toggle theme="BF-success" icon="bx-leaf" text="blue" team="color" name="blue" checked={data.color.includes('blue')} onChange={changeRadio} />
+					<Toggle theme="BF-success" icon="bx-leaf" text="yellow" team="color" name="yellow" checked={data.color.includes('yellow')} onChange={changeRadio} />
+					<Toggle theme="BF-success" icon="bx-leaf" text="green" team="color" name="green" checked={data.color.includes('green')} onChange={changeRadio} />
 				</Group>
 			</Fieldset>
 
@@ -702,9 +702,9 @@ export default function code() {
 
 				<Group>
 					<Text deco="font-success">color : </Text>
-					<ToggleNormal theme="warning" icon="bx-leaf" text="dog" name="dog" checked={data.dog} onChange={changeSwitch} />
-					<ToggleNormal theme="warning" icon="bx-leaf" text="cat" name="cat" checked={data.cat} onChange={changeSwitch} />
-					<ToggleNormal theme="warning" icon="bx-leaf" text="bird" name="bird" checked={data.bird} onChange={changeSwitch} />
+					<Toggle theme="GH-warning" icon="bx-leaf" text="dog" name="dog" checked={data.dog} onChange={changeSwitch} />
+					<Toggle theme="GH-warning" icon="bx-leaf" text="cat" name="cat" checked={data.cat} onChange={changeSwitch} />
+					<Toggle theme="GH-warning" icon="bx-leaf" text="bird" name="bird" checked={data.bird} onChange={changeSwitch} />
 				</Group>
 			</Fieldset>
 
@@ -842,8 +842,8 @@ export default function code() {
 				<ChipSample />
 			</Fieldset>
 
-			<Fieldset title="ButtonNormal">
-				{['default', 'primary', 'success', 'warning', 'danger'].map((item, index) => (
+			<Fieldset title="Button (theme)">
+				{/* {['default', 'primary', 'success', 'warning', 'danger'].map((item, index) => (
 					<Group key={index}>
 						<Text deco="font-danger">{item} : </Text>
 						<ButtonNormal theme={item} icon="bx-leaf" iconR="bxs-chevron-right" text="Next Step" name="" onClick={() => {}} />
@@ -852,11 +852,21 @@ export default function code() {
 						<ButtonNormal theme={item} icon="bx-leaf" name="key" checked />
 						<ButtonNormal theme={item} text="Menu" name="menu" disabled />
 					</Group>
+				))} */}
+				{['default', 'primary', 'success', 'warning', 'danger'].map((item, index) => (
+					<Group key={index}>
+						<Text deco="font-danger">{item} : </Text>
+						<Button theme={`HI-${item}`} icon="bx-leaf" iconR="bxs-chevron-right" text="Next Step" />
+						<Button theme={`KL-${item}`} icon="bx-leaf" text="Next Step" />
+						<Button theme={`BI-${item}`} iconR="bxs-chevron-right" text="다음 단계" />
+						<Button theme={`IB-${item}`} icon="bx-leaf" />
+						<Button theme={`AL-${item}`} text="Menu" />
+					</Group>
 				))}
 			</Fieldset>
 
-			<Fieldset title="ToggleNormal">
-				{['default', 'primary', 'success', 'warning', 'danger'].map((item, index) => (
+			<Fieldset title="Toggle (theme)">
+				{/* {['default', 'primary', 'success', 'warning', 'danger'].map((item, index) => (
 					<Group key={index}>
 						<Text deco="font-danger">{item} : </Text>
 						<ToggleNormal theme={item} icon="bx-leaf" iconR="bxs-chevron-right" text="Next Step" name="" onChange={() => {}} />
@@ -864,6 +874,16 @@ export default function code() {
 						<ToggleNormal theme={item} iconR="bxs-chevron-right" text="다음 단계" />
 						<ToggleNormal theme={item} icon="bx-leaf" name="key" checked />
 						<ToggleNormal theme={item} text="Menu" name="menu" disabled />
+					</Group>
+				))} */}
+				{['default', 'primary', 'success', 'warning', 'danger'].map((item, index) => (
+					<Group key={index}>
+						<Text deco="font-danger">{item} : </Text>
+						<Toggle theme={`HI-${item}`} icon="bx-leaf" iconR="bxs-chevron-right" text="Next Step" />
+						<Toggle theme={`KL-${item}`} icon="bx-leaf" text="Next Step" />
+						<Toggle theme={`BI-${item}`} iconR="bxs-chevron-right" text="다음 단계" />
+						<Toggle theme={`IB-${item}`} icon="bx-leaf" />
+						<Toggle theme={`AL-${item}`} text="Menu" />
 					</Group>
 				))}
 			</Fieldset>

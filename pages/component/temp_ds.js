@@ -44,37 +44,37 @@ export const Item = (props) => {
 	);
 };
 
-const getDeco = (props) => {
-	const {theme = 'default'} = props;
+// const getDeco = (props) => {
+// 	const {theme = 'default'} = props;
 
-	return {
-		default: {box: 'box-default', font: 'font-default'},
-		primary: {box: 'box-primary', font: 'font-primary'},
-		success: {box: 'box-success', font: 'font-success'},
-		warning: {box: 'box-warning', font: 'font-warning'},
-		danger: {box: 'box-danger', font: 'font-danger'},
-	}[theme];
-};
+// 	return {
+// 		default: {box: 'box-default', font: 'font-default'},
+// 		primary: {box: 'box-primary', font: 'font-primary'},
+// 		success: {box: 'box-success', font: 'font-success'},
+// 		warning: {box: 'box-warning', font: 'font-warning'},
+// 		danger: {box: 'box-danger', font: 'font-danger'},
+// 	}[theme];
+// };
 
-const Aaa = (props) => {
-	const {children, className, icon, iconR, text, team, name, onClick, onChange, checked, disabled} = props;
-	const decoData = getDeco(props);
+// const Aaa = (props) => {
+// 	const {children, className, icon, iconR, text, team, name, onClick, onChange, checked, disabled} = props;
+// 	const decoData = getDeco(props);
 
-	return (
-		<>
-			<Box deco={decoData.box} />
-			{/* <Box deco={decoData.box} className="!rounded-full" /> */}
-			<Icon deco={decoData.font} className="mr-1 last:mr-0">
-				{icon}
-			</Icon>
-			<Text deco={decoData.font}>{text}</Text>
-			{children}
-			<Icon deco={decoData.font} className="ml-1 first:ml-0">
-				{iconR}
-			</Icon>
-		</>
-	);
-};
+// 	return (
+// 		<>
+// 			<Box deco={decoData.box} />
+// 			{/* <Box deco={decoData.box} className="!rounded-full" /> */}
+// 			<Icon deco={decoData.font} className="mr-1 last:mr-0">
+// 				{icon}
+// 			</Icon>
+// 			<Text deco={decoData.font}>{text}</Text>
+// 			{children}
+// 			<Icon deco={decoData.font} className="ml-1 first:ml-0">
+// 				{iconR}
+// 			</Icon>
+// 		</>
+// 	);
+// };
 
 export const Highlight = (props) => {
 	const {children, className = ''} = props;
@@ -131,26 +131,26 @@ export const Highlight = (props) => {
 // 	);
 // };
 
-export const ButtonNormal = (props) => {
-	const {children, className, icon, iconR, text, team, name, onClick, onChange, checked, disabled} = props;
+// export const ButtonNormal = (props) => {
+// 	const {children, className, icon, iconR, text, team, name, onClick, onChange, checked, disabled} = props;
 
-	return (
-		<Button deco="basket-default" className={className} name={name} onClick={onClick} checked={checked} disabled={disabled}>
-			{/* <Button className="px-1 py-0.5 text-xs" name={name} onClick={onClick} checked={checked} disabled={disabled}> */}
-			<Aaa {...props} />
-		</Button>
-	);
-};
+// 	return (
+// 		<Button deco="basket-default" className={className} name={name} onClick={onClick} checked={checked} disabled={disabled}>
+// 			{/* <Button className="px-1 py-0.5 text-xs" name={name} onClick={onClick} checked={checked} disabled={disabled}> */}
+// 			<Aaa {...props} />
+// 		</Button>
+// 	);
+// };
 
-export const ToggleNormal = (props) => {
-	const {children, className, icon, iconR, text, team, name, onClick, onChange, checked, disabled} = props;
+// export const ToggleNormal = (props) => {
+// 	const {children, className, icon, iconR, text, team, name, onClick, onChange, checked, disabled} = props;
 
-	return (
-		<Toggle deco="basket-default" className={className} team={team} name={name} onChange={onChange} checked={checked} disabled={disabled}>
-			<Aaa {...props} />
-		</Toggle>
-	);
-};
+// 	return (
+// 		<Toggle deco="basket-default" className={className} team={team} name={name} onChange={onChange} checked={checked} disabled={disabled}>
+// 			<Aaa {...props} />
+// 		</Toggle>
+// 	);
+// };
 
 export const ToggleCheckbox = (props) => {
 	const {children, className, icon, iconR, text, team, name, onClick, onChange, checked, disabled} = props;

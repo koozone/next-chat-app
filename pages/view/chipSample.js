@@ -68,7 +68,7 @@ export default function ChipSample() {
 						<span key={index}>
 							Reiciendis consectetur{' '}
 							<A
-								theme={[`${item}${modeOut}${typeOver}${modeOver}`, color, 'sm', 'xs', round].join('-')}
+								theme={[`${item}${modeOut}${typeOver}${modeOver}`, color, 'sm', 'sm', round].join('-')}
 								icon={left[0] == 'icon' ? icon : ''}
 								iconR={right[0] == 'iconR' ? iconR : ''}
 								img={left[0] == 'image' ? image : ''}
@@ -149,7 +149,7 @@ export default function ChipSample() {
 			</Group>
 			<Group>
 				<Text deco="font-danger">size : </Text>
-				{['xs', 'sm', 'md', 'lg', 'xl', '2xl'].map((item, index) => (
+				{['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl'].map((item, index) => (
 					<ToggleRadio key={index} text={item} team="size" name={item} checked={size.includes(item)} onChange={changeChipRadio} />
 				))}
 			</Group>

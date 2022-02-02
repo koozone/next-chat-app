@@ -5,22 +5,15 @@ import {forwardRef, Fragment} from 'react';
 const dummyElement = () => {
 	return (
 		<>
-			<div className={`w-3 w-4 w-5 w-6 w-7 w-8 w-9 w-10 w-12 w-14`} />
-			;
+			<div className={`w-3 w-4 w-5 w-6 w-7 w-8 w-9 w-10 w-11 w-12 w-14`} />
+			<div className={`w-[12px] w-[14px] w-[16px] w-[18px] w-[20px] w-[24px] w-[30px] w-[36px] w-[48px] `} />
 			<div className={`px-0 py-0 mr-0 px-0.5 py-0.5 mr-0.5 px-1 py-1 mr-1 px-2 py-2 mr-2 px-3 py-3 mr-3 px-4 py-4 mr-4 px-5 py-5 mr-5`} />
-			;
-			<div className={`text-xs text-sm text-base text-md text-lg text-xl text-2xl`} />
-			;
+			<div className={`text-xs text-sm text-md text-lg text-xl text-2xl text-3xl text-4xl text-5xl`} />
 			<div className={`font-normal font-semibold italic not-italic underline no-underline bg-transparent group-hover:font-normal group-hover:font-semibold group-hover:italic group-hover:not-italic group-hover:underline group-hover:no-underline group-hover:bg-transparent`} />
-			;
 			<div className={`text-slate-800 ring-slate-800 bg-slate-100 bg-slate-300 bg-slate-500 bg-slate-600 group-hover:text-slate-800 group-hover:ring-slate-800 group-hover:bg-slate-100 group-hover:bg-slate-300 group-hover:bg-slate-500 group-hover:bg-slate-600`} />
-			;
 			<div className={`text-sky-800 ring-sky-800 bg-sky-100 bg-sky-300 bg-sky-500 bg-sky-600 group-hover:text-sky-800 group-hover:ring-sky-800 group-hover:bg-sky-100 group-hover:bg-sky-300 group-hover:bg-sky-500 group-hover:bg-sky-600`} />
-			;
 			<div className={`text-emerald-800 ring-emerald-800 bg-emerald-100 bg-emerald-300 bg-emerald-500 bg-emerald-600 group-hover:text-emerald-800 group-hover:ring-emerald-800 group-hover:bg-emerald-100 group-hover:bg-emerald-300 group-hover:bg-emerald-500 group-hover:bg-emerald-600`} />
-			;
 			<div className={`text-amber-800 ring-amber-800 bg-amber-100 bg-amber-300 bg-amber-500 bg-amber-600 group-hover:text-amber-800 group-hover:ring-amber-800 group-hover:bg-amber-100 group-hover:bg-amber-300 group-hover:bg-amber-500 group-hover:bg-amber-600`} />
-			;
 			<div className={`text-rose-800 ring-rose-800 bg-rose-100 bg-rose-300 bg-rose-500 bg-rose-600 group-hover:text-rose-800 group-hover:ring-rose-800 group-hover:bg-rose-100 group-hover:bg-rose-300 group-hover:bg-rose-500 group-hover:bg-rose-600`} />;
 		</>
 	);
@@ -383,28 +376,30 @@ const LabelTheme = (props) => {
 	const themeList = String(theme).split('-') || [];
 	const typemode = themeList[0] || 'B1C1';
 	const color = themeList[1] || 'default';
-	const size = themeList[2] || 'md';
+	const size = themeList[2] || 'sm';
 	const space = themeList[3] || 'md';
-	const round = themeList[4] || 'md';
+	const round = themeList[4] || 'sm';
 
 	const gap = {
-		none: {ss: 0.5, x: 0, y: 0},
-		xs: {ss: 0.5, x: 0.5, y: 0},
-		sm: {ss: 0.5, x: 0.5, y: 0.5},
-		md: {ss: 1, x: 1, y: 1},
-		lg: {ss: 2, x: 2, y: 2},
-		xl: {ss: 3, x: 3, y: 3},
-		'2xl': {ss: 4, x: 4, y: 4},
+		none: {px: 0, py: 0, mx: 1},
+		xs: {px: 0.5, py: 0.5, mx: 1},
+		sm: {px: 1, py: 1, mx: 1},
+		md: {px: 2, py: 2, mx: 1},
+		lg: {px: 3, py: 3, mx: 1},
+		xl: {px: 4, py: 4, mx: 1},
+		'2xl': {px: 5, py: 5, mx: 1},
 	}[space];
 
 	const width = {
 		xs: 4,
 		sm: 5,
-		base: 6,
 		md: 6,
 		lg: 7,
 		xl: 7,
 		'2xl': 8,
+		'3xl': 9,
+		'4xl': 10,
+		'5xl': 12,
 	}[size];
 
 	const aaa = typemode.match(/([A-Z])([0-9]?)([A-Z]?)([0-9]?)/);
@@ -421,21 +416,21 @@ const LabelTheme = (props) => {
 	// const fontModeClass = `${mixDecoElement({...props, useDeco: fontMode}).props.className}`;
 
 	return (
-		<div className={`${style} | ${className} px-${gap.x} py-${gap.y} text-${size}`}>
-			{/* <label htmlFor={forName} className={`${style} | ${className} px-${gap.x} py-${gap.y} text-${size}`}> */}
+		<div className={`${style} | ${className} px-${gap.px} py-${gap.py} text-${size}`}>
+			{/* <label htmlFor={forName} className={`${style} | ${className} px-${gap.px} py-${gap.py} text-${size}`}> */}
 			{/* <FormCheck {...props} type={type} checked={checked} /> */}
 			<Box deco={boxType} className={`rounded-${round}`} />
 			{left ? (
 				left
 			) : img ? (
-				<Img src={img} className={`mr-${gap.ss} last:mr-0 w-${width} aspect-square rounded-${round}`} />
+				<Img src={img} className={`mr-${gap.mx} last:mr-0 w-${width} aspect-square rounded-${round}`} />
 			) : (
-				<Icon deco={fontType} className={`mr-${gap.ss} last:mr-0`}>
+				<Icon deco={fontType} className={`mr-${gap.mx} last:mr-0`}>
 					{icon}
 				</Icon>
 			)}
-			{/* <Text deco={fontType} className={`mr-${gap.ss} last:mr-0 px-${gap.ss} ${fontModeClass}`}> */}
-			<Text {...newProps} className={`mr-${gap.ss} last:mr-0 px-${gap.ss}`}>
+			{/* <Text deco={fontType} className={`mr-${gap.mx} last:mr-0 px-${gap.mx} ${fontModeClass}`}> */}
+			<Text {...newProps} className={`mr-${gap.mx} last:mr-0 px-${gap.mx}`}>
 				{text}
 				{children}
 			</Text>
