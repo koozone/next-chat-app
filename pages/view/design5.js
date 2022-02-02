@@ -534,11 +534,7 @@ export default function code() {
 					<A href="http://www.naver.com" deco="basket-a-primary">
 						<Text deco="font-warning">naver</Text>
 					</A>
-					<A href="http://www.meta.com" deco="basket-a-primary box-warning font-warning" icon="bxl-meta" text="meta" checked>
-						{/* <Box deco="box-warning" /> */}
-						{/* <Icon deco="font-primary">bxl-meta</Icon> */}
-						{/* <Text deco="font-default">meta</Text> */}
-					</A>
+					<A href="http://www.meta.com" deco="basket-a-primary box-warning font-warning" icon="bxl-meta" text="meta" checked />
 				</Group>
 			</Fieldset>
 

@@ -381,13 +381,12 @@ const LabelTheme = (props) => {
 	const round = themeList[4] || 'sm';
 
 	const gap = {
-		none: {px: 0, py: 0, mx: 1},
-		xs: {px: 0.5, py: 0.5, mx: 1},
-		sm: {px: 1, py: 1, mx: 1},
-		md: {px: 2, py: 2, mx: 1},
-		lg: {px: 3, py: 3, mx: 1},
-		xl: {px: 4, py: 4, mx: 1},
-		'2xl': {px: 5, py: 5, mx: 1},
+		xs: {px: 0, py: 0, mx: 1},
+		sm: {px: 0.5, py: 0.5, mx: 1},
+		md: {px: 1, py: 1, mx: 1},
+		lg: {px: 2, py: 2, mx: 1},
+		xl: {px: 3, py: 3, mx: 1},
+		'2xl': {px: 4, py: 4, mx: 1},
 	}[space];
 
 	const width = {

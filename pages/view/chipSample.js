@@ -17,8 +17,8 @@ export default function ChipSample() {
 		center: ['text'],
 		icon: 'bx-leaf',
 		iconR: 'bxs-x-circle',
-		image: '/coffee.jpg',
-		imageR: '/bean.jpg',
+		image: '/bean.jpg',
+		imageR: '/shell.jpg',
 		text: 'Next',
 		checked: ['false'],
 		disabled: ['false'],
@@ -117,6 +117,26 @@ export default function ChipSample() {
 					disabled={disabled[0] == 'true'}
 				/>
 			</Group>
+			<Group className="p-5 space-y-3 flex justify-center items-center flex-wrap ring-2 ring-gray-500 rounded-lg">
+				<Toggle theme="G1L1-primary-xs-xs-full" img="/bean.jpg" />
+				<Toggle theme="G1L1-primary-xs-sm-full" icon="bx-leaf" />
+				<Toggle theme="G1L1-primary-sm-xs-full" img="/bean.jpg" />
+				<Toggle theme="G1L1-primary-xs-md-full" icon="bx-leaf" />
+				<Toggle theme="G1L1-primary-md-xs-full" img="/bean.jpg" />
+				<Toggle theme="G1L1-primary-md-md-full" icon="bx-leaf" />
+				<Toggle theme="G1L1-primary-lg-xs-full" img="/bean.jpg" />
+				<Toggle theme="G1L1-primary-lg-md-full" icon="bx-leaf" />
+				<Toggle theme="G1L1-primary-xl-xs-full" img="/bean.jpg" />
+				<Toggle theme="G1L1-primary-xl-md-full" icon="bx-leaf" />
+				<Toggle theme="G1L1-primary-2xl-xs-full" img="/bean.jpg" />
+				<Toggle theme="G1L1-primary-md-lg-full" icon="bx-leaf" />
+				<Toggle theme="G1L1-primary-3xl-xs-full" img="/bean.jpg" />
+				<Toggle theme="G1L1-primary-xl-lg-full" icon="bx-leaf" />
+				<Toggle theme="G1L1-primary-4xl-xs-full" img="/bean.jpg" />
+				<Toggle theme="G1L1-primary-2xl-lg-full" icon="bx-leaf" />
+				<Toggle theme="G1L1-primary-5xl-xs-full" img="/bean.jpg" />
+				<Toggle theme="G1L1-primary-2xl-xl-full" icon="bx-leaf" />
+			</Group>
 			<Group>
 				<Text deco="font-danger">typeOut : </Text>
 				{['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L'].map((item, index) => (
@@ -155,13 +175,13 @@ export default function ChipSample() {
 			</Group>
 			<Group>
 				<Text deco="font-danger">space : </Text>
-				{['none', 'xs', 'sm', 'md', 'lg', 'xl', '2xl'].map((item, index) => (
+				{['xs', 'sm', 'md', 'lg', 'xl', '2xl'].map((item, index) => (
 					<ToggleRadio key={index} text={item} team="space" name={item} checked={space.includes(item)} onChange={changeChipRadio} />
 				))}
 			</Group>
 			<Group>
 				<Text deco="font-danger">round : </Text>
-				{['none', 'xs', 'sm', 'md', 'lg', 'xl', 'full'].map((item, index) => (
+				{['xs', 'sm', 'md', 'lg', 'xl', 'full'].map((item, index) => (
 					<ToggleRadio key={index} text={item} team="round" name={item} checked={round.includes(item)} onChange={changeChipRadio} />
 				))}
 			</Group>
@@ -205,8 +225,8 @@ export default function ChipSample() {
 			<Group>
 				<Highlight className="html">
 					{`
-					<Toggle theme="${[`${typeOut}${modeOut}${typeOver}${modeOver}`, color, size, space, round].join('-')}"${left[0] == 'icon' ? ' icon="' + icon + '"' : ''}${left[0] == 'image' ? ' image="' + image + '"' : ''}${right[0] == 'iconR' ? ' iconR="' + iconR + '"' : ''}${
-						right[0] == 'imageR' ? ' imageR="' + imageR + '"' : ''
+					<Toggle theme="${[`${typeOut}${modeOut}${typeOver}${modeOver}`, color, size, space, round].join('-')}"${left[0] == 'icon' ? ' icon="' + icon + '"' : ''}${left[0] == 'image' ? ' img="' + image + '"' : ''}${right[0] == 'iconR' ? ' iconR="' + iconR + '"' : ''}${
+						right[0] == 'imageR' ? ' imgR="' + imageR + '"' : ''
 					}${center[0] == 'text' ? ' text="' + text + '"' : ''}${checked[0] == 'true' ? ' checked' : ''}${disabled[0] == 'true' ? ' disabled' : ''} />
 					`}
 				</Highlight>
