@@ -6,20 +6,20 @@ const dummyElement = () => {
 	return (
 		<>
 			<div className={`w-3 w-4 w-5 w-6 w-7 w-8 w-9 w-10 w-11 w-12 w-14`} />
-			<div className={`px-0 px-0.5 px-1 px-2 px-3 px-4 px-5`} />
-			<div className={`py-0 py-0.5 py-1 py-2 py-3 py-4 py-5`} />
-			<div className={`mr-0 mr-0.5 mr-1 mr-2 mr-3 mr-4 mr-5`} />
-			<div className={`ml-0 ml-0.5 ml-1 ml-2 ml-3 ml-4 ml-5`} />
-			<div className={`mx-0 mx-0.5 mx-1 mx-2 mx-3 mx-4 mx-5`} />
-			<div className={`text-xs text-sm text-md text-lg text-xl text-2xl text-3xl text-4xl text-5xl`} />
-			<div className={`rounded-t-xs rounded-t-sm rounded-t-md rounded-t-lg rounded-t-xl rounded-t-2xl rounded-t-full`} />
-			<div className={`rounded-b-xs rounded-b-sm rounded-b-md rounded-b-lg rounded-b-xl rounded-b-2xl rounded-b-full`} />
-			<div className={`rounded-l-xs rounded-l-sm rounded-l-md rounded-l-lg rounded-l-xl rounded-l-2xl rounded-l-full`} />
-			<div className={`rounded-r-xs rounded-r-sm rounded-r-md rounded-r-lg rounded-r-xl rounded-r-2xl rounded-r-full`} />
-			<div className={`rounded-tl-xs rounded-tl-sm rounded-tl-md rounded-tl-lg rounded-tl-xl rounded-tl-2xl rounded-tl-full`} />
-			<div className={`rounded-tr-xs rounded-tr-sm rounded-tr-md rounded-tr-lg rounded-tr-xl rounded-tr-2xl rounded-tr-full`} />
-			<div className={`rounded-bl-xs rounded-bl-sm rounded-bl-md rounded-bl-lg rounded-bl-xl rounded-bl-2xl rounded-bl-full`} />
-			<div className={`rounded-br-xs rounded-br-sm rounded-br-md rounded-br-lg rounded-br-xl rounded-br-2xl rounded-br-full`} />
+			<div className={`px-0 px-0.5 px-1 px-2 px-3 px-4 px-5 px-6`} />
+			<div className={`py-0 py-0.5 py-1 py-2 py-3 py-4 py-5 py-6`} />
+			<div className={`mr-0 mr-0.5 mr-1 mr-2 mr-3 mr-4 mr-5 mr-6`} />
+			<div className={`ml-0 ml-0.5 ml-1 ml-2 ml-3 ml-4 ml-5 ml-6`} />
+			<div className={`text-xs text-sm text-base text-md text-lg text-xl text-2xl text-3xl text-4xl text-5xl`} />
+			<div className={`rounded-none rounded-sm rounded rounded-md rounded-lg rounded-xl rounded-2xl rounded-3xl rounded-full`} />
+			<div className={`rounded-t-none rounded-t-sm rounded-t rounded-t-md rounded-t-lg rounded-t-xl rounded-t-2xl rounded-t-3xl rounded-t-full`} />
+			<div className={`rounded-b-none rounded-b-sm rounded-b rounded-b-md rounded-b-lg rounded-b-xl rounded-b-2xl rounded-b-3xl rounded-b-full`} />
+			<div className={`rounded-l-none rounded-l-sm rounded-l rounded-l-md rounded-l-lg rounded-l-xl rounded-l-2xl rounded-l-3xl rounded-l-full`} />
+			<div className={`rounded-r-none rounded-r-sm rounded-r rounded-r-md rounded-r-lg rounded-r-xl rounded-r-2xl rounded-r-3xl rounded-r-full`} />
+			<div className={`rounded-tl-none rounded-tl-sm rounded-tl rounded-tl-md rounded-tl-lg rounded-tl-xl rounded-tl-2xl rounded-tl-3xl rounded-tl-full`} />
+			<div className={`rounded-tr-none rounded-tr-sm rounded-tr rounded-tr-md rounded-tr-lg rounded-tr-xl rounded-tr-2xl rounded-tr-3xl rounded-tr-full`} />
+			<div className={`rounded-bl-none rounded-bl-sm rounded-bl rounded-bl-md rounded-bl-lg rounded-bl-xl rounded-bl-2xl rounded-bl-3xl rounded-bl-full`} />
+			<div className={`rounded-br-none rounded-br-sm rounded-br rounded-br-md rounded-br-lg rounded-br-xl rounded-br-2xl rounded-br-3xl rounded-br-full`} />
 			<div className={`font-normal font-semibold italic not-italic underline no-underline bg-transparent group-hover:font-normal group-hover:font-semibold group-hover:italic group-hover:not-italic group-hover:underline group-hover:no-underline group-hover:bg-transparent`} />
 			<div className={`text-slate-800 ring-slate-800 bg-slate-100 bg-slate-300 bg-slate-500 bg-slate-600 group-hover:text-slate-800 group-hover:ring-slate-800 group-hover:bg-slate-100 group-hover:bg-slate-300 group-hover:bg-slate-500 group-hover:bg-slate-600`} />
 			<div className={`text-sky-800 ring-sky-800 bg-sky-100 bg-sky-300 bg-sky-500 bg-sky-600 group-hover:text-sky-800 group-hover:ring-sky-800 group-hover:bg-sky-100 group-hover:bg-sky-300 group-hover:bg-sky-500 group-hover:bg-sky-600`} />
@@ -262,9 +262,9 @@ const getThemeProps = (props) => {
 	let tyde = themeList[1] || 'A1A1';
 	const size = themeList[2] || 'sm';
 	const space = themeList[3] || 'sm';
-	let round = themeList[4] || 'sm';
+	const round = themeList[4] || 'sm';
 
-	const roundReg = /(xs|sm|md|lg|xl|2xl|full)([0-9]?)/;
+	const roundReg = /(none|xs|sm|md|lg|xl|2xl|3xl|full)([0-9]?)/;
 	const roundMatch = round.match(roundReg);
 
 	const tydeReg = /([A-Z]?)([0-9]?)([A-Z]?)([0-9]?)/;
@@ -275,12 +275,14 @@ const getThemeProps = (props) => {
 	const modeDeco = `${tyde.replace(tydeReg, checked ? '$4$2' : '$2$4')}-${color}`; // '12-default'
 
 	const padding = {
-		xs: {x: 0, y: 0},
-		sm: {x: 0.5, y: 0.5},
-		md: {x: 1, y: 1},
-		lg: {x: 2, y: 2},
-		xl: {x: 3, y: 3},
-		'2xl': {x: 4, y: 4},
+		none: {x: 0, y: 0},
+		xs: {x: 0.5, y: 0.5},
+		sm: {x: 1, y: 1},
+		md: {x: 2, y: 2},
+		lg: {x: 3, y: 3},
+		xl: {x: 4, y: 4},
+		'2xl': {x: 5, y: 5},
+		'3xl': {x: 6, y: 6},
 	}[space];
 
 	const margin = {
@@ -307,24 +309,39 @@ const getThemeProps = (props) => {
 		'5xl': 12,
 	}[size];
 
-	round =
+	const rounded = [
+		'rounded',
 		{
-			1: 'tl-',
-			2: 'tr-',
-			3: 'br-',
-			4: 'bl-',
-			5: 't-',
-			6: 'r-',
-			7: 'b-',
-			8: 'l-',
+			1: 'tl',
+			2: 'tr',
+			3: 'br',
+			4: 'bl',
+			5: 't',
+			6: 'r',
+			7: 'b',
+			8: 'l',
 			all: '',
-		}[roundMatch[2] || 'all'] + roundMatch[1];
+		}[roundMatch[2] || 'all'],
+		{
+			none: 'none',
+			xs: 'sm',
+			sm: '',
+			md: 'md',
+			lg: 'lg',
+			xl: 'xl',
+			'2xl': '2xl',
+			'3xl': '3xl',
+			full: 'full',
+		}[roundMatch[1]],
+	]
+		.filter((item) => item)
+		.join('-');
 
 	return {
 		padding,
 		margin,
 		size,
-		round,
+		rounded,
 		width,
 		typeDeco,
 		modeDeco,
@@ -335,6 +352,7 @@ const getNewProps = (props) => {
 	const {
 		children = '',
 		tag = '',
+		theme = '',
 		deco = '',
 		className = '',
 		href = '#',
@@ -364,6 +382,7 @@ const getNewProps = (props) => {
 		.filter((item) => item.split('-')[0] == useTag)[0];
 
 	const style = `${getDefaultElement(props).props.className} | ${mixDecoElement({...props, useDeco}).props.className}`;
+	const themeObj = props.themeObj ? props.themeObj : theme ? getThemeProps(props) : {};
 
 	return {
 		...props,
@@ -375,6 +394,7 @@ const getNewProps = (props) => {
 		href,
 		onClick,
 		onChange,
+		themeObj,
 	};
 };
 
@@ -406,8 +426,20 @@ export const Icon = (props) => {
 };
 
 const TextTheme = (props) => {
-	const {children, theme, deco, style, className, icon, iconL, iconR, name, checked} = getNewProps({...props, tag: 'font'});
-	const {padding, margin, size, round, width, typeDeco, modeDeco} = getThemeProps(props);
+	const {
+		children,
+		theme,
+		deco,
+		style,
+		className,
+		icon,
+		iconL,
+		iconR,
+		name,
+		checked,
+		themeObj: {padding, margin, size, rounded, width, typeDeco, modeDeco},
+	} = getNewProps({...props, tag: 'font'});
+	// const {padding, margin, size, rounded, width, typeDeco, modeDeco} = getThemeProps(props);
 
 	const typeClass = `${mixDecoElement({...props, useDeco: `font-${typeDeco}`}).props.className}`;
 	const modeClass = `${mixDecoElement({...props, useDeco: `font-${modeDeco}`}).props.className}`;
@@ -436,16 +468,33 @@ export const Box = (props) => {
 
 const LabelTheme = (props) => {
 	const newProps = getNewProps({...props, tag: 'label'});
-	const {children, theme, deco, style, className, img, imgR, icon, iconL, iconR, text, left, right, center, checked} = newProps;
-	const {padding, margin, size, round, width, typeDeco, modeDeco} = getThemeProps(props);
+	const {
+		children,
+		theme,
+		deco,
+		style,
+		className,
+		img,
+		imgR,
+		icon,
+		iconL,
+		iconR,
+		text,
+		left,
+		right,
+		center,
+		checked,
+		themeObj: {padding, margin, size, rounded, width, typeDeco, modeDeco},
+	} = newProps;
+	// const {padding, margin, size, rounded, width, typeDeco, modeDeco} = getThemeProps(props);
 
 	return (
 		<div className={`${style} | ${className} px-${padding.x} py-${padding.y} text-${size}`}>
-			<Box deco={`box-${typeDeco}`} className={`rounded-${round}`} />
+			<Box deco={`box-${typeDeco}`} className={`${rounded}`} />
 			{left ? (
 				left
 			) : img ? (
-				<Img src={img} className={`mr-${margin.x} last:mr-0 w-${width} aspect-square rounded-${round}`} />
+				<Img src={img} className={`mr-${margin.x} last:mr-0 w-${width} aspect-square ${rounded}`} />
 			) : icon ? (
 				<Icon deco={`font-${typeDeco}`} className={`ml-${margin.x} last:ml-0`}>
 					{icon}
@@ -455,16 +504,18 @@ const LabelTheme = (props) => {
 			)}
 			{center ? (
 				center
-			) : (
-				<Text {...newProps} className={`mx-${margin.x * 2}`}>
+			) : text || children ? (
+				<Text {...newProps} className={`ml-${margin.x * 2} mr-${margin.x * 2}`}>
 					{text}
 					{children}
 				</Text>
+			) : (
+				<></>
 			)}
 			{right ? (
 				right
 			) : imgR ? (
-				<Img src={imgR} className={`ml-${margin.x} w-${width} aspect-square rounded-${round}`} />
+				<Img src={imgR} className={`ml-${margin.x} w-${width} aspect-square ${rounded}`} />
 			) : iconR ? (
 				<Icon deco={`font-${typeDeco}`} className={`mr-${margin.x}`}>
 					{iconR}

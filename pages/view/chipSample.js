@@ -176,13 +176,13 @@ export default function ChipSample() {
 			</Group>
 			<Group>
 				<Text deco="font-danger">space : </Text>
-				{['xs', 'sm', 'md', 'lg', 'xl', '2xl'].map((item, index) => (
+				{['none', 'xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl'].map((item, index) => (
 					<ToggleRadio key={index} text={item} team="space" name={item} checked={space.includes(item)} onChange={changeChipRadio} />
 				))}
 			</Group>
 			<Group>
 				<Text deco="font-danger">round : </Text>
-				{['xs', 'sm', 'md', 'lg', 'xl', '2xl', 'full'].map((item, index) => (
+				{['none', 'xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', 'full'].map((item, index) => (
 					<ToggleRadio key={index} text={item} team="round" name={item} checked={round.includes(item)} onChange={changeChipRadio} />
 				))}
 			</Group>
