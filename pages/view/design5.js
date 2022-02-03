@@ -347,7 +347,7 @@ export default function code() {
 			<Fieldset title="data">
 				<Group>
 					{Object.entries(data).map((item, index) => (
-						<Text key={index} theme="A-success" className="block">{`${item[0]} : ${JSON.stringify(item[1])}`}</Text>
+						<Text key={index} theme="success-A" className="block">{`${item[0]} : ${JSON.stringify(item[1])}`}</Text>
 					))}
 				</Group>
 			</Fieldset>
@@ -368,10 +368,19 @@ export default function code() {
 					<Icon deco="font-primary">bx-search-alt-2</Icon>
 				</Group> */}
 				<Group>
-					<Label theme="C-default-sm-md-full" icon="bx-user-plus" />
-					<Label theme="B4-default-2xl-md-full" icon="bx-leaf" />
-					<Label theme="E-danger-2xl-lg-lg" icon="bx-align-middle" />
-					<Label theme="G-primary-xl-lg-full" icon="bx-search-alt-2" />
+					<Label theme="default-C-sm-md-full" icon="bx-user-plus" />
+					<Label theme="default-B4-2xl-md-full" icon="bx-leaf" />
+					<Label theme="danger-E-2xl-lg-lg" icon="bx-align-middle" />
+					<Label theme="primary-G-xl-lg-full" icon="bx-search-alt-2" />
+					<Button
+						theme="primary-G2-xl-lg-full"
+						icon="bx-search-alt-2"
+						center={
+							<Text theme="danger-2-3xl" className="px-5">
+								ICON
+							</Text>
+						}
+					></Button>
 				</Group>
 			</Fieldset>
 
@@ -394,13 +403,13 @@ export default function code() {
 					</Text>
 				</Group> */}
 				<Group>
-					<Text theme="A-primary" className="leading-10">
-						Lorem ipsum <Text theme="A2-success">dolor sit amet</Text> consectetur <Text theme="A3-danger">Text Sample</Text> Iusto debitis nihil <Label theme="F-primary-sm-xs">Label Sample</Label> similique accusantium{' '}
-						<A theme="B2D1-danger-md-xs" href="/view/sample">
+					<Text theme="primary-A" className="leading-10">
+						Lorem ipsum <Text theme="success-2">dolor sit amet</Text> consectetur <Text theme="danger-2-lg">Text Sample</Text> Iusto debitis nihil <Label theme="F-primary-sm-xs">Label Sample</Label> similique accusantium{' '}
+						<A theme="danger-B2D1-md-xs" href="/view/sample">
 							A Sample
 						</A>{' '}
-						ut, libero dolorem nulla quod dolorum. <Button theme="B2D1-danger-sm-sm">Button Sample</Button>, ipsam{' '}
-						<Toggle theme="B2D1-danger-sm-md" name="agree" checked={data.agree} onChange={changeSwitch}>
+						ut, libero dolorem nulla quod dolorum. <Button theme="danger-B2D1-sm-sm">Button Sample</Button>, ipsam{' '}
+						<Toggle theme="danger-B2D1-sm-md" name="agree" checked={data.agree} onChange={changeSwitch}>
 							Toggle Sample{data.agree ? ' (ON)' : ' (OFF)'}
 						</Toggle>{' '}
 						dolore facere neque numquam saepe?
@@ -418,23 +427,27 @@ export default function code() {
 					<Label deco="font-danger" text="Sample" />
 				</Group>
 				<Group className="space-y-4">
-					<Label theme="C-primary" icon="bx-star" text="Start : ">
-						<Button theme="E2H1-warning-sm-xs-lg">Earum suscipit repellat officia quibusdam ipsum nisi optio</Button>
+					<Label theme="primary-C" icon="bx-star" text="Start : ">
+						<Button theme="warning-E2H1-sm-xs-lg">Earum suscipit repellat officia quibusdam ipsum nisi optio</Button>
 					</Label>
 					<Label deco="font-primary" icon="bx-leaf" text="leaf" />
 					<Label deco="font-primary" text="asdas" />
-					<Label theme="HL-default-md-xs-full" icon="bx-star" text="Sample ">
-						<Button theme="AD-danger-sm-md-full" icon="bxs-x-circle" />
+					<Label theme="default-HL-md-xs-full" icon="bx-star" text="Sample ">
+						<Button theme="danger-AD-sm-md-full" icon="bxs-x-circle" />
 					</Label>
-					<Toggle theme="HL-default-md-md-full" icon="bx-star" text="Sample " name="agree" checked={data.agree} onChange={changeSwitch} left={<Label theme="BF-success-2xl-2xl-full" icon="bx-leaf" />} right={<Label theme="AF-danger-lg-md-full" icon="bxs-x-circle" />} />
-					<Toggle theme="DF-default-md-md-full" icon="bx-star" text="Sample " name="agree" checked={data.agree} onChange={changeSwitch} left={<Label theme="DF-success-xs-xs-full" img="/bean.jpg" />} right={<Label theme="AF-danger-lg-md-full" icon="bxs-x-circle" />} />
-					<Basket theme="DF-default-md-md-full" icon="bx-star" text="Sample " name="agree" checked={data.agree} onChange={changeSwitch} left={<Label theme="DF-success-xs-xs-full" img="/shell.jpg" />} right={<Button theme="AF-danger-lg-md-full" icon="bxs-x-circle" />} />
-					<Button theme="DF-default-xs-md-full" img="/noodle.jpg" text="Compose Coffee" />
-					<Button theme="DF-default-sm-md-full" img="/noodle.jpg" text="Compose Coffee" />
-					<Button theme="DF-default-md-md-full" img="/noodle.jpg" text="Compose Coffee" />
-					<Button theme="DF-default-lg-md-full" img="/noodle.jpg" text="Compose Coffee" />
-					<Button theme="DF-default-xl-md-full" img="/noodle.jpg" text="Compose Coffee" />
-					<Button theme="DF-default-2xl-md-lg" img="/noodle.jpg" text="Compose Coffee" />
+					<Toggle theme="default-HL-md-md-full" icon="bx-star" text="Sample " name="agree" checked={data.agree} onChange={changeSwitch} left={<Label theme="success-BF-2xl-2xl-full" icon="bx-leaf" />} right={<Label theme="danger-AF-lg-md-full" icon="bxs-x-circle" />} />
+					<Toggle theme="default-DF-md-md-full" icon="bx-star" text="Sample " name="agree" checked={data.agree} onChange={changeSwitch} left={<Label theme="success-DF-xs-xs-full" img="/bean.jpg" />} right={<Label theme="danger-AF-lg-md-full" icon="bxs-x-circle" />} />
+					<Basket theme="default-DF-md-md-full" icon="bx-star" text="Sample " name="agree" checked={data.agree} onChange={changeSwitch} left={<Label theme="success-DF-xs-xs-full" img="/shell.jpg" />} right={<Button theme="danger-AF-lg-md-full" icon="bxs-x-circle" />} />
+					<Button theme="default-DF-xs-md-full" img="/noodle.jpg" text="Compose Coffee" />
+					<Button theme="default-DF-sm-md-full" img="/noodle.jpg" text="Compose Coffee" />
+					<Button theme="default-DF-md-md-full" img="/noodle.jpg" text="Compose Coffee" />
+					<Button theme="default-DF-lg-md-full" img="/noodle.jpg" text="Compose Coffee" />
+					<Button theme="default-DF-xl-md-full" img="/noodle.jpg" text="Compose Coffee" />
+					<Button theme="default-DF-2xl-md-lg" img="/noodle.jpg" text="Compose Coffee" />
+
+					<Button theme="primary-E1F2-lg-md-full" img="/coffee.jpg" text="TEST">
+						<Text theme="danger-1L-xs"> (TEST) </Text>
+					</Button>
 				</Group>
 			</Fieldset>
 
@@ -481,7 +494,7 @@ export default function code() {
 			</Fieldset>
 
 			<Fieldset title="A">
-				<Group>
+				{/* <Group>
 					<Text deco="font-danger">checked(true) : </Text>
 					<A href="http://www.google.com" deco="basket-a-primary box-primary">
 						<Icon deco="font-danger">bxl-google</Icon>
@@ -499,8 +512,8 @@ export default function code() {
 						<Icon deco="font-danger">bxl-google</Icon>
 						<Text deco="font-primary">google</Text>
 					</A>
-				</Group>
-				<Group>
+				</Group> */}
+				{/* <Group>
 					<Text deco="font-danger">checked(false) : </Text>
 					<A href="http://www.google.com" deco="basket-a-primary box-primary" checked>
 						<Icon deco="font-danger">bxl-google</Icon>
@@ -517,6 +530,32 @@ export default function code() {
 					<A href="http://www.google.com" deco="basket-a-primary box-primary" checked>
 						<Icon deco="font-danger">bxl-google</Icon>
 						<Text deco="font-primary">google</Text>
+					</A>
+				</Group> */}
+				<Group>
+					<Text deco="font-danger">checked(false) : </Text>
+					<A href="http://www.google.com" theme="primary-H2J2-sm-xs" icon="bxl-google" text="google" />
+					<A href="http://www.google.com" theme="danger-H2J2-sm-xs" icon="bxl-google">
+						<Text deco="font-primary">google</Text>
+					</A>
+					<A href="http://www.google.com" theme="primary-H2J2-sm-xs" left={<Icon deco="font-success">bxl-google</Icon>}>
+						<Text deco="font-primary">google</Text>
+					</A>
+					<A href="http://www.google.com" theme="primary-A1A2-sm-xs" left={<Icon deco="font-danger">bxl-google</Icon>}>
+						google
+					</A>
+				</Group>
+				<Group>
+					<Text deco="font-danger">checked(true) : </Text>
+					<A href="http://www.google.com" theme="primary-H2J2-sm-xs" icon="bxl-google" text="google" checked />
+					<A href="http://www.google.com" theme="danger-H2J2-sm-xs" icon="bxl-google" checked>
+						<Text deco="font-primary">google</Text>
+					</A>
+					<A href="http://www.google.com" theme="primary-H2J2-sm-xs" left={<Icon deco="font-success">bxl-google</Icon>} checked>
+						<Text deco="font-primary">google</Text>
+					</A>
+					<A href="http://www.google.com" theme="primary-A1A2-sm-xs" left={<Icon deco="font-danger">bxl-google</Icon>} checked>
+						google
 					</A>
 				</Group>
 				<Group>
@@ -536,39 +575,52 @@ export default function code() {
 					</A>
 					<A href="http://www.meta.com" deco="basket-a-primary box-warning font-warning" icon="bxl-meta" text="meta" checked />
 				</Group>
+				<Group>
+					<A href="/" theme="primary-46-xl">
+						HOME
+					</A>
+					<A href="/view/sample" theme="primary-BE-3xl-md-lg2" left={<Icon theme="warning">bx-user-plus</Icon>} />
+					<A href="/view/room" deco="basket-a-default box-low:xx2lx-primary" checked>
+						<Icon deco="font-primary">bx-search-alt-2</Icon>
+					</A>
+					<A href="http://www.naver.com" deco="basket-a-primary">
+						<Text deco="font-warning">naver</Text>
+					</A>
+					<A href="http://www.meta.com" deco="basket-a-primary box-warning font-warning" icon="bxl-meta" text="meta" checked />
+				</Group>
 			</Fieldset>
 
 			<Fieldset title="Button">
 				<Group>
-					<Button theme="HI-danger-sm-sm-md" icon="bxs-chevron-right" text="Sample" />
-					<Button theme="DI-success-sm-sm-xs" icon="bx-user" text="named" name="happy" />
-					<Button theme="DI-danger-sm-sm-xs" icon="bx-user-x" text="no named" />
-					<Button theme="CK-default-md-md-md" className={'w-[140px]'} icon="bx-user-plus" text="KOOZone" />
-					<Button theme="DG-primary-sm-sm-full" icon="bxs-like" text={`like: `} name="countLike" onClick={clickButton}>
-						<Text theme="A2L1-danger">{data.countLike}</Text>
+					<Button theme="danger-HI-sm-sm-md" icon="bxs-chevron-right" text="Sample" />
+					<Button theme="success-DI-sm-sm-xs" icon="bx-user" text="named" name="happy" />
+					<Button theme="danger-DI-sm-sm-xs" icon="bx-user-x" text="no named" />
+					<Button theme="default-CK-md-md-md" className={'w-[140px]'} icon="bx-user-plus" text="KOOZone" />
+					<Button theme="primary-DG-sm-sm-full" icon="bxs-like" text={`like: `} name="countLike" onClick={clickButton}>
+						<Text theme="danger-A2L1">{data.countLike}</Text>
 					</Button>
-					<Button theme="DG-danger-sm-sm-full" icon="bxs-dislike" text={`hate: `} name="countHate" onClick={clickButton}>
-						<Text theme="A2L1-primary">{data.countHate}</Text>
+					<Button theme="danger-DG-sm-sm-full" icon="bxs-dislike" text={`hate: `} name="countHate" onClick={clickButton}>
+						<Text theme="primary-A2L1">{data.countHate}</Text>
 					</Button>
-					<Button theme="D4G7-warning-lg-lg-md" icon="bxs-chevron-left" iconR="bxs-chevron-right" text="Arrow Button" />
+					<Button theme="warning-D4G7-lg-lg-md" icon="bxs-chevron-left" iconR="bxs-chevron-right" text="Arrow Button" />
 				</Group>
 
 				<Group>
-					<Button theme="HI-default-sm-sm-xs">Default</Button>
-					<Button theme="HI-primary-sm-sm-xs">Primary</Button>
-					<Button theme="HI-success-sm-sm-xs">Success</Button>
-					<Button theme="HI-warning-sm-sm-xs">Warning</Button>
-					<Button theme="HI-danger-sm-sm-xs" disabled>
+					<Button theme="default-HI-sm-sm-xs">Default</Button>
+					<Button theme="primary-HI-sm-sm-xs">Primary</Button>
+					<Button theme="success-HI-sm-sm-xs">Success</Button>
+					<Button theme="warning-HI-sm-sm-xs">Warning</Button>
+					<Button theme="danger-HI-sm-sm-xs" disabled>
 						Danger
 					</Button>
 				</Group>
 
 				<Group>
-					<Button theme="KL-default-sm-sm-xs" text="Default" />
-					<Button theme="KL-primary-sm-sm-xs" text="Primary" />
-					<Button theme="KL-success-sm-sm-xs" text="Success" />
-					<Button theme="KL-warning-sm-sm-xs" text="Warning" />
-					<Button theme="KL-danger-sm-sm-xs" text="Danger" disabled />
+					<Button theme="default-KL-sm-sm-xs" text="Default" />
+					<Button theme="primary-KL-sm-sm-xs" text="Primary" />
+					<Button theme="success-KL-sm-sm-xs" text="Success" />
+					<Button theme="warning-KL-sm-sm-xs" text="Warning" />
+					<Button theme="danger-KL-sm-sm-xs" text="Danger" disabled />
 				</Group>
 			</Fieldset>
 
@@ -633,10 +685,10 @@ export default function code() {
 
 				<Group>
 					<Text deco="font-danger">fruite : </Text>
-					<Toggle theme="AL-primary" icon="bx-leaf" text="banana" team="fruite" name="banana" checked={data.fruite.includes('banana')} onChange={changeCheckbox} />
-					<Toggle theme="AL-primary" icon="bx-leaf" text="apple" team="fruite" name="apple" checked={data.fruite.includes('apple')} onChange={changeCheckbox} />
-					<Toggle theme="AL-primary" icon="bx-leaf" text="orange" team="fruite" name="orange" checked={data.fruite.includes('orange')} onChange={changeCheckbox} />
-					<Toggle theme="AL-primary" icon="bx-leaf" text="melon" team="fruite" name="melon" checked={data.fruite.includes('melon')} onChange={changeCheckbox} />
+					<Toggle theme="primary-AL" icon="bx-leaf" text="banana" team="fruite" name="banana" checked={data.fruite.includes('banana')} onChange={changeCheckbox} />
+					<Toggle theme="primary-AL" icon="bx-leaf" text="apple" team="fruite" name="apple" checked={data.fruite.includes('apple')} onChange={changeCheckbox} />
+					<Toggle theme="primary-AL" icon="bx-leaf" text="orange" team="fruite" name="orange" checked={data.fruite.includes('orange')} onChange={changeCheckbox} />
+					<Toggle theme="primary-AL" icon="bx-leaf" text="melon" team="fruite" name="melon" checked={data.fruite.includes('melon')} onChange={changeCheckbox} />
 				</Group>
 			</Fieldset>
 
@@ -666,10 +718,10 @@ export default function code() {
 
 				<Group>
 					<Text deco="font-success">color : </Text>
-					<Toggle theme="BF-success" icon="bx-leaf" text="red" team="color" name="red" checked={data.color.includes('red')} onChange={changeRadio} />
-					<Toggle theme="BF-success" icon="bx-leaf" text="blue" team="color" name="blue" checked={data.color.includes('blue')} onChange={changeRadio} />
-					<Toggle theme="BF-success" icon="bx-leaf" text="yellow" team="color" name="yellow" checked={data.color.includes('yellow')} onChange={changeRadio} />
-					<Toggle theme="BF-success" icon="bx-leaf" text="green" team="color" name="green" checked={data.color.includes('green')} onChange={changeRadio} />
+					<Toggle theme="success-BF" icon="bx-leaf" text="red" team="color" name="red" checked={data.color.includes('red')} onChange={changeRadio} />
+					<Toggle theme="success-BF" icon="bx-leaf" text="blue" team="color" name="blue" checked={data.color.includes('blue')} onChange={changeRadio} />
+					<Toggle theme="success-BF" icon="bx-leaf" text="yellow" team="color" name="yellow" checked={data.color.includes('yellow')} onChange={changeRadio} />
+					<Toggle theme="success-BF" icon="bx-leaf" text="green" team="color" name="green" checked={data.color.includes('green')} onChange={changeRadio} />
 				</Group>
 			</Fieldset>
 
@@ -698,9 +750,9 @@ export default function code() {
 
 				<Group>
 					<Text deco="font-success">color : </Text>
-					<Toggle theme="GH-warning" icon="bx-leaf" text="dog" name="dog" checked={data.dog} onChange={changeSwitch} />
-					<Toggle theme="GH-warning" icon="bx-leaf" text="cat" name="cat" checked={data.cat} onChange={changeSwitch} />
-					<Toggle theme="GH-warning" icon="bx-leaf" text="bird" name="bird" checked={data.bird} onChange={changeSwitch} />
+					<Toggle theme="warning-GH" icon="bx-leaf" text="dog" name="dog" checked={data.dog} onChange={changeSwitch} />
+					<Toggle theme="warning-GH" icon="bx-leaf" text="cat" name="cat" checked={data.cat} onChange={changeSwitch} />
+					<Toggle theme="warning-GH" icon="bx-leaf" text="bird" name="bird" checked={data.bird} onChange={changeSwitch} />
 				</Group>
 			</Fieldset>
 
@@ -852,11 +904,11 @@ export default function code() {
 				{['default', 'primary', 'success', 'warning', 'danger'].map((item, index) => (
 					<Group key={index}>
 						<Text deco="font-danger">{item} : </Text>
-						<Button theme={`HI-${item}`} icon="bx-leaf" iconR="bxs-chevron-right" text="Next Step" />
-						<Button theme={`KL-${item}`} icon="bx-leaf" text="Next Step" />
-						<Button theme={`BI-${item}`} iconR="bxs-chevron-right" text="다음 단계" />
-						<Button theme={`IB-${item}`} icon="bx-leaf" />
-						<Button theme={`AL-${item}`} text="Menu" />
+						<Button theme={`${item}-HI`} icon="bx-leaf" iconR="bxs-chevron-right" text="Next Step" />
+						<Button theme={`${item}-KL`} icon="bx-leaf" text="Next Step" />
+						<Button theme={`${item}-BI`} iconR="bxs-chevron-right" text="다음 단계" />
+						<Button theme={`${item}-IB`} icon="bx-leaf" />
+						<Button theme={`${item}-AL`} text="Menu" />
 					</Group>
 				))}
 			</Fieldset>
@@ -875,11 +927,11 @@ export default function code() {
 				{['default', 'primary', 'success', 'warning', 'danger'].map((item, index) => (
 					<Group key={index}>
 						<Text deco="font-danger">{item} : </Text>
-						<Toggle theme={`HI-${item}`} icon="bx-leaf" iconR="bxs-chevron-right" text="Next Step" />
-						<Toggle theme={`KL-${item}`} icon="bx-leaf" text="Next Step" />
-						<Toggle theme={`BI-${item}`} iconR="bxs-chevron-right" text="다음 단계" />
-						<Toggle theme={`IB-${item}`} icon="bx-leaf" />
-						<Toggle theme={`AL-${item}`} text="Menu" />
+						<Toggle theme={`${item}-HI`} icon="bx-leaf" iconR="bxs-chevron-right" text="Next Step" />
+						<Toggle theme={`${item}-KL`} icon="bx-leaf" text="Next Step" />
+						<Toggle theme={`${item}-BI`} iconR="bxs-chevron-right" text="다음 단계" />
+						<Toggle theme={`${item}-IB`} icon="bx-leaf" />
+						<Toggle theme={`${item}-AL`} text="Menu" />
 					</Group>
 				))}
 			</Fieldset>

@@ -6,9 +6,20 @@ const dummyElement = () => {
 	return (
 		<>
 			<div className={`w-3 w-4 w-5 w-6 w-7 w-8 w-9 w-10 w-11 w-12 w-14`} />
-			<div className={`w-[12px] w-[14px] w-[16px] w-[18px] w-[20px] w-[24px] w-[30px] w-[36px] w-[48px] `} />
-			<div className={`px-0 py-0 mr-0 px-0.5 py-0.5 mr-0.5 px-1 py-1 mr-1 px-2 py-2 mr-2 px-3 py-3 mr-3 px-4 py-4 mr-4 px-5 py-5 mr-5`} />
+			<div className={`px-0 px-0.5 px-1 px-2 px-3 px-4 px-5`} />
+			<div className={`py-0 py-0.5 py-1 py-2 py-3 py-4 py-5`} />
+			<div className={`mr-0 mr-0.5 mr-1 mr-2 mr-3 mr-4 mr-5`} />
+			<div className={`ml-0 ml-0.5 ml-1 ml-2 ml-3 ml-4 ml-5`} />
+			<div className={`mx-0 mx-0.5 mx-1 mx-2 mx-3 mx-4 mx-5`} />
 			<div className={`text-xs text-sm text-md text-lg text-xl text-2xl text-3xl text-4xl text-5xl`} />
+			<div className={`rounded-t-xs rounded-t-sm rounded-t-md rounded-t-lg rounded-t-xl rounded-t-2xl rounded-t-full`} />
+			<div className={`rounded-b-xs rounded-b-sm rounded-b-md rounded-b-lg rounded-b-xl rounded-b-2xl rounded-b-full`} />
+			<div className={`rounded-l-xs rounded-l-sm rounded-l-md rounded-l-lg rounded-l-xl rounded-l-2xl rounded-l-full`} />
+			<div className={`rounded-r-xs rounded-r-sm rounded-r-md rounded-r-lg rounded-r-xl rounded-r-2xl rounded-r-full`} />
+			<div className={`rounded-tl-xs rounded-tl-sm rounded-tl-md rounded-tl-lg rounded-tl-xl rounded-tl-2xl rounded-tl-full`} />
+			<div className={`rounded-tr-xs rounded-tr-sm rounded-tr-md rounded-tr-lg rounded-tr-xl rounded-tr-2xl rounded-tr-full`} />
+			<div className={`rounded-bl-xs rounded-bl-sm rounded-bl-md rounded-bl-lg rounded-bl-xl rounded-bl-2xl rounded-bl-full`} />
+			<div className={`rounded-br-xs rounded-br-sm rounded-br-md rounded-br-lg rounded-br-xl rounded-br-2xl rounded-br-full`} />
 			<div className={`font-normal font-semibold italic not-italic underline no-underline bg-transparent group-hover:font-normal group-hover:font-semibold group-hover:italic group-hover:not-italic group-hover:underline group-hover:no-underline group-hover:bg-transparent`} />
 			<div className={`text-slate-800 ring-slate-800 bg-slate-100 bg-slate-300 bg-slate-500 bg-slate-600 group-hover:text-slate-800 group-hover:ring-slate-800 group-hover:bg-slate-100 group-hover:bg-slate-300 group-hover:bg-slate-500 group-hover:bg-slate-600`} />
 			<div className={`text-sky-800 ring-sky-800 bg-sky-100 bg-sky-300 bg-sky-500 bg-sky-600 group-hover:text-sky-800 group-hover:ring-sky-800 group-hover:bg-sky-100 group-hover:bg-sky-300 group-hover:bg-sky-500 group-hover:bg-sky-600`} />
@@ -64,7 +75,7 @@ const getDefaultElement = (props) => {
 
 	switch (tag) {
 		case 'img':
-			return <div className={`object-cover`} />;
+			return <div className={`object-cover peer-disabled:opacity-50 peer-disabled:pointer-events-none`} />;
 
 		case 'label':
 			return <div className={`relative inline-flex justify-center items-center`} />;
@@ -243,7 +254,84 @@ const getDecoElement = (props) => {
 	}
 };
 
-const getProps = (props) => {
+const getThemeProps = (props) => {
+	const {theme, checked} = props;
+
+	const themeList = String(theme).split('-') || [];
+	const color = themeList[0] || 'default';
+	let tyde = themeList[1] || 'A1A1';
+	const size = themeList[2] || 'sm';
+	const space = themeList[3] || 'sm';
+	let round = themeList[4] || 'sm';
+
+	const roundReg = /(xs|sm|md|lg|xl|2xl|full)([0-9]?)/;
+	const roundMatch = round.match(roundReg);
+
+	const tydeReg = /([A-Z]?)([0-9]?)([A-Z]?)([0-9]?)/;
+	const tydeMatch = tyde.match(tydeReg);
+	tyde = (tydeMatch[1] || 'A') + (tydeMatch[2] || '1') + (tydeMatch[3] || tydeMatch[1] || 'A') + (tydeMatch[4] || tydeMatch[2] || '1');
+
+	const typeDeco = `${tyde.replace(tydeReg, checked ? '$3$1' : '$1$3')}-${color}`; // 'AB-default'
+	const modeDeco = `${tyde.replace(tydeReg, checked ? '$4$2' : '$2$4')}-${color}`; // '12-default'
+
+	const padding = {
+		xs: {x: 0, y: 0},
+		sm: {x: 0.5, y: 0.5},
+		md: {x: 1, y: 1},
+		lg: {x: 2, y: 2},
+		xl: {x: 3, y: 3},
+		'2xl': {x: 4, y: 4},
+	}[space];
+
+	const margin = {
+		xs: {x: 0.5, y: 0},
+		sm: {x: 0.5, y: 0},
+		md: {x: 0.5, y: 0},
+		lg: {x: 1, y: 0},
+		xl: {x: 1, y: 0},
+		'2xl': {x: 1, y: 0},
+		'3xl': {x: 2, y: 0},
+		'4xl': {x: 2, y: 0},
+		'5xl': {x: 2, y: 0},
+	}[size];
+
+	const width = {
+		xs: 4,
+		sm: 5,
+		md: 6,
+		lg: 7,
+		xl: 7,
+		'2xl': 8,
+		'3xl': 9,
+		'4xl': 10,
+		'5xl': 12,
+	}[size];
+
+	round =
+		{
+			1: 'tl-',
+			2: 'tr-',
+			3: 'br-',
+			4: 'bl-',
+			5: 't-',
+			6: 'r-',
+			7: 'b-',
+			8: 'l-',
+			all: '',
+		}[roundMatch[2] || 'all'] + roundMatch[1];
+
+	return {
+		padding,
+		margin,
+		size,
+		round,
+		width,
+		typeDeco,
+		modeDeco,
+	};
+};
+
+const getNewProps = (props) => {
 	const {
 		children = '',
 		tag = '',
@@ -275,9 +363,7 @@ const getProps = (props) => {
 		.split('##')
 		.filter((item) => item.split('-')[0] == useTag)[0];
 
-	const defaultElement = getDefaultElement(props);
-	const decoElement = mixDecoElement({...props, useDeco});
-	const style = `${defaultElement.props.className} | ${decoElement.props.className}`;
+	const style = `${getDefaultElement(props).props.className} | ${mixDecoElement({...props, useDeco}).props.className}`;
 
 	return {
 		...props,
@@ -293,7 +379,7 @@ const getProps = (props) => {
 };
 
 const FormCheck = (props) => {
-	const {children, deco, style, className, team = '', name, href, type, onChange, checked, disabled} = getProps({...props, tag: 'formCheck'});
+	const {children, deco, style, className, team = '', name, href, type, onChange, checked, disabled} = getNewProps({...props, tag: 'formCheck'});
 
 	return props.tag == 'toggle' ? (
 		<input type={type} className={`${style} | `} id={[team, name].join('-')} name={name} data-team={team} checked={checked} disabled={disabled} onChange={onChange} />
@@ -302,59 +388,38 @@ const FormCheck = (props) => {
 	);
 };
 const FormInput = forwardRef((props, ref) => {
-	const {children, deco, style, className, name, href, type, value, placeholder, onChange, checked, disabled} = getProps({...props, tag: 'formInput'});
+	const {children, deco, style, className, name, href, type, value, placeholder, onChange, checked, disabled} = getNewProps({...props, tag: 'formInput'});
 
 	return disabled ? <input type={type} className={`${style} | `} ref={ref} placeholder={placeholder} value={value} onChange={onChange} /> : <input type={type} className={`${style} | `} id={name} name={name} ref={ref} placeholder={placeholder} value={value} onChange={onChange} />;
 });
 
 export const Img = (props) => {
-	const {deco, style, className, name, src, alt} = getProps({...props, tag: 'img'});
+	const {deco, style, className, name, src, alt} = getNewProps({...props, tag: 'img'});
 
 	return <img className={`${`${style} | ${className}`} | ${className}`} src={src} alt={alt} />;
 };
 
 export const Icon = (props) => {
-	const {children, deco, style, className, icon} = getProps({...props, tag: 'icon'});
+	const {children, deco, style, className, icon} = getNewProps({...props, tag: 'icon'});
 
 	return children ? <i className={`${style} | ${className}`} /> : <></>;
 };
 
 const TextTheme = (props) => {
-	const {children, theme, deco, style, className, icon, iconL, iconR, name, checked} = getProps({...props, tag: 'font'});
+	const {children, theme, deco, style, className, icon, iconL, iconR, name, checked} = getNewProps({...props, tag: 'font'});
+	const {padding, margin, size, round, width, typeDeco, modeDeco} = getThemeProps(props);
 
-	const themeList = String(theme).split('-') || [];
-	const typemode = themeList[0] || 'B1C1';
-	const color = themeList[1] || 'default';
-	const size = themeList[2] || 'md';
-	const space = themeList[3] || 'md';
-	const round = themeList[4] || 'md';
+	const typeClass = `${mixDecoElement({...props, useDeco: `font-${typeDeco}`}).props.className}`;
+	const modeClass = `${mixDecoElement({...props, useDeco: `font-${modeDeco}`}).props.className}`;
 
-	// const gap = {
-	// 	xs: {x: 1, y: 0},
-	// 	sm: {x: 1, y: 0.5},
-	// 	md: {x: 1, y: 1},
-	// 	lg: {x: 2, y: 2},
-	// 	xl: {x: 3, y: 3},
-	// 	'2xl': {x: 4, y: 4},
-	// }[space];
+	// 비어있는 children 내용을 코드 줄바꿈으로 인해 비어있지 않음으로 인식하는 오류를 방지하기 위해 사용
+	const childrenContent = [].concat(children).join('');
 
-	const aaa = typemode.match(/([A-Z])([0-9]?)([A-Z]?)([0-9]?)/);
-	const ttt = `${aaa[1]}${aaa[2] || '1'}${aaa[3] || aaa[1]}${aaa[4] || aaa[2] || '1'}`;
-
-	const fontTypemode = `font-${ttt}-${color}`;
-
-	// box, type 타입모드 (ex> 'box-A1B2-default', 'font-A1B2-primary')
-	const regex = /^(.*)-([A-Z])([0-9]?)([A-Z])([0-9]?)-(.*)$/;
-	const fontType = fontTypemode.replace(regex, checked ? '$1-$4$2-$6' : '$1-$2$4-$6'); // 'font-AB-primary'
-	const fontTypeClass = `${mixDecoElement({...props, useDeco: fontType}).props.className}`;
-	const fontMode = fontTypemode.replace(regex, checked ? '$1-$5$3-$6' : '$1-$3$5-$6'); // 'font-12-primary'
-	const fontModeClass = `${mixDecoElement({...props, useDeco: fontMode}).props.className}`;
-
-	return [].concat(children).join('') ? <span className={`${style} | ${className} ${fontTypeClass} ${fontModeClass}`}>{children}</span> : <></>;
+	return childrenContent ? <span className={`${style} | ${className} ${typeClass} ${modeClass} text-${size}`}>{children}</span> : <></>;
 };
 
 const TextReal = (props) => {
-	const {children, deco, style, className, icon, iconL, iconR, name} = getProps({...props, tag: 'font'});
+	const {children, deco, style, className, icon, iconL, iconR, name} = getNewProps({...props, tag: 'font'});
 
 	return children ? <span className={`${style} | ${className}`}>{children}</span> : <></>;
 };
@@ -364,84 +429,55 @@ export const Text = (props) => {
 };
 
 export const Box = (props) => {
-	const {children, deco, useDeco, style, className, name} = getProps({...props, tag: 'box'});
+	const {children, deco, useDeco, style, className, name} = getNewProps({...props, tag: 'box'});
 
 	return useDeco ? <div className={`${style} | ${className}`}></div> : <></>;
 };
 
 const LabelTheme = (props) => {
-	const newProps = getProps({...props, tag: 'label'});
-	const {children, theme, deco, style, className, img, imgR, icon, iconL, iconR, text, left, right, checked} = newProps;
-
-	const themeList = String(theme).split('-') || [];
-	const typemode = themeList[0] || 'B1C1';
-	const color = themeList[1] || 'default';
-	const size = themeList[2] || 'sm';
-	const space = themeList[3] || 'md';
-	const round = themeList[4] || 'sm';
-
-	const gap = {
-		xs: {px: 0, py: 0, mx: 1},
-		sm: {px: 0.5, py: 0.5, mx: 1},
-		md: {px: 1, py: 1, mx: 1},
-		lg: {px: 2, py: 2, mx: 1},
-		xl: {px: 3, py: 3, mx: 1},
-		'2xl': {px: 4, py: 4, mx: 1},
-	}[space];
-
-	const width = {
-		xs: 4,
-		sm: 5,
-		md: 6,
-		lg: 7,
-		xl: 7,
-		'2xl': 8,
-		'3xl': 9,
-		'4xl': 10,
-		'5xl': 12,
-	}[size];
-
-	const aaa = typemode.match(/([A-Z])([0-9]?)([A-Z]?)([0-9]?)/);
-	const ttt = `${aaa[1]}${aaa[2] || '1'}${aaa[3] || aaa[1]}${aaa[4] || aaa[2] || '1'}`;
-
-	const boxTypemode = `box-${ttt}-${color}`;
-	const fontTypemode = `font-${ttt}-${color}`;
-
-	// box, type 타입모드 (ex> 'box-A1B2-default', 'font-A1B2-primary')
-	const regex = /^(.*)-([A-Z])([0-9]?)([A-Z])([0-9]?)-(.*)$/;
-	const boxType = boxTypemode.replace(regex, checked ? '$1-$4$2-$6' : '$1-$2$4-$6'); // 'box-AB-default'
-	const fontType = fontTypemode.replace(regex, checked ? '$1-$4$2-$6' : '$1-$2$4-$6'); // 'font-AB-primary'
-	// const fontMode = fontTypemode.replace(regex, checked ? '$1-$5$3-$6' : '$1-$3$5-$6'); // 'font-12-primary'
-	// const fontModeClass = `${mixDecoElement({...props, useDeco: fontMode}).props.className}`;
+	const newProps = getNewProps({...props, tag: 'label'});
+	const {children, theme, deco, style, className, img, imgR, icon, iconL, iconR, text, left, right, center, checked} = newProps;
+	const {padding, margin, size, round, width, typeDeco, modeDeco} = getThemeProps(props);
 
 	return (
-		<div className={`${style} | ${className} px-${gap.px} py-${gap.py} text-${size}`}>
-			{/* <label htmlFor={forName} className={`${style} | ${className} px-${gap.px} py-${gap.py} text-${size}`}> */}
-			{/* <FormCheck {...props} type={type} checked={checked} /> */}
-			<Box deco={boxType} className={`rounded-${round}`} />
+		<div className={`${style} | ${className} px-${padding.x} py-${padding.y} text-${size}`}>
+			<Box deco={`box-${typeDeco}`} className={`rounded-${round}`} />
 			{left ? (
 				left
 			) : img ? (
-				<Img src={img} className={`mr-${gap.mx} last:mr-0 w-${width} aspect-square rounded-${round}`} />
-			) : (
-				<Icon deco={fontType} className={`mr-${gap.mx} last:mr-0`}>
+				<Img src={img} className={`mr-${margin.x} last:mr-0 w-${width} aspect-square rounded-${round}`} />
+			) : icon ? (
+				<Icon deco={`font-${typeDeco}`} className={`ml-${margin.x} last:ml-0`}>
 					{icon}
 				</Icon>
+			) : (
+				<></>
 			)}
-			{/* <Text deco={fontType} className={`mr-${gap.mx} last:mr-0 px-${gap.mx} ${fontModeClass}`}> */}
-			<Text {...newProps} className={`mr-${gap.mx} last:mr-0 px-${gap.mx}`}>
-				{text}
-				{children}
-			</Text>
-			{/* {children} */}
-			{right ? right : imgR ? <Img src={imgR} className={`w-${width} aspect-square rounded-${round}`} /> : <Icon deco={fontType}>{iconR}</Icon>}
-			{/* </label> */}
+			{center ? (
+				center
+			) : (
+				<Text {...newProps} className={`mx-${margin.x * 2}`}>
+					{text}
+					{children}
+				</Text>
+			)}
+			{right ? (
+				right
+			) : imgR ? (
+				<Img src={imgR} className={`ml-${margin.x} w-${width} aspect-square rounded-${round}`} />
+			) : iconR ? (
+				<Icon deco={`font-${typeDeco}`} className={`mr-${margin.x}`}>
+					{iconR}
+				</Icon>
+			) : (
+				<></>
+			)}
 		</div>
 	);
 };
 
 const LabelReal = (props) => {
-	const {children, deco, style, className, icon, iconL, iconR, text} = getProps({...props, tag: 'label'});
+	const {children, deco, style, className, icon, iconL, iconR, text} = getNewProps({...props, tag: 'label'});
 
 	return (
 		<div className={`${style} | ${className}`}>
@@ -458,8 +494,26 @@ export const Label = (props) => {
 	return props.theme ? LabelTheme(props) : LabelReal(props);
 };
 
+export const A = (props) => {
+	const newProps = getNewProps({...props, tag: 'a'});
+	const {style, className, name, href, target = '_self', checked = false, disabled} = newProps;
+
+	const label = Label({...newProps});
+
+	return (
+		<Link href={href}>
+			<a target={target} className={`${style} | ${className} | ${label.props.className}`}>
+				{/* <Basket {...newProps} type="checkbox" checked={checked} /> */}
+				{/* <Label {...newProps} /> */}
+				{label.props.children}
+				{/* {children} */}
+			</a>
+		</Link>
+	);
+};
+
 export const Basket = (props) => {
-	const newProps = props.tag ? props : getProps({...props, type: 'checkbox', tag: 'basket'});
+	const newProps = props.tag ? props : getNewProps({...props, type: 'checkbox', tag: 'basket'});
 	const {children, deco, style, className, icon, iconL, iconR, team = '', name, text, type, onChange, checked = false, disabled} = newProps;
 
 	// 특정 ui의 change 이벤트 발생을 방지하기 위한 코드
@@ -480,31 +534,13 @@ export const Basket = (props) => {
 };
 
 export const Toggle = (props) => {
-	const newProps = getProps({...props, tag: 'toggle'});
+	const newProps = getNewProps({...props, tag: 'toggle'});
 
 	return <Basket {...newProps} type="checkbox" />;
 };
 
-export const A = (props) => {
-	const newProps = getProps({...props, tag: 'a'});
-	const {style, className, name, href, target = '_self', checked = false, disabled} = newProps;
-
-	const label = Label({...newProps});
-
-	return (
-		<Link href={href}>
-			<a target={target} className={`${style} | ${className} | ${label.props.className}`}>
-				{/* <Basket {...newProps} type="checkbox" checked={checked} /> */}
-				{/* <Label {...newProps} /> */}
-				{label.props.children}
-				{/* {children} */}
-			</a>
-		</Link>
-	);
-};
-
 export const Button = (props) => {
-	const newProps = getProps({...props, tag: 'button'});
+	const newProps = getNewProps({...props, tag: 'button'});
 	const {children, name, onClick, checked = false, disabled} = newProps;
 
 	// disabled 상태일때를 위한 코드
@@ -518,7 +554,7 @@ export const Button = (props) => {
 };
 
 export const Input = forwardRef((props, ref) => {
-	const newProps = getProps({...props, tag: 'input'});
+	const newProps = getNewProps({...props, tag: 'input'});
 	const {children, name, onClick, type} = newProps;
 
 	return (

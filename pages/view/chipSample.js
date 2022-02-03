@@ -4,14 +4,15 @@ import {UseData} from '../hook/useData';
 
 export default function ChipSample() {
 	const [chipData, runChipData] = UseData({
-		typeOut: ['G'],
-		modeOut: ['1'],
-		typeOver: ['L'],
-		modeOver: ['1'],
+		outType: ['G'],
+		outMode: ['1'],
+		overType: ['L'],
+		overMode: ['1'],
 		color: ['primary'],
 		size: ['md'],
 		space: ['md'],
 		round: ['md'],
+		roundMode: [''],
 		left: ['icon'],
 		right: ['imageR'],
 		center: ['text'],
@@ -24,7 +25,7 @@ export default function ChipSample() {
 		disabled: ['false'],
 	});
 
-	const {typeOut, modeOut, typeOver, modeOver, color, size, space, round, left, right, center, image, imageR, icon, iconR, text, checked, disabled} = chipData;
+	const {outType, outMode, overType, overMode, color, size, space, round, roundMode, left, right, center, image, imageR, icon, iconR, text, checked, disabled} = chipData;
 
 	const changeChipRadio = (event) => {
 		const {name} = event.currentTarget;
@@ -53,10 +54,10 @@ export default function ChipSample() {
 	return (
 		<>
 			<Group className="p-5 ring-2 ring-gray-500 rounded-lg">
-				<Label theme="B1-primary" className="leading-6">
-					Lorem ipsum dolor <Label theme="D2-danger-md-xs-md">sit amet consectetur adipisicing</Label> elit. Voluptatem <Label theme="E-success-xl-xl-full" icon="bx-leaf" /> repellat itaque commodi magni? <Label theme="G7-default-xl-md-xs">Consequatur illo</Label> perspiciatis
-					<Label theme="A-danger-md">non at aliquid</Label>itaque voluptatibus,{' '}
-					<Label theme="K2-primary-sm-sm-full" icon="bx-leaf">
+				<Label theme="primary-B1" className="leading-6">
+					Lorem ipsum dolor <Label theme="danger-D2-md-xs-md">sit amet consectetur adipisicing</Label> elit. Voluptatem <Label theme="success-E-xl-xl-full" icon="bx-leaf" /> repellat itaque commodi magni? <Label theme="default-G7-xl-md-xs">Consequatur illo</Label> perspiciatis
+					<Label theme="danger-A-md">non at aliquid</Label>itaque voluptatibus,{' '}
+					<Label theme="primary-K2-sm-sm-full" icon="bx-leaf">
 						한글 이야기
 					</Label>{' '}
 					maiores accusantium doloremque officia provident iusto? Ipsam, aut illum.
@@ -68,7 +69,7 @@ export default function ChipSample() {
 						<span key={index}>
 							Reiciendis consectetur{' '}
 							<A
-								theme={[`${item}${modeOut}${typeOver}${modeOver}`, color, 'sm', 'sm', round].join('-')}
+								theme={[color, `${item}${outMode}${overType}${overMode}`, 'sm', 'sm', `${round}${roundMode}`].join('-')}
 								icon={left[0] == 'icon' ? icon : ''}
 								iconR={right[0] == 'iconR' ? iconR : ''}
 								img={left[0] == 'image' ? image : ''}
@@ -86,11 +87,11 @@ export default function ChipSample() {
 				{['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L'].map((item, index) => (
 					<Toggle
 						key={index}
-						name={`${item}${modeOut}${typeOver}${modeOver}`}
+						name={`${item}${outMode}${overType}${overMode}`}
 						href="/view/sample"
 						onClick={clickButton}
 						onChange={changeToggle}
-						theme={[`${item}${modeOut}${typeOver}${modeOver}`, color, size, space, round].join('-')}
+						theme={[color, `${item}${outMode}${overType}${overMode}`, size, space, `${round}${roundMode}`].join('-')}
 						icon={left[0] == 'icon' ? icon : ''}
 						iconR={right[0] == 'iconR' ? iconR : ''}
 						img={left[0] == 'image' ? image : ''}
@@ -103,11 +104,11 @@ export default function ChipSample() {
 			</Group>
 			<Group className="p-5 space-y-3 flex justify-center items-center flex-wrap ring-2 ring-gray-500 rounded-lg">
 				<Toggle
-					name={`${typeOut}${modeOut}${typeOver}${modeOver}`}
+					name={`${outType}${outMode}${overType}${overMode}`}
 					href="/view/sample"
 					onClick={clickButton}
 					onChange={changeToggle}
-					theme={[`${typeOut}${modeOut}${typeOver}${modeOver}`, color, size, space, round].join('-')}
+					theme={[color, `${outType}${outMode}${overType}${overMode}`, size, space, `${round}${roundMode}`].join('-')}
 					icon={left[0] == 'icon' ? icon : ''}
 					iconR={right[0] == 'iconR' ? iconR : ''}
 					img={left[0] == 'image' ? image : ''}
@@ -118,53 +119,53 @@ export default function ChipSample() {
 				/>
 			</Group>
 			<Group className="p-5 space-y-3 flex justify-center items-center flex-wrap ring-2 ring-gray-500 rounded-lg">
-				<Toggle theme="G1L1-primary-xs-xs-full" img="/bean.jpg" />
-				<Toggle theme="G1L1-primary-xs-sm-full" icon="bx-leaf" />
-				<Toggle theme="G1L1-primary-sm-xs-full" img="/bean.jpg" />
-				<Toggle theme="G1L1-primary-xs-md-full" icon="bx-leaf" />
-				<Toggle theme="G1L1-primary-md-xs-full" img="/bean.jpg" />
-				<Toggle theme="G1L1-primary-md-md-full" icon="bx-leaf" />
-				<Toggle theme="G1L1-primary-lg-xs-full" img="/bean.jpg" />
-				<Toggle theme="G1L1-primary-lg-md-full" icon="bx-leaf" />
-				<Toggle theme="G1L1-primary-xl-xs-full" img="/bean.jpg" />
-				<Toggle theme="G1L1-primary-xl-md-full" icon="bx-leaf" />
-				<Toggle theme="G1L1-primary-2xl-xs-full" img="/bean.jpg" />
-				<Toggle theme="G1L1-primary-md-lg-full" icon="bx-leaf" />
-				<Toggle theme="G1L1-primary-3xl-xs-full" img="/bean.jpg" />
-				<Toggle theme="G1L1-primary-xl-lg-full" icon="bx-leaf" />
-				<Toggle theme="G1L1-primary-4xl-xs-full" img="/bean.jpg" />
-				<Toggle theme="G1L1-primary-2xl-lg-full" icon="bx-leaf" />
-				<Toggle theme="G1L1-primary-5xl-xs-full" img="/bean.jpg" />
-				<Toggle theme="G1L1-primary-2xl-xl-full" icon="bx-leaf" />
-			</Group>
-			<Group>
-				<Text deco="font-danger">typeOut : </Text>
-				{['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L'].map((item, index) => (
-					<ToggleRadio key={index} text={item} team="typeOut" name={item} checked={typeOut.includes(item)} onChange={changeChipRadio} />
-				))}
-			</Group>
-			<Group>
-				<Text deco="font-danger">modeOut : </Text>
-				{['1', '2', '3', '4', '5', '6', '7', '8'].map((item, index) => (
-					<ToggleRadio key={index} text={item} team="modeOut" name={item} checked={modeOut.includes(item)} onChange={changeChipRadio} />
-				))}
-			</Group>
-			<Group>
-				<Text deco="font-danger">typeOver : </Text>
-				{['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L'].map((item, index) => (
-					<ToggleRadio key={index} text={item} team="typeOver" name={item} checked={typeOver.includes(item)} onChange={changeChipRadio} />
-				))}
-			</Group>
-			<Group>
-				<Text deco="font-danger">modeOver : </Text>
-				{['1', '2', '3', '4', '5', '6', '7', '8'].map((item, index) => (
-					<ToggleRadio key={index} text={item} team="modeOver" name={item} checked={modeOver.includes(item)} onChange={changeChipRadio} />
-				))}
+				<Toggle theme="primary-G1L1-xs-xs-full" img="/bean.jpg" />
+				<Toggle theme="primary-G1L1-xs-sm-full" icon="bx-leaf" />
+				<Toggle theme="primary-G1L1-sm-xs-full" img="/bean.jpg" />
+				<Toggle theme="primary-G1L1-xs-md-full" icon="bx-leaf" />
+				<Toggle theme="primary-G1L1-md-xs-full" img="/bean.jpg" />
+				<Toggle theme="primary-G1L1-md-md-full" icon="bx-leaf" />
+				<Toggle theme="primary-G1L1-lg-xs-full" img="/bean.jpg" />
+				<Toggle theme="primary-G1L1-lg-md-full" icon="bx-leaf" />
+				<Toggle theme="primary-G1L1-xl-xs-full" img="/bean.jpg" />
+				<Toggle theme="primary-G1L1-xl-md-full" icon="bx-leaf" />
+				<Toggle theme="primary-G1L1-2xl-xs-full" img="/bean.jpg" />
+				<Toggle theme="primary-G1L1-md-lg-full" icon="bx-leaf" />
+				<Toggle theme="primary-G1L1-3xl-xs-full" img="/bean.jpg" />
+				<Toggle theme="primary-G1L1-xl-lg-full" icon="bx-leaf" />
+				<Toggle theme="primary-G1L1-4xl-xs-full" img="/bean.jpg" />
+				<Toggle theme="primary-G1L1-2xl-lg-full" icon="bx-leaf" />
+				<Toggle theme="primary-G1L1-5xl-xs-full" img="/bean.jpg" />
+				<Toggle theme="primary-G1L1-2xl-xl-full" icon="bx-leaf" />
 			</Group>
 			<Group>
 				<Text deco="font-danger">color : </Text>
 				{['default', 'primary', 'success', 'warning', 'danger'].map((item, index) => (
 					<ToggleRadio key={index} text={item} team="color" name={item} checked={color.includes(item)} onChange={changeChipRadio} />
+				))}
+			</Group>
+			<Group>
+				<Text deco="font-danger">outType : </Text>
+				{['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L'].map((item, index) => (
+					<ToggleRadio key={index} text={item} team="outType" name={item} checked={outType.includes(item)} onChange={changeChipRadio} />
+				))}
+			</Group>
+			<Group>
+				<Text deco="font-danger">outMode : </Text>
+				{['1', '2', '3', '4', '5', '6', '7', '8'].map((item, index) => (
+					<ToggleRadio key={index} text={item} team="outMode" name={item} checked={outMode.includes(item)} onChange={changeChipRadio} />
+				))}
+			</Group>
+			<Group>
+				<Text deco="font-danger">overType : </Text>
+				{['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L'].map((item, index) => (
+					<ToggleRadio key={index} text={item} team="overType" name={item} checked={overType.includes(item)} onChange={changeChipRadio} />
+				))}
+			</Group>
+			<Group>
+				<Text deco="font-danger">overMode : </Text>
+				{['1', '2', '3', '4', '5', '6', '7', '8'].map((item, index) => (
+					<ToggleRadio key={index} text={item} team="overMode" name={item} checked={overMode.includes(item)} onChange={changeChipRadio} />
 				))}
 			</Group>
 			<Group>
@@ -181,8 +182,14 @@ export default function ChipSample() {
 			</Group>
 			<Group>
 				<Text deco="font-danger">round : </Text>
-				{['xs', 'sm', 'md', 'lg', 'xl', 'full'].map((item, index) => (
+				{['xs', 'sm', 'md', 'lg', 'xl', '2xl', 'full'].map((item, index) => (
 					<ToggleRadio key={index} text={item} team="round" name={item} checked={round.includes(item)} onChange={changeChipRadio} />
+				))}
+			</Group>
+			<Group>
+				<Text deco="font-danger">roundMode : </Text>
+				{['1', '2', '3', '4', '5', '6', '7', '8', ''].map((item, index) => (
+					<ToggleRadio key={index} text={item || 'all'} team="roundMode" name={item} checked={roundMode.includes(item)} onChange={changeChipRadio} />
 				))}
 			</Group>
 			<Group>
@@ -225,7 +232,7 @@ export default function ChipSample() {
 			<Group>
 				<Highlight className="html">
 					{`
-					<Toggle theme="${[`${typeOut}${modeOut}${typeOver}${modeOver}`, color, size, space, round].join('-')}"${left[0] == 'icon' ? ' icon="' + icon + '"' : ''}${left[0] == 'image' ? ' img="' + image + '"' : ''}${right[0] == 'iconR' ? ' iconR="' + iconR + '"' : ''}${
+					<Toggle theme="${[color, `${outType}${outMode}${overType}${overMode}`, size, space, `${round}${roundMode}`].join('-')}"${left[0] == 'icon' ? ' icon="' + icon + '"' : ''}${left[0] == 'image' ? ' img="' + image + '"' : ''}${right[0] == 'iconR' ? ' iconR="' + iconR + '"' : ''}${
 						right[0] == 'imageR' ? ' imgR="' + imageR + '"' : ''
 					}${center[0] == 'text' ? ' text="' + text + '"' : ''}${checked[0] == 'true' ? ' checked' : ''}${disabled[0] == 'true' ? ' disabled' : ''} />
 					`}
