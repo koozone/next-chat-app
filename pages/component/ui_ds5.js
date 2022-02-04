@@ -5,11 +5,11 @@ import {forwardRef, Fragment} from 'react';
 const dummyElement = () => {
 	return (
 		<>
-			<div className={`w-3 w-4 w-5 w-6 w-7 w-8 w-9 w-10 w-11 w-12 w-14`} />
 			<div className={`px-0 px-0.5 px-1 px-2 px-3 px-4 px-5 px-6`} />
 			<div className={`py-0 py-0.5 py-1 py-2 py-3 py-4 py-5 py-6`} />
 			<div className={`mr-0 mr-0.5 mr-1 mr-2 mr-3 mr-4 mr-5 mr-6`} />
 			<div className={`ml-0 ml-0.5 ml-1 ml-2 ml-3 ml-4 ml-5 ml-6`} />
+			<div className={`h-3 h-4 h-5 h-6 h-7 h-8 h-9 h-10 h-11 h-12 h-14`} />
 			<div className={`text-xs text-sm text-base text-md text-lg text-xl text-2xl text-3xl text-4xl text-5xl`} />
 			<div className={`rounded-none rounded-sm rounded rounded-md rounded-lg rounded-xl rounded-2xl rounded-3xl rounded-full`} />
 			<div className={`rounded-t-none rounded-t-sm rounded-t rounded-t-md rounded-t-lg rounded-t-xl rounded-t-2xl rounded-t-3xl rounded-t-full`} />
@@ -21,11 +21,12 @@ const dummyElement = () => {
 			<div className={`rounded-bl-none rounded-bl-sm rounded-bl rounded-bl-md rounded-bl-lg rounded-bl-xl rounded-bl-2xl rounded-bl-3xl rounded-bl-full`} />
 			<div className={`rounded-br-none rounded-br-sm rounded-br rounded-br-md rounded-br-lg rounded-br-xl rounded-br-2xl rounded-br-3xl rounded-br-full`} />
 			<div className={`font-normal font-semibold italic not-italic underline no-underline bg-transparent group-hover:font-normal group-hover:font-semibold group-hover:italic group-hover:not-italic group-hover:underline group-hover:no-underline group-hover:bg-transparent`} />
-			<div className={`text-slate-800 ring-slate-800 bg-slate-100 bg-slate-300 bg-slate-500 bg-slate-600 group-hover:text-slate-800 group-hover:ring-slate-800 group-hover:bg-slate-100 group-hover:bg-slate-300 group-hover:bg-slate-500 group-hover:bg-slate-600`} />
-			<div className={`text-sky-800 ring-sky-800 bg-sky-100 bg-sky-300 bg-sky-500 bg-sky-600 group-hover:text-sky-800 group-hover:ring-sky-800 group-hover:bg-sky-100 group-hover:bg-sky-300 group-hover:bg-sky-500 group-hover:bg-sky-600`} />
-			<div className={`text-emerald-800 ring-emerald-800 bg-emerald-100 bg-emerald-300 bg-emerald-500 bg-emerald-600 group-hover:text-emerald-800 group-hover:ring-emerald-800 group-hover:bg-emerald-100 group-hover:bg-emerald-300 group-hover:bg-emerald-500 group-hover:bg-emerald-600`} />
-			<div className={`text-amber-800 ring-amber-800 bg-amber-100 bg-amber-300 bg-amber-500 bg-amber-600 group-hover:text-amber-800 group-hover:ring-amber-800 group-hover:bg-amber-100 group-hover:bg-amber-300 group-hover:bg-amber-500 group-hover:bg-amber-600`} />
-			<div className={`text-rose-800 ring-rose-800 bg-rose-100 bg-rose-300 bg-rose-500 bg-rose-600 group-hover:text-rose-800 group-hover:ring-rose-800 group-hover:bg-rose-100 group-hover:bg-rose-300 group-hover:bg-rose-500 group-hover:bg-rose-600`} />;
+			<div className={`border-0 border group-hover:border-0 group-hover:border`} />
+			<div className={`text-slate-800 border-slate-800 bg-slate-100 bg-slate-300 bg-slate-500 bg-slate-600 group-hover:text-slate-800 group-hover:border-slate-800 group-hover:bg-slate-100 group-hover:bg-slate-300 group-hover:bg-slate-500 group-hover:bg-slate-600`} />
+			<div className={`text-sky-800 border-sky-800 bg-sky-100 bg-sky-300 bg-sky-500 bg-sky-600 group-hover:text-sky-800 group-hover:border-sky-800 group-hover:bg-sky-100 group-hover:bg-sky-300 group-hover:bg-sky-500 group-hover:bg-sky-600`} />
+			<div className={`text-emerald-800 border-emerald-800 bg-emerald-100 bg-emerald-300 bg-emerald-500 bg-emerald-600 group-hover:text-emerald-800 group-hover:border-emerald-800 group-hover:bg-emerald-100 group-hover:bg-emerald-300 group-hover:bg-emerald-500 group-hover:bg-emerald-600`} />
+			<div className={`text-amber-800 border-amber-800 bg-amber-100 bg-amber-300 bg-amber-500 bg-amber-600 group-hover:text-amber-800 group-hover:border-amber-800 group-hover:bg-amber-100 group-hover:bg-amber-300 group-hover:bg-amber-500 group-hover:bg-amber-600`} />
+			<div className={`text-rose-800 border-rose-800 bg-rose-100 bg-rose-300 bg-rose-500 bg-rose-600 group-hover:text-rose-800 group-hover:border-rose-800 group-hover:bg-rose-100 group-hover:bg-rose-300 group-hover:bg-rose-500 group-hover:bg-rose-600`} />;
 		</>
 	);
 };
@@ -179,62 +180,62 @@ const getDecoElement = (props) => {
 			return <div className={`absolute text-lg text-white top-[5px] left-[7px] invisible peer-checked:visible`} />;
 
 		case 'box-*':
-			return <div className={`absolute w-full h-full ring-1 ring-${tailcolor}-600 bg-white group-hover:bg-${tailcolor}-100 peer-checked:bg-${tailcolor}-400 peer-checked:ring-${tailcolor}-800 group-hover:peer-checked:bg-${tailcolor}-600`} />;
+			return <div className={`absolute w-full h-full border border-${tailcolor}-600 bg-white group-hover:bg-${tailcolor}-100 peer-checked:bg-${tailcolor}-400 peer-checked:border-${tailcolor}-800 group-hover:peer-checked:bg-${tailcolor}-600`} />;
 
 		case 'box-A-*':
-			return <div className={`${action}ring-0 ${action}bg-transparent`} />;
+			return <div className={`${action}border-0 ${action}bg-transparent`} />;
 
 		case 'box-B-*':
-			return <div className={`${action}ring-1 ${action}ring-${tailcolor}-800 ${action}bg-transparent`} />;
+			return <div className={`${action}border ${action}border-${tailcolor}-800 ${action}bg-transparent`} />;
 
 		case 'box-C-*':
-			return <div className={`${action}ring-0 ${action}bg-white`} />;
+			return <div className={`${action}border-0 ${action}bg-white`} />;
 
 		case 'box-D-*':
-			return <div className={`${action}ring-0 ${action}bg-${tailcolor}-100`} />;
+			return <div className={`${action}border-0 ${action}bg-${tailcolor}-100`} />;
 
 		case 'box-E-*':
-			return <div className={`${action}ring-0 ${action}bg-${tailcolor}-300`} />;
+			return <div className={`${action}border-0 ${action}bg-${tailcolor}-300`} />;
 
 		case 'box-F-*':
-			return <div className={`${action}ring-0 ${action}bg-${tailcolor}-500`} />;
+			return <div className={`${action}border-0 ${action}bg-${tailcolor}-500`} />;
 
 		case 'box-G-*':
-			return <div className={`${action}ring-0 ${action}bg-${tailcolor}-600`} />;
+			return <div className={`${action}border-0 ${action}bg-${tailcolor}-600`} />;
 
 		case 'box-H-*':
-			return <div className={`${action}ring-1 ${action}ring-${tailcolor}-800 ${action}bg-white`} />;
+			return <div className={`${action}border ${action}border-${tailcolor}-800 ${action}bg-white`} />;
 
 		case 'box-I-*':
-			return <div className={`${action}ring-1 ${action}ring-${tailcolor}-800 ${action}bg-${tailcolor}-100`} />;
+			return <div className={`${action}border ${action}border-${tailcolor}-800 ${action}bg-${tailcolor}-100`} />;
 
 		case 'box-J-*':
-			return <div className={`${action}ring-1 ${action}ring-${tailcolor}-800 ${action}bg-${tailcolor}-300`} />;
+			return <div className={`${action}border ${action}border-${tailcolor}-800 ${action}bg-${tailcolor}-300`} />;
 
 		case 'box-K-*':
-			return <div className={`${action}ring-1 ${action}ring-${tailcolor}-800 ${action}bg-${tailcolor}-500`} />;
+			return <div className={`${action}border ${action}border-${tailcolor}-800 ${action}bg-${tailcolor}-500`} />;
 
 		case 'box-L-*':
-			return <div className={`${action}ring-1 ${action}ring-${tailcolor}-800 ${action}bg-${tailcolor}-600`} />;
+			return <div className={`${action}border ${action}border-${tailcolor}-800 ${action}bg-${tailcolor}-600`} />;
 
 		case 'box-round':
-			return <div className={`absolute w-full h-full rounded-full ring-1 ring-sky-400 bg-sky-100 group-hover:bg-white peer-checked:bg-sky-500 peer-checked:ring-sky-700 group-hover:peer-checked:bg-sky-600 group-focus-within:ring-sky-400`} />;
+			return <div className={`absolute w-full h-full rounded-full border border-sky-400 bg-sky-100 group-hover:bg-white peer-checked:bg-sky-500 peer-checked:border-sky-700 group-hover:peer-checked:bg-sky-600 group-focus-within:border-sky-400`} />;
 		case 'box-trans':
 			return <div className={`absolute w-full h-full bg-black/0 group-hover:bg-black/5`} />;
 		case 'box-item':
-			return <div className={`absolute w-full h-full ring-1 ring-slate-400 bg-slate-100 group-hover:bg-white peer-checked:bg-slate-500 peer-checked:ring-slate-700 group-hover:peer-checked:bg-slate-600 group-first:rounded-l-full group-last:rounded-r-full`} />;
+			return <div className={`absolute w-full h-full border border-slate-400 bg-slate-100 group-hover:bg-white peer-checked:bg-slate-500 peer-checked:border-slate-700 group-hover:peer-checked:bg-slate-600 group-first:rounded-l-full group-last:rounded-r-full`} />;
 		case 'box-checkbox':
-			return <div className={`w-4 h-4 rounded-sm ring-1 ring-slate-400 bg-slate-100 group-hover:bg-white peer-checked:bg-sky-500 peer-checked:ring-sky-700 group-hover:peer-checked:bg-sky-600`} />;
+			return <div className={`w-4 h-4 rounded-sm border border-slate-400 bg-slate-100 group-hover:bg-white peer-checked:bg-sky-500 peer-checked:border-sky-700 group-hover:peer-checked:bg-sky-600`} />;
 		case 'box-radio':
-			return <div className={`w-4 h-4 rounded-full ring-1 ring-slate-400 bg-slate-100 group-hover:bg-white peer-checked:bg-sky-500 peer-checked:ring-sky-700 group-hover:peer-checked:bg-sky-600`} />;
+			return <div className={`w-4 h-4 rounded-full border border-slate-400 bg-slate-100 group-hover:bg-white peer-checked:bg-sky-500 peer-checked:border-sky-700 group-hover:peer-checked:bg-sky-600`} />;
 		case 'box-radio-dot':
-			return <div className={`absolute w-2 h-2 rounded-full ring-1 ring-slate-400 bg-white top-[10px] left-[12px] invisible peer-checked:visible`} />;
+			return <div className={`absolute w-2 h-2 rounded-full border border-slate-400 bg-white top-[10px] left-[12px] invisible peer-checked:visible`} />;
 		case 'box-switch':
-			return <div className={`w-7 h-4 rounded-full ring-1 ring-slate-400 bg-slate-100 group-hover:bg-white peer-checked:bg-sky-500 peer-checked:ring-sky-700 group-hover:peer-checked:bg-sky-600`} />;
+			return <div className={`w-7 h-4 rounded-full border border-slate-400 bg-slate-100 group-hover:bg-white peer-checked:bg-sky-500 peer-checked:border-sky-700 group-hover:peer-checked:bg-sky-600`} />;
 		case 'box-switch-dot':
-			return <div className={`absolute w-3 h-3 rounded-full ring-1 ring-slate-400 bg-white top-1/2 transform -translate-y-1/2 left-[11px] peer-checked:left-[22px]`} />;
+			return <div className={`absolute w-3 h-3 rounded-full border border-slate-400 bg-white top-1/2 transform -translate-y-1/2 left-[11px] peer-checked:left-[22px]`} />;
 		case 'box-list-col':
-			return <div className={`absolute w-full h-full ring-1 ring-slate-400 bg-slate-100 group-hover:bg-white peer-checked:bg-slate-500 peer-checked:ring-slate-700 group-hover:peer-checked:bg-slate-600 group-first:rounded-t-lg group-last:rounded-b-lg`} />;
+			return <div className={`absolute w-full h-full border border-slate-400 bg-slate-100 group-hover:bg-white peer-checked:bg-slate-500 peer-checked:border-slate-700 group-hover:peer-checked:bg-slate-600 group-first:rounded-t-lg group-last:rounded-b-lg`} />;
 
 		case 'basket-default':
 			return <div className={`px-2 py-1 text-sm`} />;
@@ -416,7 +417,7 @@ const FormInput = forwardRef((props, ref) => {
 export const Img = (props) => {
 	const {deco, style, className, name, src, alt} = getNewProps({...props, tag: 'img'});
 
-	return <img className={`${`${style} | ${className}`} | ${className}`} src={src} alt={alt} />;
+	return <img className={`${style} | ${className}`} src={src} alt={alt} />;
 };
 
 export const Icon = (props) => {
@@ -488,14 +489,19 @@ const LabelTheme = (props) => {
 	} = newProps;
 	// const {padding, margin, size, rounded, width, typeDeco, modeDeco} = getThemeProps(props);
 
+	const mmm = '/noodle.jpg';
+	const url = `url('${mmm}')`;
+
 	return (
 		<div className={`${style} | ${className} px-${padding.x} py-${padding.y} text-${size}`}>
 			<Box deco={`box-${typeDeco}`} className={`${rounded}`} />
 			{left ? (
 				left
 			) : img ? (
-				<Img src={img} className={`mr-${margin.x} last:mr-0 w-${width} aspect-square ${rounded}`} />
-			) : icon ? (
+				<Img src={img} className={`mr-${margin.x} last:mr-0 h-${width} aspect-square ${rounded}`} />
+			) : // <div className={`mr-${margin.x} last:mr-0 h-${width} aspect-square ${rounded} border-0 bg-origin-border bg-cover bg-[left_top] group-hover:bg-[center_center] peer-checked:bg-[right_bottom] peer-checked:group-hover:bg-[center_center] bg-[${url}]`} />
+			// <div className={`ml-${margin.x} last:ml-0 h-${width} aspect-square ${rounded} border-0 bg-origin-border bg-cover bg-[left_top] group-hover:saturate-200 peer-checked:bg-[right_bottom] group-hover:peer-checked:saturate-200`} style={{backgroundImage: `url(${img})`}} />
+			icon ? (
 				<Icon deco={`font-${typeDeco}`} className={`ml-${margin.x} last:ml-0`}>
 					{icon}
 				</Icon>
@@ -515,7 +521,8 @@ const LabelTheme = (props) => {
 			{right ? (
 				right
 			) : imgR ? (
-				<Img src={imgR} className={`ml-${margin.x} w-${width} aspect-square ${rounded}`} />
+				// <Img src={imgR} className={`ml-${margin.x} h-${width} aspect-square ${rounded}`} />
+				<div className={`mr-${margin.x} h-${width} aspect-square ${rounded} border-0 bg-origin-border bg-cover bg-[left_top] group-hover:saturate-200 peer-checked:bg-[right_bottom] group-hover:peer-checked:saturate-200`} style={{backgroundImage: `url(${imgR})`}} />
 			) : iconR ? (
 				<Icon deco={`font-${typeDeco}`} className={`mr-${margin.x}`}>
 					{iconR}

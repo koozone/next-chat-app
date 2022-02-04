@@ -376,7 +376,7 @@ export default function code() {
 						theme="primary-G2-xl-lg-full"
 						icon="bx-search-alt-2"
 						center={
-							<Text theme="danger-2-3xl" className="px-5">
+							<Text theme="danger-21-3xl" className="px-5">
 								ICON
 							</Text>
 						}
@@ -490,6 +490,11 @@ export default function code() {
 					<Basket deco="basket-default box-danger" className="w-[100px] h-[30px]" checked>
 						{/* <BoxEx deco="box-danger" /> */}
 					</Basket>
+				</Group>
+				<Group>
+					{/* <Basket theme="primary-H" className="w-[200px] h-[50px]" /> */}
+					{/* <Img deco={`box-H-primary`} className={`w-[200px] h-[50px] bg-cover bg-[left_top] hover:bg-[center_center] bg-[url('/shell.jpg')]`} /> */}
+					{/* <Button theme="primary-C" className={`w-[200px] h-[50px] bg-cover bg-[left_top] group-hover:bg-[center_center] peer-checked:bg-[right_bottom] bg-[url('/shell.jpg')]`} /> */}
 				</Group>
 			</Fieldset>
 
