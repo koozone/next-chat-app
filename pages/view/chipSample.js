@@ -20,12 +20,14 @@ export default function ChipSample() {
 		iconR: 'bxs-x-circle',
 		image: '/bean.jpg',
 		imageR: '/shell.jpg',
+		bg: '/sheet_checkbox.png',
+		bgR: '/sheet_checkbox3.png',
 		text: 'Next',
 		checked: ['false'],
 		disabled: ['false'],
 	});
 
-	const {outType, outMode, overType, overMode, color, size, space, round, roundMode, left, right, center, image, imageR, icon, iconR, text, checked, disabled} = chipData;
+	const {outType, outMode, overType, overMode, color, size, space, round, roundMode, left, right, center, image, imageR, bg, bgR, icon, iconR, text, checked, disabled} = chipData;
 
 	const changeChipRadio = (event) => {
 		const {name} = event.currentTarget;
@@ -74,6 +76,8 @@ export default function ChipSample() {
 								iconR={right[0] == 'iconR' ? iconR : ''}
 								img={left[0] == 'image' ? image : ''}
 								imgR={right[0] == 'imageR' ? imageR : ''}
+								bg={left[0] == 'bg' ? bg : ''}
+								bgR={right[0] == 'bgR' ? bgR : ''}
 								text={center[0] == 'text' ? text : ''}
 								checked={checked[0] == 'true'}
 								disabled={disabled[0] == 'true'}
@@ -96,6 +100,8 @@ export default function ChipSample() {
 						iconR={right[0] == 'iconR' ? iconR : ''}
 						img={left[0] == 'image' ? image : ''}
 						imgR={right[0] == 'imageR' ? imageR : ''}
+						bg={left[0] == 'bg' ? bg : ''}
+						bgR={right[0] == 'bgR' ? bgR : ''}
 						text={center[0] == 'text' ? text : ''}
 						checked={checked[0] == 'true'}
 						disabled={disabled[0] == 'true'}
@@ -113,6 +119,8 @@ export default function ChipSample() {
 					iconR={right[0] == 'iconR' ? iconR : ''}
 					img={left[0] == 'image' ? image : ''}
 					imgR={right[0] == 'imageR' ? imageR : ''}
+					bg={left[0] == 'bg' ? bg : ''}
+					bgR={right[0] == 'bgR' ? bgR : ''}
 					text={center[0] == 'text' ? text : ''}
 					checked={checked[0] == 'true'}
 					disabled={disabled[0] == 'true'}
@@ -197,6 +205,7 @@ export default function ChipSample() {
 				<ToggleRadio text="none" team="left" name="none" checked={left.includes('none')} onChange={changeChipRadio} />
 				<ToggleRadio text="icon" team="left" name="icon" checked={left.includes('icon')} onChange={changeChipRadio} />
 				<ToggleRadio text="image" team="left" name="image" checked={left.includes('image')} onChange={changeChipRadio} />
+				<ToggleRadio text="bg" team="left" name="bg" checked={left.includes('bg')} onChange={changeChipRadio} />
 				<Input type="text" deco="basket-default box-default font-default" className="w-[200px]" name="left" value={chipData[left]} placeholder="left 입력" onChange={chageChipInput} disabled={left == 'none'} />
 			</Group>
 			<Group>
@@ -204,6 +213,7 @@ export default function ChipSample() {
 				<ToggleRadio text="none" team="right" name="none" checked={right.includes('none')} onChange={changeChipRadio} />
 				<ToggleRadio text="icon" team="right" name="iconR" checked={right.includes('iconR')} onChange={changeChipRadio} />
 				<ToggleRadio text="image" team="right" name="imageR" checked={right.includes('imageR')} onChange={changeChipRadio} />
+				<ToggleRadio text="bg" team="right" name="bgR" checked={right.includes('bgR')} onChange={changeChipRadio} />
 				<Input type="text" deco="basket-default box-default font-default" className="w-[200px]" name="right" value={chipData[right]} placeholder="right 입력" onChange={chageChipInput} disabled={right == 'none'} />
 			</Group>
 			<Group>
@@ -232,9 +242,9 @@ export default function ChipSample() {
 			<Group>
 				<Highlight className="html">
 					{`
-					<Toggle theme="${[color, `${outType}${outMode}${overType}${overMode}`, size, space, `${round}${roundMode}`].join('-')}"${left[0] == 'icon' ? ' icon="' + icon + '"' : ''}${left[0] == 'image' ? ' img="' + image + '"' : ''}${right[0] == 'iconR' ? ' iconR="' + iconR + '"' : ''}${
-						right[0] == 'imageR' ? ' imgR="' + imageR + '"' : ''
-					}${center[0] == 'text' ? ' text="' + text + '"' : ''}${checked[0] == 'true' ? ' checked' : ''}${disabled[0] == 'true' ? ' disabled' : ''} />
+					<Toggle theme="${[color, `${outType}${outMode}${overType}${overMode}`, size, space, `${round}${roundMode}`].join('-')}"${left[0] == 'icon' ? ' icon="' + icon + '"' : ''}${left[0] == 'image' ? ' img="' + image + '"' : ''}${left[0] == 'bg' ? ' bg="' + bg + '"' : ''}${
+						right[0] == 'iconR' ? ' iconR="' + iconR + '"' : ''
+					}${right[0] == 'imageR' ? ' imgR="' + imageR + '"' : ''}${right[0] == 'bgR' ? ' bgR="' + bgR + '"' : ''}${center[0] == 'text' ? ' text="' + text + '"' : ''}${checked[0] == 'true' ? ' checked' : ''}${disabled[0] == 'true' ? ' disabled' : ''} />
 					`}
 				</Highlight>
 			</Group>

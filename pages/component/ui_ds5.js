@@ -78,8 +78,8 @@ const getDefaultElement = (props) => {
 		case 'img':
 			return <div className={`object-cover peer-disabled:opacity-50 peer-disabled:pointer-events-none`} />;
 
-		case 'label':
-			return <div className={`relative inline-flex justify-center items-center`} />;
+		case 'bg':
+			return <div className={`bg-cover bg-[left_top] group-hover:saturate-200 peer-checked:bg-[right_bottom] group-hover:peer-checked:saturate-200`} />;
 
 		case 'icon':
 			return <div className={`bx ${children} pointer-events-none peer-disabled:opacity-50 peer-disabled:pointer-events-none`} />;
@@ -89,6 +89,9 @@ const getDefaultElement = (props) => {
 
 		case 'box':
 			return <div className={`-z-20 top-0 left-0 peer-disabled:opacity-50 peer-disabled:pointer-events-none`} />;
+
+		case 'label':
+			return <div className={`relative inline-flex justify-center items-center`} />;
 
 		case 'formCheck':
 			// return <div className={`peer absolute top-0 left-0 w-0 h-0 appearance-none pointer-events-none hidden`} />;
@@ -118,16 +121,16 @@ const getDefaultElement = (props) => {
 const getDecoElement = (props) => {
 	const {tag, useDeco = '', action = '', icon} = props;
 
-	const stylecolor = useDeco?.split('-').pop();
+	const decocolor = useDeco?.split('-').pop();
 	const tailcolor = {
 		default: 'slate',
 		primary: 'sky',
 		success: 'emerald',
 		warning: 'amber',
 		danger: 'rose',
-	}[stylecolor];
+	}[decocolor];
 
-	const decoReg = new RegExp(`((font|box).*)-${stylecolor}`, 'gm');
+	const decoReg = new RegExp(`((font|box).*)-${decocolor}`, 'gm');
 	const shotDeco = tailcolor ? useDeco.replace(decoReg, '$1-*') : useDeco;
 
 	switch (shotDeco) {
@@ -382,7 +385,7 @@ const getNewProps = (props) => {
 		.split('##')
 		.filter((item) => item.split('-')[0] == useTag)[0];
 
-	const style = `${getDefaultElement(props).props.className} | ${mixDecoElement({...props, useDeco}).props.className}`;
+	const classProp = `${getDefaultElement(props).props.className} | ${mixDecoElement({...props, useDeco}).props.className}`;
 	const themeObj = props.themeObj ? props.themeObj : theme ? getThemeProps(props) : {};
 
 	return {
@@ -390,7 +393,7 @@ const getNewProps = (props) => {
 		children,
 		deco,
 		useDeco,
-		style,
+		classProp,
 		className,
 		href,
 		onClick,
@@ -400,30 +403,30 @@ const getNewProps = (props) => {
 };
 
 const FormCheck = (props) => {
-	const {children, deco, style, className, team = '', name, href, type, onChange, checked, disabled} = getNewProps({...props, tag: 'formCheck'});
+	const {children, deco, classProp, className, team = '', name, href, type, onChange, checked, disabled} = getNewProps({...props, tag: 'formCheck'});
 
 	return props.tag == 'toggle' ? (
-		<input type={type} className={`${style} | `} id={[team, name].join('-')} name={name} data-team={team} checked={checked} disabled={disabled} onChange={onChange} />
+		<input type={type} className={`${classProp} | `} id={[team, name].join('-')} name={name} data-team={team} checked={checked} disabled={disabled} onChange={onChange} />
 	) : (
-		<input type={type} className={`${style} | `} checked={checked} disabled={disabled} onChange={onChange} />
+		<input type={type} className={`${classProp} | `} checked={checked} disabled={disabled} onChange={onChange} />
 	);
 };
 const FormInput = forwardRef((props, ref) => {
-	const {children, deco, style, className, name, href, type, value, placeholder, onChange, checked, disabled} = getNewProps({...props, tag: 'formInput'});
+	const {children, deco, classProp, className, name, href, type, value, placeholder, onChange, checked, disabled} = getNewProps({...props, tag: 'formInput'});
 
-	return disabled ? <input type={type} className={`${style} | `} ref={ref} placeholder={placeholder} value={value} onChange={onChange} /> : <input type={type} className={`${style} | `} id={name} name={name} ref={ref} placeholder={placeholder} value={value} onChange={onChange} />;
+	return disabled ? <input type={type} className={`${classProp} | `} ref={ref} placeholder={placeholder} value={value} onChange={onChange} /> : <input type={type} className={`${classProp} | `} id={name} name={name} ref={ref} placeholder={placeholder} value={value} onChange={onChange} />;
 });
 
 export const Img = (props) => {
-	const {deco, style, className, name, src, alt} = getNewProps({...props, tag: 'img'});
+	const {deco, classProp, className, name, src, alt} = getNewProps({...props, tag: 'img'});
 
-	return <img className={`${style} | ${className}`} src={src} alt={alt} />;
+	return <img className={`${classProp} | ${className}`} src={src} alt={alt} />;
 };
 
 export const Icon = (props) => {
-	const {children, deco, style, className, icon} = getNewProps({...props, tag: 'icon'});
+	const {children, deco, classProp, className, icon} = getNewProps({...props, tag: 'icon'});
 
-	return children ? <i className={`${style} | ${className}`} /> : <></>;
+	return children ? <i className={`${classProp} | ${className}`} /> : <></>;
 };
 
 const TextTheme = (props) => {
@@ -431,7 +434,7 @@ const TextTheme = (props) => {
 		children,
 		theme,
 		deco,
-		style,
+		classProp,
 		className,
 		icon,
 		iconL,
@@ -448,23 +451,29 @@ const TextTheme = (props) => {
 	// 비어있는 children 내용을 코드 줄바꿈으로 인해 비어있지 않음으로 인식하는 오류를 방지하기 위해 사용
 	const childrenContent = [].concat(children).join('');
 
-	return childrenContent ? <span className={`${style} | ${className} ${typeClass} ${modeClass} text-${size}`}>{children}</span> : <></>;
+	return childrenContent ? <span className={`${classProp} | ${className} ${typeClass} ${modeClass} text-${size}`}>{children}</span> : <></>;
 };
 
 const TextReal = (props) => {
-	const {children, deco, style, className, icon, iconL, iconR, name} = getNewProps({...props, tag: 'font'});
+	const {children, deco, classProp, className, icon, iconL, iconR, name} = getNewProps({...props, tag: 'font'});
 
-	return children ? <span className={`${style} | ${className}`}>{children}</span> : <></>;
+	return children ? <span className={`${classProp} | ${className}`}>{children}</span> : <></>;
 };
 
 export const Text = (props) => {
 	return props.theme ? TextTheme(props) : TextReal(props);
 };
 
-export const Box = (props) => {
-	const {children, deco, useDeco, style, className, name} = getNewProps({...props, tag: 'box'});
+export const Bg = (props) => {
+	const {children, deco, useDeco, classProp, className, bg, name} = getNewProps({...props, tag: 'bg'});
 
-	return useDeco ? <div className={`${style} | ${className}`}></div> : <></>;
+	return bg ? <div className={`${classProp} | ${className}`} style={{backgroundImage: `url(${bg})`}}></div> : <></>;
+};
+
+export const Box = (props) => {
+	const {children, deco, useDeco, classProp, className, name} = getNewProps({...props, tag: 'box'});
+
+	return useDeco ? <div className={`${classProp} | ${className}`}></div> : <></>;
 };
 
 const LabelTheme = (props) => {
@@ -473,10 +482,12 @@ const LabelTheme = (props) => {
 		children,
 		theme,
 		deco,
-		style,
+		classProp,
 		className,
 		img,
 		imgR,
+		bg,
+		bgR,
 		icon,
 		iconL,
 		iconR,
@@ -493,15 +504,16 @@ const LabelTheme = (props) => {
 	const url = `url('${mmm}')`;
 
 	return (
-		<div className={`${style} | ${className} px-${padding.x} py-${padding.y} text-${size}`}>
+		<div className={`${classProp} | ${className} px-${padding.x} py-${padding.y} text-${size}`}>
 			<Box deco={`box-${typeDeco}`} className={`${rounded}`} />
 			{left ? (
 				left
 			) : img ? (
 				<Img src={img} className={`mr-${margin.x} last:mr-0 h-${width} aspect-square ${rounded}`} />
-			) : // <div className={`mr-${margin.x} last:mr-0 h-${width} aspect-square ${rounded} border-0 bg-origin-border bg-cover bg-[left_top] group-hover:bg-[center_center] peer-checked:bg-[right_bottom] peer-checked:group-hover:bg-[center_center] bg-[${url}]`} />
-			// <div className={`ml-${margin.x} last:ml-0 h-${width} aspect-square ${rounded} border-0 bg-origin-border bg-cover bg-[left_top] group-hover:saturate-200 peer-checked:bg-[right_bottom] group-hover:peer-checked:saturate-200`} style={{backgroundImage: `url(${img})`}} />
-			icon ? (
+			) : bg ? (
+				// <div className={`ml-${margin.x} last:ml-0 h-${width} aspect-square ${rounded} border-0 bg-origin-border bg-cover bg-[left_top] group-hover:saturate-200 peer-checked:bg-[right_bottom] group-hover:peer-checked:saturate-200`} style={{backgroundImage: `url(${img})`}} />
+				<Bg bg={bg} className={`mr-${margin.x} last:mr-0 h-${width} aspect-square ${rounded}`} />
+			) : icon ? (
 				<Icon deco={`font-${typeDeco}`} className={`ml-${margin.x} last:ml-0`}>
 					{icon}
 				</Icon>
@@ -521,8 +533,9 @@ const LabelTheme = (props) => {
 			{right ? (
 				right
 			) : imgR ? (
-				// <Img src={imgR} className={`ml-${margin.x} h-${width} aspect-square ${rounded}`} />
-				<div className={`mr-${margin.x} h-${width} aspect-square ${rounded} border-0 bg-origin-border bg-cover bg-[left_top] group-hover:saturate-200 peer-checked:bg-[right_bottom] group-hover:peer-checked:saturate-200`} style={{backgroundImage: `url(${imgR})`}} />
+				<Img src={imgR} className={`ml-${margin.x} h-${width} aspect-square ${rounded}`} />
+			) : bgR ? (
+				<Bg bg={bgR} className={`ml-${margin.x} h-${width} aspect-square ${rounded}`} />
 			) : iconR ? (
 				<Icon deco={`font-${typeDeco}`} className={`mr-${margin.x}`}>
 					{iconR}
@@ -535,10 +548,10 @@ const LabelTheme = (props) => {
 };
 
 const LabelReal = (props) => {
-	const {children, deco, style, className, icon, iconL, iconR, text} = getNewProps({...props, tag: 'label'});
+	const {children, deco, classProp, className, icon, iconL, iconR, text} = getNewProps({...props, tag: 'label'});
 
 	return (
-		<div className={`${style} | ${className}`}>
+		<div className={`${classProp} | ${className}`}>
 			<Box deco={deco} />
 			<Icon deco={deco}>{icon || iconL}</Icon>
 			<Text deco={deco}>{text}</Text>
@@ -554,13 +567,13 @@ export const Label = (props) => {
 
 export const A = (props) => {
 	const newProps = getNewProps({...props, tag: 'a'});
-	const {style, className, name, href, target = '_self', checked = false, disabled} = newProps;
+	const {classProp, className, name, href, target = '_self', checked = false, disabled} = newProps;
 
 	const label = Label({...newProps});
 
 	return (
 		<Link href={href}>
-			<a target={target} className={`${style} | ${className} | ${label.props.className}`}>
+			<a target={target} className={`${classProp} | ${className} | ${label.props.className}`}>
 				{/* <Basket {...newProps} type="checkbox" checked={checked} /> */}
 				{/* <Label {...newProps} /> */}
 				{label.props.children}
@@ -572,7 +585,7 @@ export const A = (props) => {
 
 export const Basket = (props) => {
 	const newProps = props.tag ? props : getNewProps({...props, type: 'checkbox', tag: 'basket'});
-	const {children, deco, style, className, icon, iconL, iconR, team = '', name, text, type, onChange, checked = false, disabled} = newProps;
+	const {children, deco, classProp, className, icon, iconL, iconR, team = '', name, text, type, onChange, checked = false, disabled} = newProps;
 
 	// 특정 ui의 change 이벤트 발생을 방지하기 위한 코드
 	const forName = ['toggle', 'input'].includes(props.tag) ? (name ? [team, name].join('-') : null) : '';
@@ -580,7 +593,7 @@ export const Basket = (props) => {
 	const label = Label({...newProps});
 
 	return (
-		<label htmlFor={forName} className={`${style} | ${className} | ${label.props.className}`}>
+		<label htmlFor={forName} className={`${classProp} | ${className} | ${label.props.className}`}>
 			<FormCheck {...props} type={type} checked={checked} />
 			{/* <Box deco={deco} /> */}
 			{/* <Label deco={deco} icon={icon || iconL} iconR={iconR} text={text} /> */}
