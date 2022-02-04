@@ -9,6 +9,7 @@ const dummyElement = () => {
 			<div className={`py-0 py-0.5 py-1 py-2 py-3 py-4 py-5 py-6`} />
 			<div className={`mr-0 mr-0.5 mr-1 mr-2 mr-3 mr-4 mr-5 mr-6`} />
 			<div className={`ml-0 ml-0.5 ml-1 ml-2 ml-3 ml-4 ml-5 ml-6`} />
+			<div className={`w-3 w-4 w-5 w-6 w-7 w-8 w-9 w-10 w-11 w-12 w-14 w-16 w-18 w-20 w-24`} />
 			<div className={`h-3 h-4 h-5 h-6 h-7 h-8 h-9 h-10 h-11 h-12 h-14`} />
 			<div className={`text-xs text-sm text-base text-md text-lg text-xl text-2xl text-3xl text-4xl text-5xl`} />
 			<div className={`rounded-none rounded-sm rounded rounded-md rounded-lg rounded-xl rounded-2xl rounded-3xl rounded-full`} />
@@ -301,7 +302,7 @@ const getThemeProps = (props) => {
 		'5xl': {x: 2, y: 0},
 	}[size];
 
-	const width = {
+	const height = {
 		xs: 4,
 		sm: 5,
 		md: 6,
@@ -346,7 +347,7 @@ const getThemeProps = (props) => {
 		margin,
 		size,
 		rounded,
-		width,
+		height,
 		typeDeco,
 		modeDeco,
 	};
@@ -441,9 +442,9 @@ const TextTheme = (props) => {
 		iconR,
 		name,
 		checked,
-		themeObj: {padding, margin, size, rounded, width, typeDeco, modeDeco},
+		themeObj: {padding, margin, size, rounded, height, typeDeco, modeDeco},
 	} = getNewProps({...props, tag: 'font'});
-	// const {padding, margin, size, rounded, width, typeDeco, modeDeco} = getThemeProps(props);
+	// const {padding, margin, size, rounded, height, typeDeco, modeDeco} = getThemeProps(props);
 
 	const typeClass = `${mixDecoElement({...props, useDeco: `font-${typeDeco}`}).props.className}`;
 	const modeClass = `${mixDecoElement({...props, useDeco: `font-${modeDeco}`}).props.className}`;
@@ -484,10 +485,10 @@ const LabelTheme = (props) => {
 		deco,
 		classProp,
 		className,
-		img,
-		imgR,
-		bg,
-		bgR,
+		img = '',
+		imgR = '',
+		bg = '',
+		bgR = '',
 		icon,
 		iconL,
 		iconR,
@@ -496,12 +497,15 @@ const LabelTheme = (props) => {
 		right,
 		center,
 		checked,
-		themeObj: {padding, margin, size, rounded, width, typeDeco, modeDeco},
+		themeObj: {padding, margin, size, rounded, height, typeDeco, modeDeco},
 	} = newProps;
-	// const {padding, margin, size, rounded, width, typeDeco, modeDeco} = getThemeProps(props);
+	// const {padding, margin, size, rounded, height, typeDeco, modeDeco} = getThemeProps(props);
 
-	const mmm = '/noodle.jpg';
-	const url = `url('${mmm}')`;
+	// const mmm = '/noodle.jpg';
+	// const url = `url('${mmm}')`;
+	const fileReg = /(.*)_x(.*)\.(.*)/;
+	const bgRatio = bg.match(fileReg)?.[2] || 1;
+	const bgRRatio = bgR.match(fileReg)?.[2] || 1;
 
 	return (
 		<div className={`${classProp} | ${className} px-${padding.x} py-${padding.y} text-${size}`}>
@@ -509,10 +513,10 @@ const LabelTheme = (props) => {
 			{left ? (
 				left
 			) : img ? (
-				<Img src={img} className={`mr-${margin.x} last:mr-0 h-${width} aspect-square ${rounded}`} />
+				<Img src={img} className={`mr-${margin.x} last:mr-0 h-${height} aspect-square ${rounded}`} />
 			) : bg ? (
-				// <div className={`ml-${margin.x} last:ml-0 h-${width} aspect-square ${rounded} border-0 bg-origin-border bg-cover bg-[left_top] group-hover:saturate-200 peer-checked:bg-[right_bottom] group-hover:peer-checked:saturate-200`} style={{backgroundImage: `url(${img})`}} />
-				<Bg bg={bg} className={`mr-${margin.x} last:mr-0 h-${width} aspect-square ${rounded}`} />
+				// <div className={`ml-${margin.x} last:ml-0 h-${height} aspect-square ${rounded} border-0 bg-origin-border bg-cover bg-[left_top] group-hover:saturate-200 peer-checked:bg-[right_bottom] group-hover:peer-checked:saturate-200`} style={{backgroundImage: `url(${img})`}} />
+				<Bg bg={bg} className={`mr-${margin.x} last:mr-0 w-${height * bgRatio} h-${height} ${rounded}`} />
 			) : icon ? (
 				<Icon deco={`font-${typeDeco}`} className={`ml-${margin.x} last:ml-0`}>
 					{icon}
@@ -533,9 +537,9 @@ const LabelTheme = (props) => {
 			{right ? (
 				right
 			) : imgR ? (
-				<Img src={imgR} className={`ml-${margin.x} h-${width} aspect-square ${rounded}`} />
+				<Img src={imgR} className={`ml-${margin.x} h-${height} aspect-square ${rounded}`} />
 			) : bgR ? (
-				<Bg bg={bgR} className={`ml-${margin.x} h-${width} aspect-square ${rounded}`} />
+				<Bg bg={bgR} className={`ml-${margin.x} w-${height * bgRRatio} h-${height} ${rounded}`} />
 			) : iconR ? (
 				<Icon deco={`font-${typeDeco}`} className={`mr-${margin.x}`}>
 					{iconR}
