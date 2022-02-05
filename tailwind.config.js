@@ -19,6 +19,8 @@ module.exports = {
 				contain: 'contain',
 				...theme('spacing'),
 				'50%': '50%',
+				'100%': '100%',
+				'200%': '200%',
 			}),
 		},
 		fontFamily: {

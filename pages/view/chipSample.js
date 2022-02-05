@@ -20,8 +20,8 @@ export default function ChipSample() {
 		iconR: 'bxs-x-circle',
 		image: '/bean.jpg',
 		imageR: '/shell.jpg',
-		bg: '/sheet_checkbox5_x2.png',
-		bgR: '/sheet_checkbox4.png',
+		bg: '/sheet_radio6-lg2.png',
+		bgR: '/sheet_radio4-md1.png',
 		text: 'Next',
 		checked: ['false'],
 		disabled: ['false'],
@@ -65,6 +65,26 @@ export default function ChipSample() {
 					maiores accusantium doloremque officia provident iusto? Ipsam, aut illum.
 				</Label>
 			</Group>
+			<Group className="p-5 space-y-3 flex justify-center items-center flex-wrap ring-2 ring-gray-500 rounded-lg">
+				<Toggle theme="primary-G1L1-xs-xs-full" img="/bean.jpg" />
+				<Toggle theme="primary-G1L1-xs-sm-full" icon="bx-leaf" />
+				<Toggle theme="primary-G1L1-sm-xs-full" img="/bean.jpg" />
+				<Toggle theme="primary-G1L1-xs-md-full" icon="bx-leaf" />
+				<Toggle theme="primary-G1L1-md-xs-full" img="/bean.jpg" />
+				<Toggle theme="primary-G1L1-md-md-full" icon="bx-leaf" />
+				<Toggle theme="primary-G1L1-lg-xs-full" img="/bean.jpg" />
+				<Toggle theme="primary-G1L1-lg-md-full" icon="bx-leaf" />
+				<Toggle theme="primary-G1L1-xl-xs-full" img="/bean.jpg" />
+				<Toggle theme="primary-G1L1-xl-md-full" icon="bx-leaf" />
+				<Toggle theme="primary-G1L1-2xl-xs-full" img="/bean.jpg" />
+				<Toggle theme="primary-G1L1-md-lg-full" icon="bx-leaf" />
+				<Toggle theme="primary-G1L1-3xl-xs-full" img="/bean.jpg" />
+				<Toggle theme="primary-G1L1-xl-lg-full" icon="bx-leaf" />
+				<Toggle theme="primary-G1L1-4xl-xs-full" img="/bean.jpg" />
+				<Toggle theme="primary-G1L1-2xl-lg-full" icon="bx-leaf" />
+				<Toggle theme="primary-G1L1-5xl-xs-full" img="/bean.jpg" />
+				<Toggle theme="primary-G1L1-2xl-xl-full" icon="bx-leaf" />
+			</Group>
 			<Group className="p-5 ring-2 ring-gray-500 rounded-lg">
 				<Text deco="font-success" className="leading-8">
 					{['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L'].map((item, index) => (
@@ -95,7 +115,8 @@ export default function ChipSample() {
 						href="/view/sample"
 						onClick={clickButton}
 						onChange={changeToggle}
-						theme={[color, `${item}${outMode}${overType}${overMode}`, size, space, `${round}${roundMode}`].join('-')}
+						// theme={`${[color, `${item}${outMode}${overType}${overMode}`, size, space, `${round}${roundMode}`].join('-')} ${['warning', `${item}${outMode}${overType}${overMode}`, size, space, `${round}${roundMode}`].join('-')}`}
+						theme={[`${color}/danger`, `${item}${outMode}${overType}${overMode}`, size, space, `${round}${roundMode}`].join('-')}
 						icon={left[0] == 'icon' ? icon : ''}
 						iconR={right[0] == 'iconR' ? iconR : ''}
 						img={left[0] == 'image' ? image : ''}
@@ -114,7 +135,8 @@ export default function ChipSample() {
 					href="/view/sample"
 					onClick={clickButton}
 					onChange={changeToggle}
-					theme={[color, `${outType}${outMode}${overType}${overMode}`, size, space, `${round}${roundMode}`].join('-')}
+					// theme={`${[color, `${outType}${outMode}${overType}${overMode}`, size, space, `${round}${roundMode}`].join('-')} ${['warning', `${outType}${outMode}${overType}${overMode}`, size, space, `${round}${roundMode}`].join('-')}`}
+					theme={[`${color}/danger`, `${outType}${outMode}${overType}${overMode}`, `${size}/xs`, `${space}/sm`, `${round}${roundMode}/full`].join('-')}
 					icon={left[0] == 'icon' ? icon : ''}
 					iconR={right[0] == 'iconR' ? iconR : ''}
 					img={left[0] == 'image' ? image : ''}
@@ -125,26 +147,6 @@ export default function ChipSample() {
 					checked={checked[0] == 'true'}
 					disabled={disabled[0] == 'true'}
 				/>
-			</Group>
-			<Group className="p-5 space-y-3 flex justify-center items-center flex-wrap ring-2 ring-gray-500 rounded-lg">
-				<Toggle theme="primary-G1L1-xs-xs-full" img="/bean.jpg" />
-				<Toggle theme="primary-G1L1-xs-sm-full" icon="bx-leaf" />
-				<Toggle theme="primary-G1L1-sm-xs-full" img="/bean.jpg" />
-				<Toggle theme="primary-G1L1-xs-md-full" icon="bx-leaf" />
-				<Toggle theme="primary-G1L1-md-xs-full" img="/bean.jpg" />
-				<Toggle theme="primary-G1L1-md-md-full" icon="bx-leaf" />
-				<Toggle theme="primary-G1L1-lg-xs-full" img="/bean.jpg" />
-				<Toggle theme="primary-G1L1-lg-md-full" icon="bx-leaf" />
-				<Toggle theme="primary-G1L1-xl-xs-full" img="/bean.jpg" />
-				<Toggle theme="primary-G1L1-xl-md-full" icon="bx-leaf" />
-				<Toggle theme="primary-G1L1-2xl-xs-full" img="/bean.jpg" />
-				<Toggle theme="primary-G1L1-md-lg-full" icon="bx-leaf" />
-				<Toggle theme="primary-G1L1-3xl-xs-full" img="/bean.jpg" />
-				<Toggle theme="primary-G1L1-xl-lg-full" icon="bx-leaf" />
-				<Toggle theme="primary-G1L1-4xl-xs-full" img="/bean.jpg" />
-				<Toggle theme="primary-G1L1-2xl-lg-full" icon="bx-leaf" />
-				<Toggle theme="primary-G1L1-5xl-xs-full" img="/bean.jpg" />
-				<Toggle theme="primary-G1L1-2xl-xl-full" icon="bx-leaf" />
 			</Group>
 			<Group>
 				<Text deco="font-danger">color : </Text>
@@ -242,7 +244,7 @@ export default function ChipSample() {
 			<Group>
 				<Highlight className="html">
 					{`
-					<Toggle theme="${[color, `${outType}${outMode}${overType}${overMode}`, size, space, `${round}${roundMode}`].join('-')}"${left[0] == 'icon' ? ' icon="' + icon + '"' : ''}${left[0] == 'image' ? ' img="' + image + '"' : ''}${left[0] == 'bg' ? ' bg="' + bg + '"' : ''}${
+					<Toggle theme="${[`${color}/danger`, `${outType}${outMode}${overType}${overMode}`, size, space, `${round}${roundMode}`].join('-')}"${left[0] == 'icon' ? ' icon="' + icon + '"' : ''}${left[0] == 'image' ? ' img="' + image + '"' : ''}${left[0] == 'bg' ? ' bg="' + bg + '"' : ''}${
 						right[0] == 'iconR' ? ' iconR="' + iconR + '"' : ''
 					}${right[0] == 'imageR' ? ' imgR="' + imageR + '"' : ''}${right[0] == 'bgR' ? ' bgR="' + bgR + '"' : ''}${center[0] == 'text' ? ' text="' + text + '"' : ''}${checked[0] == 'true' ? ' checked' : ''}${disabled[0] == 'true' ? ' disabled' : ''} />
 					`}

@@ -80,7 +80,7 @@ const getDefaultElement = (props) => {
 			return <div className={`object-cover peer-disabled:opacity-50 peer-disabled:pointer-events-none`} />;
 
 		case 'bg':
-			return <div className={`bg-cover bg-no-repeat bg-left-top group-hover:saturate-200 peer-checked:bg-right-bottom group-hover:peer-checked:saturate-200`} />;
+			return <div className={`bg-no-repeat bg-left-top group-hover:bg-right-top peer-checked:bg-left-bottom group-hover:peer-checked:bg-right-bottom peer-disabled:opacity-50 peer-disabled:pointer-events-none`} />;
 
 		case 'icon':
 			return <div className={`bx ${children} pointer-events-none peer-disabled:opacity-50 peer-disabled:pointer-events-none`} />;
@@ -262,12 +262,21 @@ const getDecoElement = (props) => {
 const getThemeProps = (props) => {
 	const {theme, checked} = props;
 
+	// const tttList = theme.split(' ');
+	// const ttt = checked ? tttList[1] || tttList[0] : tttList[0];
+
+	// const themeList = String(ttt).split('-') || [];
+	// const color = themeList[0] || 'default';
+	// let tyde = themeList[1] || 'A1A1';
+	// const size = themeList[2] || 'sm';
+	// const space = themeList[3] || 'sm';
+	// const round = themeList[4] || 'sm';
 	const themeList = String(theme).split('-') || [];
-	const color = themeList[0] || 'default';
-	let tyde = themeList[1] || 'A1A1';
-	const size = themeList[2] || 'sm';
-	const space = themeList[3] || 'sm';
-	const round = themeList[4] || 'sm';
+	const color = checked ? themeList[0]?.split('/')[1] || themeList[0]?.split('/')[0] || 'default' : themeList[0]?.split('/')[0] || 'default';
+	let tyde = checked ? themeList[1]?.split('/')[1] || themeList[1]?.split('/')[0] || 'A1A1' : themeList[1]?.split('/')[0] || 'A1A1';
+	const size = checked ? themeList[2]?.split('/')[1] || themeList[2]?.split('/')[0] || 'sm' : themeList[2]?.split('/')[0] || 'sm';
+	const space = checked ? themeList[3]?.split('/')[1] || themeList[3]?.split('/')[0] || 'sm' : themeList[3]?.split('/')[0] || 'sm';
+	const round = checked ? themeList[4]?.split('/')[1] || themeList[4]?.split('/')[0] || 'sm' : themeList[4]?.split('/')[0] || 'sm';
 
 	const roundReg = /(none|xs|sm|md|lg|xl|2xl|3xl|full)([0-9]?)/;
 	const roundMatch = round.match(roundReg);
@@ -276,8 +285,10 @@ const getThemeProps = (props) => {
 	const tydeMatch = tyde.match(tydeReg);
 	tyde = (tydeMatch[1] || 'A') + (tydeMatch[2] || '1') + (tydeMatch[3] || tydeMatch[1] || 'A') + (tydeMatch[4] || tydeMatch[2] || '1');
 
-	const typeDeco = `${tyde.replace(tydeReg, checked ? '$3$1' : '$1$3')}-${color}`; // 'AB-default'
-	const modeDeco = `${tyde.replace(tydeReg, checked ? '$4$2' : '$2$4')}-${color}`; // '12-default'
+	// const typeDeco = `${tyde.replace(tydeReg, checked ? '$3$1' : '$1$3')}-${color}`; // 'AB-default'
+	// const modeDeco = `${tyde.replace(tydeReg, checked ? '$4$2' : '$2$4')}-${color}`; // '12-default'
+	const typeDeco = `${tyde.replace(tydeReg, '$1$3')}-${color}`; // 'AB-default'
+	const modeDeco = `${tyde.replace(tydeReg, '$2$4')}-${color}`; // '12-default'
 
 	const padding = {
 		none: {x: 0, y: 0},
@@ -418,16 +429,39 @@ const FormInput = forwardRef((props, ref) => {
 	return disabled ? <input type={type} className={`${classProp} | `} ref={ref} placeholder={placeholder} value={value} onChange={onChange} /> : <input type={type} className={`${classProp} | `} id={name} name={name} ref={ref} placeholder={placeholder} value={value} onChange={onChange} />;
 });
 
+export const Icon = (props) => {
+	const {children, deco, classProp, className, icon} = getNewProps({...props, tag: 'icon'});
+
+	return children ? <i className={`${classProp} | ${className}`} /> : <></>;
+};
+
 export const Img = (props) => {
 	const {deco, classProp, className, name, src, alt} = getNewProps({...props, tag: 'img'});
 
 	return <img className={`${classProp} | ${className}`} src={src} alt={alt} />;
 };
 
-export const Icon = (props) => {
-	const {children, deco, classProp, className, icon} = getNewProps({...props, tag: 'icon'});
+export const Bg = (props) => {
+	const {children, deco, useDeco, classProp, className, bg, height, name} = getNewProps({...props, tag: 'bg'});
 
-	return children ? <i className={`${classProp} | ${className}`} /> : <></>;
+	const fileReg = /.*-(xs|sm|md|lg|xl)([0-9]?)\..*/;
+	const match = bg.match(fileReg);
+
+	const ratio = {
+		xs: 0.25,
+		sm: 0.5,
+		md: 1,
+		lg: 2,
+		xl: 3,
+	}[match?.[1] || 'md'];
+
+	const scale = {
+		1: '100%',
+		2: '200%',
+		3: '300%',
+	}[match?.[2] || 1];
+
+	return bg ? <div className={`${classProp} | ${className} w-${height * ratio} h-${height} bg-${scale} `} style={{backgroundImage: `url(${bg})`}}></div> : <></>;
 };
 
 const TextTheme = (props) => {
@@ -465,12 +499,6 @@ export const Text = (props) => {
 	return props.theme ? TextTheme(props) : TextReal(props);
 };
 
-export const Bg = (props) => {
-	const {children, deco, useDeco, classProp, className, bg, name} = getNewProps({...props, tag: 'bg'});
-
-	return bg ? <div className={`${classProp} | ${className}`} style={{backgroundImage: `url(${bg})`}}></div> : <></>;
-};
-
 export const Box = (props) => {
 	const {children, deco, useDeco, classProp, className, name} = getNewProps({...props, tag: 'box'});
 
@@ -501,22 +529,16 @@ const LabelTheme = (props) => {
 	} = newProps;
 	// const {padding, margin, size, rounded, height, typeDeco, modeDeco} = getThemeProps(props);
 
-	// const mmm = '/noodle.jpg';
-	// const url = `url('${mmm}')`;
-	const fileReg = /(.*)_x(.*)\.(.*)/;
-	const bgRatio = bg.match(fileReg)?.[2] || 1;
-	const bgRRatio = bgR.match(fileReg)?.[2] || 1;
-
 	return (
 		<div className={`${classProp} | ${className} px-${padding.x} py-${padding.y} text-${size}`}>
 			<Box deco={`box-${typeDeco}`} className={`${rounded}`} />
 			{left ? (
 				left
 			) : img ? (
-				<Img src={img} className={`mr-${margin.x} last:mr-0 h-${height} aspect-square ${rounded}`} />
+				<Img src={img} className={`mr-${margin.x} last:mr-0 w-${height} h-${height} ${rounded}`} />
 			) : bg ? (
 				// <div className={`ml-${margin.x} last:ml-0 h-${height} aspect-square ${rounded} border-0 bg-origin-border bg-cover bg-[left_top] group-hover:saturate-200 peer-checked:bg-[right_bottom] group-hover:peer-checked:saturate-200`} style={{backgroundImage: `url(${img})`}} />
-				<Bg bg={bg} className={`mr-${margin.x} last:mr-0 w-${height * bgRatio} h-${height} ${rounded}`} />
+				<Bg bg={bg} height={height} className={`mr-${margin.x} last:mr-0 ${rounded}`} />
 			) : icon ? (
 				<Icon deco={`font-${typeDeco}`} className={`ml-${margin.x} last:ml-0`}>
 					{icon}
@@ -537,9 +559,9 @@ const LabelTheme = (props) => {
 			{right ? (
 				right
 			) : imgR ? (
-				<Img src={imgR} className={`ml-${margin.x} h-${height} aspect-square ${rounded}`} />
+				<Img src={imgR} className={`ml-${margin.x} w-${height} h-${height} ${rounded}`} />
 			) : bgR ? (
-				<Bg bg={bgR} className={`ml-${margin.x} w-${height * bgRRatio} h-${height} ${rounded}`} />
+				<Bg bg={bgR} height={height} className={`ml-${margin.x} ${rounded}`} />
 			) : iconR ? (
 				<Icon deco={`font-${typeDeco}`} className={`mr-${margin.x}`}>
 					{iconR}
