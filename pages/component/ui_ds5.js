@@ -537,7 +537,7 @@ const LabelTheme = (props) => {
 				<Img src={img} className={`mr-${margin.x} last:mr-0 w-${height} h-${height} ${rounded}`} />
 			) : bg ? (
 				// <div className={`ml-${margin.x} last:ml-0 h-${height} aspect-square ${rounded} border-0 bg-origin-border bg-cover bg-[left_top] group-hover:saturate-200 peer-checked:bg-[right_bottom] group-hover:peer-checked:saturate-200`} style={{backgroundImage: `url(${img})`}} />
-				<Bg bg={bg} height={height} className={`mr-${margin.x} last:mr-0 ${rounded}`} />
+				<Bg bg={bg} height={height} className={`mr-${margin.x} last:mr-0`} />
 			) : icon ? (
 				<Icon deco={`font-${typeDeco}`} className={`ml-${margin.x} last:ml-0`}>
 					{icon}
@@ -560,7 +560,7 @@ const LabelTheme = (props) => {
 			) : imgR ? (
 				<Img src={imgR} className={`ml-${margin.x} w-${height} h-${height} ${rounded}`} />
 			) : bgR ? (
-				<Bg bg={bgR} height={height} className={`ml-${margin.x} ${rounded}`} />
+				<Bg bg={bgR} height={height} className={`ml-${margin.x}`} />
 			) : iconR ? (
 				<Icon deco={`font-${typeDeco}`} className={`mr-${margin.x}`}>
 					{iconR}

@@ -21,7 +21,7 @@ export default function ChipSample() {
 		image: '/bean.jpg',
 		imageR: '/shell.jpg',
 		bg: '/sheet_radio6-lg2.png',
-		bgR: '/sheet_radio4-md1.png',
+		bgR: '/sheet_radio4.png',
 		text: 'Next',
 		checked: ['false'],
 		disabled: ['false'],
