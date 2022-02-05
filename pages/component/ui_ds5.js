@@ -11,7 +11,7 @@ const dummyElement = () => {
 			<div className={`ml-0 ml-0.5 ml-1 ml-2 ml-3 ml-4 ml-5 ml-6`} />
 			<div className={`w-3 w-4 w-5 w-6 w-7 w-8 w-9 w-10 w-11 w-12 w-14 w-16 w-18 w-20 w-24`} />
 			<div className={`h-3 h-4 h-5 h-6 h-7 h-8 h-9 h-10 h-11 h-12 h-14`} />
-			<div className={`text-xs text-sm text-base text-md text-lg text-xl text-2xl text-3xl text-4xl text-5xl`} />
+			<div className={`text-xs text-sm text-md text-lg text-xl text-2xl text-3xl text-4xl text-5xl`} />
 			<div className={`rounded-none rounded-sm rounded rounded-md rounded-lg rounded-xl rounded-2xl rounded-3xl rounded-full`} />
 			<div className={`rounded-t-none rounded-t-sm rounded-t rounded-t-md rounded-t-lg rounded-t-xl rounded-t-2xl rounded-t-3xl rounded-t-full`} />
 			<div className={`rounded-b-none rounded-b-sm rounded-b rounded-b-md rounded-b-lg rounded-b-xl rounded-b-2xl rounded-b-3xl rounded-b-full`} />
@@ -80,7 +80,7 @@ const getDefaultElement = (props) => {
 			return <div className={`object-cover peer-disabled:opacity-50 peer-disabled:pointer-events-none`} />;
 
 		case 'bg':
-			return <div className={`bg-cover bg-[left_top] group-hover:saturate-200 peer-checked:bg-[right_bottom] group-hover:peer-checked:saturate-200`} />;
+			return <div className={`bg-cover bg-no-repeat bg-left-top group-hover:saturate-200 peer-checked:bg-right-bottom group-hover:peer-checked:saturate-200`} />;
 
 		case 'icon':
 			return <div className={`bx ${children} pointer-events-none peer-disabled:opacity-50 peer-disabled:pointer-events-none`} />;
