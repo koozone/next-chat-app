@@ -7,12 +7,19 @@ module.exports = {
 		// 	mymy: colors.blue,
 		// },
 		extend: {
-			width: {
-				18: '4.5rem',
-			},
 			fontSize: {
 				md: ['1rem', '1.5rem'],
 			},
+			width: {
+				18: '4.5rem',
+			},
+			backgroundSize: ({theme}) => ({
+				auto: 'auto',
+				cover: 'cover',
+				contain: 'contain',
+				...theme('spacing'),
+				'50%': '50%',
+			}),
 		},
 		fontFamily: {
 			body: ['sans-serif'],
