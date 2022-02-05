@@ -11,17 +11,14 @@ module.exports = {
 				md: ['1rem', '1.5rem'],
 			},
 			width: {
+				4.5: '1.125rem',
 				18: '4.5rem',
 			},
-			backgroundSize: ({theme}) => ({
-				auto: 'auto',
-				cover: 'cover',
-				contain: 'contain',
-				...theme('spacing'),
-				'50%': '50%',
-				'100%': '100%',
+			backgroundSize: {
+				'100%': 'cover',
 				'200%': '200%',
-			}),
+				'300%': '300%',
+			},
 		},
 		fontFamily: {
 			body: ['sans-serif'],

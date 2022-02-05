@@ -9,8 +9,9 @@ const dummyElement = () => {
 			<div className={`py-0 py-0.5 py-1 py-2 py-3 py-4 py-5 py-6`} />
 			<div className={`mr-0 mr-0.5 mr-1 mr-2 mr-3 mr-4 mr-5 mr-6`} />
 			<div className={`ml-0 ml-0.5 ml-1 ml-2 ml-3 ml-4 ml-5 ml-6`} />
-			<div className={`w-3 w-4 w-5 w-6 w-7 w-8 w-9 w-10 w-11 w-12 w-14 w-16 w-18 w-20 w-24`} />
-			<div className={`h-3 h-4 h-5 h-6 h-7 h-8 h-9 h-10 h-11 h-12 h-14`} />
+			<div className={`w-2 w-2.5 w-3 w-3.5 w-4 w-4.5 w-5 w-6 w-7 w-8 w-9 w-10 w-12 w-14 w-16 w-18 w-20 w-24`} />
+			<div className={`h-4 h-5 h-6 h-7 h-8 h-9 h-10 h-12`} />
+			<div className={`bg-100% bg-200% bg-300%`} />
 			<div className={`text-xs text-sm text-md text-lg text-xl text-2xl text-3xl text-4xl text-5xl`} />
 			<div className={`rounded-none rounded-sm rounded rounded-md rounded-lg rounded-xl rounded-2xl rounded-3xl rounded-full`} />
 			<div className={`rounded-t-none rounded-t-sm rounded-t rounded-t-md rounded-t-lg rounded-t-xl rounded-t-2xl rounded-t-3xl rounded-t-full`} />
@@ -448,11 +449,9 @@ export const Bg = (props) => {
 	const match = bg.match(fileReg);
 
 	const ratio = {
-		xs: 0.25,
 		sm: 0.5,
 		md: 1,
 		lg: 2,
-		xl: 3,
 	}[match?.[1] || 'md'];
 
 	const scale = {
@@ -461,7 +460,7 @@ export const Bg = (props) => {
 		3: '300%',
 	}[match?.[2] || 1];
 
-	return bg ? <div className={`${classProp} | ${className} w-${height * ratio} h-${height} bg-${scale} `} style={{backgroundImage: `url(${bg})`}}></div> : <></>;
+	return bg ? <div className={`${classProp} | ${className} w-${height * ratio} h-${height} bg-${scale}`} style={{backgroundImage: `url(${bg})`}}></div> : <></>;
 };
 
 const TextTheme = (props) => {

@@ -53,6 +53,8 @@ export default function ChipSample() {
 		runChipData.change('checked', [`${checked}`]);
 	};
 
+	const sampleTheme = [`${color}/danger`, `${outType}${outMode}${overType}${overMode}/H1I1`, `${size}/xs`, `${space}/sm`, `${round}${roundMode}/full`].join('-');
+
 	return (
 		<>
 			<Group className="p-5 ring-2 ring-gray-500 rounded-lg">
@@ -136,7 +138,7 @@ export default function ChipSample() {
 					onClick={clickButton}
 					onChange={changeToggle}
 					// theme={`${[color, `${outType}${outMode}${overType}${overMode}`, size, space, `${round}${roundMode}`].join('-')} ${['warning', `${outType}${outMode}${overType}${overMode}`, size, space, `${round}${roundMode}`].join('-')}`}
-					theme={[`${color}/danger`, `${outType}${outMode}${overType}${overMode}`, `${size}/xs`, `${space}/sm`, `${round}${roundMode}/full`].join('-')}
+					theme={sampleTheme}
 					icon={left[0] == 'icon' ? icon : ''}
 					iconR={right[0] == 'iconR' ? iconR : ''}
 					img={left[0] == 'image' ? image : ''}
@@ -147,6 +149,15 @@ export default function ChipSample() {
 					checked={checked[0] == 'true'}
 					disabled={disabled[0] == 'true'}
 				/>
+			</Group>
+			<Group>
+				<Highlight className="html">
+					{`
+					<Toggle theme="${sampleTheme}"${left[0] == 'icon' ? ' icon="' + icon + '"' : ''}${left[0] == 'image' ? ' img="' + image + '"' : ''}${left[0] == 'bg' ? ' bg="' + bg + '"' : ''}${right[0] == 'iconR' ? ' iconR="' + iconR + '"' : ''}${right[0] == 'imageR' ? ' imgR="' + imageR + '"' : ''}${
+						right[0] == 'bgR' ? ' bgR="' + bgR + '"' : ''
+					}${center[0] == 'text' ? ' text="' + text + '"' : ''}${checked[0] == 'true' ? ' checked' : ''}${disabled[0] == 'true' ? ' disabled' : ''} />
+					`}
+				</Highlight>
 			</Group>
 			<Group>
 				<Text deco="font-danger">color : </Text>
@@ -240,15 +251,6 @@ export default function ChipSample() {
 				{['false', 'true'].map((item, index) => (
 					<ToggleRadio key={index} text={item} team="disabled" name={item} checked={disabled.includes(item)} onChange={changeChipRadio} />
 				))}
-			</Group>
-			<Group>
-				<Highlight className="html">
-					{`
-					<Toggle theme="${[`${color}/danger`, `${outType}${outMode}${overType}${overMode}`, size, space, `${round}${roundMode}`].join('-')}"${left[0] == 'icon' ? ' icon="' + icon + '"' : ''}${left[0] == 'image' ? ' img="' + image + '"' : ''}${left[0] == 'bg' ? ' bg="' + bg + '"' : ''}${
-						right[0] == 'iconR' ? ' iconR="' + iconR + '"' : ''
-					}${right[0] == 'imageR' ? ' imgR="' + imageR + '"' : ''}${right[0] == 'bgR' ? ' bgR="' + bgR + '"' : ''}${center[0] == 'text' ? ' text="' + text + '"' : ''}${checked[0] == 'true' ? ' checked' : ''}${disabled[0] == 'true' ? ' disabled' : ''} />
-					`}
-				</Highlight>
 			</Group>
 		</>
 	);
