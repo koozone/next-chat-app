@@ -1,6 +1,17 @@
 import {Chip, Group, Highlight, ToggleRadio} from '../component/temp_ds';
-import {A, Basket, Button, Icon, Input, Label, Text, Toggle} from '../component/ui_ds5';
+import {A, Basket, Button, Icon, Input, Label, Text, Toggle} from '../component/ui_ds6';
 import {UseData} from '../hook/useData';
+
+const LineGroup = (props) => {
+	const {children, text, className = ''} = props;
+
+	return (
+		<div className={`flex items-center space-x-2 ${className}`}>
+			<Label className="w-32 justify-end" theme="default-A-md" icon="bx-leaf" text={text} />
+			{children}
+		</div>
+	);
+};
 
 export default function ChipSample() {
 	const [chipData, runChipData] = UseData({
@@ -54,7 +65,7 @@ export default function ChipSample() {
 	};
 
 	const sampleTheme = [`${color}/success`, `${outType}${outMode == '1' ? '' : outMode}${overType}${overMode == '1' ? '' : overMode}`, `${size}`, `${space}`, `${round}${roundMode}`].join('-');
-	const controlTheme = 'default/success-DJ2/D2J-sm-sm-lg';
+	const controlTheme = '-EF2/K2-sm-sm-lg';
 	const controlRadio = '/radio1.png';
 
 	return (
@@ -161,97 +172,86 @@ export default function ChipSample() {
 					`}
 				</Highlight>
 			</Group>
-			<Group>
-				<Text deco="font-danger">color : </Text>
+			<LineGroup text="color : ">
 				{['default', 'primary', 'success', 'warning', 'danger'].map((item, index) => (
 					// <ToggleRadio key={index} text={item} team="color" name={item} checked={color.includes(item)} onChange={changeChipRadio} />
-					<Toggle key={index} theme={controlTheme} bg={controlRadio} text={item} team="color" name={item} checked={color.includes(item)} onChange={changeChipRadio} />
+					<Toggle key={index} theme={`${item}${controlTheme}`} bg={controlRadio} text={item} team="color" name={item} checked={color.includes(item)} onChange={changeChipRadio} />
 				))}
-			</Group>
-			<Group>
-				<Text deco="font-danger">outType : </Text>
+			</LineGroup>
+			<LineGroup text="outType : ">
 				{['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L'].map((item, index) => (
 					// <ToggleRadio key={index} text={item} team="outType" name={item} checked={outType.includes(item)} onChange={changeChipRadio} />
-					<Toggle key={index} theme={controlTheme} bg={controlRadio} text={item} team="outType" name={item} checked={outType.includes(item)} onChange={changeChipRadio} />
+					// <Toggle key={index} theme={`primary${controlTheme}`} bg={controlRadio} text={item} team="outType" name={item} checked={outType.includes(item)} onChange={changeChipRadio} />
+					<Toggle key={index} theme={`${color}-${item}${item}2/${item}2-sm-sm-lg`} bg={controlRadio} text={item} team="outType" name={item} checked={outType.includes(item)} onChange={changeChipRadio} />
 				))}
-			</Group>
-			<Group>
-				<Text deco="font-danger">outMode : </Text>
+			</LineGroup>
+			<LineGroup text="outMode : ">
 				{['1', '2', '3', '4', '5', '6', '7', '8'].map((item, index) => (
 					// <ToggleRadio key={index} text={item} team="outMode" name={item} checked={outMode.includes(item)} onChange={changeChipRadio} />
-					<Toggle key={index} theme={controlTheme} bg={controlRadio} text={item} team="outMode" name={item} checked={outMode.includes(item)} onChange={changeChipRadio} />
+					<Toggle key={index} theme={`default${controlTheme}`} bg={controlRadio} text={item} team="outMode" name={item} checked={outMode.includes(item)} onChange={changeChipRadio} />
 				))}
-			</Group>
-			<Group>
-				<Text deco="font-danger">overType : </Text>
+			</LineGroup>
+			<LineGroup text="overType : ">
 				{['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L'].map((item, index) => (
 					// <ToggleRadio key={index} text={item} team="overType" name={item} checked={overType.includes(item)} onChange={changeChipRadio} />
-					<Toggle key={index} theme={controlTheme} bg={controlRadio} text={item} team="overType" name={item} checked={overType.includes(item)} onChange={changeChipRadio} />
+					<Toggle key={index} theme={`${color}-${item}${item}2/${item}2-sm-sm-lg`} bg={controlRadio} text={item} team="overType" name={item} checked={overType.includes(item)} onChange={changeChipRadio} />
 				))}
-			</Group>
-			<Group>
-				<Text deco="font-danger">overMode : </Text>
+			</LineGroup>
+			<LineGroup text="overMode : ">
 				{['1', '2', '3', '4', '5', '6', '7', '8'].map((item, index) => (
 					// <ToggleRadio key={index} text={item} team="overMode" name={item} checked={overMode.includes(item)} onChange={changeChipRadio} />
-					<Toggle key={index} theme={controlTheme} bg={controlRadio} text={item} team="overMode" name={item} checked={overMode.includes(item)} onChange={changeChipRadio} />
+					<Toggle key={index} theme={`default${controlTheme}`} bg={controlRadio} text={item} team="overMode" name={item} checked={overMode.includes(item)} onChange={changeChipRadio} />
 				))}
-			</Group>
-			<Group>
-				<Text deco="font-danger">size : </Text>
+			</LineGroup>
+			<LineGroup text="size : ">
 				{['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl'].map((item, index) => (
 					// <ToggleRadio key={index} text={item} team="size" name={item} checked={size.includes(item)} onChange={changeChipRadio} />
-					<Toggle key={index} theme={controlTheme} bg={controlRadio} text={item} team="size" name={item} checked={size.includes(item)} onChange={changeChipRadio} />
+					<Toggle key={index} theme={`success${controlTheme}`} bg={controlRadio} text={item} team="size" name={item} checked={size.includes(item)} onChange={changeChipRadio} />
 				))}
-			</Group>
-			<Group>
-				<Text deco="font-danger">space : </Text>
+			</LineGroup>
+			<LineGroup text="space : ">
 				{['none', 'xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl'].map((item, index) => (
 					// <ToggleRadio key={index} text={item} team="space" name={item} checked={space.includes(item)} onChange={changeChipRadio} />
-					<Toggle key={index} theme={controlTheme} bg={controlRadio} text={item} team="space" name={item} checked={space.includes(item)} onChange={changeChipRadio} />
+					<Toggle key={index} theme={`success${controlTheme}`} bg={controlRadio} text={item} team="space" name={item} checked={space.includes(item)} onChange={changeChipRadio} />
 				))}
-			</Group>
-			<Group>
-				<Text deco="font-danger">round : </Text>
+			</LineGroup>
+			<LineGroup text="round : ">
 				{['none', 'xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', 'full'].map((item, index) => (
 					// <ToggleRadio key={index} text={item} team="round" name={item} checked={round.includes(item)} onChange={changeChipRadio} />
-					<Toggle key={index} theme={controlTheme} bg={controlRadio} text={item} team="round" name={item} checked={round.includes(item)} onChange={changeChipRadio} />
+					<Toggle key={index} theme={`success${controlTheme}`} bg={controlRadio} text={item} team="round" name={item} checked={round.includes(item)} onChange={changeChipRadio} />
 				))}
-			</Group>
-			<Group>
-				<Text deco="font-danger">roundMode : </Text>
+			</LineGroup>
+			<LineGroup text="roundMode : ">
 				{['1', '2', '3', '4', '5', '6', '7', '8', ''].map((item, index) => (
 					// <ToggleRadio key={index} text={item || 'all'} team="roundMode" name={item} checked={roundMode.includes(item)} onChange={changeChipRadio} />
-					<Toggle key={index} theme={controlTheme} bg={controlRadio} text={item || 'all'} team="roundMode" name={item} checked={roundMode.includes(item)} onChange={changeChipRadio} />
+					<Toggle key={index} theme={`default${controlTheme}`} bg={controlRadio} text={item || 'all'} team="roundMode" name={item} checked={roundMode.includes(item)} onChange={changeChipRadio} />
 				))}
-			</Group>
-			<Group>
-				<Text deco="font-danger">left : </Text>
+			</LineGroup>
+			<LineGroup text="left : ">
 				{/* <ToggleRadio text="none" team="left" name="none" checked={left.includes('none')} onChange={changeChipRadio} />
 				<ToggleRadio text="icon" team="left" name="icon" checked={left.includes('icon')} onChange={changeChipRadio} />
 				<ToggleRadio text="image" team="left" name="image" checked={left.includes('image')} onChange={changeChipRadio} />
 				<ToggleRadio text="bg" team="left" name="bg" checked={left.includes('bg')} onChange={changeChipRadio} /> */}
 				{['none', 'icon', 'image', 'bg'].map((item, index) => (
-					<Toggle key={index} theme={controlTheme} bg={controlRadio} text={item} team="left" name={item} checked={left.includes(item)} onChange={changeChipRadio} />
+					<Toggle key={index} theme={`warning${controlTheme}`} bg={controlRadio} text={item} team="left" name={item} checked={left.includes(item)} onChange={changeChipRadio} />
 				))}
 				<Input type="text" deco="basket-default box-default font-default" className="w-[200px]" name="left" value={chipData[left]} placeholder="left 입력" onChange={chageChipInput} disabled={left == 'none'} />
-			</Group>
-			<Group>
-				<Text deco="font-danger">right : </Text>
+			</LineGroup>
+			<LineGroup text="right : ">
 				{/* <ToggleRadio text="none" team="right" name="none" checked={right.includes('none')} onChange={changeChipRadio} />
 				<ToggleRadio text="icon" team="right" name="iconR" checked={right.includes('iconR')} onChange={changeChipRadio} />
 				<ToggleRadio text="image" team="right" name="imageR" checked={right.includes('imageR')} onChange={changeChipRadio} />
 				<ToggleRadio text="bg" team="right" name="bgR" checked={right.includes('bgR')} onChange={changeChipRadio} /> */}
 				{['none', 'icon', 'image', 'bg'].map((item, index) => (
-					<Toggle key={index} theme={controlTheme} bg={controlRadio} text={item} team="right" name={`${item}R`} checked={right.includes(`${item}R`)} onChange={changeChipRadio} />
+					<Toggle key={index} theme={`warning${controlTheme}`} bg={controlRadio} text={item} team="right" name={`${item}R`} checked={right.includes(`${item}R`)} onChange={changeChipRadio} />
 				))}
 				<Input type="text" deco="basket-default box-default font-default" className="w-[200px]" name="right" value={chipData[right]} placeholder="right 입력" onChange={chageChipInput} disabled={right == 'none'} />
-			</Group>
-			<Group>
-				<Text deco="font-danger">center : </Text>
+			</LineGroup>
+			<LineGroup text="center : ">
 				{/* <ToggleRadio text="none" team="center" name="none" checked={center.includes('none')} onChange={changeChipRadio} />
 				<ToggleRadio text="text" team="center" name="text" checked={center.includes('text')} onChange={changeChipRadio} /> */}
 				{['none', 'text'].map((item, index) => (
-					<Toggle key={index} theme={controlTheme} bg={controlRadio} text={item} team="center" name={item} checked={center.includes(item)} onChange={changeChipRadio} />
+					<Toggle key={index} theme={`warning${controlTheme}`} bg={controlRadio} text={item} team="center" name={item} checked={center.includes(item)} onChange={changeChipRadio} />
 				))}
 				<Input type="text" deco="basket-default box-default font-default" className="w-[200px]" name="center" value={chipData[center]} placeholder="text 입력" onChange={chageChipInput} disabled={center == 'none'}>
 					<Icon deco="font-danger">bx-user</Icon>
@@ -259,21 +259,19 @@ export default function ChipSample() {
 						TEXT :
 					</Text>
 				</Input>
-			</Group>
-			<Group>
-				<Text deco="font-danger">checked : </Text>
+			</LineGroup>
+			<LineGroup text="checked : ">
 				{['false', 'true'].map((item, index) => (
 					// <ToggleRadio key={index} text={item} team="checked" name={item} checked={checked.includes(item)} onChange={changeChipRadio} />
-					<Toggle key={index} theme={controlTheme} bg={controlRadio} text={item} team="checked" name={item} checked={checked.includes(item)} onChange={changeChipRadio} />
+					<Toggle key={index} theme={`danger${controlTheme}`} bg={controlRadio} text={item} team="checked" name={item} checked={checked.includes(item)} onChange={changeChipRadio} />
 				))}
-			</Group>
-			<Group>
-				<Text deco="font-danger">disabled : </Text>
+			</LineGroup>
+			<LineGroup text="disabled : ">
 				{['false', 'true'].map((item, index) => (
 					// <ToggleRadio key={index} text={item} team="disabled" name={item} checked={disabled.includes(item)} onChange={changeChipRadio} />
-					<Toggle key={index} theme={controlTheme} bg={controlRadio} text={item} team="disabled" name={item} checked={disabled.includes(item)} onChange={changeChipRadio} />
+					<Toggle key={index} theme={`danger${controlTheme}`} bg={controlRadio} text={item} team="disabled" name={item} checked={disabled.includes(item)} onChange={changeChipRadio} />
 				))}
-			</Group>
+			</LineGroup>
 		</>
 	);
 }
