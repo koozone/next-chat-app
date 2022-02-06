@@ -19,9 +19,18 @@ module.exports = {
 				'200%': '200%',
 				'300%': '300%',
 			},
+			backgroundPosition: {
+				'center-top': 'center top',
+				'center-bottom': 'center bottom',
+			},
 		},
 		fontFamily: {
 			body: ['sans-serif'],
+		},
+	},
+	variants: {
+		extend: {
+			backgroundPosition: ['group-active'],
 		},
 	},
 	plugins: [],

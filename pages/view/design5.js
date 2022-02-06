@@ -944,36 +944,54 @@ export default function code() {
 			<Fieldset title="ToggleCheckbox">
 				<Group>
 					<Text deco="font-danger">default : </Text>
-					<ToggleCheckbox name="checkbox" checked={data.checkbox} onChange={changeSwitch}>
+					{/* <ToggleCheckbox name="checkbox" checked={data.checkbox} onChange={changeSwitch}>
 						<Text deco="font-toggle">다음 내용을 확인했습니다.</Text>
 					</ToggleCheckbox>
 					<ToggleCheckbox />
 					<ToggleCheckbox text="동의" checked />
-					<ToggleCheckbox text="비동의" disabled />
+					<ToggleCheckbox text="비동의" disabled /> */}
+					<Toggle theme="default/success-AA2-sm-sm-lg" bg="/checkbox1.png" name="checkbox" checked={data.checkbox} onChange={changeSwitch}>
+						다음 내용을 확인했습니다.
+					</Toggle>
+					<Toggle theme="default/success-AA2-sm-sm-lg" bg="/checkbox1.png" />
+					<Toggle theme="default/success-AA2-sm-sm-lg" bg="/checkbox1.png" text="동의" checked />
+					<Toggle theme="default/success-AA2-sm-sm-lg" bg="/checkbox1.png" text="비동의" disabled />
 				</Group>
 			</Fieldset>
 
 			<Fieldset title="ToggleRadio">
 				<Group>
 					<Text deco="font-danger">default : </Text>
-					<ToggleRadio name="radio" checked={data.radio} onChange={changeSwitch}>
+					{/* <ToggleRadio name="radio" checked={data.radio} onChange={changeSwitch}>
 						<Text deco="font-toggle">다음 내용을 확인했습니다.</Text>
 					</ToggleRadio>
 					<ToggleRadio />
 					<ToggleRadio text="동의" checked />
-					<ToggleRadio text="비동의" disabled />
+					<ToggleRadio text="비동의" disabled /> */}
+					<Toggle theme="default/success-AA2-sm-sm-lg" bg="/radio1.png" name="radio" checked={data.radio} onChange={changeSwitch}>
+						다음 내용을 확인했습니다.
+					</Toggle>
+					<Toggle theme="default/success-AA2-sm-sm-lg" bg="/radio1.png" />
+					<Toggle theme="default/success-AA2-sm-sm-lg" bg="/radio1.png" text="동의" checked />
+					<Toggle theme="default/success-AA2-sm-sm-lg" bg="/radio1.png" text="비동의" disabled />
 				</Group>
 			</Fieldset>
 
 			<Fieldset title="ToggleSwitch">
 				<Group>
 					<Text deco="font-danger">default : </Text>
-					<ToggleSwitch name="agree" checked={data.agree} onChange={changeSwitch}>
+					{/* <ToggleSwitch name="agree" checked={data.agree} onChange={changeSwitch}>
 						<Text deco="font-toggle">다음 내용을 확인했습니다.</Text>
 					</ToggleSwitch>
 					<ToggleSwitch />
 					<ToggleSwitch text="동의" checked />
-					<ToggleSwitch text="비동의" disabled />
+					<ToggleSwitch text="비동의" disabled /> */}
+					<Toggle theme="default/success-AA2-sm-sm-lg" bg="/switch1-lg.png" name="switch" checked={data.switch} onChange={changeSwitch}>
+						다음 내용을 확인했습니다.
+					</Toggle>
+					<Toggle theme="default/success-AA2-sm-sm-lg" bg="/switch1-lg.png" />
+					<Toggle theme="default/success-AA2-sm-sm-lg" bg="/switch1-lg.png" text="동의" checked />
+					<Toggle theme="default/success-AA2-sm-sm-lg" bg="/switch1-lg.png" text="비동의" disabled />
 				</Group>
 			</Fieldset>
 		</>

@@ -460,7 +460,9 @@ export const Bg = (props) => {
 		3: '300%',
 	}[match?.[2] || 1];
 
-	return bg ? <div className={`${classProp} | ${className} w-${height * ratio} h-${height} bg-${scale}`} style={{backgroundImage: `url(${bg})`}}></div> : <></>;
+	const active = match?.[2] == '2' ? '' : 'group-active:bg-center-top group-active:peer-checked:bg-center-bottom';
+
+	return bg ? <div className={`${classProp} | ${className} w-${height * ratio} h-${height} bg-${scale} ${active}`} style={{backgroundImage: `url(${bg})`}}></div> : <></>;
 };
 
 const TextTheme = (props) => {
