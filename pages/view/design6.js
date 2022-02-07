@@ -957,8 +957,6 @@ export default function code() {
 					<Toggle theme="default-AA2-sm-sm-lg" bg="/checkbox1.png" text="동의" checked />
 					<Toggle theme="default-AA2-sm-sm-lg" bg="/checkbox1.png" text="비동의" disabled />
 				</Group>
-
-				<Toggle theme="danger-GL-md-md-md success-D5I-lg-sm-md4" bg="/sheet_radio6-lg2.png" imgR="/shell.jpg" text="Next" checked={data.checkbox} />
 			</Fieldset>
 
 			<Fieldset title="ToggleRadio">

@@ -15,7 +15,7 @@ const LineGroup = (props) => {
 	return (
 		<div className={`flex items-center space-x-2 ${className}`}>
 			<Label className="w-32 justify-end" theme="default-A-md" icon="bx-leaf" text={`${name} : `} />
-			<Button className={clearVisible.includes(name) ? 'opacity-100' : 'opacity-20'} theme={`danger-GH`} icon="bxs-x-circle" name={name} onClick={clickClearButton} disabled={!clearVisible.includes(name)} />
+			<Button className={clearVisible.includes(name) ? 'opacity-100' : 'opacity-20'} theme={`warning-HE`} icon="bx-x-circle" name={name} onClick={clickClearButton} disabled={!clearVisible.includes(name)} />
 			{children}
 		</div>
 	);
@@ -38,16 +38,6 @@ export default function ChipSample() {
 		space: ['md'],
 		round: ['md'],
 		roundMode: [''],
-		left: ['icon'],
-		right: ['imageR'],
-		center: ['text'],
-		icon: 'bx-leaf',
-		iconR: 'bxs-x-circle',
-		image: '/bean.jpg',
-		imageR: '/shell.jpg',
-		bg: '/sheet_radio6-lg2.png',
-		bgR: '/sheet_radio4.png',
-		text: 'Next',
 	});
 	const onChipData = UseData({
 		outType: ['L'],
@@ -59,6 +49,9 @@ export default function ChipSample() {
 		space: ['md'],
 		round: ['md'],
 		roundMode: [''],
+	});
+
+	const [elData, runElData] = UseData({
 		left: ['icon'],
 		right: ['imageR'],
 		center: ['text'],
@@ -69,24 +62,14 @@ export default function ChipSample() {
 		bg: '/sheet_radio6-lg2.png',
 		bgR: '/sheet_radio4.png',
 		text: 'Next',
-	});
-
-	const [elData, runElData] = UseData({
 		checked: ['false'],
 		disabled: ['false'],
 	});
-	const {checked, disabled} = elData;
+	const {left, right, center, image, imageR, bg, bgR, icon, iconR, text, checked, disabled} = elData;
 
 	const [chipData, runChipData] = checked == 'true' ? onChipData : offChipData;
 	// const [chipData, runChipData] = offChipData;
-	const {color, outType, outMode, overType, overMode, size, space, round, roundMode, left, right, center, image, imageR, bg, bgR, icon, iconR, text} = chipData;
-
-	const changeElRadio = (event) => {
-		const {name} = event.currentTarget;
-		const {team} = event.currentTarget.dataset;
-
-		runElData.change(team, [name]);
-	};
+	const {color, outType, outMode, overType, overMode, size, space, round, roundMode} = chipData;
 
 	const changeChipRadio = (event) => {
 		const {name} = event.currentTarget;
@@ -95,10 +78,17 @@ export default function ChipSample() {
 		runChipData.change(team, [name]);
 	};
 
-	const chageChipInput = (event) => {
+	const changeElRadio = (event) => {
+		const {name} = event.currentTarget;
+		const {team} = event.currentTarget.dataset;
+
+		runElData.change(team, [name]);
+	};
+
+	const chageElInput = (event) => {
 		const {name, value} = event.currentTarget;
 
-		runChipData.change(chipData[name][0], value);
+		runElData.change(chipData[name][0], value);
 	};
 
 	const clickButton = (event) => {
@@ -172,56 +162,6 @@ export default function ChipSample() {
 					))}
 				</Text>
 			</Group> */}
-			<Group className="p-5 space-y-3 flex justify-center items-center flex-wrap ring-2 ring-gray-500 rounded-lg">
-				{['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L'].map((item, index) => (
-					<Toggle
-						key={index}
-						name={`${item}${outMode}${overType}${overMode}`}
-						href="/view/sample"
-						onClick={clickButton}
-						onChange={changeToggle}
-						// theme={`${[color, `${item}${outMode}${overType}${overMode}`, size, space, `${round}${roundMode}`].join('-')} ${['warning', `${item}${outMode}${overType}${overMode}`, size, space, `${round}${roundMode}`].join('-')}`}
-						theme={[`${color}`, `${item}${outMode}${overType}${overMode}`, size, space, `${round}${roundMode}`].join('-')}
-						icon={left == 'icon' ? icon : ''}
-						iconR={right == 'iconR' ? iconR : ''}
-						img={left == 'image' ? image : ''}
-						imgR={right == 'imageR' ? imageR : ''}
-						bg={left == 'bg' ? bg : ''}
-						bgR={right == 'bgR' ? bgR : ''}
-						text={center == 'text' ? text : ''}
-						checked={checked == 'true'}
-						disabled={disabled == 'true'}
-					/>
-				))}
-			</Group>
-			<Group className="p-5 space-y-3 flex justify-center items-center flex-wrap ring-2 ring-gray-500 rounded-lg">
-				<Toggle
-					name={`${outType}${outMode}${overType}${overMode}`}
-					href="/view/sample"
-					onClick={clickButton}
-					onChange={changeToggle}
-					// theme={`${[color, `${outType}${outMode}${overType}${overMode}`, size, space, `${round}${roundMode}`].join('-')} ${['warning', `${outType}${outMode}${overType}${overMode}`, size, space, `${round}${roundMode}`].join('-')}`}
-					theme={`${sampleTheme} ${sampleOnTheme}`}
-					icon={left == 'icon' ? icon : ''}
-					iconR={right == 'iconR' ? iconR : ''}
-					img={left == 'image' ? image : ''}
-					imgR={right == 'imageR' ? imageR : ''}
-					bg={left == 'bg' ? bg : ''}
-					bgR={right == 'bgR' ? bgR : ''}
-					text={center == 'text' ? text : ''}
-					checked={checked == 'true'}
-					disabled={disabled == 'true'}
-				/>
-			</Group>
-			<Group>
-				<Highlight className="html">
-					{`
-					<Toggle theme="${`${sampleTheme} ${sampleOnTheme}`}"${left == 'icon' ? ' icon="' + icon + '"' : ''}${left == 'image' ? ' img="' + image + '"' : ''}${left == 'bg' ? ' bg="' + bg + '"' : ''}${right == 'iconR' ? ' iconR="' + iconR + '"' : ''}${right == 'imageR' ? ' imgR="' + imageR + '"' : ''}${
-						right == 'bgR' ? ' bgR="' + bgR + '"' : ''
-					}${center == 'text' ? ' text="' + text + '"' : ''}${checked == 'true' ? ' checked' : ''}${disabled == 'true' ? ' disabled' : ''} />
-					`}
-				</Highlight>
-			</Group>
 			<LineGroup name="disabled" runFunc={runChipData}>
 				{['false', 'true'].map((item, index) => (
 					// <ToggleRadio key={index} text={item} team="disabled" name={item} checked={disabled.includes(item)} onChange={changeElRadio} />
@@ -233,6 +173,8 @@ export default function ChipSample() {
 					// <ToggleRadio key={index} text={item} team="checked" name={item} checked={checked.includes(item)} onChange={changeElRadio} />
 					<Toggle key={index} theme={`warning${controlTheme} warning${controlOnTheme}`} bg={controlBg} text={item} team="checked" name={item} checked={checked.includes(item)} onChange={changeElRadio} />
 				))}
+				<Button theme={`default-HE`} icon="bx-link" name="link" onClick={() => {}} />
+				<Button theme={`danger-HE`} icon="bx-eraser" name="eraser" onClick={() => {}} />
 			</LineGroup>
 			<LineGroup name="color" runFunc={runChipData}>
 				{['default', 'primary', 'success', 'info', 'warning', 'danger'].map((item, index) => (
@@ -291,22 +233,16 @@ export default function ChipSample() {
 				))}
 			</LineGroup>
 			<LineGroup name="left" runFunc={runChipData}>
-				{/* <ToggleRadio text="none" team="left" name="none" checked={left.includes('none')} onChange={changeChipRadio} />
-				<ToggleRadio text="icon" team="left" name="icon" checked={left.includes('icon')} onChange={changeChipRadio} />
-				<ToggleRadio text="image" team="left" name="image" checked={left.includes('image')} onChange={changeChipRadio} />
-				<ToggleRadio text="bg" team="left" name="bg" checked={left.includes('bg')} onChange={changeChipRadio} /> */}
 				{['icon', 'image', 'bg'].map((item, index) => (
-					<Toggle key={index} theme={`info${controlTheme} info${controlOnTheme}`} bg={controlBg} text={item} team="left" name={item} checked={left.includes(item)} onChange={changeChipRadio} />
+					<Toggle key={index} theme={`info${controlTheme} info${controlOnTheme}`} bg={controlBg} text={item} team="left" name={item} checked={left.includes(item)} onChange={changeElRadio} />
 				))}
-				<Input type="text" deco="basket-default box-default font-default" className="w-[200px]" name="left" value={chipData[left]} placeholder="left 입력" onChange={chageChipInput} disabled={left == ''} />
+				<Input type="text" deco="basket-default box-default font-default" className="w-[200px]" name="left" value={chipData[left]} placeholder="left 입력" onChange={chageElInput} disabled={left == ''} />
 			</LineGroup>
 			<LineGroup name="center" runFunc={runChipData}>
-				{/* <ToggleRadio text="none" team="center" name="none" checked={center.includes('none')} onChange={changeChipRadio} />
-				<ToggleRadio text="text" team="center" name="text" checked={center.includes('text')} onChange={changeChipRadio} /> */}
 				{['text'].map((item, index) => (
-					<Toggle key={index} theme={`info${controlTheme} info${controlOnTheme}`} bg={controlBg} text={item} team="center" name={item} checked={center.includes(item)} onChange={changeChipRadio} />
+					<Toggle key={index} theme={`info${controlTheme} info${controlOnTheme}`} bg={controlBg} text={item} team="center" name={item} checked={center.includes(item)} onChange={changeElRadio} />
 				))}
-				<Input type="text" deco="basket-default box-default font-default" className="w-[350px]" name="center" value={chipData[center]} placeholder="text 입력" onChange={chageChipInput} disabled={center == ''}>
+				<Input type="text" deco="basket-default box-default font-default" className="w-[350px]" name="center" value={chipData[center]} placeholder="text 입력" onChange={chageElInput} disabled={center == ''}>
 					<Icon deco="font-danger">bx-user</Icon>
 					<Text deco="font-primary" className="flex-none">
 						TEXT :
@@ -314,15 +250,62 @@ export default function ChipSample() {
 				</Input>
 			</LineGroup>
 			<LineGroup name="right" runFunc={runChipData}>
-				{/* <ToggleRadio text="none" team="right" name="none" checked={right.includes('none')} onChange={changeChipRadio} />
-				<ToggleRadio text="icon" team="right" name="iconR" checked={right.includes('iconR')} onChange={changeChipRadio} />
-				<ToggleRadio text="image" team="right" name="imageR" checked={right.includes('imageR')} onChange={changeChipRadio} />
-				<ToggleRadio text="bg" team="right" name="bgR" checked={right.includes('bgR')} onChange={changeChipRadio} /> */}
 				{['icon', 'image', 'bg'].map((item, index) => (
-					<Toggle key={index} theme={`info${controlTheme} info${controlOnTheme}`} bg={controlBg} text={item} team="right" name={`${item}R`} checked={right.includes(`${item}R`)} onChange={changeChipRadio} />
+					<Toggle key={index} theme={`info${controlTheme} info${controlOnTheme}`} bg={controlBg} text={item} team="right" name={`${item}R`} checked={right.includes(`${item}R`)} onChange={changeElRadio} />
 				))}
-				<Input type="text" deco="basket-default box-default font-default" className="w-[200px]" name="right" value={chipData[right]} placeholder="right 입력" onChange={chageChipInput} disabled={right == ''} />
+				<Input type="text" deco="basket-default box-default font-default" className="w-[200px]" name="right" value={chipData[right]} placeholder="right 입력" onChange={chageElInput} disabled={right == ''} />
 			</LineGroup>
+
+			<Group>
+				<Highlight className="html">
+					{`
+					<Toggle theme="${`${sampleTheme} ${sampleOnTheme}`}"${left == 'icon' ? ' icon="' + icon + '"' : ''}${left == 'image' ? ' img="' + image + '"' : ''}${left == 'bg' ? ' bg="' + bg + '"' : ''}${right == 'iconR' ? ' iconR="' + iconR + '"' : ''}${right == 'imageR' ? ' imgR="' + imageR + '"' : ''}${
+						right == 'bgR' ? ' bgR="' + bgR + '"' : ''
+					}${center == 'text' ? ' text="' + text + '"' : ''}${checked == 'true' ? ' checked' : ''}${disabled == 'true' ? ' disabled' : ''} />
+					`}
+				</Highlight>
+			</Group>
+			<Group className="p-5 space-y-3 flex justify-center items-center flex-wrap ring-2 ring-gray-500 rounded-lg">
+				<Toggle
+					name={`${outType}${outMode}${overType}${overMode}`}
+					href="/view/sample"
+					onClick={clickButton}
+					onChange={changeToggle}
+					// theme={`${[color, `${outType}${outMode}${overType}${overMode}`, size, space, `${round}${roundMode}`].join('-')} ${['warning', `${outType}${outMode}${overType}${overMode}`, size, space, `${round}${roundMode}`].join('-')}`}
+					theme={`${sampleTheme} ${sampleOnTheme}`}
+					icon={left == 'icon' ? icon : ''}
+					iconR={right == 'iconR' ? iconR : ''}
+					img={left == 'image' ? image : ''}
+					imgR={right == 'imageR' ? imageR : ''}
+					bg={left == 'bg' ? bg : ''}
+					bgR={right == 'bgR' ? bgR : ''}
+					text={center == 'text' ? text : ''}
+					checked={checked == 'true'}
+					disabled={disabled == 'true'}
+				/>
+			</Group>
+			<Group className="p-5 space-y-3 flex justify-center items-center flex-wrap ring-2 ring-gray-500 rounded-lg">
+				{['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L'].map((item, index) => (
+					<Toggle
+						key={index}
+						name={`${item}${outMode}${overType}${overMode}`}
+						href="/view/sample"
+						onClick={clickButton}
+						onChange={changeToggle}
+						// theme={`${[color, `${item}${outMode}${overType}${overMode}`, size, space, `${round}${roundMode}`].join('-')} ${['warning', `${item}${outMode}${overType}${overMode}`, size, space, `${round}${roundMode}`].join('-')}`}
+						theme={[`${color}`, `${item}${outMode}${overType}${overMode}`, size, space, `${round}${roundMode}`].join('-')}
+						icon={left == 'icon' ? icon : ''}
+						iconR={right == 'iconR' ? iconR : ''}
+						img={left == 'image' ? image : ''}
+						imgR={right == 'imageR' ? imageR : ''}
+						bg={left == 'bg' ? bg : ''}
+						bgR={right == 'bgR' ? bgR : ''}
+						text={center == 'text' ? text : ''}
+						checked={checked == 'true'}
+						disabled={disabled == 'true'}
+					/>
+				))}
+			</Group>
 		</>
 	);
 }
