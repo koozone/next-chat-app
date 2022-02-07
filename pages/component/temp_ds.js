@@ -1,5 +1,5 @@
 import {useEffect} from 'react';
-import {Icon, A, Button, Img, Input, Label, Text, Basket, Toggle, Box} from '../component/ui_ds5';
+import {Icon, A, Button, Img, Input, Label, Text, Basket, Toggle, Box} from '../component/ui_ds6';
 import hljs from 'highlight.js';
 import 'highlight.js/styles/night-owl.css';
 import javascript from 'highlight.js/lib/languages/javascript';
@@ -87,9 +87,17 @@ export const Highlight = (props) => {
 		hljs.highlightAll();
 	}, [content]);
 
+	// position: absolute;
+	// right: 10px;
+	// top: 50%;
+	// z-index: 10;
+
+	// padding-right: 40px;
+
 	return (
-		<pre className="grid">
+		<pre className="grid relative">
 			<code className={`rounded-lg ${className}`}>{content}</code>
+			<Toggle className="" theme="default-LH-md-md-sm" icon="bx-copy-alt" />
 		</pre>
 	);
 };
