@@ -279,12 +279,23 @@ const getThemeProps = (props) => {
 	// const size = themeList[2] || 'sm';
 	// const space = themeList[3] || 'sm';
 	// const round = themeList[4] || 'sm';
-	const themeList = String(theme).split('-') || [];
-	const color = checked ? themeList[0]?.split('/')[1] || themeList[0]?.split('/')[0] || 'default' : themeList[0]?.split('/')[0] || 'default';
-	let tyde = checked ? themeList[1]?.split('/')[1] || themeList[1]?.split('/')[0] || 'I' : themeList[1]?.split('/')[0] || 'I';
-	const size = checked ? themeList[2]?.split('/')[1] || themeList[2]?.split('/')[0] || 'md' : themeList[2]?.split('/')[0] || 'md';
-	const space = checked ? themeList[3]?.split('/')[1] || themeList[3]?.split('/')[0] || 'md' : themeList[3]?.split('/')[0] || 'md';
-	const round = checked ? themeList[4]?.split('/')[1] || themeList[4]?.split('/')[0] || 'md' : themeList[4]?.split('/')[0] || 'md';
+	// const themeList = String(theme).split('-') || [];
+	// const color = checked ? themeList[0]?.split('/')[1] || themeList[0]?.split('/')[0] || 'default' : themeList[0]?.split('/')[0] || 'default';
+	// let tyde = checked ? themeList[1]?.split('/')[1] || themeList[1]?.split('/')[0] || 'I' : themeList[1]?.split('/')[0] || 'I';
+	// const size = checked ? themeList[2]?.split('/')[1] || themeList[2]?.split('/')[0] || 'md' : themeList[2]?.split('/')[0] || 'md';
+	// const space = checked ? themeList[3]?.split('/')[1] || themeList[3]?.split('/')[0] || 'md' : themeList[3]?.split('/')[0] || 'md';
+	// const round = checked ? themeList[4]?.split('/')[1] || themeList[4]?.split('/')[0] || 'md' : themeList[4]?.split('/')[0] || 'md';
+	const themeArr = String(theme).split(' ') || [];
+	const offTheme = themeArr[0];
+	const onTheme = themeArr[1];
+	const themeValue = checked ? onTheme || offTheme : offTheme;
+
+	const themeList = String(themeValue).split('-') || [];
+	const color = themeList[0] || 'default';
+	let tyde = themeList[1] || 'I';
+	const size = themeList[2] || 'md';
+	const space = themeList[3] || 'md';
+	const round = themeList[4] || 'md';
 
 	const roundReg = /(none|xs|sm|md|lg|xl|2xl|3xl|full)([0-9]?)/;
 	const roundMatch = round.match(roundReg);
@@ -416,52 +427,52 @@ const getNewProps = (props) => {
 		.split('##')
 		.filter((item) => item.split('-')[0] == useTag)[0];
 
-	const classProp = `${getDefaultElement(props).props.className} | ${mixDecoElement({...props, useDeco}).props.className}`;
-	const themeObj = props.themeObj ? props.themeObj : theme ? getThemeProps(props) : {};
+	const styleName = `${getDefaultElement(props).props.className} | ${mixDecoElement({...props, useDeco}).props.className}`;
+	const themeProps = props.themeProps ? props.themeProps : theme ? getThemeProps(props) : {};
 
 	return {
 		...props,
 		children,
 		deco,
 		useDeco,
-		classProp,
+		styleName,
 		className,
 		href,
 		onClick,
 		onChange,
-		themeObj,
+		themeProps,
 	};
 };
 
 const FormCheck = (props) => {
-	const {children, deco, classProp, className, team = '', name, href, type, onChange, checked, disabled} = getNewProps({...props, tag: 'formCheck'});
+	const {children, deco, styleName, className, team = '', name, href, type, onChange, checked, disabled} = getNewProps({...props, tag: 'formCheck'});
 
 	return props.tag == 'toggle' ? (
-		<input type={type} className={`${classProp} | `} id={[team, name].join('-')} name={name} data-team={team} checked={checked} disabled={disabled} onChange={onChange} />
+		<input type={type} className={`${styleName} | `} id={[team, name].join('-')} name={name} data-team={team} checked={checked} disabled={disabled} onChange={onChange} />
 	) : (
-		<input type={type} className={`${classProp} | `} checked={checked} disabled={disabled} onChange={onChange} />
+		<input type={type} className={`${styleName} | `} checked={checked} disabled={disabled} onChange={onChange} />
 	);
 };
 const FormInput = forwardRef((props, ref) => {
-	const {children, deco, classProp, className, name, href, type, value, placeholder, onChange, checked, disabled} = getNewProps({...props, tag: 'formInput'});
+	const {children, deco, styleName, className, name, href, type, value, placeholder, onChange, checked, disabled} = getNewProps({...props, tag: 'formInput'});
 
-	return disabled ? <input type={type} className={`${classProp} | `} ref={ref} placeholder={placeholder} value={value} onChange={onChange} /> : <input type={type} className={`${classProp} | `} id={name} name={name} ref={ref} placeholder={placeholder} value={value} onChange={onChange} />;
+	return disabled ? <input type={type} className={`${styleName} | `} ref={ref} placeholder={placeholder} value={value} onChange={onChange} /> : <input type={type} className={`${styleName} | `} id={name} name={name} ref={ref} placeholder={placeholder} value={value} onChange={onChange} />;
 });
 
 export const Icon = (props) => {
-	const {children, deco, classProp, className, icon} = getNewProps({...props, tag: 'icon'});
+	const {children, deco, styleName, className, icon} = getNewProps({...props, tag: 'icon'});
 
-	return children ? <i className={`${classProp} | ${className}`} /> : <></>;
+	return children ? <i className={`${styleName} | ${className}`} /> : <></>;
 };
 
 export const Img = (props) => {
-	const {deco, classProp, className, name, src, alt} = getNewProps({...props, tag: 'img'});
+	const {deco, styleName, className, name, src, alt} = getNewProps({...props, tag: 'img'});
 
-	return <img className={`${classProp} | ${className}`} src={src} alt={alt} />;
+	return <img className={`${styleName} | ${className}`} src={src} alt={alt} />;
 };
 
 export const Bg = (props) => {
-	const {children, deco, useDeco, classProp, className, bg, height, name} = getNewProps({...props, tag: 'bg'});
+	const {children, deco, useDeco, styleName, className, bg, height, name} = getNewProps({...props, tag: 'bg'});
 
 	const fileReg = /.*-(xs|sm|md|lg|xl)([0-9]?)\..*/;
 	const match = bg.match(fileReg);
@@ -480,7 +491,7 @@ export const Bg = (props) => {
 
 	const active = match?.[2] == '2' ? '' : 'group-active:bg-center-top group-active:peer-checked:bg-center-bottom';
 
-	return bg ? <div className={`${classProp} | ${className} w-${height * ratio} h-${height} bg-${scale} ${active}`} style={{backgroundImage: `url(${bg})`}}></div> : <></>;
+	return bg ? <div className={`${styleName} | ${className} w-${height * ratio} h-${height} bg-${scale} ${active}`} style={{backgroundImage: `url(${bg})`}}></div> : <></>;
 };
 
 const TextTheme = (props) => {
@@ -488,14 +499,14 @@ const TextTheme = (props) => {
 		children,
 		theme,
 		deco,
-		classProp,
+		styleName,
 		className,
 		icon,
 		iconL,
 		iconR,
 		name,
 		checked,
-		themeObj: {padding, margin, size, rounded, height, typeDeco, modeDeco},
+		themeProps: {padding, margin, size, rounded, height, typeDeco, modeDeco},
 	} = getNewProps({...props, tag: 'font'});
 	// const {padding, margin, size, rounded, height, typeDeco, modeDeco} = getThemeProps(props);
 
@@ -505,13 +516,13 @@ const TextTheme = (props) => {
 	// 비어있는 children 내용을 코드 줄바꿈으로 인해 비어있지 않음으로 인식하는 오류를 방지하기 위해 사용
 	const childrenContent = [].concat(children).join('');
 
-	return childrenContent ? <span className={`${classProp} | ${className} ${typeClass} ${modeClass} text-${size}`}>{children}</span> : <></>;
+	return childrenContent ? <span className={`${styleName} | ${className} ${typeClass} ${modeClass} text-${size}`}>{children}</span> : <></>;
 };
 
 const TextReal = (props) => {
-	const {children, deco, classProp, className, icon, iconL, iconR, name} = getNewProps({...props, tag: 'font'});
+	const {children, deco, styleName, className, icon, iconL, iconR, name} = getNewProps({...props, tag: 'font'});
 
-	return children ? <span className={`${classProp} | ${className}`}>{children}</span> : <></>;
+	return children ? <span className={`${styleName} | ${className}`}>{children}</span> : <></>;
 };
 
 export const Text = (props) => {
@@ -519,9 +530,9 @@ export const Text = (props) => {
 };
 
 export const Box = (props) => {
-	const {children, deco, useDeco, classProp, className, name} = getNewProps({...props, tag: 'box'});
+	const {children, deco, useDeco, styleName, className, name} = getNewProps({...props, tag: 'box'});
 
-	return useDeco ? <div className={`${classProp} | ${className}`}></div> : <></>;
+	return useDeco ? <div className={`${styleName} | ${className}`}></div> : <></>;
 };
 
 const LabelTheme = (props) => {
@@ -530,7 +541,7 @@ const LabelTheme = (props) => {
 		children,
 		theme,
 		deco,
-		classProp,
+		styleName,
 		className,
 		img = '',
 		imgR = '',
@@ -544,12 +555,12 @@ const LabelTheme = (props) => {
 		right,
 		center,
 		checked,
-		themeObj: {padding, margin, size, rounded, height, typeDeco, modeDeco},
+		themeProps: {padding, margin, size, rounded, height, typeDeco, modeDeco},
 	} = newProps;
 	// const {padding, margin, size, rounded, height, typeDeco, modeDeco} = getThemeProps(props);
 
 	return (
-		<div className={`${classProp} | ${className} px-${padding.x} py-${padding.y} text-${size}`}>
+		<div className={`${styleName} | ${className} px-${padding.x} py-${padding.y} text-${size}`}>
 			<Box deco={`box-${typeDeco}`} className={`${rounded}`} />
 			{left ? (
 				left
@@ -593,10 +604,10 @@ const LabelTheme = (props) => {
 };
 
 const LabelReal = (props) => {
-	const {children, deco, classProp, className, icon, iconL, iconR, text} = getNewProps({...props, tag: 'label'});
+	const {children, deco, styleName, className, icon, iconL, iconR, text} = getNewProps({...props, tag: 'label'});
 
 	return (
-		<div className={`${classProp} | ${className}`}>
+		<div className={`${styleName} | ${className}`}>
 			<Box deco={deco} />
 			<Icon deco={deco}>{icon || iconL}</Icon>
 			<Text deco={deco}>{text}</Text>
@@ -612,14 +623,14 @@ export const Label = (props) => {
 
 export const A = (props) => {
 	const newProps = getNewProps({...props, tag: 'a'});
-	const {classProp, className, name, href, target = '_self', checked = false, disabled} = newProps;
+	const {styleName, className, name, href, target = '_self', checked = false, disabled} = newProps;
 
 	const label = Label({...newProps});
 	const labelClass = `${label.props.className} justify-center`;
 
 	return (
 		<Link href={href}>
-			<a target={target} className={`${classProp} | ${className} | ${labelClass}`}>
+			<a target={target} className={`${styleName} | ${className} | ${labelClass}`}>
 				{/* <Basket {...newProps} type="checkbox" checked={checked} /> */}
 				{/* <Label {...newProps} /> */}
 				{label.props.children}
@@ -631,7 +642,7 @@ export const A = (props) => {
 
 export const Basket = (props) => {
 	const newProps = props.tag ? props : getNewProps({...props, type: 'checkbox', tag: 'basket'});
-	const {children, deco, classProp, className, icon, iconL, iconR, team = '', name, text, type, onChange, checked = false, disabled} = newProps;
+	const {children, deco, styleName, className, icon, iconL, iconR, team = '', name, text, type, onChange, checked = false, disabled} = newProps;
 
 	// 특정 ui의 change 이벤트 발생을 방지하기 위한 코드
 	const forName = ['toggle', 'input'].includes(props.tag) ? (name ? [team, name].join('-') : null) : '';
@@ -640,7 +651,7 @@ export const Basket = (props) => {
 	const labelClass = `${label.props.className} justify-center`;
 
 	return (
-		<label htmlFor={forName} className={`${classProp} | ${className} | ${labelClass}`}>
+		<label htmlFor={forName} className={`${styleName} | ${className} | ${labelClass}`}>
 			<FormCheck {...props} type={type} checked={checked} />
 			{/* <Box deco={deco} /> */}
 			{/* <Label deco={deco} icon={icon || iconL} iconR={iconR} text={text} /> */}
