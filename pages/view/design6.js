@@ -435,7 +435,7 @@ export default function code() {
 					<Label theme="default-HL-md-xs-full" icon="bx-star" text="Sample ">
 						<Button theme="danger-AD-sm-md-full" icon="bxs-x-circle" />
 					</Label>
-					<Toggle theme="default-HL-md-md-full" icon="bx-star" text="Sample " name="agree" checked={data.agree} onChange={changeSwitch} left={<Label theme="success-BF-2xl-2xl-full" icon="bx-leaf" />} right={<Label theme="danger-AF-lg-md-full" icon="bxs-x-circle" />} />
+					<Toggle theme="default-HL-md-md-full" icon="bx-star" text="Sample " name="agree" checked={data.agree} onChange={changeSwitch} left={<Label theme="success-BF-2xl-xl-full" icon="bx-leaf" />} right={<Label theme="danger-AF-lg-md-full" icon="bxs-x-circle" />} />
 					<Toggle theme="default-DF-md-md-full" icon="bx-star" text="Sample " name="agree" checked={data.agree} onChange={changeSwitch} left={<Label theme="success-DF-xs-xs-full" img="/bean.jpg" />} right={<Label theme="danger-AF-lg-md-full" icon="bxs-x-circle" />} />
 					<Basket theme="default-DF-md-md-full" icon="bx-star" text="Sample " name="agree" checked={data.agree} onChange={changeSwitch} left={<Label theme="success-DF-xs-xs-full" img="/shell.jpg" />} right={<Button theme="danger-AF-lg-md-full" icon="bxs-x-circle" />} />
 					<Button theme="default-DF-xs-md-full" img="/noodle.jpg" text="Compose Coffee" />
@@ -911,8 +911,8 @@ export default function code() {
 						<Text deco="font-danger">{item} : </Text>
 						<Button theme={`${item}-HI`} icon="bx-leaf" iconR="bxs-chevron-right" text="Next Step" />
 						<Button theme={`${item}-KL`} icon="bx-leaf" text="Next Step" />
-						<Button theme={`${item}-BI`} iconR="bxs-chevron-right" text="다음 단계" />
-						<Button theme={`${item}-IB`} icon="bx-leaf" />
+						<Button theme={`${item}-GI`} iconR="bxs-chevron-right" text="다음 단계" />
+						<Button theme={`${item}-IG`} icon="bx-leaf" />
 						<Button theme={`${item}-AL`} text="Menu" />
 					</Group>
 				))}
@@ -934,8 +934,8 @@ export default function code() {
 						<Text deco="font-danger">{item} : </Text>
 						<Toggle theme={`${item}-HI`} icon="bx-leaf" iconR="bxs-chevron-right" text="Next Step" />
 						<Toggle theme={`${item}-KL`} icon="bx-leaf" text="Next Step" />
-						<Toggle theme={`${item}-BI`} iconR="bxs-chevron-right" text="다음 단계" />
-						<Toggle theme={`${item}-IB`} icon="bx-leaf" />
+						<Toggle theme={`${item}-GI`} iconR="bxs-chevron-right" text="다음 단계" />
+						<Toggle theme={`${item}-IG`} icon="bx-leaf" />
 						<Toggle theme={`${item}-AL`} text="Menu" />
 					</Group>
 				))}

@@ -27,6 +27,7 @@ const dummyElement = () => {
 			<div className={`text-slate-800 border-slate-800 bg-slate-100 bg-slate-300 bg-slate-500 bg-slate-600 group-hover:text-slate-800 group-hover:border-slate-800 group-hover:bg-slate-100 group-hover:bg-slate-300 group-hover:bg-slate-500 group-hover:bg-slate-600`} />
 			<div className={`text-sky-800 border-sky-800 bg-sky-100 bg-sky-300 bg-sky-500 bg-sky-600 group-hover:text-sky-800 group-hover:border-sky-800 group-hover:bg-sky-100 group-hover:bg-sky-300 group-hover:bg-sky-500 group-hover:bg-sky-600`} />
 			<div className={`text-emerald-800 border-emerald-800 bg-emerald-100 bg-emerald-300 bg-emerald-500 bg-emerald-600 group-hover:text-emerald-800 group-hover:border-emerald-800 group-hover:bg-emerald-100 group-hover:bg-emerald-300 group-hover:bg-emerald-500 group-hover:bg-emerald-600`} />
+			<div className={`text-indigo-800 border-indigo-800 bg-indigo-100 bg-indigo-300 bg-indigo-500 bg-indigo-600 group-hover:text-indigo-800 group-hover:border-indigo-800 group-hover:bg-indigo-100 group-hover:bg-indigo-300 group-hover:bg-indigo-500 group-hover:bg-indigo-600`} />
 			<div className={`text-amber-800 border-amber-800 bg-amber-100 bg-amber-300 bg-amber-500 bg-amber-600 group-hover:text-amber-800 group-hover:border-amber-800 group-hover:bg-amber-100 group-hover:bg-amber-300 group-hover:bg-amber-500 group-hover:bg-amber-600`} />
 			<div className={`text-rose-800 border-rose-800 bg-rose-100 bg-rose-300 bg-rose-500 bg-rose-600 group-hover:text-rose-800 group-hover:border-rose-800 group-hover:bg-rose-100 group-hover:bg-rose-300 group-hover:bg-rose-500 group-hover:bg-rose-600`} />;
 		</>
@@ -76,7 +77,7 @@ const mixDecoElement = (props) => {
 const getDefaultElement = (props) => {
 	const {children, tag, disabled} = props;
 
-	const peerDisabled = 'peer-disabled:opacity-50 peer-disabled:pointer-events-none';
+	const peerDisabled = 'peer-disabled:opacity-50 peer-disabled:pointer-events-none peer-disabled:cursor-default';
 
 	switch (tag) {
 		case 'img':
@@ -102,7 +103,7 @@ const getDefaultElement = (props) => {
 			return <div className={`peer sr-only`} />;
 
 		case 'formInput':
-			return <div className={`flex-auto truncate outline-none bg-transparent peer-disabled:opacity-50 peer-disabled:pointer-events-none`} />;
+			return <div className={`flex-auto truncate outline-none bg-transparent ${peerDisabled}`} />;
 
 		case 'basket':
 			// return <div className={`relative inline-flex justify-center items-center`} />;
@@ -133,6 +134,7 @@ const getDecoElement = (props) => {
 		default: 'slate',
 		primary: 'sky',
 		success: 'emerald',
+		info: 'indigo',
 		warning: 'amber',
 		danger: 'rose',
 	}[decocolor];
@@ -172,14 +174,14 @@ const getDecoElement = (props) => {
 		case 'font-B-*':
 		case 'font-C-*':
 		case 'font-D-*':
-		case 'font-E-*':
+		case 'font-G-*':
 		case 'font-H-*':
 		case 'font-I-*':
 		case 'font-J-*':
 			return <div className={`${action}text-${tailcolor}-800`} />;
 
+		case 'font-E-*':
 		case 'font-F-*':
-		case 'font-G-*':
 		case 'font-K-*':
 		case 'font-L-*':
 			return <div className={`${action}text-white`} />;
@@ -196,22 +198,22 @@ const getDecoElement = (props) => {
 			return <div className={`${action}border-0 ${action}bg-transparent`} />;
 
 		case 'box-B-*':
-			return <div className={`${action}border ${action}border-${tailcolor}-800 ${action}bg-transparent`} />;
-
-		case 'box-C-*':
 			return <div className={`${action}border-0 ${action}bg-white`} />;
 
-		case 'box-D-*':
+		case 'box-C-*':
 			return <div className={`${action}border-0 ${action}bg-${tailcolor}-100`} />;
 
-		case 'box-E-*':
+		case 'box-D-*':
 			return <div className={`${action}border-0 ${action}bg-${tailcolor}-300`} />;
 
-		case 'box-F-*':
+		case 'box-E-*':
 			return <div className={`${action}border-0 ${action}bg-${tailcolor}-500`} />;
 
-		case 'box-G-*':
+		case 'box-F-*':
 			return <div className={`${action}border-0 ${action}bg-${tailcolor}-600`} />;
+
+		case 'box-G-*':
+			return <div className={`${action}border ${action}border-${tailcolor}-800 ${action}bg-transparent`} />;
 
 		case 'box-H-*':
 			return <div className={`${action}border ${action}border-${tailcolor}-800 ${action}bg-white`} />;
@@ -279,10 +281,10 @@ const getThemeProps = (props) => {
 	// const round = themeList[4] || 'sm';
 	const themeList = String(theme).split('-') || [];
 	const color = checked ? themeList[0]?.split('/')[1] || themeList[0]?.split('/')[0] || 'default' : themeList[0]?.split('/')[0] || 'default';
-	let tyde = checked ? themeList[1]?.split('/')[1] || themeList[1]?.split('/')[0] || 'A1A1' : themeList[1]?.split('/')[0] || 'A1A1';
-	const size = checked ? themeList[2]?.split('/')[1] || themeList[2]?.split('/')[0] || 'sm' : themeList[2]?.split('/')[0] || 'sm';
-	const space = checked ? themeList[3]?.split('/')[1] || themeList[3]?.split('/')[0] || 'sm' : themeList[3]?.split('/')[0] || 'sm';
-	const round = checked ? themeList[4]?.split('/')[1] || themeList[4]?.split('/')[0] || 'sm' : themeList[4]?.split('/')[0] || 'sm';
+	let tyde = checked ? themeList[1]?.split('/')[1] || themeList[1]?.split('/')[0] || 'I' : themeList[1]?.split('/')[0] || 'I';
+	const size = checked ? themeList[2]?.split('/')[1] || themeList[2]?.split('/')[0] || 'md' : themeList[2]?.split('/')[0] || 'md';
+	const space = checked ? themeList[3]?.split('/')[1] || themeList[3]?.split('/')[0] || 'md' : themeList[3]?.split('/')[0] || 'md';
+	const round = checked ? themeList[4]?.split('/')[1] || themeList[4]?.split('/')[0] || 'md' : themeList[4]?.split('/')[0] || 'md';
 
 	const roundReg = /(none|xs|sm|md|lg|xl|2xl|3xl|full)([0-9]?)/;
 	const roundMatch = round.match(roundReg);
@@ -297,14 +299,19 @@ const getThemeProps = (props) => {
 	const modeDeco = `${tyde.replace(tydeReg, '$2$4')}-${color}`; // '12-default'
 
 	const padding = {
-		none: {x: 0, y: 0},
-		xs: {x: 0.5, y: 0.5},
-		sm: {x: 1, y: 1},
-		md: {x: 2, y: 2},
-		lg: {x: 3, y: 3},
-		xl: {x: 4, y: 4},
-		'2xl': {x: 5, y: 5},
-		'3xl': {x: 6, y: 6},
+		// none: {x: 0, y: 0},
+		// xs: {x: 0.5, y: 0.5},
+		// sm: {x: 1, y: 1},
+		// md: {x: 2, y: 2},
+		// lg: {x: 3, y: 3},
+		// xl: {x: 4, y: 4},
+		// '2xl': {x: 5, y: 5},
+		// '3xl': {x: 6, y: 6},
+		xs: {x: 0, y: 0},
+		sm: {x: 0.5, y: 0.5},
+		md: {x: 1, y: 1},
+		lg: {x: 2, y: 2},
+		xl: {x: 3, y: 3},
 	}[space];
 
 	const margin = {
@@ -334,25 +341,31 @@ const getThemeProps = (props) => {
 	const rounded = [
 		'rounded',
 		{
-			1: 'tl',
-			2: 'tr',
-			3: 'br',
-			4: 'bl',
-			5: 't',
-			6: 'r',
-			7: 'b',
-			8: 'l',
-			all: '',
-		}[roundMatch[2] || 'all'],
+			none: '',
+			1: 't',
+			2: 'r',
+			3: 'b',
+			4: 'l',
+			5: 'tl',
+			6: 'tr',
+			7: 'br',
+			8: 'bl',
+		}[roundMatch[2] || 'none'],
 		{
-			none: 'none',
-			xs: 'sm',
+			// none: 'none',
+			// xs: 'sm',
+			// sm: '',
+			// md: 'md',
+			// lg: 'lg',
+			// xl: 'xl',
+			// '2xl': '2xl',
+			// '3xl': '3xl',
+			// full: 'full',
+			xs: 'none',
 			sm: '',
-			md: 'md',
-			lg: 'lg',
-			xl: 'xl',
-			'2xl': '2xl',
-			'3xl': '3xl',
+			md: 'lg',
+			lg: 'xl',
+			xl: '2xl',
 			full: 'full',
 		}[roundMatch[1]],
 	]
