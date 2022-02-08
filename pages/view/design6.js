@@ -690,10 +690,10 @@ export default function code() {
 
 				<Group>
 					<Text deco="font-danger">fruite : </Text>
-					<Toggle theme="primary-CDL/FG" icon="bx-leaf" text="banana" team="fruite" name="banana" checked={data.fruite.includes('banana')} onChange={changeCheckbox} />
-					<Toggle theme="primary-CDL/FG" icon="bx-leaf" text="apple" team="fruite" name="apple" checked={data.fruite.includes('apple')} onChange={changeCheckbox} />
-					<Toggle theme="primary-CDL/FG" icon="bx-leaf" text="orange" team="fruite" name="orange" checked={data.fruite.includes('orange')} onChange={changeCheckbox} />
-					<Toggle theme="primary-CDL/FG" icon="bx-leaf" text="melon" team="fruite" name="melon" checked={data.fruite.includes('melon')} onChange={changeCheckbox} />
+					<Toggle theme="primary-DL primary-FG" icon="bx-leaf" text="banana" team="fruite" name="banana" checked={data.fruite.includes('banana')} onChange={changeCheckbox} />
+					<Toggle theme="primary-DL primary-FG" icon="bx-leaf" text="apple" team="fruite" name="apple" checked={data.fruite.includes('apple')} onChange={changeCheckbox} />
+					<Toggle theme="primary-DL primary-FG" icon="bx-leaf" text="orange" team="fruite" name="orange" checked={data.fruite.includes('orange')} onChange={changeCheckbox} />
+					<Toggle theme="primary-DL primary-FG" icon="bx-leaf" text="melon" team="fruite" name="melon" checked={data.fruite.includes('melon')} onChange={changeCheckbox} />
 				</Group>
 			</Fieldset>
 
@@ -723,10 +723,10 @@ export default function code() {
 
 				<Group>
 					<Text deco="font-success">color : </Text>
-					<Toggle theme="success-BI/KL" icon="bx-leaf" text="red" team="color" name="red" checked={data.color.includes('red')} onChange={changeRadio} />
-					<Toggle theme="success-BI/KL" icon="bx-leaf" text="blue" team="color" name="blue" checked={data.color.includes('blue')} onChange={changeRadio} />
-					<Toggle theme="success-BI/KL" icon="bx-leaf" text="yellow" team="color" name="yellow" checked={data.color.includes('yellow')} onChange={changeRadio} />
-					<Toggle theme="success-BI/KL" icon="bx-leaf" text="green" team="color" name="green" checked={data.color.includes('green')} onChange={changeRadio} />
+					<Toggle theme="success-BI success-KL" icon="bx-leaf" text="red" team="color" name="red" checked={data.color.includes('red')} onChange={changeRadio} />
+					<Toggle theme="success-BI success-KL" icon="bx-leaf" text="blue" team="color" name="blue" checked={data.color.includes('blue')} onChange={changeRadio} />
+					<Toggle theme="success-BI success-KL" icon="bx-leaf" text="yellow" team="color" name="yellow" checked={data.color.includes('yellow')} onChange={changeRadio} />
+					<Toggle theme="success-BI success-KL" icon="bx-leaf" text="green" team="color" name="green" checked={data.color.includes('green')} onChange={changeRadio} />
 				</Group>
 			</Fieldset>
 
@@ -755,9 +755,9 @@ export default function code() {
 
 				<Group>
 					<Text deco="font-success">color : </Text>
-					<Toggle theme="default/warning-HJ/JH" icon="bx-leaf" text="dog" name="dog" checked={data.dog} onChange={changeSwitch} />
-					<Toggle theme="default/warning-HJ/JH" icon="bx-leaf" text="cat" name="cat" checked={data.cat} onChange={changeSwitch} />
-					<Toggle theme="default/warning-HJ/JH" icon="bx-leaf" text="bird" name="bird" checked={data.bird} onChange={changeSwitch} />
+					<Toggle theme="default-HJ warning-JH" icon="bx-leaf" text="dog" name="dog" checked={data.dog} onChange={changeSwitch} />
+					<Toggle theme="default-HJ warning-JH" icon="bx-leaf" text="cat" name="cat" checked={data.cat} onChange={changeSwitch} />
+					<Toggle theme="default-HJ warning-JH" icon="bx-leaf" text="bird" name="bird" checked={data.bird} onChange={changeSwitch} />
 				</Group>
 			</Fieldset>
 
