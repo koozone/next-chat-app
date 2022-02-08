@@ -9,10 +9,10 @@ const dummyElement = () => {
 			<div className={`py-0 py-0.5 py-1 py-2 py-3 py-4 py-5 py-6`} />
 			<div className={`mr-0 mr-0.5 mr-1 mr-2 mr-3 mr-4 mr-5 mr-6`} />
 			<div className={`ml-0 ml-0.5 ml-1 ml-2 ml-3 ml-4 ml-5 ml-6`} />
-			<div className={`w-2 w-2.5 w-3 w-3.5 w-4 w-4.5 w-5 w-6 w-7 w-8 w-9 w-10 w-12 w-14 w-16 w-18 w-20 w-24`} />
-			<div className={`h-4 h-5 h-6 h-7 h-8 h-9 h-10 h-12`} />
+			<div className={`w-2 w-2.5 w-3 w-3.5 w-4 w-4.5 w-5 w-6 w-7 w-8 w-9 w-10 w-12 w-14 w-16 w-18 w-20 w-24 w-28`} />
+			<div className={`h-4 h-5 h-6 h-7 h-8 h-9 h-10 h-12 h-14`} />
 			<div className={`bg-100% bg-200% bg-300%`} />
-			<div className={`text-xs text-sm text-md text-lg text-xl text-2xl text-3xl text-4xl text-5xl`} />
+			<div className={`text-xs text-sm text-md text-lg text-xl text-2xl text-3xl text-4xl text-5xl text-6xl`} />
 			<div className={`rounded-none rounded-sm rounded rounded-md rounded-lg rounded-xl rounded-2xl rounded-3xl rounded-full`} />
 			<div className={`rounded-t-none rounded-t-sm rounded-t rounded-t-md rounded-t-lg rounded-t-xl rounded-t-2xl rounded-t-3xl rounded-t-full`} />
 			<div className={`rounded-b-none rounded-b-sm rounded-b rounded-b-md rounded-b-lg rounded-b-xl rounded-b-2xl rounded-b-3xl rounded-b-full`} />
@@ -75,7 +75,7 @@ const mixDecoElement = (props) => {
 };
 
 const getDefaultElement = (props) => {
-	const {children, tag, disabled} = props;
+	const {children, tag, checked, disabled} = props;
 
 	const peerDisabled = 'peer-disabled:opacity-50 peer-disabled:pointer-events-none peer-disabled:cursor-default';
 
@@ -87,13 +87,18 @@ const getDefaultElement = (props) => {
 			return <div className={`bg-no-repeat bg-left-top group-hover:bg-right-top peer-checked:bg-left-bottom group-hover:peer-checked:bg-right-bottom ${peerDisabled}`} />;
 
 		case 'icon':
-			return <div className={`bx ${children} pointer-events-none ${peerDisabled}`} />;
+			const iconArr = String(children).split(' ') || [];
+			const offIcon = iconArr[0];
+			const onIcon = iconArr[1];
+			const iconValue = checked ? onIcon || offIcon : offIcon;
+
+			return <div className={`bx ${iconValue} pointer-events-none ${peerDisabled}`} />;
 
 		case 'font':
 			return <div className={`${peerDisabled}`} />;
 
 		case 'box':
-			return <div className={`-z-20 top-0 left-0 ${peerDisabled}`} />;
+			return <div className={`top-0 left-0 -z-20 ${peerDisabled}`} />;
 
 		case 'label':
 			return <div className={`relative inline-flex items-center`} />;
@@ -245,7 +250,7 @@ const getDecoElement = (props) => {
 		case 'box-switch':
 			return <div className={`w-7 h-4 rounded-full border border-slate-400 bg-slate-100 group-hover:bg-white peer-checked:bg-sky-500 peer-checked:border-sky-700 group-hover:peer-checked:bg-sky-600`} />;
 		case 'box-switch-dot':
-			return <div className={`absolute w-3 h-3 rounded-full border border-slate-400 bg-white top-1/2 transform -translate-y-1/2 left-[11px] peer-checked:left-[22px]`} />;
+			return <div className={`absolute w-3 h-3 rounded-full border border-slate-400 bg-white left-[11px] top-1/2 transform -translate-y-1/2 peer-checked:left-[22px]`} />;
 		case 'box-list-col':
 			return <div className={`absolute w-full h-full border border-slate-400 bg-slate-100 group-hover:bg-white peer-checked:bg-slate-500 peer-checked:border-slate-700 group-hover:peer-checked:bg-slate-600 group-first:rounded-t-lg group-last:rounded-b-lg`} />;
 
@@ -335,6 +340,7 @@ const getThemeProps = (props) => {
 		'3xl': {x: 2, y: 0},
 		'4xl': {x: 2, y: 0},
 		'5xl': {x: 2, y: 0},
+		'6xl': {x: 3, y: 0},
 	}[size];
 
 	const height = {
@@ -347,6 +353,7 @@ const getThemeProps = (props) => {
 		'3xl': 9,
 		'4xl': 10,
 		'5xl': 12,
+		'6xl': 14,
 	}[size];
 
 	const rounded = [
@@ -570,7 +577,7 @@ const LabelTheme = (props) => {
 				// <div className={`ml-${margin.x} last:ml-0 h-${height} aspect-square ${rounded} border-0 bg-origin-border bg-cover bg-[left_top] group-hover:saturate-200 peer-checked:bg-[right_bottom] group-hover:peer-checked:saturate-200`} style={{backgroundImage: `url(${img})`}} />
 				<Bg bg={bg} height={height} className={`mr-${margin.x} last:mr-0`} />
 			) : icon ? (
-				<Icon deco={`font-${typeDeco}`} className={`ml-${margin.x} last:ml-0`}>
+				<Icon {...newProps} deco={`font-${typeDeco}`} className={`ml-${margin.x} last:ml-0`}>
 					{icon}
 				</Icon>
 			) : (
@@ -593,7 +600,7 @@ const LabelTheme = (props) => {
 			) : bgR ? (
 				<Bg bg={bgR} height={height} className={`ml-${margin.x}`} />
 			) : iconR ? (
-				<Icon deco={`font-${typeDeco}`} className={`mr-${margin.x}`}>
+				<Icon {...newProps} deco={`font-${typeDeco}`} className={`mr-${margin.x}`}>
 					{iconR}
 				</Icon>
 			) : (
@@ -626,11 +633,11 @@ export const A = (props) => {
 	const {styleName, className, name, href, target = '_self', checked = false, disabled} = newProps;
 
 	const label = Label({...newProps});
-	const labelClass = `${label.props.className} justify-center`;
+	const labelName = `${label.props.className} justify-center`;
 
 	return (
 		<Link href={href}>
-			<a target={target} className={`${styleName} | ${className} | ${labelClass}`}>
+			<a target={target} className={`${styleName} | ${labelName}`}>
 				{/* <Basket {...newProps} type="checkbox" checked={checked} /> */}
 				{/* <Label {...newProps} /> */}
 				{label.props.children}
@@ -648,10 +655,10 @@ export const Basket = (props) => {
 	const forName = ['toggle', 'input'].includes(props.tag) ? (name ? [team, name].join('-') : null) : '';
 
 	const label = Label({...newProps});
-	const labelClass = `${label.props.className} justify-center`;
+	const labelName = `${label.props.className} justify-center`;
 
 	return (
-		<label htmlFor={forName} className={`${styleName} | ${className} | ${labelClass}`}>
+		<label htmlFor={forName} className={`${styleName} | ${labelName}`}>
 			<FormCheck {...props} type={type} checked={checked} />
 			{/* <Box deco={deco} /> */}
 			{/* <Label deco={deco} icon={icon || iconL} iconR={iconR} text={text} /> */}

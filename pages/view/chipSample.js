@@ -4,7 +4,8 @@ import {UseData} from '../hook/useData';
 
 const LineGroup = (props) => {
 	const {children, name, className = '', runFunc} = props;
-	const clearVisible = ['outMode', 'overMode', 'roundMode', 'left', 'right', 'center'];
+	const visibleList = ['outMode', 'overMode', 'roundMode', 'left', 'right', 'center'];
+	const valueList = ['disabled', 'checked', 'left', 'right', 'center'];
 
 	const clickClearButton = (event) => {
 		const {name} = event.currentTarget;
@@ -14,8 +15,8 @@ const LineGroup = (props) => {
 
 	return (
 		<div className={`flex items-center space-x-2 ${className}`}>
-			<Label className="w-32 justify-end" theme="default-A-md" icon="bx-leaf" text={`${name} : `} />
-			<Button className={clearVisible.includes(name) ? 'opacity-100' : 'opacity-20'} theme={`warning-HE`} icon="bx-x-circle" name={name} onClick={clickClearButton} disabled={!clearVisible.includes(name)} />
+			<Label className="w-32 justify-end" theme={valueList.includes(name) ? 'default-A-md' : 'warning-A-md'} icon="bx-leaf" text={`${name} : `} />
+			<Button className={visibleList.includes(name) ? 'opacity-100' : 'opacity-20'} theme={`warning-HE`} icon="bx-x-circle" name={name} onClick={clickClearButton} disabled={!visibleList.includes(name)} />
 			{children}
 		</div>
 	);
@@ -38,6 +39,8 @@ export default function ChipSample() {
 		space: ['md'],
 		round: ['md'],
 		roundMode: [''],
+		icon: 'bx-leaf',
+		iconR: 'bxs-x-circle',
 	});
 	const onChip = UseData({
 		color: ['danger'],
@@ -49,28 +52,28 @@ export default function ChipSample() {
 		space: ['md'],
 		round: ['md'],
 		roundMode: [''],
+		icon: 'bx-leaf',
+		iconR: 'bxs-x-circle',
 	});
 
 	const [elData, runElData] = UseData({
 		left: ['icon'],
 		right: ['imageR'],
 		center: ['text'],
-		icon: 'bx-leaf',
-		iconR: 'bxs-x-circle',
-		image: '/bean.jpg',
-		imageR: '/shell.jpg',
+		image: '/image/bean.jpg',
+		imageR: '/image/shell.jpg',
 		bg: '/sheet/switch1-lg.png',
 		bgR: '/sheet/radio1.png',
 		text: 'Next',
 		checked: ['false'],
 		disabled: ['false'],
 	});
-	const {left, right, center, image, imageR, bg, bgR, icon, iconR, text, checked, disabled} = elData;
+	const {left, right, center, image, imageR, bg, bgR, text, checked, disabled} = elData;
 
 	const [chipData, runChipData] = checked == 'true' ? onChip : offChip;
 	// const [chipData, runChipData] = offChip;
-	const {color, outType, outMode, overType, overMode, size, space, round, roundMode} = chipData;
-
+	const {color, outType, outMode, overType, overMode, size, space, round, roundMode, icon, iconR} = chipData;
+	console.log('chipData', chipData);
 	const changeChipRadio = (event) => {
 		const {name} = event.currentTarget;
 		const {team} = event.currentTarget.dataset;
@@ -85,10 +88,14 @@ export default function ChipSample() {
 		runElData.change(team, [name]);
 	};
 
-	const chageElInput = (event) => {
+	const chageInput = (event) => {
 		const {name, value} = event.currentTarget;
 
-		runElData.change(elData[name][0], value);
+		if (['icon', 'iconR'].includes(name)) {
+			runChipData.change(chipData[name][0], value);
+		} else {
+			runElData.change(elData[name][0], value);
+		}
 	};
 
 	const clickButton = (event) => {
@@ -175,8 +182,8 @@ export default function ChipSample() {
 				))}
 				<Button
 					theme={`default-HE`}
-					icon="bx-copy-alt"
-					name="copy"
+					icon="bx-paste"
+					name="paste"
 					onClick={() => {
 						runChipData.change(checked == 'true' ? offChip[0] : onChip[0]);
 					}}
@@ -221,7 +228,7 @@ export default function ChipSample() {
 				))}
 			</LineGroup>
 			<LineGroup name="size" runFunc={runChipData}>
-				{['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl'].map((item, index) => (
+				{['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl', '6xl'].map((item, index) => (
 					// <ToggleRadio key={index} text={item} team="size" name={item} checked={size.includes(item)} onChange={changeChipRadio} />
 					<Toggle key={index} theme={`success${controlTheme} success${controlOnTheme}`} bg={controlBg} text={item} team="size" name={item} checked={size.includes(item)} onChange={changeChipRadio} />
 				))}
@@ -250,13 +257,13 @@ export default function ChipSample() {
 				{['icon', 'image', 'bg'].map((item, index) => (
 					<Toggle key={index} theme={`info${controlTheme} info${controlOnTheme}`} bg={controlBg} text={item} team="left" name={item} checked={left.includes(item)} onChange={changeElRadio} />
 				))}
-				<Input type="text" deco="basket-default box-default font-default" className="w-[200px]" name="left" value={elData[left]} placeholder="left 입력" onChange={chageElInput} disabled={left == ''} />
+				<Input type="text" deco="basket-default box-default font-default" className="w-[200px]" name="left" value={elData[left]} placeholder="left 입력" onChange={chageInput} disabled={left == ''} />
 			</LineGroup>
 			<LineGroup name="center" runFunc={runElData}>
 				{['text'].map((item, index) => (
 					<Toggle key={index} theme={`info${controlTheme} info${controlOnTheme}`} bg={controlBg} text={item} team="center" name={item} checked={center.includes(item)} onChange={changeElRadio} />
 				))}
-				<Input type="text" deco="basket-default box-default font-default" className="w-[350px]" name="center" value={elData[center]} placeholder="text 입력" onChange={chageElInput} disabled={center == ''}>
+				<Input type="text" deco="basket-default box-default font-default" className="w-[350px]" name="center" value={elData[center]} placeholder="text 입력" onChange={chageInput} disabled={center == ''}>
 					<Icon deco="font-danger">bx-user</Icon>
 					<Text deco="font-primary" className="flex-none">
 						TEXT :
@@ -267,7 +274,7 @@ export default function ChipSample() {
 				{['icon', 'image', 'bg'].map((item, index) => (
 					<Toggle key={index} theme={`info${controlTheme} info${controlOnTheme}`} bg={controlBg} text={item} team="right" name={`${item}R`} checked={right.includes(`${item}R`)} onChange={changeElRadio} />
 				))}
-				<Input type="text" deco="basket-default box-default font-default" className="w-[200px]" name="right" value={elData[right]} placeholder="right 입력" onChange={chageElInput} disabled={right == ''} />
+				<Input type="text" deco="basket-default box-default font-default" className="w-[200px]" name="right" value={elData[right]} placeholder="right 입력" onChange={chageInput} disabled={right == ''} />
 			</LineGroup>
 
 			<Group className="p-5 space-y-3 flex justify-center items-center flex-wrap ring-2 ring-gray-500 rounded-lg">
@@ -277,7 +284,7 @@ export default function ChipSample() {
 					onClick={clickButton}
 					onChange={changeToggle}
 					// theme={`${[color, `${outType}${outMode}${overType}${overMode}`, size, space, `${round}${roundMode}`].join('-')} ${['warning', `${outType}${outMode}${overType}${overMode}`, size, space, `${round}${roundMode}`].join('-')}`}
-					theme={`${sampleTheme} ${sampleOnTheme}`}
+					theme={[sampleTheme, sampleOnTheme].join(' ')}
 					icon={left == 'icon' ? icon : ''}
 					iconR={right == 'iconR' ? iconR : ''}
 					img={left == 'image' ? image : ''}
@@ -314,7 +321,7 @@ export default function ChipSample() {
 			<Group>
 				<Highlight className="html">
 					{`
-					<Toggle theme="${`${sampleTheme} ${sampleOnTheme}`}"${left == 'icon' ? ' icon="' + icon + '"' : ''}${left == 'image' ? ' img="' + image + '"' : ''}${left == 'bg' ? ' bg="' + bg + '"' : ''}${right == 'iconR' ? ' iconR="' + iconR + '"' : ''}${right == 'imageR' ? ' imgR="' + imageR + '"' : ''}${
+					<Toggle theme="${[sampleTheme, sampleOnTheme].join(' ')}"${left == 'icon' ? ' icon="' + icon + '"' : ''}${left == 'image' ? ' img="' + image + '"' : ''}${left == 'bg' ? ' bg="' + bg + '"' : ''}${right == 'iconR' ? ' iconR="' + iconR + '"' : ''}${right == 'imageR' ? ' imgR="' + imageR + '"' : ''}${
 						right == 'bgR' ? ' bgR="' + bgR + '"' : ''
 					}${center == 'text' ? ' text="' + text + '"' : ''}${checked == 'true' ? ' checked' : ''}${disabled == 'true' ? ' disabled' : ''} />
 					`}

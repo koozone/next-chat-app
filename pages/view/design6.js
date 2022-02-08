@@ -354,9 +354,9 @@ export default function code() {
 
 			<Fieldset title="Img">
 				<Group className="space-y-4">
-					<Img src="/coffee.jpg" className="w-[50px] aspect-square" />
-					<Img src="/soup.jpg" className="w-[100px]" />
-					<Img src="/soup.jpg" className="w-[100px] aspect-square" />
+					<Img src="/image/coffee.jpg" className="w-[50px] aspect-square" />
+					<Img src="/image/soup.jpg" className="w-[100px]" />
+					<Img src="/image/soup.jpg" className="w-[100px] aspect-square" />
 				</Group>
 			</Fieldset>
 
@@ -436,16 +436,16 @@ export default function code() {
 						<Button theme="danger-AD-sm-md-full" icon="bxs-x-circle" />
 					</Label>
 					<Toggle theme="default-HL-md-md-full" icon="bx-star" text="Sample " name="agree" checked={data.agree} onChange={changeSwitch} left={<Label theme="success-BF-2xl-xl-full" icon="bx-leaf" />} right={<Label theme="danger-AF-lg-md-full" icon="bxs-x-circle" />} />
-					<Toggle theme="default-DF-md-md-full" icon="bx-star" text="Sample " name="agree" checked={data.agree} onChange={changeSwitch} left={<Label theme="success-DF-xs-xs-full" img="/bean.jpg" />} right={<Label theme="danger-AF-lg-md-full" icon="bxs-x-circle" />} />
-					<Basket theme="default-DF-md-md-full" icon="bx-star" text="Sample " name="agree" checked={data.agree} onChange={changeSwitch} left={<Label theme="success-DF-xs-xs-full" img="/shell.jpg" />} right={<Button theme="danger-AF-lg-md-full" icon="bxs-x-circle" />} />
-					<Button theme="default-DF-xs-md-full" img="/noodle.jpg" text="Compose Coffee" />
-					<Button theme="default-DF-sm-md-full" img="/noodle.jpg" text="Compose Coffee" />
-					<Button theme="default-DF-md-md-full" img="/noodle.jpg" text="Compose Coffee" />
-					<Button theme="default-DF-lg-md-full" img="/noodle.jpg" text="Compose Coffee" />
-					<Button theme="default-DF-xl-md-full" img="/noodle.jpg" text="Compose Coffee" />
-					<Button theme="default-DF-2xl-md-lg" img="/noodle.jpg" text="Compose Coffee" />
+					<Toggle theme="default-DF-md-md-full" icon="bx-star" text="Sample " name="agree" checked={data.agree} onChange={changeSwitch} left={<Label theme="success-DF-xs-xs-full" img="/image/bean.jpg" />} right={<Label theme="danger-AF-lg-md-full" icon="bxs-x-circle" />} />
+					<Basket theme="default-DF-md-md-full" icon="bx-star" text="Sample " name="agree" checked={data.agree} onChange={changeSwitch} left={<Label theme="success-DF-xs-xs-full" img="/image/shell.jpg" />} right={<Button theme="danger-AF-lg-md-full" icon="bxs-x-circle" />} />
+					<Button theme="default-DF-xs-md-full" img="/image/noodle.jpg" text="Compose Coffee" />
+					<Button theme="default-DF-sm-md-full" img="/image/noodle.jpg" text="Compose Coffee" />
+					<Button theme="default-DF-md-md-full" img="/image/noodle.jpg" text="Compose Coffee" />
+					<Button theme="default-DF-lg-md-full" img="/image/noodle.jpg" text="Compose Coffee" />
+					<Button theme="default-DF-xl-md-full" img="/image/noodle.jpg" text="Compose Coffee" />
+					<Button theme="default-DF-2xl-md-lg" img="/image/noodle.jpg" text="Compose Coffee" />
 
-					<Button theme="primary-E1F2-lg-md-full" img="/coffee.jpg" text="TEST">
+					<Button theme="primary-E1F2-lg-md-full" img="/image/coffee.jpg" text="TEST">
 						<Text theme="danger-1L-xs"> (TEST) </Text>
 					</Button>
 				</Group>
