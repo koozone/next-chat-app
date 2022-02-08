@@ -103,7 +103,7 @@ const getDefaultElement = (props) => {
 			return <div className={`peer sr-only`} />;
 
 		case 'formInput':
-			return <div className={`flex-auto truncate outline-none bg-transparent ${peerDisabled}`} />;
+			return <div className={`flex-1 truncate outline-none bg-transparent ${peerDisabled}`} />;
 
 		case 'basket':
 			// return <div className={`relative inline-flex justify-center items-center`} />;
@@ -119,7 +119,8 @@ const getDefaultElement = (props) => {
 			return disabled ? <div className={`select-none`} /> : <div className={`group cursor-pointer select-none`} />;
 
 		case 'input':
-			return disabled ? <div className={`relative inline-flex justify-start items-center select-none`} /> : <div className={`group relative inline-flex justify-start items-center cursor-text select-none`} />;
+			// return disabled ? <div className={`relative inline-flex justify-start items-center select-none`} /> : <div className={`group relative inline-flex justify-start items-center cursor-text select-none`} />;
+			return disabled ? <div className={`select-none`} /> : <div className={`group cursor-text select-none`} />;
 
 		default:
 			return <div className={``} />;
@@ -458,7 +459,11 @@ const FormCheck = (props) => {
 const FormInput = forwardRef((props, ref) => {
 	const {children, deco, styleName, className, name, href, type, value, placeholder, onChange, checked, disabled} = getNewProps({...props, tag: 'formInput'});
 
-	return disabled ? <input type={type} className={`${styleName} | `} ref={ref} placeholder={placeholder} value={value} onChange={onChange} /> : <input type={type} className={`${styleName} | `} id={name} name={name} ref={ref} placeholder={placeholder} value={value} onChange={onChange} />;
+	return disabled ? (
+		<input type={type} className={`${styleName} | ${className}`} ref={ref} placeholder={placeholder} value={value} onChange={onChange} />
+	) : (
+		<input type={type} className={`${styleName} | ${className}`} id={name} name={name} ref={ref} placeholder={placeholder} value={value} onChange={onChange} />
+	);
 });
 
 export const Icon = (props) => {
@@ -616,10 +621,13 @@ const LabelTheme = (props) => {
 			{center ? (
 				center
 			) : textValue || children ? (
-				<Text {...newProps} className={`ml-${margin.x * 2} mr-${margin.x * 2}`}>
-					{textValue}
-					{children}
-				</Text>
+				<>
+					<Text {...newProps} className={`ml-${margin.x * 2} mr-${margin.x * 2}`}>
+						{textValue}
+						{children}
+					</Text>
+					{props.tag == 'input' ? <FormInput {...props} className={`ml-${margin.x * 2} mr-${margin.x * 2}`} /> : <></>}
+				</>
 			) : (
 				<></>
 			)}
@@ -725,8 +733,8 @@ export const Input = forwardRef((props, ref) => {
 
 	return (
 		<Basket {...newProps} type="button">
-			{children}
-			<FormInput {...props} ref={ref} />
+			{/* {children}
+			<FormInput {...props} ref={ref} /> */}
 		</Basket>
 	);
 });

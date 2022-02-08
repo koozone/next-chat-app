@@ -100,7 +100,7 @@ export const Highlight = (props) => {
 	return (
 		<pre id="sampleCode" className="grid relative rounded-lg overflow-hidden">
 			<code className={`!pr-8 ${className}`}>{content}</code>
-			<div className="pl-5 absolute right-0 top-0 bottom-4 bg-gradient-to-l from-[#001528] via-[#001528]">
+			<div className="pl-5 absolute right-0 top-0 bottom-5 bg-gradient-to-l from-[#001528] via-[#001528]">
 				<Button
 					className="z-10"
 					theme="default-FB-md-lg-md8 success-F-md-lg-md8"

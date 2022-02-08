@@ -984,7 +984,7 @@ export default function code() {
 					<ToggleSwitch />
 					<ToggleSwitch text="동의" checked />
 					<ToggleSwitch text="비동의" disabled /> */}
-					<Toggle theme="default-AA2-sm-sm-xs" bg="/sheet/switch1-lg.png" name="switch" checked={data.switch} onChange={changeSwitch}>
+					<Toggle theme="default-AA2-sm-sm-xs danger-A2-sm-sm-xs" bg="/sheet/switch1-lg.png" name="switch" checked={data.switch} onChange={changeSwitch}>
 						다음 내용을 확인했습니다.
 					</Toggle>
 					<Toggle theme="default-AA2-sm-sm-xs" bg="/sheet/switch1-lg.png" />

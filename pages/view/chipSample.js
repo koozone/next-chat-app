@@ -294,7 +294,7 @@ export default function ChipSample() {
 						TEXT :
 					</Text>
 				</Input>
-				<Input type="text" theme="primary-HI-md-md-md" className="w-[150px]" name="center" value={chipData[center]} placeholder="text 입력" onChange={chageChipInput} disabled={center == ''} />
+				<Input type="text" theme="danger-HI-md-md-md" img="/image/coffee.jpg" text="Name:" className="w-[200px]" name="center" value={chipData[center]} placeholder="text 입력" onChange={chageChipInput} disabled={center == ''} />
 			</LineGroup>
 			<LineGroup name="right" runFunc={runElData}>
 				{['icon', 'image', 'bg'].map((item, index) => (
