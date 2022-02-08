@@ -891,9 +891,7 @@ export default function code() {
 				</Group>
 			</Fieldset>
 
-			<Fieldset title="Chip">
-				<ChipSample />
-			</Fieldset>
+			<ChipSample />
 
 			<Fieldset title="Button (theme)">
 				{/* {['default', 'primary', 'success', 'warning', 'danger'].map((item, index) => (
@@ -950,12 +948,12 @@ export default function code() {
 					<ToggleCheckbox />
 					<ToggleCheckbox text="동의" checked />
 					<ToggleCheckbox text="비동의" disabled /> */}
-					<Toggle theme="default-AA2-sm-sm-lg" bg="/sheet/checkbox1.png" name="checkbox" checked={data.checkbox} onChange={changeSwitch}>
+					<Toggle theme="default-AA2-sm-sm-xs" bg="/sheet/checkbox1.png" name="checkbox" checked={data.checkbox} onChange={changeSwitch}>
 						다음 내용을 확인했습니다.
 					</Toggle>
-					<Toggle theme="default-AA2-sm-sm-lg" bg="/sheet/checkbox1.png" />
-					<Toggle theme="default-AA2-sm-sm-lg" bg="/sheet/checkbox1.png" text="동의" checked />
-					<Toggle theme="default-AA2-sm-sm-lg" bg="/sheet/checkbox1.png" text="비동의" disabled />
+					<Toggle theme="default-AA2-sm-sm-xs" bg="/sheet/checkbox1.png" />
+					<Toggle theme="default-AA2-sm-sm-xs" bg="/sheet/checkbox1.png" text="동의" checked />
+					<Toggle theme="default-AA2-sm-sm-xs" bg="/sheet/checkbox1.png" text="비동의" disabled />
 				</Group>
 			</Fieldset>
 
@@ -968,12 +966,12 @@ export default function code() {
 					<ToggleRadio />
 					<ToggleRadio text="동의" checked />
 					<ToggleRadio text="비동의" disabled /> */}
-					<Toggle theme="default-AA2-sm-sm-lg" bg="/sheet/radio1.png" name="radio" checked={data.radio} onChange={changeSwitch}>
+					<Toggle theme="default-AA2-sm-sm-xs" bg="/sheet/radio1.png" name="radio" checked={data.radio} onChange={changeSwitch}>
 						다음 내용을 확인했습니다.
 					</Toggle>
-					<Toggle theme="default-AA2-sm-sm-lg" bg="/sheet/radio1.png" />
-					<Toggle theme="default-AA2-sm-sm-lg" bg="/sheet/radio1.png" text="동의" checked />
-					<Toggle theme="default-AA2-sm-sm-lg" bg="/sheet/radio1.png" text="비동의" disabled />
+					<Toggle theme="default-AA2-sm-sm-xs" bg="/sheet/radio1.png" />
+					<Toggle theme="default-AA2-sm-sm-xs" bg="/sheet/radio1.png" text="동의" checked />
+					<Toggle theme="default-AA2-sm-sm-xs" bg="/sheet/radio1.png" text="비동의" disabled />
 				</Group>
 			</Fieldset>
 
@@ -986,12 +984,16 @@ export default function code() {
 					<ToggleSwitch />
 					<ToggleSwitch text="동의" checked />
 					<ToggleSwitch text="비동의" disabled /> */}
-					<Toggle theme="default-AA2-sm-sm-lg" bg="/sheet/switch1-lg.png" name="switch" checked={data.switch} onChange={changeSwitch}>
+					<Toggle theme="default-AA2-sm-sm-xs" bg="/sheet/switch1-lg.png" name="switch" checked={data.switch} onChange={changeSwitch}>
 						다음 내용을 확인했습니다.
 					</Toggle>
-					<Toggle theme="default-AA2-sm-sm-lg" bg="/sheet/switch1-lg.png" />
-					<Toggle theme="default-AA2-sm-sm-lg" bg="/sheet/switch1-lg.png" text="동의" checked />
-					<Toggle theme="default-AA2-sm-sm-lg" bg="/sheet/switch1-lg.png" text="비동의" disabled />
+					<Toggle theme="default-AA2-sm-sm-xs" bg="/sheet/switch1-lg.png" />
+					<Toggle theme="default-AA2-sm-sm-xs" bg="/sheet/switch1-lg.png" text="동의" checked />
+					<Toggle theme="default-AA2-sm-sm-xs" bg="/sheet/switch1-lg.png" text="비동의" disabled />
+				</Group>
+				<Group>
+					<Toggle theme="danger-IL-md-md-full success-IL-md-md-full" bg="/sheet/radio1.png " bgR=" /sheet/radio1.png" text="OFF ON" checked={data.switch} />
+					<Toggle theme="default-IL-2xl-md-md warning-IL-md-md-md" icon="bx-leaf bx-menu" imgR=" /image/noodle.jpg" text=" On" checked={data.switch} />
 				</Group>
 			</Fieldset>
 		</>

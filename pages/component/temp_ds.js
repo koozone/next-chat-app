@@ -129,7 +129,7 @@ export const Highlight = (props) => {
 
 							setTimeout(() => {
 								runCopyData.change(false);
-							}, 2000);
+							}, 1000);
 						} catch (err) {
 							// Unable to copy
 							// copyButton.innerHTML = 'Copy';

@@ -87,12 +87,7 @@ const getDefaultElement = (props) => {
 			return <div className={`bg-no-repeat bg-left-top group-hover:bg-right-top peer-checked:bg-left-bottom group-hover:peer-checked:bg-right-bottom ${peerDisabled}`} />;
 
 		case 'icon':
-			const iconArr = String(children).split(' ') || [];
-			const offIcon = iconArr[0];
-			const onIcon = iconArr[1];
-			const iconValue = checked ? onIcon || offIcon : offIcon;
-
-			return <div className={`bx ${iconValue} pointer-events-none ${peerDisabled}`} />;
+			return <div className={`pointer-events-none ${peerDisabled}`} />;
 
 		case 'font':
 			return <div className={`${peerDisabled}`} />;
@@ -469,7 +464,7 @@ const FormInput = forwardRef((props, ref) => {
 export const Icon = (props) => {
 	const {children, deco, styleName, className, icon} = getNewProps({...props, tag: 'icon'});
 
-	return children ? <i className={`${styleName} | ${className}`} /> : <></>;
+	return children ? <i className={`bx ${children} ${styleName} | ${className}`} /> : <></>;
 };
 
 export const Img = (props) => {
@@ -554,10 +549,10 @@ const LabelTheme = (props) => {
 		imgR = '',
 		bg = '',
 		bgR = '',
-		icon,
-		iconL,
-		iconR,
-		text,
+		icon = '',
+		iconL = '',
+		iconR = '',
+		text = '',
 		left,
 		right,
 		center,
@@ -566,28 +561,63 @@ const LabelTheme = (props) => {
 	} = newProps;
 	// const {padding, margin, size, rounded, height, typeDeco, modeDeco} = getThemeProps(props);
 
+	const iconArr = String(icon).split(' ') || [];
+	const offIcon = iconArr[0];
+	const onIcon = iconArr.length == 2 ? iconArr[1] : iconArr[1] || iconArr[0];
+	const iconValue = checked ? onIcon : offIcon;
+
+	const iconRArr = String(iconR).split(' ') || [];
+	const offIconR = iconRArr[0];
+	const onIconR = iconRArr.length == 2 ? iconRArr[1] : iconRArr[1] || iconRArr[0];
+	const iconRValue = checked ? onIconR : offIconR;
+
+	const imageArr = String(img).split(' ') || [];
+	const offImage = imageArr[0];
+	const onImage = imageArr.length == 2 ? imageArr[1] : imageArr[1] || imageArr[0];
+	const imageValue = checked ? onImage : offImage;
+
+	const imageRArr = String(imgR).split(' ') || [];
+	const offImageR = imageRArr[0];
+	const onImageR = imageRArr.length == 2 ? imageRArr[1] : imageRArr[1] || imageRArr[0];
+	const imageRValue = checked ? onImageR : offImageR;
+
+	const bgArr = String(bg).split(' ') || [];
+	const offBg = bgArr[0];
+	const onBg = bgArr.length == 2 ? bgArr[1] : bgArr[1] || bgArr[0];
+	const bgValue = checked ? onBg : offBg;
+
+	const bgRArr = String(bgR).split(' ') || [];
+	const offBgR = bgRArr[0];
+	const onBgR = bgRArr.length == 2 ? bgRArr[1] : bgRArr[1] || bgRArr[0];
+	const bgRValue = checked ? onBgR : offBgR;
+
+	const textArr = String(text).split(' ') || [];
+	const offText = textArr[0];
+	const onText = textArr.length == 2 ? textArr[1] : textArr[1] || textArr[0];
+	const textValue = checked ? onText : offText;
+
 	return (
 		<div className={`${styleName} | ${className} px-${padding.x} py-${padding.y} text-${size}`}>
 			<Box deco={`box-${typeDeco}`} className={`${rounded}`} />
 			{left ? (
 				left
-			) : img ? (
-				<Img src={img} className={`mr-${margin.x} last:mr-0 w-${height} h-${height} ${rounded}`} />
-			) : bg ? (
+			) : imageValue ? (
+				<Img src={imageValue} className={`mr-${margin.x} last:mr-0 w-${height} h-${height} ${rounded}`} />
+			) : bgValue ? (
 				// <div className={`ml-${margin.x} last:ml-0 h-${height} aspect-square ${rounded} border-0 bg-origin-border bg-cover bg-[left_top] group-hover:saturate-200 peer-checked:bg-[right_bottom] group-hover:peer-checked:saturate-200`} style={{backgroundImage: `url(${img})`}} />
-				<Bg bg={bg} height={height} className={`mr-${margin.x} last:mr-0`} />
-			) : icon ? (
-				<Icon {...newProps} deco={`font-${typeDeco}`} className={`ml-${margin.x} last:ml-0`}>
-					{icon}
+				<Bg bg={bgValue} height={height} className={`mr-${margin.x} last:mr-0 ${rounded}`} />
+			) : iconValue ? (
+				<Icon deco={`font-${typeDeco}`} className={`ml-${margin.x} last:ml-0`}>
+					{iconValue}
 				</Icon>
 			) : (
 				<></>
 			)}
 			{center ? (
 				center
-			) : text || children ? (
+			) : textValue || children ? (
 				<Text {...newProps} className={`ml-${margin.x * 2} mr-${margin.x * 2}`}>
-					{text}
+					{textValue}
 					{children}
 				</Text>
 			) : (
@@ -595,13 +625,13 @@ const LabelTheme = (props) => {
 			)}
 			{right ? (
 				right
-			) : imgR ? (
-				<Img src={imgR} className={`ml-${margin.x} w-${height} h-${height} ${rounded}`} />
-			) : bgR ? (
-				<Bg bg={bgR} height={height} className={`ml-${margin.x}`} />
-			) : iconR ? (
-				<Icon {...newProps} deco={`font-${typeDeco}`} className={`mr-${margin.x}`}>
-					{iconR}
+			) : imageRValue ? (
+				<Img src={imageRValue} className={`ml-${margin.x} w-${height} h-${height} ${rounded}`} />
+			) : bgRValue ? (
+				<Bg bg={bgRValue} height={height} className={`ml-${margin.x} ${rounded}`} />
+			) : iconRValue ? (
+				<Icon deco={`font-${typeDeco}`} className={`mr-${margin.x}`}>
+					{iconRValue}
 				</Icon>
 			) : (
 				<></>
