@@ -3,6 +3,82 @@ import {Fieldset, Chip, Group, Highlight, ToggleRadio} from '../component/temp_d
 import {A, Basket, Button, Icon, Input, Label, Text, Toggle} from '../component/ui_ds6';
 import {UseData} from '../hook/useData';
 
+const OPTIONS = [
+	{value: 'apple', name: '사과'},
+	{value: 'banana', name: '바나나'},
+	{value: 'orange', name: '오렌지'},
+];
+
+const SelectBox = (props) => {
+	const {options, defaultValue, name: key, keyOpen = `${props.name}Open`} = props;
+	const [data, runData] = props.data;
+	const itemList = data[key] || [];
+	console.log('~~~~', data, key, data[key]);
+	// default value
+	if (!data[key] && defaultValue) {
+		runData.change(
+			key,
+			options.filter((item) => item.value == defaultValue)
+		);
+	}
+
+	return (
+		<div className="relative w-[200px]">
+			<Toggle
+				// type="password"
+				theme="primary-HI-md-md-md::warning-IJ-md-md-md"
+				// icon="bx-leaf"
+				img="/image/bean.jpg"
+				bgR="/sheet/dropdown2.png"
+				text="test"
+				className="w-full"
+				name={key}
+				value={itemList.map((i) => i.name).join(', ')}
+				placeholder="SELECT"
+				onChange={(event) => {
+					// if (event.target.name == 'leftTest') {
+					runData.change(keyOpen, !data[keyOpen]);
+					// }
+				}}
+				onBlur={() => {
+					// runData.change(keyOpen, false);
+				}}
+				checked={data[keyOpen]}
+				disabled={false}
+			/>
+			<div
+				className={`absolute left-0 top-full w-full h-[120px] min-h-fit overflow-y-auto border-2 border-orange-500 bg-white rounded-md ${data[keyOpen] ? 'block' : 'hidden'}`}
+				onFocus={() => {
+					console.log('onFocus');
+					// runData.change(keyOpen, true);
+				}}
+				onBlur={() => {
+					console.log('onBlur');
+					runData.change(keyOpen, false);
+				}}
+			>
+				<div className="flex flex-col items-stretch divide-y divide-orange-300">
+					{options.map((item, index) => (
+						<Toggle
+							key={index}
+							className="w-full z-10"
+							theme="default-BD-sm-md-xs::primary-DE-md-lg-xs"
+							bg={item.value == 'x' ? '' : '/sheet/radio1.png::/sheet/radio1.png'}
+							iconR="bx-x-circle::bx-x"
+							text={`${item.name}-Off::${item.name}-On`}
+							checked={itemList.map((item) => item.value).includes(item.value)}
+							onChange={() => {
+								runData.change(key, item.value == '' ? [] : [item]);
+								runData.change(keyOpen, false);
+							}}
+						/>
+					))}
+				</div>
+			</div>
+		</div>
+	);
+};
+
 const LineGroup = (props) => {
 	const {children, name, className = '', runFunc} = props;
 	const visibleList = ['outMode', 'overMode', 'roundMode', 'left', 'right', 'center'];
@@ -31,11 +107,12 @@ const getTheme = (props) => {
 };
 
 export default function ChipSample() {
-	const [testData, runTestData] = UseData({
+	const aaaData = UseData({
 		drop: false,
 		dropbox1Open: false,
 		dropbox1: [],
 	});
+	const [testData, runTestData] = aaaData;
 
 	const offChip = UseData({
 		color: ['default'],
@@ -342,8 +419,9 @@ export default function ChipSample() {
 			<div className="relative w-[200px]">
 				<Toggle
 					// type="password"
-					theme="primary-HI-md-md-md::warning-IJ-md-md-md1"
-					icon="bx-leaf"
+					theme="primary-HI-md-md-md::warning-IJ-md-md-md"
+					// icon="bx-leaf"
+					img="/image/bean.jpg"
 					text="test"
 					className="w-full"
 					name="leftTest"
@@ -359,25 +437,26 @@ export default function ChipSample() {
 					}}
 					checked={testData.dropbox1Open}
 					disabled={left == ''}
-					right={
-						<Toggle
-							theme="primary-A-sm-sm-xs::primary-A-sm-sm-xs"
-							bg="/sheet/dropdown2.png"
-							onChange={() => {
-								runTestData.change('dropbox1Open', !testData.dropbox1Open);
-								console.log('idInput.current', idInput.current);
-								idInput.current.focus();
-							}}
-							onBlur={() => {
-								// runTestData.change('dropbox1Open', false);
-							}}
-							checked={testData.dropbox1Open}
-							disabled={left == ''}
-						/>
-					}
+					// right={
+					// 	<Toggle
+					// 		theme="primary-A-sm-sm-xs::primary-A-sm-sm-xs"
+					// 		bg="/sheet/dropdown2.png"
+					// 		onChange={() => {
+					// 			runTestData.change('dropbox1Open', !testData.dropbox1Open);
+					// 			console.log('idInput.current', idInput.current);
+					// 			idInput.current.focus();
+					// 		}}
+					// 		onBlur={() => {
+					// 			// runTestData.change('dropbox1Open', false);
+					// 		}}
+					// 		checked={testData.dropbox1Open}
+					// 		disabled={left == ''}
+					// 	/>
+					// }
+					bgR="/sheet/dropdown2.png"
 				/>
 				<div
-					className={`absolute left-0 top-full w-full h-[120px] overflow-scroll border-2 border-t-0 border-orange-500 bg-white rounded-md rounded-t-none ${testData.dropbox1Open ? 'block' : 'hidden'}`}
+					className={`absolute left-0 top-full w-full h-[120px] overflow-y-auto border-2 border-orange-500 bg-white rounded-md ${testData.dropbox1Open ? 'block' : 'hidden'}`}
 					ref={idInput}
 					onFocus={() => {
 						console.log('onFocus');
@@ -392,7 +471,7 @@ export default function ChipSample() {
 						{'xabcdefghijkl'.split('').map((item, index) => (
 							<Toggle
 								key={index}
-								className="w-full z-0"
+								className="w-full z-10"
 								theme="default-BD-sm-md-xs::primary-DE-md-lg-xs"
 								bg={item == 'x' ? '' : '/sheet/radio1.png::/sheet/radio1.png'}
 								iconR="bx-x-circle::bx-x"
@@ -407,6 +486,8 @@ export default function ChipSample() {
 					</div>
 				</div>
 			</div>
+
+			<SelectBox name="aaa" options={OPTIONS} data={aaaData} defaultValue="banana" />
 
 			<Group className="p-5 space-y-3 flex justify-center items-center flex-wrap ring-2 ring-gray-500 rounded-lg">
 				<Button

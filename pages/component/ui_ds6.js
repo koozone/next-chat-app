@@ -93,7 +93,7 @@ const getDefaultElement = (props) => {
 			return <div className={`${peerDisabled}`} />;
 
 		case 'box':
-			return <div className={`top-0 left-0 -z-20 ${peerDisabled}`} />;
+			return <div className={`top-0 left-0 -z-10 ${peerDisabled}`} />;
 
 		case 'label':
 			return <div className={`relative inline-flex items-center`} />;
@@ -636,7 +636,7 @@ const LabelTheme = (props) => {
 			) : (
 				<></>
 			)}
-			{newProps.hasOwnProperty('value') ? <FormInput {...newProps} className={`ml-${margin.x * 2} mr-${margin.x * 2}`} readOnly={props.tag != 'input'} /> : <></>}
+			{newProps.hasOwnProperty('value') ? <FormInput {...newProps} className={`ml-${margin.x * 2} mr-${margin.x * 2} ${props.tag != 'input' ? 'pointer-events-none' : 'pointer-events-auto'}`} readOnly={props.tag != 'input'} /> : <></>}
 			{right ? (
 				right
 			) : imageRValue ? (
