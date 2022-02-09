@@ -1,3 +1,4 @@
+import {useRef} from 'react';
 import {Fieldset, Chip, Group, Highlight, ToggleRadio} from '../component/temp_ds';
 import {A, Basket, Button, Icon, Input, Label, Text, Toggle} from '../component/ui_ds6';
 import {UseData} from '../hook/useData';
@@ -16,7 +17,7 @@ const LineGroup = (props) => {
 
 	return (
 		<div className={`flex items-center space-x-2 ${className}`}>
-			<Label className="w-32 justify-end" theme={warningList.includes(name) ? 'warning-A-md' : infoList.includes(name) ? 'info-A-md' : 'success-A-md'} icon="bx-leaf" text={`${name} : `} />
+			<Label className="w-36 justify-end" theme={warningList.includes(name) ? 'warning-A-md' : infoList.includes(name) ? 'info-A-md' : 'success-A-md'} icon="bx-leaf" text={`${name} : `} />
 			<Button className={visibleList.includes(name) ? 'opacity-100' : 'opacity-20'} theme={`warning-HE`} icon="bx-x-circle" name={name} onClick={clickClearButton} disabled={!visibleList.includes(name)} />
 			{children}
 		</div>
@@ -30,6 +31,12 @@ const getTheme = (props) => {
 };
 
 export default function ChipSample() {
+	const [testData, runTestData] = UseData({
+		drop: false,
+		dropbox1Open: false,
+		dropbox1: [],
+	});
+
 	const offChip = UseData({
 		color: ['default'],
 		outType: ['I'],
@@ -113,16 +120,18 @@ export default function ChipSample() {
 
 	const sampleOffTheme = getTheme(offChip[0]);
 	const sampleOnTheme = getTheme(onChip[0]);
-	const sampleIcon = [offChip[0].icon, onChip[0].icon].join(' ');
-	const sampleIconR = [offChip[0].iconR, onChip[0].iconR].join(' ');
-	const sampleImage = [offChip[0].image, onChip[0].image].join(' ');
-	const sampleImageR = [offChip[0].imageR, onChip[0].imageR].join(' ');
-	const sampleBg = [offChip[0].bg, onChip[0].bg].join(' ');
-	const sampleBgR = [offChip[0].bgR, onChip[0].bgR].join(' ');
-	const sampleText = [offChip[0].text, onChip[0].text].join(' ');
+	const sampleIcon = [offChip[0].icon, onChip[0].icon].join('::');
+	const sampleIconR = [offChip[0].iconR, onChip[0].iconR].join('::');
+	const sampleImage = [offChip[0].image, onChip[0].image].join('::');
+	const sampleImageR = [offChip[0].imageR, onChip[0].imageR].join('::');
+	const sampleBg = [offChip[0].bg, onChip[0].bg].join('::');
+	const sampleBgR = [offChip[0].bgR, onChip[0].bgR].join('::');
+	const sampleText = [offChip[0].text, onChip[0].text].join('::');
 	const controlOffTheme = '-DE2-sm-md-md';
 	const controlOnTheme = '-K2-sm-md-md';
 	const controlBg = '/sheet/radio1.png';
+
+	const idInput = useRef(null);
 
 	return (
 		<Fieldset title="Chip">
@@ -282,35 +291,131 @@ export default function ChipSample() {
 				{['icon', 'image', 'bg'].map((item, index) => (
 					<Toggle key={index} theme={`info${controlOffTheme} info${controlOnTheme}`} bg={controlBg} text={item} team="left" name={item} checked={left.includes(item)} onChange={changeElRadio} />
 				))}
-				<Input type="text" deco="basket-default box-default font-default" className="w-[200px]" name="left" value={chipData[left]} placeholder="left 입력" onChange={chageChipInput} disabled={left == ''} />
+				{/* <Input type="text" deco="basket-default box-default font-default" className="w-[200px]" name="left" value={chipData[left]} placeholder="left 입력" onChange={chageChipInput} disabled={left == ''} /> */}
+				<Input
+					type="text"
+					theme="danger-HI-md-md-md"
+					icon="bx-leaf"
+					text={left}
+					className="w-[300px]"
+					name="left"
+					value={left == '' ? '' : chipData[left]}
+					placeholder={left == '' ? '선택' : `${left} 입력`}
+					onChange={chageChipInput}
+					disabled={left == ''}
+					right={
+						<Toggle
+							theme="primary-A-sm-sm-xs::primary-A-sm-sm-xs"
+							bg="/sheet/dropdown2.png"
+							onChange={() => {
+								runTestData.change('drop', !testData.drop);
+							}}
+							onBlur={() => {
+								runTestData.change('drop', false);
+							}}
+							checked={testData.drop}
+							disabled={left == ''}
+						/>
+					}
+				/>
 			</LineGroup>
 			<LineGroup name="center" runFunc={runElData}>
 				{['text'].map((item, index) => (
 					<Toggle key={index} theme={`info${controlOffTheme} info${controlOnTheme}`} bg={controlBg} text={item} team="center" name={item} checked={center.includes(item)} onChange={changeElRadio} />
 				))}
-				<Input type="text" deco="basket-default box-default font-default" className="w-[350px]" name="center" value={chipData[center]} placeholder="text 입력" onChange={chageChipInput} disabled={center == ''}>
+				{/* <Input type="text" deco="basket-default box-default font-default" className="w-[350px]" name="center" value={chipData[center]} placeholder="text 입력" onChange={chageChipInput} disabled={center == ''}>
 					<Icon deco="font-danger">bx-user</Icon>
 					<Text deco="font-primary" className="flex-none">
 						TEXT :
 					</Text>
-				</Input>
-				<Input type="text" theme="danger-HI-md-md-md" img="/image/coffee.jpg" text="Name:" className="w-[200px]" name="center" value={chipData[center]} placeholder="text 입력" onChange={chageChipInput} disabled={center == ''} />
+				</Input> */}
+				<Input type="password" theme="danger-HI-md-md-md" icon="bx-leaf" text={center} className="w-[450px]" name="center" value={center == '' ? '' : chipData[center]} placeholder={center == '' ? '선택' : `${center} 입력`} onChange={chageChipInput} disabled={center == ''} />
 			</LineGroup>
 			<LineGroup name="right" runFunc={runElData}>
 				{['icon', 'image', 'bg'].map((item, index) => (
 					<Toggle key={index} theme={`info${controlOffTheme} info${controlOnTheme}`} bg={controlBg} text={item} team="right" name={`${item}R`} checked={right.includes(`${item}R`)} onChange={changeElRadio} />
 				))}
-				<Input type="text" deco="basket-default box-default font-default" className="w-[200px]" name="right" value={chipData[right]} placeholder="right 입력" onChange={chageChipInput} disabled={right == ''} />
+				{/* <Input type="text" deco="basket-default box-default font-default" className="w-[200px]" name="right" value={chipData[right]} placeholder="right 입력" onChange={chageChipInput} disabled={right == ''} /> */}
+				<Input type="text" theme="danger-HI-md-md-md" icon="bx-leaf" text={right} className="w-[300px]" name="right" value={right == '' ? '' : chipData[right]} placeholder={right == '' ? '선택' : `${right} 입력`} onChange={chageChipInput} disabled={right == ''} />
 			</LineGroup>
 
-			<Group className="p-5 space-y-3 flex justify-center items-center flex-wrap ring-2 ring-gray-500 rounded-lg">
+			<div className="relative w-[200px]">
 				<Toggle
+					// type="password"
+					theme="primary-HI-md-md-md::warning-IJ-md-md-md1"
+					icon="bx-leaf"
+					text="test"
+					className="w-full"
+					name="leftTest"
+					value={testData.dropbox1}
+					placeholder="SELECT"
+					onChange={(event) => {
+						if (event.target.name == 'leftTest') {
+							runTestData.change('dropbox1Open', !testData.dropbox1Open);
+						}
+					}}
+					onBlur={() => {
+						// runTestData.change('dropbox1Open', false);
+					}}
+					checked={testData.dropbox1Open}
+					disabled={left == ''}
+					right={
+						<Toggle
+							theme="primary-A-sm-sm-xs::primary-A-sm-sm-xs"
+							bg="/sheet/dropdown2.png"
+							onChange={() => {
+								runTestData.change('dropbox1Open', !testData.dropbox1Open);
+								console.log('idInput.current', idInput.current);
+								idInput.current.focus();
+							}}
+							onBlur={() => {
+								// runTestData.change('dropbox1Open', false);
+							}}
+							checked={testData.dropbox1Open}
+							disabled={left == ''}
+						/>
+					}
+				/>
+				<div
+					className={`absolute left-0 top-full w-full h-[120px] overflow-scroll border-2 border-t-0 border-orange-500 bg-white rounded-md rounded-t-none ${testData.dropbox1Open ? 'block' : 'hidden'}`}
+					ref={idInput}
+					onFocus={() => {
+						console.log('onFocus');
+						// runTestData.change('dropbox1Open', true);
+					}}
+					onBlur={() => {
+						console.log('onBlur');
+						runTestData.change('dropbox1Open', false);
+					}}
+				>
+					<div className="flex flex-col items-stretch divide-y divide-orange-300">
+						{'xabcdefghijkl'.split('').map((item, index) => (
+							<Toggle
+								key={index}
+								className="w-full z-0"
+								theme="default-BD-sm-md-xs::primary-DE-md-lg-xs"
+								bg={item == 'x' ? '' : '/sheet/radio1.png::/sheet/radio1.png'}
+								iconR="bx-x-circle::bx-x"
+								text={`${item}-Off::${item}-On`}
+								checked={testData.dropbox1.includes(item)}
+								onChange={() => {
+									runTestData.change('dropbox1', item == 'x' ? '' : item);
+									runTestData.change('dropbox1Open', false);
+								}}
+							/>
+						))}
+					</div>
+				</div>
+			</div>
+
+			<Group className="p-5 space-y-3 flex justify-center items-center flex-wrap ring-2 ring-gray-500 rounded-lg">
+				<Button
 					name={`${outType}${outMode}${overType}${overMode}`}
 					href="/view/sample"
 					onClick={clickButton}
 					onChange={changeToggle}
 					// theme={`${[color, `${outType}${outMode}${overType}${overMode}`, size, space, `${round}${roundMode}`].join('-')} ${['warning', `${outType}${outMode}${overType}${overMode}`, size, space, `${round}${roundMode}`].join('-')}`}
-					theme={[sampleOffTheme, sampleOnTheme].join(' ')}
+					theme={[sampleOffTheme, sampleOnTheme].join('::')}
 					icon={left == 'icon' ? sampleIcon : ''}
 					iconR={right == 'iconR' ? sampleIconR : ''}
 					img={left == 'image' ? sampleImage : ''}
@@ -347,7 +452,7 @@ export default function ChipSample() {
 			<Group>
 				<Highlight className="html">
 					{`
-					<Toggle theme="${[sampleOffTheme, sampleOnTheme].join(' ')}"${left == 'icon' ? ' icon="' + sampleIcon + '"' : ''}${left == 'image' ? ' img="' + sampleImage + '"' : ''}${left == 'bg' ? ' bg="' + sampleBg + '"' : ''}${right == 'iconR' ? ' iconR="' + sampleIconR + '"' : ''}${
+					<Toggle theme="${[sampleOffTheme, sampleOnTheme].join('::')}"${left == 'icon' ? ' icon="' + sampleIcon + '"' : ''}${left == 'image' ? ' img="' + sampleImage + '"' : ''}${left == 'bg' ? ' bg="' + sampleBg + '"' : ''}${right == 'iconR' ? ' iconR="' + sampleIconR + '"' : ''}${
 						right == 'imageR' ? ' imgR="' + sampleImageR + '"' : ''
 					}${right == 'bgR' ? ' bgR="' + sampleBgR + '"' : ''}${center == 'text' ? ' text="' + sampleText + '"' : ''}${checked == 'true' ? ' checked' : ''}${disabled == 'true' ? ' disabled' : ''} />
 					`}

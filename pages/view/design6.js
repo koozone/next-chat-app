@@ -292,6 +292,9 @@ export default function code() {
 	});
 	const [modal, runModal] = UseModal();
 	const [sideMenu, runSideMenu] = UseSideMenu();
+	const [testData, runTestData] = UseData({
+		dropbox: [],
+	});
 
 	const clickButton = (event) => {
 		const {name} = event.currentTarget;
@@ -690,10 +693,10 @@ export default function code() {
 
 				<Group>
 					<Text deco="font-danger">fruite : </Text>
-					<Toggle theme="primary-DL primary-FG" icon="bx-leaf" text="banana" team="fruite" name="banana" checked={data.fruite.includes('banana')} onChange={changeCheckbox} />
-					<Toggle theme="primary-DL primary-FG" icon="bx-leaf" text="apple" team="fruite" name="apple" checked={data.fruite.includes('apple')} onChange={changeCheckbox} />
-					<Toggle theme="primary-DL primary-FG" icon="bx-leaf" text="orange" team="fruite" name="orange" checked={data.fruite.includes('orange')} onChange={changeCheckbox} />
-					<Toggle theme="primary-DL primary-FG" icon="bx-leaf" text="melon" team="fruite" name="melon" checked={data.fruite.includes('melon')} onChange={changeCheckbox} />
+					<Toggle theme="primary-DL::primary-FG" icon="bx-leaf" text="banana" team="fruite" name="banana" checked={data.fruite.includes('banana')} onChange={changeCheckbox} />
+					<Toggle theme="primary-DL::primary-FG" icon="bx-leaf" text="apple" team="fruite" name="apple" checked={data.fruite.includes('apple')} onChange={changeCheckbox} />
+					<Toggle theme="primary-DL::primary-FG" icon="bx-leaf" text="orange" team="fruite" name="orange" checked={data.fruite.includes('orange')} onChange={changeCheckbox} />
+					<Toggle theme="primary-DL::primary-FG" icon="bx-leaf" text="melon" team="fruite" name="melon" checked={data.fruite.includes('melon')} onChange={changeCheckbox} />
 				</Group>
 			</Fieldset>
 
@@ -723,10 +726,10 @@ export default function code() {
 
 				<Group>
 					<Text deco="font-success">color : </Text>
-					<Toggle theme="success-BI success-KL" icon="bx-leaf" text="red" team="color" name="red" checked={data.color.includes('red')} onChange={changeRadio} />
-					<Toggle theme="success-BI success-KL" icon="bx-leaf" text="blue" team="color" name="blue" checked={data.color.includes('blue')} onChange={changeRadio} />
-					<Toggle theme="success-BI success-KL" icon="bx-leaf" text="yellow" team="color" name="yellow" checked={data.color.includes('yellow')} onChange={changeRadio} />
-					<Toggle theme="success-BI success-KL" icon="bx-leaf" text="green" team="color" name="green" checked={data.color.includes('green')} onChange={changeRadio} />
+					<Toggle theme="success-BI::success-KL" icon="bx-leaf" text="red" team="color" name="red" checked={data.color.includes('red')} onChange={changeRadio} />
+					<Toggle theme="success-BI::success-KL" icon="bx-leaf" text="blue" team="color" name="blue" checked={data.color.includes('blue')} onChange={changeRadio} />
+					<Toggle theme="success-BI::success-KL" icon="bx-leaf" text="yellow" team="color" name="yellow" checked={data.color.includes('yellow')} onChange={changeRadio} />
+					<Toggle theme="success-BI::success-KL" icon="bx-leaf" text="green" team="color" name="green" checked={data.color.includes('green')} onChange={changeRadio} />
 				</Group>
 			</Fieldset>
 
@@ -755,9 +758,9 @@ export default function code() {
 
 				<Group>
 					<Text deco="font-success">color : </Text>
-					<Toggle theme="default-HJ warning-JH" icon="bx-leaf" text="dog" name="dog" checked={data.dog} onChange={changeSwitch} />
-					<Toggle theme="default-HJ warning-JH" icon="bx-leaf" text="cat" name="cat" checked={data.cat} onChange={changeSwitch} />
-					<Toggle theme="default-HJ warning-JH" icon="bx-leaf" text="bird" name="bird" checked={data.bird} onChange={changeSwitch} />
+					<Toggle theme="default-HJ::warning-JH" icon="bx-leaf" text="dog" name="dog" checked={data.dog} onChange={changeSwitch} />
+					<Toggle theme="default-HJ::warning-JH" icon="bx-leaf" text="cat" name="cat" checked={data.cat} onChange={changeSwitch} />
+					<Toggle theme="default-HJ::warning-JH" icon="bx-leaf" text="bird" name="bird" checked={data.bird} onChange={changeSwitch} />
 				</Group>
 			</Fieldset>
 
@@ -811,6 +814,27 @@ export default function code() {
 						<Item value="left" data={data} changeRadio={changeRadio} />
 						<Item value="middle" data={data} changeRadio={changeRadio} />
 						<Item value="right" data={data} changeRadio={changeRadio} />
+					</div>
+				</Group>
+
+				<Group>
+					<div className="w-[200px] h-[120px] overflow-scroll border-2 border-orange-500 bg-white rounded-md">
+						<div className="flex flex-col items-stretch divide-y divide-orange-300">
+							{'abcdefghijkl'.split('').map((item, index) => (
+								<Button
+									key={index}
+									className="w-full z-0"
+									theme="default-BD-md-md-xs::primary-DE-md-md-xs"
+									bg="/sheet/radio1.png::/sheet/radio1.png"
+									iconR="bx-x-circle::bx-x"
+									text={`${item}-Off::${item}-On`}
+									checked={testData.dropbox.includes(item)}
+									onClick={() => {
+										runTestData.change('dropbox', item);
+									}}
+								/>
+							))}
+						</div>
 					</div>
 				</Group>
 			</Fieldset>
@@ -984,7 +1008,7 @@ export default function code() {
 					<ToggleSwitch />
 					<ToggleSwitch text="동의" checked />
 					<ToggleSwitch text="비동의" disabled /> */}
-					<Toggle theme="default-AA2-sm-sm-xs danger-A2-sm-sm-xs" bg="/sheet/switch1-lg.png" name="switch" checked={data.switch} onChange={changeSwitch}>
+					<Toggle theme="default-AA2-sm-sm-xs::danger-A2-sm-sm-xs" bg="/sheet/switch1-lg.png" name="switch" checked={data.switch} onChange={changeSwitch}>
 						다음 내용을 확인했습니다.
 					</Toggle>
 					<Toggle theme="default-AA2-sm-sm-xs" bg="/sheet/switch1-lg.png" />
@@ -992,8 +1016,8 @@ export default function code() {
 					<Toggle theme="default-AA2-sm-sm-xs" bg="/sheet/switch1-lg.png" text="비동의" disabled />
 				</Group>
 				<Group>
-					<Toggle theme="danger-IL-md-md-full success-IL-md-md-full" bg="/sheet/radio1.png " bgR=" /sheet/radio1.png" text="OFF ON" checked={data.switch} />
-					<Toggle theme="default-IL-2xl-md-md warning-IL-md-md-md" icon="bx-leaf bx-menu" imgR=" /image/noodle.jpg" text=" On" checked={data.switch} />
+					<Toggle theme="danger-IL-md-md-full::success-IL-md-md-full" bg="/sheet/radio1.png::" bgR="::/sheet/radio1.png" text="OFF::ON" checked={data.switch} />
+					<Toggle theme="default-IL-2xl-md-md::warning-IL-md-md-md" icon="bx-leaf::bx-menu" imgR="::/image/noodle.jpg" text="::On" checked={data.switch} />
 				</Group>
 			</Fieldset>
 		</>

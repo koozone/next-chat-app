@@ -107,7 +107,7 @@ const getDefaultElement = (props) => {
 
 		case 'basket':
 			// return <div className={`relative inline-flex justify-center items-center`} />;
-			return <div className={``} />;
+			return <div className={`pointer-events-none`} />;
 
 		case 'a':
 			// return <div className={`group relative inline-flex justify-center items-center`} />;
@@ -120,7 +120,7 @@ const getDefaultElement = (props) => {
 
 		case 'input':
 			// return disabled ? <div className={`relative inline-flex justify-start items-center select-none`} /> : <div className={`group relative inline-flex justify-start items-center cursor-text select-none`} />;
-			return disabled ? <div className={`select-none`} /> : <div className={`group cursor-text select-none`} />;
+			return disabled ? <div className={`select-none`} /> : <div className={`cursor-text select-none`} />;
 
 		default:
 			return <div className={``} />;
@@ -271,7 +271,7 @@ const getDecoElement = (props) => {
 const getThemeProps = (props) => {
 	const {theme, checked} = props;
 
-	// const tttList = theme.split(' ');
+	// const tttList = theme.split('::');
 	// const ttt = checked ? tttList[1] || tttList[0] : tttList[0];
 
 	// const themeList = String(ttt).split('-') || [];
@@ -286,7 +286,7 @@ const getThemeProps = (props) => {
 	// const size = checked ? themeList[2]?.split('/')[1] || themeList[2]?.split('/')[0] || 'md' : themeList[2]?.split('/')[0] || 'md';
 	// const space = checked ? themeList[3]?.split('/')[1] || themeList[3]?.split('/')[0] || 'md' : themeList[3]?.split('/')[0] || 'md';
 	// const round = checked ? themeList[4]?.split('/')[1] || themeList[4]?.split('/')[0] || 'md' : themeList[4]?.split('/')[0] || 'md';
-	const themeArr = String(theme).split(' ') || [];
+	const themeArr = String(theme).split('::') || [];
 	const offTheme = themeArr[0];
 	const onTheme = themeArr[1];
 	const themeValue = checked ? onTheme || offTheme : offTheme;
@@ -411,6 +411,12 @@ const getNewProps = (props) => {
 		onChange = (event) => {
 			console.log(`${event.currentTarget.name || '{noname}'} change!`);
 		},
+		onFocus = (event) => {
+			console.log(`${event.currentTarget.name || '{noname}'} focus!`);
+		},
+		onBlur = (event) => {
+			console.log(`${event.currentTarget.name || '{noname}'} blur!`);
+		},
 	} = props;
 
 	const useTag = {
@@ -443,6 +449,8 @@ const getNewProps = (props) => {
 		href,
 		onClick,
 		onChange,
+		onFocus,
+		onBlur,
 		themeProps,
 	};
 };
@@ -457,12 +465,12 @@ const FormCheck = (props) => {
 	);
 };
 const FormInput = forwardRef((props, ref) => {
-	const {children, deco, styleName, className, name, href, type, value, placeholder, onChange, checked, disabled} = getNewProps({...props, tag: 'formInput'});
+	const {children, deco, styleName, className, name, href, type, value, placeholder, onChange, checked, disabled, readOnly} = getNewProps({...props, tag: 'formInput'});
 
 	return disabled ? (
-		<input type={type} className={`${styleName} | ${className}`} ref={ref} placeholder={placeholder} value={value} onChange={onChange} />
+		<input type={type} className={`${styleName} | ${className}`} ref={ref} placeholder={placeholder} value={value} onChange={onChange} readOnly={readOnly} />
 	) : (
-		<input type={type} className={`${styleName} | ${className}`} id={name} name={name} ref={ref} placeholder={placeholder} value={value} onChange={onChange} />
+		<input type={type} className={`${styleName} | ${className}`} id={name} name={name} ref={ref} placeholder={placeholder} value={value} onChange={onChange} readOnly={readOnly} />
 	);
 });
 
@@ -566,37 +574,37 @@ const LabelTheme = (props) => {
 	} = newProps;
 	// const {padding, margin, size, rounded, height, typeDeco, modeDeco} = getThemeProps(props);
 
-	const iconArr = String(icon).split(' ') || [];
+	const iconArr = String(icon).split('::') || [];
 	const offIcon = iconArr[0];
 	const onIcon = iconArr.length == 2 ? iconArr[1] : iconArr[1] || iconArr[0];
 	const iconValue = checked ? onIcon : offIcon;
 
-	const iconRArr = String(iconR).split(' ') || [];
+	const iconRArr = String(iconR).split('::') || [];
 	const offIconR = iconRArr[0];
 	const onIconR = iconRArr.length == 2 ? iconRArr[1] : iconRArr[1] || iconRArr[0];
 	const iconRValue = checked ? onIconR : offIconR;
 
-	const imageArr = String(img).split(' ') || [];
+	const imageArr = String(img).split('::') || [];
 	const offImage = imageArr[0];
 	const onImage = imageArr.length == 2 ? imageArr[1] : imageArr[1] || imageArr[0];
 	const imageValue = checked ? onImage : offImage;
 
-	const imageRArr = String(imgR).split(' ') || [];
+	const imageRArr = String(imgR).split('::') || [];
 	const offImageR = imageRArr[0];
 	const onImageR = imageRArr.length == 2 ? imageRArr[1] : imageRArr[1] || imageRArr[0];
 	const imageRValue = checked ? onImageR : offImageR;
 
-	const bgArr = String(bg).split(' ') || [];
+	const bgArr = String(bg).split('::') || [];
 	const offBg = bgArr[0];
 	const onBg = bgArr.length == 2 ? bgArr[1] : bgArr[1] || bgArr[0];
 	const bgValue = checked ? onBg : offBg;
 
-	const bgRArr = String(bgR).split(' ') || [];
+	const bgRArr = String(bgR).split('::') || [];
 	const offBgR = bgRArr[0];
 	const onBgR = bgRArr.length == 2 ? bgRArr[1] : bgRArr[1] || bgRArr[0];
 	const bgRValue = checked ? onBgR : offBgR;
 
-	const textArr = String(text).split(' ') || [];
+	const textArr = String(text).split('::') || [];
 	const offText = textArr[0];
 	const onText = textArr.length == 2 ? textArr[1] : textArr[1] || textArr[0];
 	const textValue = checked ? onText : offText;
@@ -621,16 +629,14 @@ const LabelTheme = (props) => {
 			{center ? (
 				center
 			) : textValue || children ? (
-				<>
-					<Text {...newProps} className={`ml-${margin.x * 2} mr-${margin.x * 2}`}>
-						{textValue}
-						{children}
-					</Text>
-					{props.tag == 'input' ? <FormInput {...props} className={`ml-${margin.x * 2} mr-${margin.x * 2}`} /> : <></>}
-				</>
+				<Text {...newProps} className={`ml-${margin.x * 2} mr-${margin.x * 2}`}>
+					{textValue}
+					{children}
+				</Text>
 			) : (
 				<></>
 			)}
+			{newProps.hasOwnProperty('value') ? <FormInput {...newProps} className={`ml-${margin.x * 2} mr-${margin.x * 2}`} readOnly={props.tag != 'input'} /> : <></>}
 			{right ? (
 				right
 			) : imageRValue ? (
@@ -686,8 +692,8 @@ export const A = (props) => {
 };
 
 export const Basket = (props) => {
-	const newProps = props.tag ? props : getNewProps({...props, type: 'checkbox', tag: 'basket'});
-	const {children, deco, styleName, className, icon, iconL, iconR, team = '', name, text, type, onChange, checked = false, disabled} = newProps;
+	const newProps = props.tag ? props : getNewProps({...props, tag: 'basket'});
+	const {children, deco, styleName, className, icon, iconL, iconR, team = '', name, text, type, onChange, onFocus, onBlur, checked = false, disabled} = newProps;
 
 	// 특정 ui의 change 이벤트 발생을 방지하기 위한 코드
 	const forName = ['toggle', 'input'].includes(props.tag) ? (name ? [team, name].join('-') : null) : '';
@@ -696,8 +702,8 @@ export const Basket = (props) => {
 	const labelName = `${label.props.className} justify-center`;
 
 	return (
-		<label htmlFor={forName} className={`${styleName} | ${labelName}`}>
-			<FormCheck {...props} type={type} checked={checked} />
+		<label htmlFor={forName} className={`${styleName} | ${labelName}`} onFocus={onFocus} onBlur={onBlur}>
+			<FormCheck {...props} type="checkbox" checked={checked} />
 			{/* <Box deco={deco} /> */}
 			{/* <Label deco={deco} icon={icon || iconL} iconR={iconR} text={text} /> */}
 			{/* <Label {...newProps} /> */}
@@ -710,19 +716,19 @@ export const Basket = (props) => {
 export const Toggle = (props) => {
 	const newProps = getNewProps({...props, tag: 'toggle'});
 
-	return <Basket {...newProps} type="checkbox" />;
+	return <Basket {...newProps} />;
 };
 
 export const Button = (props) => {
 	const newProps = getNewProps({...props, tag: 'button'});
-	const {children, name, onClick, checked = false, disabled} = newProps;
+	const {children, name, onClick, onBlur, checked = false, disabled} = newProps;
 
 	// disabled 상태일때를 위한 코드
 	const clickHandler = disabled ? () => {} : onClick;
 
 	return (
 		<button type="button" name={name} onClick={clickHandler}>
-			<Basket {...newProps} type="checkbox" checked={checked} />
+			<Basket {...newProps} checked={checked} />
 		</button>
 	);
 };
@@ -732,7 +738,7 @@ export const Input = forwardRef((props, ref) => {
 	const {children, name, onClick, type} = newProps;
 
 	return (
-		<Basket {...newProps} type="button">
+		<Basket {...newProps}>
 			{/* {children}
 			<FormInput {...props} ref={ref} /> */}
 		</Basket>
