@@ -1,9 +1,10 @@
-import {useRef} from 'react';
+import {useEffect, useRef} from 'react';
 import {Fieldset, Chip, Group, Highlight, ToggleRadio} from '../component/temp_ds';
 import {A, Basket, Button, Icon, Input, Label, Text, Toggle} from '../component/ui_ds6';
 import {UseData} from '../hook/useData';
 
 const OPTIONS = [
+	{value: '', name: '초기화'},
 	{value: 'apple', name: '사과'},
 	{value: 'banana', name: '바나나'},
 	{value: 'orange', name: '오렌지'},
@@ -13,14 +14,22 @@ const SelectBox = (props) => {
 	const {options, defaultValue, name: key, keyOpen = `${props.name}Open`} = props;
 	const [data, runData] = props.data;
 	const itemList = data[key] || [];
-	console.log('~~~~', data, key, data[key]);
-	// default value
-	if (!data[key] && defaultValue) {
-		runData.change(
-			key,
-			options.filter((item) => item.value == defaultValue)
-		);
-	}
+
+	const focusDiv = useRef(null);
+
+	useEffect(() => {
+		// default value
+		if (!data.hasOwnProperty(key) && defaultValue) {
+			runData.change(
+				key,
+				options.filter((item) => item.value == defaultValue)
+			);
+		}
+	}, []);
+
+	useEffect(() => {
+		if (focusDiv.current) focusDiv.current.focus();
+	}, [focusDiv]);
 
 	return (
 		<div className="relative w-[200px]">
@@ -47,7 +56,8 @@ const SelectBox = (props) => {
 				disabled={false}
 			/>
 			<div
-				className={`absolute left-0 top-full w-full h-[120px] min-h-fit overflow-y-auto border-2 border-orange-500 bg-white rounded-md ${data[keyOpen] ? 'block' : 'hidden'}`}
+				className={`absolute z-10 left-0 top-full w-full h-[120px] min-h-fit overflow-y-auto border-2 border-orange-500 bg-white rounded-md ${data[keyOpen] ? 'block' : 'hidden'}`}
+				ref={focusDiv}
 				onFocus={() => {
 					console.log('onFocus');
 					// runData.change(keyOpen, true);
@@ -61,9 +71,9 @@ const SelectBox = (props) => {
 					{options.map((item, index) => (
 						<Toggle
 							key={index}
-							className="w-full z-10"
+							className="w-full"
 							theme="default-BD-sm-md-xs::primary-DE-md-lg-xs"
-							bg={item.value == 'x' ? '' : '/sheet/radio1.png::/sheet/radio1.png'}
+							bg={item.value == '' ? '' : '/sheet/radio1.png::/sheet/radio1.png'}
 							iconR="bx-x-circle::bx-x"
 							text={`${item.name}-Off::${item.name}-On`}
 							checked={itemList.map((item) => item.value).includes(item.value)}
@@ -207,8 +217,6 @@ export default function ChipSample() {
 	const controlOffTheme = '-DE2-sm-md-md';
 	const controlOnTheme = '-K2-sm-md-md';
 	const controlBg = '/sheet/radio1.png';
-
-	const idInput = useRef(null);
 
 	return (
 		<Fieldset title="Chip">
@@ -416,78 +424,8 @@ export default function ChipSample() {
 				<Input type="text" theme="danger-HI-md-md-md" icon="bx-leaf" text={right} className="w-[300px]" name="right" value={right == '' ? '' : chipData[right]} placeholder={right == '' ? '선택' : `${right} 입력`} onChange={chageChipInput} disabled={right == ''} />
 			</LineGroup>
 
-			<div className="relative w-[200px]">
-				<Toggle
-					// type="password"
-					theme="primary-HI-md-md-md::warning-IJ-md-md-md"
-					// icon="bx-leaf"
-					img="/image/bean.jpg"
-					text="test"
-					className="w-full"
-					name="leftTest"
-					value={testData.dropbox1}
-					placeholder="SELECT"
-					onChange={(event) => {
-						if (event.target.name == 'leftTest') {
-							runTestData.change('dropbox1Open', !testData.dropbox1Open);
-						}
-					}}
-					onBlur={() => {
-						// runTestData.change('dropbox1Open', false);
-					}}
-					checked={testData.dropbox1Open}
-					disabled={left == ''}
-					// right={
-					// 	<Toggle
-					// 		theme="primary-A-sm-sm-xs::primary-A-sm-sm-xs"
-					// 		bg="/sheet/dropdown2.png"
-					// 		onChange={() => {
-					// 			runTestData.change('dropbox1Open', !testData.dropbox1Open);
-					// 			console.log('idInput.current', idInput.current);
-					// 			idInput.current.focus();
-					// 		}}
-					// 		onBlur={() => {
-					// 			// runTestData.change('dropbox1Open', false);
-					// 		}}
-					// 		checked={testData.dropbox1Open}
-					// 		disabled={left == ''}
-					// 	/>
-					// }
-					bgR="/sheet/dropdown2.png"
-				/>
-				<div
-					className={`absolute left-0 top-full w-full h-[120px] overflow-y-auto border-2 border-orange-500 bg-white rounded-md ${testData.dropbox1Open ? 'block' : 'hidden'}`}
-					ref={idInput}
-					onFocus={() => {
-						console.log('onFocus');
-						// runTestData.change('dropbox1Open', true);
-					}}
-					onBlur={() => {
-						console.log('onBlur');
-						runTestData.change('dropbox1Open', false);
-					}}
-				>
-					<div className="flex flex-col items-stretch divide-y divide-orange-300">
-						{'xabcdefghijkl'.split('').map((item, index) => (
-							<Toggle
-								key={index}
-								className="w-full z-10"
-								theme="default-BD-sm-md-xs::primary-DE-md-lg-xs"
-								bg={item == 'x' ? '' : '/sheet/radio1.png::/sheet/radio1.png'}
-								iconR="bx-x-circle::bx-x"
-								text={`${item}-Off::${item}-On`}
-								checked={testData.dropbox1.includes(item)}
-								onChange={() => {
-									runTestData.change('dropbox1', item == 'x' ? '' : item);
-									runTestData.change('dropbox1Open', false);
-								}}
-							/>
-						))}
-					</div>
-				</div>
-			</div>
-
-			<SelectBox name="aaa" options={OPTIONS} data={aaaData} defaultValue="banana" />
+			<SelectBox name="aaa" options={OPTIONS} data={aaaData} defaultValue="apple" />
+			<SelectBox name="bbb" options={OPTIONS} data={aaaData} defaultValue="banana" />
 
 			<Group className="p-5 space-y-3 flex justify-center items-center flex-wrap ring-2 ring-gray-500 rounded-lg">
 				<Button
