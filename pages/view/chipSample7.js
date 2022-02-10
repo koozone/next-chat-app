@@ -42,6 +42,7 @@ const SelectBox = (props) => {
 			onBlur={() => {
 				runData.change(keyOpen, false);
 			}}
+			checked={data[keyOpen]}
 		>
 			<Toggle
 				// type="password"
@@ -57,7 +58,7 @@ const SelectBox = (props) => {
 				checked={data[keyOpen]}
 				disabled={false}
 			/>
-			<div className={`${data[keyOpen] ? 'left-0' : 'left-[9999px]'} fixed md:absolute z-10 md:top-full md:bottom-auto bottom-0 w-full max-h-40 overflow-y-auto border-2 border-orange-500 bg-white rounded-md`}>
+			<div className={`${data[keyOpen] ? 'not-sr-only' : 'sr-only'} fixed md:absolute z-10 left-0 md:top-full md:bottom-auto bottom-0 w-full max-h-40 overflow-y-auto border-2 border-orange-500 bg-white rounded-md`}>
 				<div className="flex flex-col items-stretch divide-y divide-orange-300">
 					{options.map((item, index) => (
 						<Button
@@ -419,11 +420,14 @@ export default function ChipSample() {
 			<SelectBox name="bbb" options={OPTIONS2} data={aaaData} defaultValue="banana" />
 
 			<Group className="p-5 space-y-3 flex justify-center items-center flex-wrap ring-2 ring-gray-500 rounded-lg">
-				<Button
+				<Toggle
 					name={`${outType}${outMode}${overType}${overMode}`}
 					href="/view/sample"
 					onClick={clickButton}
-					onChange={changeToggle}
+					onChange={() => {
+						aaaData[1].change('aaa', [OPTIONS[1]]);
+						aaaData[1].change('bbb', [OPTIONS2[1], OPTIONS2[4], OPTIONS2[5]]);
+					}}
 					// theme={`${[color, `${outType}${outMode}${overType}${overMode}`, size, space, `${round}${roundMode}`].join('-')} ${['warning', `${outType}${outMode}${overType}${overMode}`, size, space, `${round}${roundMode}`].join('-')}`}
 					theme={[sampleOffTheme, sampleOnTheme].join('::')}
 					icon={left == 'icon' ? sampleIcon : ''}
