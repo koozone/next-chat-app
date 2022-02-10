@@ -1,6 +1,6 @@
 import {useEffect, useRef} from 'react';
 import {Fieldset, Chip, Group, Highlight, ToggleRadio} from '../component/temp_ds';
-import {A, Basket, Button, Icon, Input, Label, Text, Toggle} from '../component/ui_ds6';
+import {A, Basket, Button, Icon, Input, Label, Text, Toggle} from '../component/ui_ds7';
 import {UseData} from '../hook/useData';
 
 const OPTIONS = [

@@ -1,5 +1,5 @@
 import {useEffect} from 'react';
-import {Icon, A, Button, Img, Input, Label, Text, Basket, Toggle, Box} from '../component/ui_ds6';
+import {Icon, A, Button, Img, Input, Label, Text, Basket, Toggle, Box} from '../component/ui_ds7';
 import hljs from 'highlight.js';
 import 'highlight.js/styles/night-owl.css';
 import javascript from 'highlight.js/lib/languages/javascript';
@@ -103,8 +103,8 @@ export const Highlight = (props) => {
 			<div className="pl-5 absolute right-0 top-0 bottom-5 bg-gradient-to-l from-[#001528] via-[#001528]">
 				<Button
 					className="z-10"
-					theme="default-FB-md-lg-md8 success-F-md-lg-md8"
-					icon="bx-copy-alt bx-check"
+					theme="default-FB-md-lg-md8::success-F-md-lg-md8"
+					icon="bx-copy-alt::bx-check"
 					// bg="/sheet/symbol2-md2.png"
 					checked={copyData}
 					onClick={(event) => {
