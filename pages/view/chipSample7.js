@@ -34,6 +34,7 @@ const SelectBox = (props) => {
 		}
 	}, []);
 
+	const containerSize = openData ? `w-full h-screen ${maxHeight}` : 'w-0 h-0';
 	const containerMotion = direction ? 'top-auto bottom-0 md:top-full md:bottom-auto' : 'top-auto bottom-0 md:top-auto md:bottom-full';
 	const menuMotion = direction
 		? 'top-full bottom-auto md:top-auto md:bottom-full translate-y-0 peer-checked:-translate-y-full md:translate-y-0 md:peer-checked:translate-y-full'
@@ -41,7 +42,7 @@ const SelectBox = (props) => {
 
 	return (
 		<div
-			className={`md:relative ${width}`}
+			className={`inline-block md:relative ${width}`}
 			onFocus={() => {
 				runOpenData.change(true);
 			}}
@@ -64,9 +65,9 @@ const SelectBox = (props) => {
 				checked={openData}
 				disabled={false}
 			/>
-			<div className={`${openData ? 'not-sr-only' : 'sr-only'} ${containerMotion} z-10 peer-checked:z-20 fixed md:absolute left-0 w-full h-screen ${maxHeight} overflow-hidden pointer-events-none`}>
+			<div className={`${containerSize} ${containerMotion} z-10 peer-checked:z-20 fixed md:absolute left-0 overflow-hidden pointer-events-none`}>
 				<input type="checkbox" className="peer sr-only" checked={openData} onChange={() => {}} />
-				<div className={`${menuMotion} absolute transition-all duration-200 left-0 w-full ${maxHeight} overflow-y-auto border-2 border-zinc-500 bg-white rounded-md pointer-events-auto`}>
+				<div className={`${menuMotion} absolute transition-all duration-200 left-0 w-full max-h-full overflow-y-auto border-[1px] border-zinc-500 bg-white rounded-md pointer-events-auto`}>
 					<div className="flex flex-col items-stretch divide-y divide-zinc-500">
 						{options.map((item, index) => (
 							<Button
