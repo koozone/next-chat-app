@@ -19,62 +19,71 @@ const OPTIONS2 = [
 ];
 
 const SelectBox = (props) => {
-	const {options, defaultValue, name: key, keyOpen = `${props.name}Open`} = props;
-	const [data, runData] = props.data;
-	const itemList = data[key] || [];
+	const {title = '', name, options, icon, value, defaultValue, width = 'w-[200px]', maxHeight = 'max-h-[160px]', direction = true} = props;
+	const [selectData, runSelectData] = props.data;
+	const [openData, runOpenData] = UseData(false);
+	const selectList = selectData[name] || [];
 
 	useEffect(() => {
 		// default value
-		if (!data.hasOwnProperty(key) && defaultValue) {
-			runData.change(
-				key,
+		if (!selectData.hasOwnProperty(name) && defaultValue) {
+			runSelectData.change(
+				name,
 				options.filter((item) => item.value == defaultValue)
 			);
 		}
 	}, []);
 
+	const containerMotion = direction ? 'top-auto bottom-0 md:top-full md:bottom-auto' : 'top-auto bottom-0 md:top-auto md:bottom-full';
+	const menuMotion = direction
+		? 'top-full bottom-auto md:top-auto md:bottom-full translate-y-0 peer-checked:-translate-y-full md:translate-y-0 md:peer-checked:translate-y-full'
+		: 'top-full bottom-auto md:top-full md:bottom-auto translate-y-0 peer-checked:-translate-y-full md:translate-y-0 md:peer-checked:-translate-y-full';
+
 	return (
 		<div
-			className="md:relative w-[200px]"
+			className={`md:relative ${width}`}
 			onFocus={() => {
-				runData.change(keyOpen, true);
+				runOpenData.change(true);
 			}}
 			onBlur={() => {
-				runData.change(keyOpen, false);
+				runOpenData.change(false);
 			}}
-			checked={data[keyOpen]}
 		>
 			<Toggle
 				// type="password"
 				theme="primary-HI-md-md-md::warning-IJ-md-md-md"
-				// icon="bx-leaf"
-				img="/image/bean.jpg"
+				icon={icon}
+				// img="/image/bean.jpg"
 				bgR="/sheet/dropdown2.png"
-				text="test"
+				text={title}
 				className="w-full"
-				name={key}
-				value={itemList.map((i) => i.name).join(', ')}
+				name={name}
+				// value={selectList.map((i) => i.name).join(', ')}
+				value={value || selectList.map((i) => i.name).join(', ')}
 				placeholder="SELECT"
-				checked={data[keyOpen]}
+				checked={openData}
 				disabled={false}
 			/>
-			<div className={`${data[keyOpen] ? 'not-sr-only' : 'sr-only'} fixed md:absolute z-10 left-0 md:top-full md:bottom-auto bottom-0 w-full max-h-40 overflow-y-auto border-2 border-orange-500 bg-white rounded-md`}>
-				<div className="flex flex-col items-stretch divide-y divide-orange-300">
-					{options.map((item, index) => (
-						<Button
-							key={index}
-							className="w-full"
-							theme="default-BD-md-md-xs::primary-DE-md-lg-xs"
-							bg={item.value == '' ? '' : '/sheet/radio1.png::/sheet/radio1.png'}
-							iconR="bx-x-circle::bx-x"
-							text={`${item.name}-Off::${item.name}-On`}
-							checked={itemList.map((item) => item.value).includes(item.value)}
-							onClick={() => {
-								runData.change(key, item.value == '' ? [] : [item]);
-								runData.change(keyOpen, false);
-							}}
-						/>
-					))}
+			<div className={`${openData ? 'not-sr-only' : 'sr-only'} ${containerMotion} z-10 peer-checked:z-20 fixed md:absolute left-0 w-full h-screen ${maxHeight} overflow-hidden pointer-events-none`}>
+				<input type="checkbox" className="peer sr-only" checked={openData} onChange={() => {}} />
+				<div className={`${menuMotion} absolute transition-all duration-200 left-0 w-full ${maxHeight} overflow-y-auto border-2 border-zinc-500 bg-white rounded-md pointer-events-auto`}>
+					<div className="flex flex-col items-stretch divide-y divide-zinc-500">
+						{options.map((item, index) => (
+							<Button
+								key={index}
+								className="w-full"
+								theme="default-BD-md-md-xs::primary-DE-md-lg-xs"
+								bg={item.value == '' ? '' : '/sheet/radio1.png::/sheet/radio1.png'}
+								iconR="bx-x-circle::bx-x"
+								text={`${item.name}: ${item.value}::${item.name}-On`}
+								checked={selectList.map((item) => item.value).includes(item.value)}
+								onClick={() => {
+									runSelectData.change(name, item.value == '' ? [] : [item]);
+									runOpenData.change(false);
+								}}
+							/>
+						))}
+					</div>
 				</div>
 			</div>
 		</div>
@@ -366,13 +375,25 @@ export default function ChipSample() {
 			</LineGroup>
 			<LineGroup name="left" runFunc={runElData}>
 				{['icon', 'image', 'bg'].map((item, index) => (
-					<Toggle key={index} theme={`info${controlOffTheme} info${controlOnTheme}`} bg={controlBg} text={item} team="left" name={item} checked={left.includes(item)} onChange={changeElRadio} />
+					<Toggle
+						key={index}
+						theme={`info${controlOffTheme} info${controlOnTheme}`}
+						bg={controlBg}
+						iconR={item == 'icon' ? chipData['icon'] : ''}
+						imgR={item == 'image' ? chipData['image'] : ''}
+						bgR={item == 'bg' ? chipData['bg'] : ''}
+						text={item}
+						team="left"
+						name={item}
+						checked={left.includes(item)}
+						onChange={changeElRadio}
+					/>
 				))}
 				{/* <Input type="text" deco="basket-default box-default font-default" className="w-[200px]" name="left" value={chipData[left]} placeholder="left 입력" onChange={chageChipInput} disabled={left == ''} /> */}
 				<Input
 					type="text"
 					theme="danger-HI-md-md-md"
-					icon="bx-leaf"
+					// icon="bx-leaf"
 					text={left}
 					className="w-[300px]"
 					name="left"
@@ -406,18 +427,43 @@ export default function ChipSample() {
 						TEXT :
 					</Text>
 				</Input> */}
-				<Input type="password" theme="danger-HI-md-md-md" icon="bx-leaf" text={center} className="w-[450px]" name="center" value={center == '' ? '' : chipData[center]} placeholder={center == '' ? '선택' : `${center} 입력`} onChange={chageChipInput} disabled={center == ''} />
+				<Input type="text" theme="danger-HI-md-md-md" text={center} className="w-[450px]" name="center" value={center == '' ? '' : chipData[center]} placeholder={center == '' ? '선택' : `${center} 입력`} onChange={chageChipInput} disabled={center == ''} />
 			</LineGroup>
 			<LineGroup name="right" runFunc={runElData}>
 				{['icon', 'image', 'bg'].map((item, index) => (
-					<Toggle key={index} theme={`info${controlOffTheme} info${controlOnTheme}`} bg={controlBg} text={item} team="right" name={`${item}R`} checked={right.includes(`${item}R`)} onChange={changeElRadio} />
+					<Toggle
+						key={index}
+						theme={`info${controlOffTheme} info${controlOnTheme}`}
+						bg={controlBg}
+						iconR={item == 'icon' ? chipData['iconR'] : ''}
+						imgR={item == 'image' ? chipData['imageR'] : ''}
+						bgR={item == 'bg' ? chipData['bgR'] : ''}
+						text={item}
+						team="right"
+						name={`${item}R`}
+						checked={right.includes(`${item}R`)}
+						onChange={changeElRadio}
+					/>
 				))}
 				{/* <Input type="text" deco="basket-default box-default font-default" className="w-[200px]" name="right" value={chipData[right]} placeholder="right 입력" onChange={chageChipInput} disabled={right == ''} /> */}
-				<Input type="text" theme="danger-HI-md-md-md" icon="bx-leaf" text={right} className="w-[300px]" name="right" value={right == '' ? '' : chipData[right]} placeholder={right == '' ? '선택' : `${right} 입력`} onChange={chageChipInput} disabled={right == ''} />
+				<Input type="text" theme="danger-HI-md-md-md" text={right} className="w-[300px]" name="right" value={right == '' ? '' : chipData[right]} placeholder={right == '' ? '선택' : `${right} 입력`} onChange={chageChipInput} disabled={right == ''} />
 			</LineGroup>
 
-			<SelectBox name="aaa" options={OPTIONS} data={aaaData} defaultValue="apple" />
-			<SelectBox name="bbb" options={OPTIONS2} data={aaaData} defaultValue="banana" />
+			<SelectBox name="aaa" data={aaaData} options={OPTIONS} />
+			<SelectBox title="fruit" name="bbb" data={aaaData} options={OPTIONS2} defaultValue="banana" width="w-[230px]" direction={false} value={aaaData[0]['bbb']?.map((item) => `${item.value}`).join(', ')} />
+			<SelectBox
+				title="icon"
+				name="icon"
+				data={aaaData}
+				options={[
+					{value: 'bx-leaf', name: 'leaf'},
+					{value: 'bx-lemon', name: 'lemon'},
+					{value: 'bx-paste', name: 'paste'},
+				]}
+				width="w-[250px]"
+				value={aaaData[0]['icon']?.map((item) => `${item.name}: ${item.value}`).join(', ')}
+				icon={aaaData[0]['icon']?.map((item) => item.value).join(', ')}
+			/>
 
 			<Group className="p-5 space-y-3 flex justify-center items-center flex-wrap ring-2 ring-gray-500 rounded-lg">
 				<Toggle
