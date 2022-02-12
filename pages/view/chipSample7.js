@@ -1,4 +1,4 @@
-import {useEffect, useRef} from 'react';
+import {useEffect, useRef, cloneElement} from 'react';
 import {Fieldset, Chip, Group, Highlight, ToggleRadio} from '../component/temp_ds';
 import {A, Basket, Button, Icon, Input, Label, Text, Toggle} from '../component/ui_ds7';
 import {UseData} from '../hook/useData';
@@ -28,40 +28,49 @@ const OPTIONS3 = [
 ];
 
 const SelectItem = (props) => {
-	const {option, checked} = props;
+	const {option = {}, checked = false} = props;
 
 	return (
 		<Toggle
 			className="w-full"
-			theme="primary-HI-md-md-md::warning-IJ-md-md-md"
+			theme="primary-HI-md-lg-full::warning-IJ-md-md-md1"
 			// icon={icon}
 			// img="/image/bean.jpg"
 			bgR="/sheet/dropdown2.png"
 			text={option.label}
 			// name={option.name}
-			value={[...option.value].map((item) => item.label).join(', ')}
+			value={[...(option.value || [])].map((item) => item.label).join(', ')}
 			placeholder="SELECT"
 			checked={checked}
 		/>
 	);
 };
 const BoxItem = (props) => {
-	const {option, checked, onClick} = props;
+	const {option = {}, checked = false, onClick} = props;
 
 	return <Button className="w-full" theme="default-BD-md-md-xs::primary-DE-md-lg-xs" text={`${option.label}: ${option.value}`} name={option.value} checked={checked} onClick={onClick} />;
 };
 
 const SelectBox3 = (props) => {
-	const {name, options, icon, value, defaultValue, width = 'w-[200px]', maxHeight = 'max-h-[160px]', direction = true} = props;
+	const {
+		option: {value, label},
+		options,
+		selectItem,
+		boxItem,
+		defaultValue,
+		width = 'w-[200px]',
+		maxHeight = 'max-h-[160px]',
+		direction = true,
+	} = props;
 	const [selectData, runSelectData] = props.data;
 	const [openData, runOpenData] = UseData(false);
-	const selectList = selectData[name] || [];
+	const selectList = selectData[value] || [];
 
 	useEffect(() => {
 		// default value
-		if (!selectData.hasOwnProperty(name) && defaultValue) {
+		if (!selectData.hasOwnProperty(value) && defaultValue) {
 			runSelectData.change(
-				name,
+				value,
 				options.filter((item) => item.value == defaultValue)
 			);
 		}
@@ -74,9 +83,9 @@ const SelectBox3 = (props) => {
 		: 'top-full bottom-auto md:top-full md:bottom-auto translate-y-0 peer-checked:-translate-y-full md:translate-y-0 md:peer-checked:-translate-y-full';
 
 	const clickBoxItem = (event) => {
-		const {name: itemName} = event.currentTarget;
+		const {name} = event.currentTarget;
 
-		runSelectData.change(name, itemName == '' ? [] : options.filter((item) => item.value == itemName));
+		runSelectData.change(value, name == '' ? [] : options.filter((item) => item.value == name));
 		runOpenData.change(false);
 	};
 
@@ -90,14 +99,16 @@ const SelectBox3 = (props) => {
 				runOpenData.change(false);
 			}}
 		>
-			<SelectItem option={{label: '색상', value: selectList}} checked={openData} />
+			{/* <SelectItem option={{label: '색상', value: selectList}} checked={openData} /> */}
+			{cloneElement(selectItem, {option: {label: label, value: selectList}, checked: openData})}
 			<div className={`${containerSize} ${containerMotion} z-10 peer-checked:z-20 fixed md:absolute left-0 overflow-hidden pointer-events-none`}>
 				<input type="checkbox" className="peer sr-only" checked={openData} onChange={() => {}} />
 				<div className={`${menuMotion} absolute transition-all duration-200 left-0 w-full max-h-full overflow-y-auto border-[1px] border-zinc-500 bg-white rounded-md pointer-events-auto`}>
 					<div className="flex flex-col items-stretch divide-y divide-zinc-500">
-						{options.map((item, index) => (
-							<BoxItem key={index} option={item} checked={selectList.map((i) => i.value).includes(item.value)} onClick={clickBoxItem} />
-						))}
+						{options.map((item, index) =>
+							// <BoxItem key={index} option={item} checked={selectList.map((i) => i.value).includes(item.value)} onClick={clickBoxItem} />
+							cloneElement(boxItem, {key: index, option: item, checked: selectList.map((i) => i.value).includes(item.value), onClick: clickBoxItem})
+						)}
 					</div>
 				</div>
 			</div>
@@ -553,7 +564,9 @@ export default function ChipSample() {
 				value={aaaData[0]['icon']?.map((item) => `${item.name}: ${item.value}`).join(', ')}
 				icon={aaaData[0]['icon']?.map((item) => item.value).join(', ')}
 			/>
-			<SelectBox3 title="이메일" name="email" data={aaaData} options={OPTIONS3} />
+			<SelectBox3 option={{value: 'email', label: '이메일'}} data={aaaData} options={OPTIONS3} selectItem={<SelectItem />} boxItem={<BoxItem />} />
+			<SelectItem />
+			<BoxItem />
 
 			<Group className="p-5 space-y-3 flex justify-center items-center flex-wrap ring-2 ring-gray-500 rounded-lg">
 				<Toggle
