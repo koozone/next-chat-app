@@ -4,6 +4,7 @@ import {Header1} from '../component/header';
 import List from '../component/list';
 import ListItem from '../component/listItem';
 import {useEffect, useState} from 'react';
+import {Button} from '../component/ui_ds7';
 
 export default function list() {
 	const [movieList, setMovieList] = useState([]);

@@ -6,7 +6,7 @@ import {UseCount} from '../hook/useCount';
 import {UseData} from '../hook/useData';
 import {UseModal} from '../hook/useModal';
 import {UseSideMenu} from '../hook/useSideMenu';
-import ChipSample from './chipSample';
+import SampleChip from './sampleChip';
 import Todo from './todo';
 
 // const Fieldset = ({children, title}) => {
@@ -892,7 +892,7 @@ export default function code() {
 			</Fieldset>
 
 			<Fieldset title="Chip">
-				<ChipSample />
+				<SampleChip />
 			</Fieldset>
 
 			<Fieldset title="Button (theme)">

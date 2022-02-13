@@ -107,7 +107,7 @@ const getTheme = (props) => {
 	return [`${color}`, `${outType}${outMode}${overType}${overMode}`, `${size}`, `${space}`, `${round}${roundMode}`].join('-');
 };
 
-export default function ChipSample() {
+export default function SampleChip() {
 	const aaaData = UseData({
 		drop: false,
 		dropbox1Open: false,

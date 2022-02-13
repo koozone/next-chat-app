@@ -3,193 +3,6 @@ import {Fieldset, Chip, Group, Highlight, ToggleRadio} from '../component/temp_d
 import {A, Basket, Button, Icon, Input, Label, Text, Toggle} from '../component/ui_ds7';
 import {UseData} from '../hook/useData';
 
-const OPTIONS = [
-	{value: '', name: '초기화'},
-	{value: 'apple', name: '사과'},
-	{value: 'banana', name: '바나나'},
-];
-const OPTIONS2 = [
-	{value: '', name: '초기화'},
-	{value: 'apple', name: '사과'},
-	{value: 'banana', name: '바나나'},
-	{value: 'orange', name: '오렌지'},
-	{value: 'melon', name: '멜론'},
-	{value: 'lemon', name: '레몬'},
-	{value: 'grape', name: '포도'},
-];
-const OPTIONS3 = [
-	{value: '', label: '초기화'},
-	{value: 'blue', label: '파랑'},
-	{value: 'red', label: '빨강'},
-	{value: 'green', label: '초록'},
-	{value: 'yellow', label: '노랑'},
-	{value: 'white', label: '하양'},
-	{value: 'black', label: '검정'},
-];
-
-const SelectItem = (props) => {
-	const {option = {}, checked = false} = props;
-
-	return (
-		<Toggle
-			className="w-full"
-			theme="primary-HI-md-lg-full::warning-IJ-md-md-md1"
-			// icon={icon}
-			// img="/image/bean.jpg"
-			bgR="/sheet/dropdown2.png"
-			text={option.label}
-			// name={option.name}
-			value={[...(option.value || [])].map((item) => item.label).join(', ')}
-			placeholder="SELECT"
-			checked={checked}
-		/>
-	);
-};
-const BoxItem = (props) => {
-	const {option = {}, checked = false, onClick} = props;
-
-	return <Button className="w-full" theme="default-BD-md-md-xs::primary-DE-md-lg-xs" text={`${option.label}: ${option.value}`} name={option.value} checked={checked} onClick={onClick} />;
-};
-
-const SelectBox3 = (props) => {
-	const {
-		option: {value, label},
-		options,
-		selectItem,
-		boxItem,
-		defaultValue,
-		width = 'w-[200px]',
-		maxHeight = 'max-h-[160px]',
-		direction = true,
-	} = props;
-	const [selectData, runSelectData] = props.data;
-	const [openData, runOpenData] = UseData(false);
-	const selectList = selectData[value] || [];
-
-	useEffect(() => {
-		// default value
-		if (!selectData.hasOwnProperty(value) && defaultValue) {
-			runSelectData.change(
-				value,
-				options.filter((item) => item.value == defaultValue)
-			);
-		}
-	}, []);
-
-	const containerSize = openData ? `w-full h-screen ${maxHeight}` : 'w-0 h-0';
-	const containerMotion = direction ? 'top-auto bottom-0 md:top-full md:bottom-auto' : 'top-auto bottom-0 md:top-auto md:bottom-full';
-	const menuMotion = direction
-		? 'top-full bottom-auto md:top-auto md:bottom-full translate-y-0 peer-checked:-translate-y-full md:translate-y-0 md:peer-checked:translate-y-full'
-		: 'top-full bottom-auto md:top-full md:bottom-auto translate-y-0 peer-checked:-translate-y-full md:translate-y-0 md:peer-checked:-translate-y-full';
-
-	const clickBoxItem = (event) => {
-		const {name} = event.currentTarget;
-
-		runSelectData.change(value, name == '' ? [] : options.filter((item) => item.value == name));
-		runOpenData.change(false);
-	};
-
-	return (
-		<div
-			className={`inline-block md:relative ${width}`}
-			onFocus={() => {
-				runOpenData.change(true);
-			}}
-			onBlur={() => {
-				runOpenData.change(false);
-			}}
-		>
-			{/* <SelectItem option={{label: '색상', value: selectList}} checked={openData} /> */}
-			{cloneElement(selectItem, {option: {label: label, value: selectList}, checked: openData})}
-			<div className={`${containerSize} ${containerMotion} z-10 peer-checked:z-20 fixed md:absolute left-0 overflow-hidden pointer-events-none`}>
-				<input type="checkbox" className="peer sr-only" checked={openData} onChange={() => {}} />
-				<div className={`${menuMotion} absolute transition-all duration-200 left-0 w-full max-h-full overflow-y-auto border-[1px] border-zinc-500 bg-white rounded-md pointer-events-auto`}>
-					<div className="flex flex-col items-stretch divide-y divide-zinc-500">
-						{options.map((item, index) =>
-							// <BoxItem key={index} option={item} checked={selectList.map((i) => i.value).includes(item.value)} onClick={clickBoxItem} />
-							cloneElement(boxItem, {key: index, option: item, checked: selectList.map((i) => i.value).includes(item.value), onClick: clickBoxItem})
-						)}
-					</div>
-				</div>
-			</div>
-		</div>
-	);
-};
-const SelectBox = (props) => {
-	const {title = '', name, options, icon, value, defaultValue, width = 'w-[200px]', maxHeight = 'max-h-[160px]', direction = true} = props;
-	const [selectData, runSelectData] = props.data;
-	const [openData, runOpenData] = UseData(false);
-	const selectList = selectData[name] || [];
-
-	useEffect(() => {
-		// default value
-		if (!selectData.hasOwnProperty(name) && defaultValue) {
-			runSelectData.change(
-				name,
-				options.filter((item) => item.value == defaultValue)
-			);
-		}
-	}, []);
-
-	const containerSize = openData ? `w-full h-screen ${maxHeight}` : 'w-0 h-0';
-	const containerMotion = direction ? 'top-auto bottom-0 md:top-full md:bottom-auto' : 'top-auto bottom-0 md:top-auto md:bottom-full';
-	const menuMotion = direction
-		? 'top-full bottom-auto md:top-auto md:bottom-full translate-y-0 peer-checked:-translate-y-full md:translate-y-0 md:peer-checked:translate-y-full'
-		: 'top-full bottom-auto md:top-full md:bottom-auto translate-y-0 peer-checked:-translate-y-full md:translate-y-0 md:peer-checked:-translate-y-full';
-
-	const clickBoxItem = (event) => {};
-
-	return (
-		<div
-			className={`inline-block md:relative ${width}`}
-			onFocus={() => {
-				runOpenData.change(true);
-			}}
-			onBlur={() => {
-				runOpenData.change(false);
-			}}
-		>
-			<Toggle
-				// type="password"
-				theme="primary-HI-md-md-md::warning-IJ-md-md-md"
-				icon={icon}
-				// img="/image/bean.jpg"
-				bgR="/sheet/dropdown2.png"
-				text={title}
-				className="w-full"
-				name={name}
-				// value={selectList.map((i) => i.name).join(', ')}
-				value={value || selectList.map((i) => i.name).join(', ')}
-				placeholder="SELECT"
-				checked={openData}
-				disabled={false}
-			/>
-			<div className={`${containerSize} ${containerMotion} z-10 peer-checked:z-20 fixed md:absolute left-0 overflow-hidden pointer-events-none`}>
-				<input type="checkbox" className="peer sr-only" checked={openData} onChange={() => {}} />
-				<div className={`${menuMotion} absolute transition-all duration-200 left-0 w-full max-h-full overflow-y-auto border-[1px] border-zinc-500 bg-white rounded-md pointer-events-auto`}>
-					<div className="flex flex-col items-stretch divide-y divide-zinc-500">
-						{options.map((item, index) => (
-							<Button
-								key={index}
-								className="w-full"
-								theme="default-BD-md-md-xs::primary-DE-md-lg-xs"
-								bg={item.value == '' ? '' : '/sheet/radio1.png::/sheet/radio1.png'}
-								iconR="bx-x-circle::bx-x"
-								text={`${item.name}: ${item.value}::${item.name}-On`}
-								checked={selectList.map((item) => item.value).includes(item.value)}
-								onClick={() => {
-									runSelectData.change(name, item.value == '' ? [] : [item]);
-									runOpenData.change(false);
-								}}
-							/>
-						))}
-					</div>
-				</div>
-			</div>
-		</div>
-	);
-};
-
 const LineGroup = (props) => {
 	const {children, name, className = '', runFunc} = props;
 	const visibleList = ['outMode', 'overMode', 'roundMode', 'left', 'right', 'center'];
@@ -217,14 +30,7 @@ const getTheme = (props) => {
 	return [`${color}`, `${outType}${outMode}${overType}${overMode}`, `${size}`, `${space}`, `${round}${roundMode}`].join('-');
 };
 
-export default function ChipSample() {
-	const aaaData = UseData({
-		drop: false,
-		dropbox1Open: false,
-		dropbox1: [],
-	});
-	const [testData, runTestData] = aaaData;
-
+export default function SampleChip() {
 	const offChip = UseData({
 		color: ['default'],
 		outType: ['I'],
@@ -501,20 +307,6 @@ export default function ChipSample() {
 					placeholder={left == '' ? '선택' : `${left} 입력`}
 					onChange={chageChipInput}
 					disabled={left == ''}
-					right={
-						<Toggle
-							theme="primary-A-sm-sm-xs::primary-A-sm-sm-xs"
-							bg="/sheet/dropdown2.png"
-							onChange={() => {
-								runTestData.change('drop', !testData.drop);
-							}}
-							onBlur={() => {
-								runTestData.change('drop', false);
-							}}
-							checked={testData.drop}
-							disabled={left == ''}
-						/>
-					}
 				/>
 			</LineGroup>
 			<LineGroup name="center" runFunc={runElData}>
@@ -549,34 +341,12 @@ export default function ChipSample() {
 				<Input type="text" theme="danger-HI-md-md-md" text={right} className="w-[300px]" name="right" value={right == '' ? '' : chipData[right]} placeholder={right == '' ? '선택' : `${right} 입력`} onChange={chageChipInput} disabled={right == ''} />
 			</LineGroup>
 
-			<SelectBox name="aaa" data={aaaData} options={OPTIONS} />
-			<SelectBox title="fruit" name="bbb" data={aaaData} options={OPTIONS2} defaultValue="banana" width="w-[230px]" direction={false} value={aaaData[0]['bbb']?.map((item) => `${item.value}`).join(', ')} />
-			<SelectBox
-				title="icon"
-				name="icon"
-				data={aaaData}
-				options={[
-					{value: 'bx-leaf', name: 'leaf'},
-					{value: 'bx-lemon', name: 'lemon'},
-					{value: 'bx-paste', name: 'paste'},
-				]}
-				width="w-[250px]"
-				value={aaaData[0]['icon']?.map((item) => `${item.name}: ${item.value}`).join(', ')}
-				icon={aaaData[0]['icon']?.map((item) => item.value).join(', ')}
-			/>
-			<SelectBox3 option={{value: 'email', label: '이메일'}} data={aaaData} options={OPTIONS3} selectItem={<SelectItem />} boxItem={<BoxItem />} />
-			<SelectItem />
-			<BoxItem />
-
 			<Group className="p-5 space-y-3 flex justify-center items-center flex-wrap ring-2 ring-gray-500 rounded-lg">
 				<Toggle
 					name={`${outType}${outMode}${overType}${overMode}`}
 					href="/view/sample"
 					onClick={clickButton}
-					onChange={() => {
-						aaaData[1].change('aaa', [OPTIONS[1]]);
-						aaaData[1].change('bbb', [OPTIONS2[1], OPTIONS2[4], OPTIONS2[5]]);
-					}}
+					onChange={changeToggle}
 					// theme={`${[color, `${outType}${outMode}${overType}${overMode}`, size, space, `${round}${roundMode}`].join('-')} ${['warning', `${outType}${outMode}${overType}${overMode}`, size, space, `${round}${roundMode}`].join('-')}`}
 					theme={[sampleOffTheme, sampleOnTheme].join('::')}
 					icon={left == 'icon' ? sampleIcon : ''}

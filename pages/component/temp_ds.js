@@ -97,48 +97,51 @@ export const Highlight = (props) => {
 
 	// padding-right: 40px;
 
+	const clickCopy = (event) => {
+		// const copyButton = document.getElementById('copyButton');
+		const codeEle = document.getElementById('sampleCode');
+		const selection = window.getSelection();
+
+		// Save the current selection
+		const currentRange = selection.rangeCount === 0 ? null : selection.getRangeAt(0);
+
+		// Select the text content of code element
+		const range = document.createRange();
+		range.selectNodeContents(codeEle);
+		selection.removeAllRanges();
+		selection.addRange(range);
+
+		// Copy to the clipboard
+		try {
+			document.execCommand('copy');
+			// copyButton.innerHTML = 'Copied';
+			runCopyData.change(true);
+
+			setTimeout(() => {
+				runCopyData.change(false);
+			}, 1000);
+		} catch (err) {
+			// Unable to copy
+			// copyButton.innerHTML = 'Copy';
+		} finally {
+			// Restore the previous selection
+			selection.removeAllRanges();
+			currentRange && selection.addRange(currentRange);
+		}
+	};
+
 	return (
 		<pre id="sampleCode" className="grid relative rounded-lg overflow-hidden">
 			<code className={`!pr-8 ${className}`}>{content}</code>
-			<div className="pl-5 absolute right-0 top-0 bottom-5 bg-gradient-to-l from-[#001528] via-[#001528]">
+			{/* <div className="pl-5 absolute right-0 top-0 bottom-5 bg-gradient-to-l from-[#001528] via-[#001528]"> */}
+			<div className="pl-5 absolute right-0 top-0">
 				<Button
 					className="z-10"
 					theme="default-FB-md-lg-md8::success-F-md-lg-md8"
 					icon="bx-copy-alt::bx-check"
 					// bg="/sheet/symbol2-md2.png"
 					checked={copyData}
-					onClick={(event) => {
-						// const copyButton = document.getElementById('copyButton');
-						const codeEle = document.getElementById('sampleCode');
-						const selection = window.getSelection();
-
-						// Save the current selection
-						const currentRange = selection.rangeCount === 0 ? null : selection.getRangeAt(0);
-
-						// Select the text content of code element
-						const range = document.createRange();
-						range.selectNodeContents(codeEle);
-						selection.removeAllRanges();
-						selection.addRange(range);
-
-						// Copy to the clipboard
-						try {
-							document.execCommand('copy');
-							// copyButton.innerHTML = 'Copied';
-							runCopyData.change(true);
-
-							setTimeout(() => {
-								runCopyData.change(false);
-							}, 1000);
-						} catch (err) {
-							// Unable to copy
-							// copyButton.innerHTML = 'Copy';
-						} finally {
-							// Restore the previous selection
-							selection.removeAllRanges();
-							currentRange && selection.addRange(currentRange);
-						}
-					}}
+					onClick={clickCopy}
 				/>
 			</div>
 		</pre>
