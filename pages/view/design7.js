@@ -6,7 +6,7 @@ import {UseCount} from '../hook/useCount';
 import {UseData} from '../hook/useData';
 import {UseModal} from '../hook/useModal';
 import {UseSideMenu} from '../hook/useSideMenu';
-import SampleChip from './sampleChip2';
+import SampleChip from './sampleChip3';
 import Todo from './todo';
 
 // const Fieldset = ({children, title}) => {

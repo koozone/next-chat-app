@@ -49,6 +49,58 @@ const foodList = [
 	{value: 'cake', label: '케이크'},
 	{value: 'wine', label: '와인'},
 ];
+const userList = [
+	{
+		value: 'Wade Cooper',
+		label: 'Wade Cooper',
+		src: 'https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+	},
+	{
+		value: 'Arlene Mccoy',
+		label: 'Arlene Mccoy',
+		src: 'https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+	},
+	{
+		value: 'Devon Webb',
+		label: 'Devon Webb',
+		src: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.25&w=256&h=256&q=80',
+	},
+	{
+		value: 'Tom Cook',
+		label: 'Tom Cook',
+		src: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+	},
+	{
+		value: 'Tanya Fox',
+		label: 'Tanya Fox',
+		src: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+	},
+	{
+		value: 'Hellen Schmidt',
+		label: 'Hellen Schmidt',
+		src: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+	},
+	{
+		value: 'Caroline Schultz',
+		label: 'Caroline Schultz',
+		src: 'https://images.unsplash.com/photo-1568409938619-12e139227838?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+	},
+	{
+		value: 'Mason Heaney',
+		label: 'Mason Heaney',
+		src: 'https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+	},
+	{
+		value: 'Claudie Smitham',
+		label: 'Claudie Smitham',
+		src: 'https://images.unsplash.com/photo-1584486520270-19eca1efcce5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+	},
+	{
+		value: 'Emil Schaefer',
+		label: 'Emil Schaefer',
+		src: 'https://images.unsplash.com/photo-1561505457-3bcad021f8ee?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+	},
+];
 
 const DefaultSelectItem = (props) => {
 	const {value, label, checked = false, direction = true} = props;
@@ -105,6 +157,24 @@ const SelectItem2 = (props) => {
 		/>
 	);
 };
+const SelectItem3 = (props) => {
+	const {value, label, checked = false} = props;
+
+	return (
+		<Toggle
+			className="w-full"
+			theme="primary-HI-lg-md-md::info-IJ-lg-md-md"
+			// icon={`bx-${value[0].value}`}
+			bgR="/sheet/dropdown2.png"
+			text={value.length ? '' : label}
+			// name={name}
+			value={[...(value || [])].map((item) => item.label).join(', ')}
+			placeholder="SELECT"
+			checked={checked}
+			left={<Label theme="primary-AF-md-xs-full" img={value[0]?.src} checked={checked} />}
+		/>
+	);
+};
 const DefaultBoxItem = (props) => {
 	const {value, label, checked = false, onClick} = props;
 
@@ -119,6 +189,11 @@ const BoxItem2 = (props) => {
 	const {value, label, checked = false, onClick} = props;
 
 	return <Button className="w-full" theme="default-BD-md-md-xs::primary-DE-md-lg-xs" iconR={`bx-${value}`} text={label} name={value} checked={checked} onClick={onClick} />;
+};
+const BoxItem3 = (props) => {
+	const {value, label, src, checked = false, onClick} = props;
+
+	return <Button className="w-full" theme="default-BD-md-md-xs::primary-DE-md-lg-xs" text={label} name={value} checked={checked} onClick={onClick} left={<Label theme="success-AF-2xl-sm-full::danger-FF-3xl-sm-full" img={src} checked={checked} />} />;
 };
 
 const SelectBox = (props) => {
@@ -161,7 +236,12 @@ const SelectBox = (props) => {
 			}}
 		>
 			{/* <SelectItem option={{label: '색상', value: selectList}} checked={openData} /> */}
-			{cloneElement(selectItem, {value: selectList, label: label, checked: openData, direction})}
+			{cloneElement(selectItem, {
+				value: selectList,
+				label: label,
+				checked: openData,
+				direction,
+			})}
 			<div className={`${containerSize} ${containerMotion} z-10 peer-checked:z-20 fixed md:absolute left-0 overflow-hidden pointer-events-none`}>
 				<input type="checkbox" className="peer sr-only" checked={openData} onChange={() => {}} />
 				<div className={`${menuMotion} absolute transition-all duration-200 left-0 w-full max-h-full overflow-y-auto border-[1px] border-zinc-500 bg-white rounded-md pointer-events-auto`}>
@@ -215,6 +295,10 @@ export default function SampleSelectbox() {
 
 				<LineGroup name="food">
 					<SelectBox value="food" label="음식" data={dataList} options={foodList} selectItem={<SelectItem2 />} boxItem={<BoxItem2 />} />
+				</LineGroup>
+
+				<LineGroup name="user">
+					<SelectBox value="user" label="사용자" data={dataList} options={userList} selectItem={<SelectItem3 />} boxItem={<BoxItem3 />} />
 				</LineGroup>
 
 				<Group className="p-5 flex justify-center items-center flex-wrap ring-2 ring-gray-500 rounded-lg">

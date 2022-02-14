@@ -129,4 +129,4 @@ export function Header3() {
 	);
 }
 
-export default Header3;
+export default Header2;
