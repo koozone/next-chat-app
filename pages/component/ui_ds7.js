@@ -96,7 +96,7 @@ const getDefaultElement = (props) => {
 			return <div className={`top-0 left-0 -z-10 ${peerDisabled}`} />;
 
 		case 'label':
-			return <div className={`relative flex items-center`} />;
+			return <div className={`relative flex items-center z-0`} />;
 
 		case 'formCheck':
 			// return <div className={`peer absolute top-0 left-0 w-0 h-0 appearance-none pointer-events-none hidden`} />;

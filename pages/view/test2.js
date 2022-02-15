@@ -6,7 +6,7 @@ const getImage = () => {
 	return `https://source.unsplash.com/collection/190727/400x300?random=${Math.round(Math.random() * 9999)}`;
 };
 
-const Avatar = (props) => {
+export const Avatar = (props) => {
 	return (
 		<div className="inline-flex flex-col items-center space-y-1">
 			<div className="relative p-1 bg-gradient-to-tr from-yellow-400 to-rose-600 rounded-full">
@@ -24,7 +24,7 @@ const Avatar = (props) => {
 	);
 };
 
-const Card = (props) => {
+export const Card = (props) => {
 	return (
 		<div className="md:flex md:flex-row overflow-hidden rounded-2xl">
 			<img className="bg-gray-50 object-cover h-48 w-full md:h-auto md:w-2/5" src={getImage()} alt="" />

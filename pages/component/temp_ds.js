@@ -131,12 +131,12 @@ export const Highlight = (props) => {
 	};
 
 	return (
-		<pre id="sampleCode" className="grid relative rounded-lg overflow-hidden">
+		<pre id="sampleCode" className="grid relative rounded-lg overflow-x-auto whitespace-pre">
 			<code className={`!pr-8 ${className}`}>{content}</code>
 			{/* <div className="pl-5 absolute right-0 top-0 bottom-5 bg-gradient-to-l from-[#001528] via-[#001528]"> */}
 			<div className="pl-5 absolute right-0 top-0">
 				<Button
-					className="z-10"
+					className="z-0"
 					theme="default-FB-md-lg-md8::success-F-md-lg-md8"
 					icon="bx-copy-alt::bx-check"
 					// bg="/sheet/symbol2-md2.png"
