@@ -383,7 +383,7 @@ export default function SampleChip() {
 				))}
 			</Group>
 			<Group>
-				<Highlight className="html">
+				<Highlight className="language-html">
 					{`
 					<Toggle theme="${[sampleOffTheme, sampleOnTheme].join('::')}"${left == 'icon' ? ' icon="' + sampleIcon + '"' : ''}${left == 'image' ? ' img="' + sampleImage + '"' : ''}${left == 'bg' ? ' bg="' + sampleBg + '"' : ''}${right == 'iconR' ? ' iconR="' + sampleIconR + '"' : ''}${
 						right == 'imageR' ? ' imgR="' + sampleImageR + '"' : ''

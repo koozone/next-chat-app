@@ -19,6 +19,7 @@
 		"react": "17.0.2",
 		"react-dom": "17.0.2",
 		"react-modal": "3.14.4",
+		"simply-beautiful": "0.2.10",
 		"socket.io": "4.4.0",
 		"socket.io-client": "4.4.0",
 		"tiny-uid": "1.1.1"

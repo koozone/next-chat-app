@@ -1,7 +1,12 @@
 import {useEffect, useRef} from 'react';
+import {renderToString, renderToStaticMarkup} from 'react-dom/server';
+import beautify from 'simply-beautiful';
 import Header from '../component/header';
+import {Highlight} from '../component/temp_ds';
 import {Toggle} from '../component/ui_ds7';
 import {UseData} from '../hook/useData';
+import Dress from './dress';
+import {SelectBox} from './sampleSelectbox2';
 import Test, {Avatar, Card} from './test2';
 
 export const TitleMenu = (props) => {
@@ -79,11 +84,13 @@ export const Area = (props) => {
 			{/* <div className="min-w-full sm:min-w-[0px] relative sm:pr-4" style={{maxWidth: '100%', width: `${sizeData.prevLeft}px`}}> */}
 			<div ref={divRef} className="min-w-full max-w-full sm:min-w-[300px] relative sm:pr-4" style={{width: `${sizeData.nowLeft}px`}}>
 				{/* <div className="h-auto"> */}
-				<div className="bg-white w-full">
-					{/* <iframe ref={iframeRef} src={src} className="w-full" onLoad={onLoad} style={{height: `${sizeData.height}px`}} /> */}
-					{/* <iframe ref={iframeRef} src={src} className="w-full" style={{height: `${sizeData.height}px`}} onLoad={onLoad} /> */}
-					<div className="py-10">
-						<div className="w-fit mx-auto">{children}</div>
+				{/* <div className="bg-white">
+					<div className="mx-auto py-16 px-4">
+						<div className="flex items-center flex-wrap space-x-3">{children}</div>
+					</div> */}
+				<div className="bg-white">
+					<div className="py-16 px-4">
+						<div className="w-fit mx-auto flex items-center flex-wrap space-x-3">{children}</div>
 					</div>
 					<div
 						// className={`sr-only sm:not-sr-only sm:border-l sm:${sizeData.hasCapture ? 'bg-red-500' : 'bg-gray-100'} sm:absolute sm:right-0 sm:inset-y-0 sm:flex sm:justify-center sm:items-center sm:w-[100px] cursor-[ew-resize]`}
@@ -170,7 +177,7 @@ export const VariableArea = (props) => {
 			{/* <div className="min-w-full sm:min-w-[0px] relative sm:pr-4" style={{maxWidth: '100%', width: `${sizeData.prevLeft}px`}}> */}
 			<div ref={divRef} className="min-w-full max-w-full sm:min-w-[300px] relative sm:pr-4" style={{width: `${sizeData.nowLeft}px`}}>
 				{/* <div className="h-auto"> */}
-				<div className="bg-white w-full">
+				<div className="bg-white">
 					{/* <div className="mx-auto my-auto w-[300px] h-[100px] bg-green-400"></div> */}
 					{/* <iframe ref={iframeRef} src={src} className="w-full" onLoad={onLoad} style={{height: `${sizeData.height}px`}} /> */}
 					<iframe ref={iframeRef} src={src} className="w-full" style={{height: `${sizeData.height}px`}} onLoad={onLoad} />
@@ -199,7 +206,14 @@ export const VariableArea = (props) => {
 };
 
 export const ExampleSection = (props) => {
-	const {src} = props;
+	const {children, src} = props;
+	const htmlString = renderToStaticMarkup(children);
+	const prettyString = beautify.html(htmlString, {
+		indent_size: 4,
+		space_before_conditional: true,
+		jslint_happy: true,
+		max_char: 0,
+	});
 
 	return src ? (
 		<section>
@@ -210,6 +224,11 @@ export const ExampleSection = (props) => {
 		<section>
 			<TitleMenu {...props} />
 			<Area {...props} />
+			<Highlight className="language-html max-h-80">
+				{`
+				${prettyString}
+				`}
+			</Highlight>
 		</section>
 	);
 };
@@ -219,34 +238,48 @@ export default function test() {
 		<>
 			<Header />
 
-			<div className="max-w-[60rem] mx-auto px-4 py-20">
+			<div className="max-w-[80rem] mx-auto px-4 py-20">
 				<div className="space-y-20">
-					<ExampleSection title="Avatar group stacked bottom to top" src="http://localhost:3000/view/sampleSelectbox2" />
 					{/* <ExampleSection title="Circular avatars" src="http://localhost:3000/view/sampleChip3" /> */}
-					<ExampleSection title="Layout" src="http://localhost:3000/view/room" />
+					<ExampleSection title="SampleSelectbox" src="http://localhost:3000/view/sampleSelectbox2" />
+					<ExampleSection title="Room" src="http://localhost:3000/view/room" />
 					<ExampleSection title="Layout" src="http://localhost:3000/view/layout" />
-					<ExampleSection title="Normal Sample">
-						{/* <div className="w-[300px] h-[200px] bg-red-400" /> */}
+					<ExampleSection title="Avatar">
 						<Avatar />
 					</ExampleSection>
-					<ExampleSection title="Normal Sample">
-						<div className="flex items-center flex-wrap space-x-3">
-							<Toggle theme="info-KL-md-md-md::success-IL-md-md-md" icon="bx-leaf::bx-lemon" imgR="/image/shell.jpg::/image/noodle.jpg" text="Off::On" />
-							<Toggle theme="info-KL-md-md-md::success-IL-md-md-md" icon="bx-leaf::bx-lemon" imgR="/image/shell.jpg::/image/noodle.jpg" text="Off::On" />
-							<Toggle theme="info-KL-md-md-md::success-IL-md-md-md" icon="bx-leaf::bx-lemon" imgR="/image/shell.jpg::/image/noodle.jpg" text="Off::On" />
-							<Toggle theme="info-KL-md-md-md::success-IL-md-md-md" icon="bx-leaf::bx-lemon" imgR="/image/shell.jpg::/image/noodle.jpg" text="Off::On" />
-						</div>
+					<ExampleSection title="Dress" src="http://localhost:3000/view/dress" />
+					<ExampleSection title="UI Sample">
+						<Toggle theme="info-KL-md-md-md::success-IL-md-md-md" icon="bx-leaf::bx-lemon" imgR="/image/shell.jpg::/image/noodle.jpg" text="Off::On" />
+						<Toggle theme="info-KL-md-md-md::success-IL-md-md-md" icon="bx-leaf::bx-lemon" imgR="/image/shell.jpg::/image/noodle.jpg" text="Off::On" />
+						<Toggle theme="info-KL-md-md-md::success-IL-md-md-md" icon="bx-leaf::bx-lemon" imgR="/image/shell.jpg::/image/noodle.jpg" text="Off::On" />
+						<Toggle theme="info-KL-md-md-md::success-IL-md-md-md" icon="bx-leaf::bx-lemon" imgR="/image/shell.jpg::/image/noodle.jpg" text="Off::On" />
 					</ExampleSection>
-					<ExampleSection title="Normal Sample">
-						<div className="flex items-center flex-wrap space-x-3">
-							<Toggle theme="primary-CF-lg-md-full::primary-CF-6xl-md-full" img="/image/bean.jpg::/image/coffee.jpg" />
-							<Toggle theme="primary-CF-3xl-md-full::primary-CF-6xl-md-full" img="/image/bean.jpg::/image/coffee.jpg" />
-							<Toggle theme="primary-CF-6xl-md-full::primary-CF-6xl-md-full" img="/image/bean.jpg::/image/coffee.jpg" />
-						</div>
+					<ExampleSection title="UI Sample">
+						<Toggle theme="primary-CF-lg-md-full::primary-CF-6xl-md-full" img="/image/bean.jpg::/image/coffee.jpg" />
+						<Toggle theme="primary-CF-3xl-md-full::primary-CF-6xl-md-full" img="/image/bean.jpg::/image/coffee.jpg" />
+						<Toggle theme="primary-CF-6xl-md-full::primary-CF-6xl-md-full" img="/image/bean.jpg::/image/coffee.jpg" />
 					</ExampleSection>
-					<ExampleSection title="Normal Sample">
-						<div className="flex items-center flex-wrap space-x-3">
-							<Toggle theme="primary-CF-2xl-md-full::primary-CF-2xl-md-full" bg="/sheet/switch6-lg3.png::/sheet/switch6-lg3.png" />
+					<ExampleSection title="UI Sample">
+						<Toggle theme="primary-CF-2xl-md-full::primary-CF-2xl-md-full" bg="/sheet/switch6-lg3.png::/sheet/switch6-lg3.png" />
+					</ExampleSection>
+					<ExampleSection title="UI Sample">
+						<SelectBox
+							value="food"
+							label="음식"
+							data={UseData()}
+							options={[
+								{value: 'lemon', label: '레몬'},
+								{value: 'baguette', label: '바게트'},
+								{value: 'bowl-rice', label: '밥'},
+								{value: 'bowl-hot', label: '국수'},
+								{value: 'coffee', label: '커피'},
+								{value: 'beer', label: '맥주'},
+							]}
+						/>
+					</ExampleSection>
+					<ExampleSection title="UI Sample">
+						<div className="w-[300px] h-[200px] bg-red-400">
+							<span>안녕</span>
 						</div>
 					</ExampleSection>
 				</div>

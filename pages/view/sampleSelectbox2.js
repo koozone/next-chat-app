@@ -196,7 +196,7 @@ const BoxItem3 = (props) => {
 	return <Button className="w-full" theme="default-BD-md-md-xs::primary-DE-md-lg-xs" text={label} name={value} checked={checked} onClick={onClick} left={<Label theme="success-AF-2xl-sm-full::danger-FF-3xl-sm-full" img={src} checked={checked} />} />;
 };
 
-const SelectBox = (props) => {
+export const SelectBox = (props) => {
 	const {value, label, selectItem = <DefaultSelectItem />, boxItem = <DefaultBoxItem />, options, defaultValue, width = 'w-[200px]', maxHeight = 'max-h-[160px]', direction = true} = props;
 	const [selectData, runSelectData] = props.data;
 	const [openData, runOpenData] = UseData(false);
@@ -323,7 +323,7 @@ export default function SampleSelectbox() {
 
 			<Fieldset title="data">
 				<Group>
-					<Highlight className="json max-h-80">
+					<Highlight className="language-json max-h-80">
 						{`
 						${JSON.stringify(sampleData, null, '\t')}
 						`}

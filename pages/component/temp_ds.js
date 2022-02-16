@@ -3,9 +3,15 @@ import {Icon, A, Button, Img, Input, Label, Text, Basket, Toggle, Box} from '../
 import hljs from 'highlight.js';
 import 'highlight.js/styles/night-owl.css';
 import javascript from 'highlight.js/lib/languages/javascript';
+import html from 'highlight.js/lib/languages/xml';
+import json from 'highlight.js/lib/languages/json';
 import {UseData} from '../hook/useData';
 
 hljs.registerLanguage('js', javascript);
+hljs.registerLanguage('html', html);
+hljs.registerLanguage('json', json);
+// 콘솔창에 "이스케이프 처리되지 않은 HTML이 포함 경고" 제거
+hljs.configure({ignoreUnescapedHTML: true});
 
 export const Fieldset = ({children, title}) => {
 	return (
@@ -75,6 +81,18 @@ export const Item = (props) => {
 // 			</Icon>
 // 		</>
 // 	);
+// };
+
+// const htmlToText = (htmlStr) => {
+// 	let return_str = htmlStr;
+// 	return_str = return_str.replace(/</gi, '&lt;');
+// 	return_str = return_str.replace(/>/gi, '&gt;');
+// 	return_str = return_str.replace(/&/gi, '&amp;');
+// 	// return_str = return_str.replace(/ /gi, '&nbsp;');
+// 	// return_str = return_str.replace(/\t/gi, '&nbsp;&nbsp;&nbsp;&nbsp;');
+// 	// return_str = return_str.replace(/\r|\n|\r\n/gi, '<br>');
+
+// 	return return_str;
 // };
 
 export const Highlight = (props) => {
