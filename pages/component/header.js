@@ -14,7 +14,7 @@ const menuList = [
 	{name: 'Room', icon: 'bx-party', href: '/view/room'},
 	{name: 'Chat', icon: 'bx-bowl-rice', href: '/view/chat'},
 	{name: 'Sample', icon: 'bx-lemon', href: '/view/sample'},
-	{name: 'Layout', icon: 'bx-lemon', href: '/view/test3'},
+	{name: 'Layout', icon: 'bx-lemon', href: '/view/test4'},
 	{name: 'Code', icon: 'bx-lemon', href: '/view/code'},
 	{name: 'Design', icon: 'bx-lemon', href: '/view/design7'},
 	{name: 'Test', icon: 'bx-lemon', href: '/view/test2'},
