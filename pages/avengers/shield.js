@@ -46,6 +46,7 @@ export const TestLab = () => {
 				<TestDiv />
 			</AreaItem>
 			<AreaItem title="Dress" src="http://localhost:3000/view/dress" />
+			<AreaItem title="Layout" src="http://localhost:3000/view/layout" />
 		</SectionA>
 	);
 };

@@ -68,15 +68,19 @@ export const VariableArea = (props) => {
 		height: 0,
 	});
 
-	const onLoad = (event) => {
-		onResize(event);
-	};
-	const onResize = (event) => {
-		const {moveX, moveY} = extractPositionDelta(event);
-
-		runSizeData.change('width', sizeData.width + moveX);
+	useEffect(() => {
 		runSizeData.change('height', iframeRef.current?.contentWindow.document.body.scrollHeight || 0);
-	};
+	}, [sizeData]);
+
+	// const onLoad = (event) => {
+	// 	onResize(event);
+	// };
+	// const onResize = (event) => {
+	// 	// const {moveX, moveY} = extractPositionDelta(event);
+
+	// 	// runSizeData.change('width', sizeData.width + moveX);
+	// 	runSizeData.change('height', iframeRef.current?.contentWindow.document.body.scrollHeight || 0);
+	// };
 
 	const onDown = (event) => {
 		// width 위치 보정
@@ -91,7 +95,10 @@ export const VariableArea = (props) => {
 		if (!sizeData.isDragging) {
 			return;
 		}
-		onResize(event);
+
+		const {moveX, moveY} = extractPositionDelta(event);
+
+		runSizeData.change('width', sizeData.width + moveX);
 	};
 
 	const onUp = (event) => runSizeData.change('isDragging', false);
@@ -121,7 +128,7 @@ export const VariableArea = (props) => {
 		<div className={`bg-gray-500 rounded-lg ring-1 ring-gray-500 overflow-hidden`}>
 			{/* <div className="block"> */}
 			{/* <div className="min-w-full sm:min-w-[0px] relative sm:pr-4" style={{maxWidth: '100%', width: `${sizeData.prevWidth}px`}}> */}
-			<div ref={divRef} className="relative min-w-full max-w-full sm:min-w-[300px] sm:pr-4 overflow-hidden" style={{width: `${sizeData.width}px`}}>
+			<div ref={divRef} className="relative min-w-full max-w-full sm:min-w-[320px] sm:pr-4 overflow-hidden" style={{width: `${sizeData.width}px`}}>
 				{/* <div className="h-auto"> */}
 				{/* <div className="bg-white">
 					<div className="mx-auto py-16 px-4">
@@ -133,7 +140,7 @@ export const VariableArea = (props) => {
 				</div> */}
 				{src ? (
 					<div className="bg-white">
-						<iframe ref={iframeRef} src={src} className="w-full" style={{height: `${sizeData.height}px`}} onLoad={onLoad} />
+						<iframe ref={iframeRef} src={src} className="w-full" style={{height: `${sizeData.height}px`}} />
 					</div>
 				) : (
 					<div className="bg-white py-4 px-8">
