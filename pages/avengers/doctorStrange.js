@@ -4,8 +4,9 @@ export const SectionA = (props) => {
 	const {children, className} = props;
 
 	return (
-		<section className={classNames('px-4 py-8', className)}>
-			<div className="max-w-[70rem] mx-auto space-y-8">{children}</div>
+		<section className={classNames('px-4 py-8 max-w-[70rem] mx-auto space-y-8', className)}>
+			{/* <div className="max-w-[70rem] mx-auto space-y-8">{children}</div> */}
+			{children}
 		</section>
 	);
 };

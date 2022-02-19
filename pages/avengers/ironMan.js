@@ -4,9 +4,10 @@ import javascript from 'highlight.js/lib/languages/javascript';
 import html from 'highlight.js/lib/languages/xml';
 import json from 'highlight.js/lib/languages/json';
 import classNames from 'classnames';
-import {useEffect, useRef} from 'react';
+import {useCallback, useEffect, useRef} from 'react';
 import {UseData} from './vision';
 import {copyClipboard} from './thor';
+import {debounce, throttle} from 'lodash';
 
 hljs.registerLanguage('js', javascript);
 hljs.registerLanguage('html', html);
@@ -57,7 +58,7 @@ export const Highlight = (props) => {
 };
 
 export const VariableArea = (props) => {
-	const {children, src} = props;
+	const {children, src, height} = props;
 	const divRef = useRef(null);
 	const iframeRef = useRef(null);
 	const [sizeData, runSizeData] = UseData({
@@ -65,70 +66,88 @@ export const VariableArea = (props) => {
 		isDragging: false,
 		prevWidth: 0,
 		width: 9999,
-		height: 0,
+		height: height || 0,
+
+		barClass: 'bg-gray-100',
 	});
 
 	useEffect(() => {
-		runSizeData.change('height', iframeRef.current?.contentWindow.document.body.scrollHeight || 0);
-	}, [sizeData]);
+		window.addEventListener('resize', onResize);
 
-	// const onLoad = (event) => {
-	// 	onResize(event);
-	// };
-	// const onResize = (event) => {
-	// 	// const {moveX, moveY} = extractPositionDelta(event);
+		return () => {
+			window.removeEventListener('resize', onResize);
+		};
+	}, []);
 
-	// 	// runSizeData.change('width', sizeData.width + moveX);
-	// 	runSizeData.change('height', iframeRef.current?.contentWindow.document.body.scrollHeight || 0);
-	// };
+	useEffect(() => {
+		runSizeData.change(
+			'barClass',
+			classNames({
+				'bg-gray-100': !sizeData.hasCapture,
+				'bg-gray-200': sizeData.hasCapture && sizeData.width < 640,
+				'bg-green-200': sizeData.hasCapture && sizeData.width >= 640 && sizeData.width < 768,
+				'bg-blue-200': sizeData.hasCapture && sizeData.width >= 768 && sizeData.width < 1024,
+				'bg-red-200': sizeData.hasCapture && sizeData.width >= 1024,
+			})
+		);
+	}, [sizeData.hasCapture, sizeData.width]);
 
-	const onDown = (event) => {
+	const onResize = debounce(
+		throttle(
+			useCallback(() => {
+				runSizeData.change('height', height || iframeRef.current?.contentWindow?.document?.body?.scrollHeight || 0);
+			}, []),
+			500
+		),
+		100
+	);
+
+	const onDown = useCallback((event) => {
+		event.target.setPointerCapture(event.pointerId);
+
 		// width 위치 보정
 		runSizeData.change('width', divRef.current.offsetWidth);
 		runSizeData.change('isDragging', true);
-		event.target.setPointerCapture(event.pointerId);
-
 		extractPositionDelta(event);
-	};
+	}, []);
 
-	const onMove = (event) => {
-		if (!sizeData.isDragging) {
-			return;
-		}
+	const onMove = useCallback(
+		(event) => {
+			if (!sizeData.isDragging) {
+				return;
+			}
 
-		const {moveX, moveY} = extractPositionDelta(event);
+			const {moveX, moveY} = extractPositionDelta(event);
 
-		runSizeData.change('width', sizeData.width + moveX);
-	};
+			runSizeData.change('width', sizeData.width + moveX);
+			onResize();
+		},
+		[sizeData.isDragging, sizeData.width]
+	);
 
-	const onUp = (event) => runSizeData.change('isDragging', false);
-	const onGotCapture = (event) => runSizeData.change('hasCapture', true);
-	const onLostCapture = (event) => runSizeData.change('hasCapture', false);
+	const onUp = useCallback((event) => runSizeData.change('isDragging', false), []);
+	const onGotCapture = useCallback((event) => runSizeData.change('hasCapture', true), []);
+	const onLostCapture = useCallback((event) => runSizeData.change('hasCapture', false), []);
 
-	const extractPositionDelta = (event) => {
-		const pointX = event.screenX;
-		const delta = {
-			moveX: pointX - sizeData.prevWidth,
-		};
+	const extractPositionDelta = useCallback(
+		(event) => {
+			const pointX = event.screenX;
+			const delta = {
+				moveX: pointX - sizeData.prevWidth,
+			};
 
-		runSizeData.change('prevWidth', pointX);
+			runSizeData.change('prevWidth', pointX);
 
-		return delta;
-	};
-
-	const barClass = classNames({
-		'bg-gray-100': !sizeData.hasCapture,
-		'bg-gray-200': sizeData.hasCapture && sizeData.width <= 640,
-		'bg-green-200': sizeData.hasCapture && sizeData.width > 640 && sizeData.width <= 768,
-		'bg-blue-200': sizeData.hasCapture && sizeData.width > 768 && sizeData.width <= 1024,
-		'bg-red-200': sizeData.hasCapture && sizeData.width > 1024,
-	});
+			return delta;
+		},
+		[sizeData.prevWidth]
+	);
 
 	return (
-		<div className={`bg-gray-500 rounded-lg ring-1 ring-gray-500 overflow-hidden`}>
+		<div className={`bg-gray-500 rounded-lg ring-1 ring-gray-500 overflow-hidden sm:pr-4`}>
 			{/* <div className="block"> */}
 			{/* <div className="min-w-full sm:min-w-[0px] relative sm:pr-4" style={{maxWidth: '100%', width: `${sizeData.prevWidth}px`}}> */}
-			<div ref={divRef} className="relative min-w-full max-w-full sm:min-w-[320px] sm:pr-4 overflow-hidden" style={{width: `${sizeData.width}px`}}>
+			<div ref={divRef} className="relative min-w-full max-w-full sm:min-w-[320px]" style={{width: `${sizeData.width}px`}}>
 				{/* <div className="h-auto"> */}
 				{/* <div className="bg-white">
 					<div className="mx-auto py-16 px-4">
@@ -139,18 +158,25 @@ export const VariableArea = (props) => {
 					<div className="w-fit mx-auto flex space-x-3">{children}</div>
 				</div> */}
 				{src ? (
-					<div className="bg-white">
-						<iframe ref={iframeRef} src={src} className="w-full" style={{height: `${sizeData.height}px`}} />
+					<div className="bg-white overflow-auto">
+						<div style={{height: sizeData.height ? `${sizeData.height}px` : 'auto'}}>
+							<iframe ref={iframeRef} src={src} className="w-full h-full" onLoad={onResize} />
+						</div>
 					</div>
 				) : (
-					<div className="bg-white py-4 px-8">
-						<div className="w-fit mx-auto flex space-x-3">{children}</div>
+					// <div className="bg-white overflow-hidden py-4 px-8">
+					// 	<div className="w-fit mx-auto flex items-center space-x-3" style={{height: sizeData.height ? `${sizeData.height}px` : 'auto'}}>
+					// 		{children}
+					// 	</div>
+					// </div>
+					<div className="bg-white overflow-auto">
+						<div style={{height: sizeData.height ? `${sizeData.height}px` : 'auto'}}>{children}</div>
 					</div>
 				)}
 				<div
 					// className={`sr-only sm:not-sr-only sm:border-l sm:${sizeData.hasCapture ? 'bg-red-500' : 'bg-gray-100'} sm:absolute sm:right-0 sm:inset-y-0 sm:flex sm:justify-center sm:items-center sm:w-[100px] cursor-[ew-resize]`}
 					// className={`sr-only sm:not-sr-only sm:border-l ${sizeData.hasCapture ? 'sm:bg-blue-200' : 'sm:bg-gray-100'} sm:absolute sm:right-0 sm:inset-y-0 sm:flex sm:justify-center sm:items-center sm:w-4 cursor-[ew-resize]`}
-					className={classNames(barClass, 'sr-only sm:not-sr-only sm:border-l sm:absolute sm:right-0 sm:inset-y-0 sm:flex sm:justify-center sm:items-center sm:w-4 cursor-[ew-resize]')}
+					className={classNames(sizeData.barClass, 'sr-only sm:not-sr-only sm:border-l sm:absolute sm:-right-4 sm:inset-y-0 sm:flex sm:justify-center sm:items-center sm:w-4 cursor-[ew-resize]')}
 					onPointerDown={onDown}
 					onPointerMove={onMove}
 					onPointerUp={onUp}

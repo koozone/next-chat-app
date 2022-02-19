@@ -4,7 +4,8 @@ import {Basket} from '../component/ui_ds5';
 
 const getImage = () => {
 	// return `https://source.unsplash.com/collection/190727/400x300?random=${Math.round(Math.random() * 9999)}`;
-	return `https://source.unsplash.com/collection/190727/400x300}`;
+	// return `https://source.unsplash.com/collection/190727/400x300`;
+	return `https://picsum.photos/300/200/?random=${Math.round(Math.random() * 9999)}`;
 };
 
 export const Avatar = (props) => {

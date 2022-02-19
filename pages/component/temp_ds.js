@@ -1,11 +1,11 @@
 import {useEffect} from 'react';
 import {Icon, A, Button, Img, Input, Label, Text, Basket, Toggle, Box} from '../component/ui_ds7';
-import hljs from 'highlight.js';
-import 'highlight.js/styles/night-owl.css';
+import {UseData} from '../hook/useData';
+import hljs from 'highlight.js/lib/common';
 import javascript from 'highlight.js/lib/languages/javascript';
 import html from 'highlight.js/lib/languages/xml';
 import json from 'highlight.js/lib/languages/json';
-import {UseData} from '../hook/useData';
+import 'highlight.js/styles/night-owl.css';
 
 hljs.registerLanguage('js', javascript);
 hljs.registerLanguage('html', html);

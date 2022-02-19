@@ -33,3 +33,12 @@ export const copyClipboard = (targetEl) => {
 	}
 	return returnBln;
 };
+
+export const getRandomSrc = (randomNumber) => {
+	// return `https://source.unsplash.com/collection/190727/400x300?random=${Math.round(Math.random() * 9999)}`;
+	// return `https://source.unsplash.com/collection/190727/400x300`;
+	// return `https://picsum.photos/300/200/?random=${Math.round(Math.random() * 9999)}`;
+	return `https://picsum.photos/200/200/?random=${randomNumber}`;
+};
+
+export const fakeFetch = (delay = 1000) => new Promise((res) => setTimeout(res, delay));
