@@ -1,7 +1,7 @@
-import {forwardRef, useEffect, useRef} from 'react';
+import {createElement, forwardRef, useEffect, useRef} from 'react';
 import {PocketA, PocketB, SectionA, SectionB} from './doctorStrange';
-import {CardItem} from './hulk';
-import {Highlight, VariableArea} from './ironMan';
+import {CardItem, PostItem} from './hulk';
+import {Area, Highlight, VariableArea} from './ironMan';
 import {AreaItem} from './spiderMan';
 import {fakeFetch, getRandomSrc} from './thor';
 import {UseData} from './vision';
@@ -60,4 +60,21 @@ export const TestLab = () => {
 	);
 };
 
-export default TestLab;
+export const TestArea = () => {
+	return (
+		<div className="max-w-[1024px] mx-auto p-10 space-y-10">
+			<Area src="http://localhost:3000/avengers/item/cardItem" />
+			<Area src="http://localhost:3000/avengers/item/postItem" />
+		</div>
+	);
+};
+
+export const TestBlank = () => {
+	return (
+		<div className="max-w-[1024px] mx-auto py-10 space-y-10">
+			<Area height="640" src="http://localhost:3000/avengers/item/cardItem" />
+		</div>
+	);
+};
+
+export default TestBlank;

@@ -196,3 +196,122 @@ export const VariableArea = (props) => {
 		</div>
 	);
 };
+
+export const Area = (props) => {
+	const {children, src, height} = props;
+	const divRef = useRef(null);
+	const iframeRef = useRef(null);
+	const [sizeData, runSizeData] = UseData({
+		hasCapture: false,
+		isDragging: false,
+		prevWidth: 0,
+		width: 9999,
+		height: height || 0,
+
+		barClass: 'bg-gray-100',
+	});
+
+	useEffect(() => {
+		window.addEventListener('resize', onResize);
+
+		return () => {
+			window.removeEventListener('resize', onResize);
+		};
+	}, []);
+
+	useEffect(() => {
+		runSizeData.change(
+			'barClass',
+			classNames({
+				'bg-gray-100': !sizeData.hasCapture,
+				'bg-gray-200': sizeData.hasCapture && sizeData.width < 640,
+				'bg-green-200': sizeData.hasCapture && sizeData.width >= 640 && sizeData.width < 768,
+				'bg-blue-200': sizeData.hasCapture && sizeData.width >= 768 && sizeData.width < 1024,
+				'bg-red-200': sizeData.hasCapture && sizeData.width >= 1024,
+			})
+		);
+	}, [sizeData.hasCapture, sizeData.width]);
+
+	const onResize = debounce(
+		throttle(
+			useCallback(() => {
+				runSizeData.change('height', height || iframeRef.current?.contentWindow?.document?.body?.scrollHeight || 0);
+			}, []),
+			500
+		),
+		100
+	);
+
+	const onDown = useCallback((event) => {
+		event.target.setPointerCapture(event.pointerId);
+
+		// width 위치 보정
+		runSizeData.change('width', divRef.current.offsetWidth);
+		runSizeData.change('isDragging', true);
+		extractPositionDelta(event);
+	}, []);
+
+	const onMove = useCallback(
+		(event) => {
+			if (!sizeData.isDragging) {
+				return;
+			}
+
+			const {moveX, moveY} = extractPositionDelta(event);
+
+			runSizeData.change('width', sizeData.width + moveX);
+			onResize();
+		},
+		[sizeData.isDragging, sizeData.width]
+	);
+
+	const onUp = useCallback((event) => runSizeData.change('isDragging', false), []);
+	const onGotCapture = useCallback((event) => runSizeData.change('hasCapture', true), []);
+	const onLostCapture = useCallback((event) => runSizeData.change('hasCapture', false), []);
+
+	const extractPositionDelta = useCallback(
+		(event) => {
+			const pointX = event.screenX;
+			const delta = {
+				moveX: pointX - sizeData.prevWidth,
+			};
+
+			runSizeData.change('prevWidth', pointX);
+
+			return delta;
+		},
+		[sizeData.prevWidth]
+	);
+
+	return (
+		<div className={`ring-1 ring-gray-500`}>
+			<div ref={divRef} className="relative min-w-full max-w-full sm:min-w-[320px]" style={{width: `${sizeData.width}px`}}>
+				{src ? (
+					<div className="bg-white overflow-auto">
+						<div style={{height: sizeData.height ? `${sizeData.height}px` : 'auto'}}>
+							<iframe ref={iframeRef} src={src} className="w-full h-full" onLoad={onResize} />
+						</div>
+					</div>
+				) : (
+					<div className="bg-white overflow-auto">
+						<div style={{height: sizeData.height ? `${sizeData.height}px` : 'auto'}}>{children}</div>
+					</div>
+				)}
+				<div
+					className={classNames('sr-only sm:not-sr-only sm:absolute sm:-right-4 sm:inset-y-0 sm:flex sm:justify-center sm:items-center sm:w-4 cursor-[ew-resize]')}
+					onPointerDown={onDown}
+					onPointerMove={onMove}
+					onPointerUp={onUp}
+					onPointerCancel={onUp}
+					onGotPointerCapture={onGotCapture}
+					onLostPointerCapture={onLostCapture}
+				>
+					<div className="absolute inset-y-0 -inset-x-2"></div>
+					<svg aria-hidden="true" className="h-4 w-4 text-gray-600 pointer-events-none" fill="currentColor" viewBox="0 0 24 24">
+						<path d="M8 5h2v14H8zM14 5h2v14h-2z"></path>
+					</svg>
+				</div>
+			</div>
+		</div>
+	);
+};

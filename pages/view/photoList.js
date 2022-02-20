@@ -52,8 +52,8 @@ export const Main = () => {
 		<div className="py-4 px-8">
 			<div className="flex-col space-y-3">
 				{[...Array(stateData.count)].map((item, index) => (
-					// <CardItem key={index} number={index} />
-					<PostItem key={index} number={index} />
+					<CardItem key={index} number={index} />
+					// <PostItem key={index} number={index} />
 				))}
 				<Loading ref={loadingRef} />
 			</div>
