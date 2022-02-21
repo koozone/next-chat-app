@@ -72,7 +72,7 @@ export const TestArea = () => {
 export const TestBlank = () => {
 	return (
 		<div className="max-w-[1024px] mx-auto py-10 space-y-10">
-			<Area height="640" src="http://localhost:3000/avengers/item/photoItem" />
+			<Area height="640" src="http://localhost:3000/avengers/module/photoModule" />
 		</div>
 	);
 };

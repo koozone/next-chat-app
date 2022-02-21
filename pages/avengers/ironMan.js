@@ -285,7 +285,7 @@ export const Area = (props) => {
 
 	return (
 		<div className={`ring-1 ring-gray-500`}>
-			<div ref={divRef} className="relative min-w-full max-w-full sm:min-w-[320px]" style={{width: `${sizeData.width}px`}}>
+			<div ref={divRef} className="relative min-w-full max-w-full sm:min-w-[100px]" style={{width: `${sizeData.width}px`}}>
 				{src ? (
 					<div className="bg-white overflow-auto">
 						<div style={{height: sizeData.height ? `${sizeData.height}px` : 'auto'}}>
