@@ -77,4 +77,12 @@ export const TestBlank = () => {
 	);
 };
 
-export default TestBlank;
+export const TestCalendar = () => {
+	return (
+		<div className="max-w-[1024px] mx-auto py-10 space-y-10">
+			<Area height="640" src="http://localhost:3000/avengers/module/calendarModule" />
+		</div>
+	);
+};
+
+export default TestCalendar;
