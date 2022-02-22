@@ -14,13 +14,21 @@ export const CalendarModule = () => {
 
 	return (
 		<div className="p-10">
-			<span className="text-3xl">{`${stateData.dateTime.year} ${stateData.dateTime.setLocale('en')[false ? 'monthShort' : 'monthLong']}`}</span>
+			<span className="text-3xl">{`${stateData.dateTime.year} ${stateData.dateTime.setLocale('ko')[false ? 'monthShort' : 'monthLong']}`}</span>
 			<ToyCalendar data={data} />
 
 			<Button
 				theme="default-IL-md-md-md"
-				icon="bx-leaf"
-				text="Prev Month"
+				icon="bxs-chevrons-left"
+				// text=""
+				onClick={() => {
+					runStateData.change('dateTime', stateData.dateTime.plus({years: -1}));
+				}}
+			/>
+			<Button
+				theme="default-IL-md-md-md"
+				icon="bxs-chevron-left"
+				text="Prev"
 				onClick={() => {
 					runStateData.change('dateTime', stateData.dateTime.plus({months: -1}));
 				}}
@@ -43,10 +51,18 @@ export const CalendarModule = () => {
 			/>
 			<Button
 				theme="default-IL-md-md-md"
-				icon="bx-leaf"
-				text="Next Month"
+				iconR="bxs-chevron-right"
+				text="Next"
 				onClick={() => {
 					runStateData.change('dateTime', stateData.dateTime.plus({months: 1}));
+				}}
+			/>
+			<Button
+				theme="default-IL-md-md-md"
+				icon="bxs-chevrons-right"
+				// text=""
+				onClick={() => {
+					runStateData.change('dateTime', stateData.dateTime.plus({years: 1}));
 				}}
 			/>
 			<span>{stateData.dateTime.toString()}</span>

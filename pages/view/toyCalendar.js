@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import {DateTime, Info} from 'luxon';
-import {Fragment} from 'react';
+import {Fragment, useCallback} from 'react';
+import {UseData} from './../avengers/vision';
 
 const DayItem = (props) => {
 	const {children, className} = props;
@@ -13,7 +14,7 @@ const DayItem = (props) => {
 
 export const ToyCalendar = (props) => {
 	const {width = 'w-full', height = 'h-[500px]', data} = props;
-	const [stateData, runStateData] = data;
+	const [stateData, runStateData] = data || UseData({dateTime: DateTime.now()});
 
 	const startWeekMonday = false;
 	const viewWeekNumber = true;
@@ -22,17 +23,18 @@ export const ToyCalendar = (props) => {
 	const weekLocale = 'en';
 	const viewSubDate = true;
 	const subDateLocale = 'chinese';
-	const colList = ['0.5fr', '1fr', '1fr', '1fr', '1fr', '1fr', '0.5fr', '0.5fr'];
+	const colList = ['0.25fr', '1fr', '1fr', '1fr', '1fr', '1fr', '0.5fr', '0.5fr'];
 	const rowList = ['0.5fr', '1fr', '1fr', '1fr', '1fr', '1fr'];
 
 	// const dateTime = DateTime.fromISO('2022-W02-1');
 	// const nowDateTime = DateTime.local(2022, 9, 3);
 	const nowDateTime = stateData?.dateTime || DateTime.now();
-	const firstDateTime = nowDateTime.startOf('month');
-	const startDateTime = firstDateTime.minus({days: firstDateTime.weekday - (startWeekMonday ? 1 : 0)});
-	// const weekday = startDateTime.weekday;
+	const startFirstDateTime = nowDateTime.startOf('month');
+	const startMondayDateTime = startFirstDateTime.minus({days: (startFirstDateTime.weekday - 1) % 7});
+	const startViewDateTime = startMondayDateTime.minus({days: startWeekMonday ? 0 : 1});
+	// const weekday = startViewDateTime.weekday;
 	// const weekNumber = dateTime.startOf('month').weekNumber;
-	// const startDateTime = DateTime.fromISO(`${dateTime.year}-W${String(weekNumber).padStart(2, '0')}-1`);
+	// const startViewDateTime = DateTime.fromISO(`${dateTime.year}-W${String(weekNumber).padStart(2, '0')}-1`);
 	// const dateTime3 = nowDateTime.endOf('month');
 	// const dateTime2 = nowDateTime.plus({hours: 3, minutes: 2});
 	// var f = {month: 'long', day: 'numeric'};
@@ -48,19 +50,23 @@ export const ToyCalendar = (props) => {
 	// 				'grid-cols-[40px_80px_80px_80px_80px_80px_40px]': !viewWeekNumber,
 	// 		  }
 	// );
-	const gridRows = rowList.join(' ');
+	const aaa = useCallback((valueList, indexList) => {
+		return indexList.map((val) => valueList[val]).join(' ');
+	}, []);
+
+	const gridRows = aaa(rowList, [0, 1, 2, 3, 4, 5]);
 	const gridCols = classNames(
 		startWeekMonday
 			? {
-					[`${colList[0]} ${colList[1]} ${colList[2]} ${colList[3]} ${colList[4]} ${colList[5]} ${colList[6]} ${colList[7]}`]: viewWeekNumber,
-					[`${colList[1]} ${colList[2]} ${colList[3]} ${colList[4]} ${colList[5]} ${colList[6]} ${colList[7]}`]: !viewWeekNumber,
+					[`${aaa(colList, [0, 1, 2, 3, 4, 5, 6, 7])}`]: viewWeekNumber,
+					[`${aaa(colList, [1, 2, 3, 4, 5, 6, 7])}`]: !viewWeekNumber,
 			  }
 			: {
-					[`${colList[0]} ${colList[7]} ${colList[1]} ${colList[2]} ${colList[3]} ${colList[4]} ${colList[5]} ${colList[6]}`]: viewWeekNumber,
-					[`${colList[7]} ${colList[1]} ${colList[2]} ${colList[3]} ${colList[4]} ${colList[5]} ${colList[6]}`]: !viewWeekNumber,
+					[`${aaa(colList, [0, 7, 1, 2, 3, 4, 5, 6])}`]: viewWeekNumber,
+					[`${aaa(colList, [7, 1, 2, 3, 4, 5, 6])}`]: !viewWeekNumber,
 			  }
 	);
-
+	console.log('weekYear', DateTime.local(2022, 1, 3).weekYear, DateTime.local(2022, 1, 3).weekNumber, startMondayDateTime.toString());
 	return (
 		<div className={classNames(width, height, 'grid gap-px rounded-lg ring-2 ring-slate-500 bg-slate-300 overflow-hidden')} style={{gridTemplateColumns: gridCols, gridTemplateRows: gridRows}}>
 			{viewWeekString && (
@@ -69,7 +75,7 @@ export const ToyCalendar = (props) => {
 					{[...Array(7)].map((dayVal, k) => {
 						const index = k;
 						const weekIndex = (index + (startWeekMonday ? 1 : 0)) % 7;
-						const dateTime = startDateTime.plus({days: index});
+						const viewDateTime = startViewDateTime.plus({days: index});
 						const bgColor = classNames('bg-slate-100');
 						const textColor = classNames({
 							'text-slate-500': weekIndex != 0 && weekIndex != 6,
@@ -79,27 +85,28 @@ export const ToyCalendar = (props) => {
 
 						return (
 							<DayItem key={`weekString${index}`} className={classNames(bgColor, 'justify-center items-center')}>
-								<div className={classNames(textColor, 'text-md')}>{dateTime.setLocale(weekLocale)[weekStringShot ? 'weekdayShort' : 'weekdayLong']}</div>
+								<div className={classNames(textColor, 'text-md')}>{viewDateTime.setLocale(weekLocale)[weekStringShot ? 'weekdayShort' : 'weekdayLong']}</div>
 							</DayItem>
 						);
 					})}
 				</Fragment>
 			)}
 			{[...Array(5)].map((weekVal, i) => {
-				const weekDateTime = startDateTime.plus({weeks: i});
+				// const weekDateTime = startViewDateTime.plus({weeks: i});
+				const weekDateTime = startMondayDateTime.plus({weeks: i});
 
 				return (
 					<Fragment key={`weekNumber${i}`}>
 						{viewWeekNumber && (
 							<DayItem className="bg-slate-100 justify-center items-center">
-								<div className="text-slate-400 text-sm">{`W${weekDateTime.weekNumber}`}</div>
+								<div className="text-slate-400 text-sm">{`${weekDateTime.weekNumber}`}</div>
 							</DayItem>
 						)}
 						{[...Array(7)].map((dayVal, k) => {
 							const index = k + i * 7;
 							const weekIndex = (index + (startWeekMonday ? 1 : 0)) % 7;
-							const dateTime = startDateTime.plus({days: index});
-							const subDateTime = dateTime.reconfigure({outputCalendar: subDateLocale});
+							const viewDateTime = startViewDateTime.plus({days: index});
+							const subDateTime = viewDateTime.reconfigure({outputCalendar: subDateLocale});
 							const bgColor = classNames({
 								'bg-white': weekIndex != 0 && weekIndex != 6,
 								'bg-blue-50': weekIndex == 6,
@@ -111,14 +118,18 @@ export const ToyCalendar = (props) => {
 								'text-red-500': weekIndex == 0,
 							});
 							const opacity = classNames({
-								'opacity-30': dateTime.month != nowDateTime.month,
-								'opacity-100': dateTime.month == nowDateTime.month,
+								'opacity-30': viewDateTime.month != nowDateTime.month,
+								'opacity-100': viewDateTime.month == nowDateTime.month,
+							});
+							const bbb = classNames({
+								invisible: !['1', '5', '10', '15', '20', '25', '30'].includes(subDateTime.toFormat('d')),
+								visible: ['1', '5', '10', '15', '20', '25', '30'].includes(subDateTime.toFormat('d')),
 							});
 
 							return (
-								<DayItem key={`dayNumber${index}`} className={classNames(bgColor, 'justify-center items-center')}>
-									<div className={classNames(textColor, opacity, 'text-3xl')}>{dateTime.day}</div>
-									{viewSubDate && <div className="text-xs text-slate-400">{subDateTime.toFormat('L.d')}</div>}
+								<DayItem key={`dayNumber${index}`} className={classNames(bgColor, opacity, 'justify-center items-center')}>
+									<div className={classNames(textColor, 'text-3xl')}>{viewDateTime.day}</div>
+									{viewSubDate && <div className={classNames(bbb, 'text-xs text-slate-400')}>{subDateTime.toFormat('L.d')}</div>}
 								</DayItem>
 							);
 						})}
