@@ -10,6 +10,9 @@ import {UseData} from '../vision';
 export const CalendarModule = () => {
 	const calendarData = UseData({
 		dateTime: DateTime.local(2022, 9, 3),
+		// dateTime: DateTime.now(),
+	});
+	const optionData = UseData({
 		viewWeekNumber: true,
 		viewWeekString: true,
 		weekStringShot: true,
@@ -18,16 +21,17 @@ export const CalendarModule = () => {
 		startWeekDay: [{value: 7, label: '일'}],
 	});
 	const [calendarState, runCalendarState] = calendarData;
+	const [optionState, runOptionState] = optionData;
+
+	const weekStringShot = optionState.weekStringShot;
+	const weekLocale = optionState.weekLocale?.map((val) => val.value)[0];
 
 	return (
 		<div className="p-10">
-			<div className="text-3xl">{`${calendarState.dateTime.year} ${calendarState.dateTime.setLocale('ko')[false ? 'monthShort' : 'monthLong']}`}</div>
-			<div className="inline-block w-1/2">
-				<ToyCalendar height="h-[400px]" data={calendarData} />
+			<div className="text-3xl">{`${calendarState.dateTime.year} ${calendarState.dateTime.setLocale(weekLocale)[weekStringShot ? 'monthShort' : 'monthLong']}`}</div>
+			<div className="inline-block w-full">
+				<ToyCalendar height="h-[400px]" calendarData={calendarData} optionData={optionData} />
 			</div>
-			{/* <div className="inline-block w-1/2">
-				<ToyCalendar height="h-[400px]" data={calendarData} />
-			</div> */}
 
 			<div className="p-5 space-x-3 flex justify-center items-center flex-wrap ring-2 ring-gray-500 rounded-lg">
 				<Button
@@ -75,31 +79,31 @@ export const CalendarModule = () => {
 				<Toggle
 					theme="default-IL-md-md-md::danger-IL-md-md-md"
 					icon="bxs-chevrons-right::bx-leaf"
-					checked={calendarState.viewWeekNumber}
+					checked={optionState.viewWeekNumber}
 					onChange={() => {
-						runCalendarState.change('viewWeekNumber', !calendarState.viewWeekNumber);
+						runOptionState.change('viewWeekNumber', !optionState.viewWeekNumber);
 					}}
 				/>
 				<Toggle
 					theme="default-IL-md-md-md::danger-IL-md-md-md"
 					icon="bxs-chevrons-right::bx-leaf"
-					checked={calendarState.viewWeekString}
+					checked={optionState.viewWeekString}
 					onChange={() => {
-						runCalendarState.change('viewWeekString', !calendarState.viewWeekString);
+						runOptionState.change('viewWeekString', !optionState.viewWeekString);
 					}}
 				/>
 				<Toggle
 					theme="default-IL-md-md-md::danger-IL-md-md-md"
 					icon="bxs-chevrons-right::bx-leaf"
-					checked={calendarState.viewSubDate}
+					checked={optionState.viewSubDate}
 					onChange={() => {
-						runCalendarState.change('viewSubDate', !calendarState.viewSubDate);
+						runOptionState.change('viewSubDate', !optionState.viewSubDate);
 					}}
 				/>
 				<SelectBox
 					value="startWeekDay"
 					direction={false}
-					data={calendarData}
+					data={optionData}
 					options={[
 						{value: 7, label: '일'},
 						{value: 1, label: '월'},
@@ -114,7 +118,7 @@ export const CalendarModule = () => {
 				<SelectBox
 					value="weekLocale"
 					direction={false}
-					data={calendarData}
+					data={optionData}
 					options={[
 						{value: 'ko', label: '한글'},
 						{value: 'en', label: '영어'},
@@ -125,9 +129,9 @@ export const CalendarModule = () => {
 				<Toggle
 					theme="default-IL-md-md-md::danger-IL-md-md-md"
 					icon="bxs-chevrons-right::bx-leaf"
-					checked={calendarState.weekStringShot}
+					checked={optionState.weekStringShot}
 					onChange={() => {
-						runCalendarState.change('weekStringShot', !calendarState.weekStringShot);
+						runOptionState.change('weekStringShot', !optionState.weekStringShot);
 					}}
 				/>
 				<Button
@@ -135,7 +139,7 @@ export const CalendarModule = () => {
 					icon="bx-leaf"
 					text="Reset"
 					onClick={() => {
-						runCalendarState.reset();
+						runOptionState.reset();
 					}}
 				/>
 			</div>
