@@ -207,7 +207,7 @@ export const ToyCalendar = (props) => {
 								.map((item) => item.label)
 								.join(', ');
 							// 오늘
-							const today = mainDateTime == nowDateTime;
+							const today = mainDateTime.toISODate() == nowDateTime.toISODate();
 							const mainBgColor = classNames({
 								'bg-white': !(weekIndex == 6 || weekIndex == 0),
 								'bg-blue-50': weekIndex == 6,
@@ -217,6 +217,8 @@ export const ToyCalendar = (props) => {
 								'text-slate-500': !(weekIndex == 6 || weekIndex == 0 || holiday),
 								'text-blue-500': weekIndex == 6,
 								'text-red-500': weekIndex == 0 || holiday,
+								'ring-green-500/30 bg-green-300/30': today,
+								'ring-transparent bg-transparent': !today,
 							});
 							const mainOpacity = classNames({
 								'opacity-30': mainDateTime.month != viewDateTime.month,
@@ -233,9 +235,9 @@ export const ToyCalendar = (props) => {
 
 							return (
 								<DayItem key={`dayNumber${index}`} className={classNames(mainBgColor, mainOpacity, 'justify-center items-center')}>
-									<div className={classNames(mainTextColor, 'text-3xl bg-green-400')}>{mainDateTime.day}</div>
+									<div className={classNames(mainTextColor, 'aspect-square w-9 text-3xl text-center ring-4 rounded-full')}>{mainDateTime.day}</div>
 									{/* {viewSubDate && <div className={classNames(subVisible, 'text-xs text-slate-400')}>{memorialday || subDateTime.toFormat('L.d')}</div>} */}
-									{viewSubDate && <div className={classNames(subTextColor, 'text-xs')}>{holiday || memorialday || subDateTime.toFormat('L.d')}</div>}
+									{viewSubDate && <div className={classNames(subTextColor, 'truncate whitespace-nowrap w-[80px] text-xs text-center')}>{holiday || memorialday || subDateTime.toFormat('L.d')}</div>}
 								</DayItem>
 							);
 						})}

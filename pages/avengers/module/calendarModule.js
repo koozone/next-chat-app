@@ -1,4 +1,6 @@
+import axios from 'axios';
 import {DateTime} from 'luxon';
+import {useEffect} from 'react';
 import {Button, Toggle} from '../../component/ui_ds7';
 import {SelectBox} from '../../view/sampleSelectbox2';
 import ToyCalendar from '../../view/toyCalendar';
@@ -6,6 +8,20 @@ import PhotoItem, {PhotoRoundItem} from '../item/photoItem';
 import PhotoList from '../list/photoList';
 import PhotoSection from '../section/photoSection';
 import {UseData} from '../vision';
+
+const loadJson = async () => {
+	const res = await axios.get('http://apis.data.go.kr/B090041/openapi/service/SpcdeInfoService/getRestDeInfo', {
+		params: {
+			ServiceKey: 'qw05m%2B7UYOhznr9HvHViWlahG8N7YCJnzY%2BuwSZueDRnjdW9g5rqpXjQ0S3vFki2K%2F3dZTczE07cwixOVpZH4A%3D%3D',
+			solYear: 2022,
+			//solMonth:01,
+			numOfRows: 20,
+			// _type: 'json',
+		},
+	});
+	// const dataList = [].concat(res.data || []);
+	console.log('res.data', res.data);
+};
 
 export const CalendarModule = () => {
 	const calendarData = UseData({
@@ -25,6 +41,10 @@ export const CalendarModule = () => {
 
 	const weekStringShot = optionState.weekStringShot;
 	const weekLocale = optionState.weekLocale?.map((val) => val.value)[0];
+
+	useEffect(() => {
+		// loadJson();
+	}, [calendarState.dateTime]);
 
 	return (
 		<div className="p-10">
