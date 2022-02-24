@@ -1,29 +1,23 @@
 // useState를 사용한 custom hook 구현
 import {useState} from 'react';
 
-export const UseData = (initData = {}) => {
-	const [data, setData] = useState(initData);
+export const UseData = (initData) => {
+	const [state, setState] = useState(initData);
 
 	const change = (...option) => {
 		if (option.length == 1) {
-			const [value] = option;
-
-			setData(value);
+			setState(option[0]);
 		} else {
-			const [name, value] = option;
-
-			setData((data) => ({...data, [name]: value}));
+			setState((state) => ({...state, [option[0]]: option[1]}));
 		}
 	};
 	const reset = (...option) => {
 		if (option.length == 1) {
-			const [name] = option;
-
-			change(name, initData[name]);
+			change(option[0], initData[option[0]]);
 		} else {
-			setData(initData);
+			setState(initData);
 		}
 	};
 
-	return [data, {change, reset}];
+	return [state, {change, reset}];
 };
