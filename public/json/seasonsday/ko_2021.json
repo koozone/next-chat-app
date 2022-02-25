@@ -1,0 +1,38 @@
+{
+	"response": {
+		"header": {"resultCode": "00", "resultMsg": "NORMAL SERVICE."},
+		"body": {
+			"items": {
+				"item": [
+					{"dateKind": "03", "dateName": "소한", "isHoliday": "N", "kst": "1223 ", "locdate": 20210105, "seq": 1},
+					{"dateKind": "03", "dateName": "대한", "isHoliday": "N", "kst": "0540 ", "locdate": 20210120, "seq": 1},
+					{"dateKind": "03", "dateName": "입춘", "isHoliday": "N", "kst": "2359 ", "locdate": 20210203, "seq": 1},
+					{"dateKind": "03", "dateName": "우수", "isHoliday": "N", "kst": "1944 ", "locdate": 20210218, "seq": 1},
+					{"dateKind": "03", "dateName": "경칩", "isHoliday": "N", "kst": "1754 ", "locdate": 20210305, "seq": 1},
+					{"dateKind": "03", "dateName": "춘분", "isHoliday": "N", "kst": "1837 ", "locdate": 20210320, "seq": 1},
+					{"dateKind": "03", "dateName": "청명", "isHoliday": "N", "kst": "2235 ", "locdate": 20210404, "seq": 1},
+					{"dateKind": "03", "dateName": "곡우", "isHoliday": "N", "kst": "0533 ", "locdate": 20210420, "seq": 2},
+					{"dateKind": "03", "dateName": "입하", "isHoliday": "N", "kst": "1547 ", "locdate": 20210505, "seq": 2},
+					{"dateKind": "03", "dateName": "소만", "isHoliday": "N", "kst": "0437 ", "locdate": 20210521, "seq": 2},
+					{"dateKind": "03", "dateName": "망종", "isHoliday": "N", "kst": "1952 ", "locdate": 20210605, "seq": 2},
+					{"dateKind": "03", "dateName": "하지", "isHoliday": "N", "kst": "1232 ", "locdate": 20210621, "seq": 1},
+					{"dateKind": "03", "dateName": "소서", "isHoliday": "N", "kst": "0605 ", "locdate": 20210707, "seq": 1},
+					{"dateKind": "03", "dateName": "대서", "isHoliday": "N", "kst": "2326 ", "locdate": 20210722, "seq": 1},
+					{"dateKind": "03", "dateName": "입추", "isHoliday": "N", "kst": "1554 ", "locdate": 20210807, "seq": 1},
+					{"dateKind": "03", "dateName": "처서", "isHoliday": "N", "kst": "0635 ", "locdate": 20210823, "seq": 1},
+					{"dateKind": "03", "dateName": "백로", "isHoliday": "N", "kst": "1853 ", "locdate": 20210907, "seq": 3},
+					{"dateKind": "03", "dateName": "추분", "isHoliday": "N", "kst": "0421 ", "locdate": 20210923, "seq": 1},
+					{"dateKind": "03", "dateName": "한로", "isHoliday": "N", "kst": "1039 ", "locdate": 20211008, "seq": 2},
+					{"dateKind": "03", "dateName": "상강", "isHoliday": "N", "kst": "1351 ", "locdate": 20211023, "seq": 1},
+					{"dateKind": "03", "dateName": "입동", "isHoliday": "N", "kst": "1359 ", "locdate": 20211107, "seq": 1},
+					{"dateKind": "03", "dateName": "소설", "isHoliday": "N", "kst": "1134 ", "locdate": 20211122, "seq": 1},
+					{"dateKind": "03", "dateName": "대설", "isHoliday": "N", "kst": "0657 ", "locdate": 20211207, "seq": 1},
+					{"dateKind": "03", "dateName": "동지", "isHoliday": "N", "kst": "0059 ", "locdate": 20211222, "seq": 1}
+				]
+			},
+			"numOfRows": 100,
+			"pageNo": 1,
+			"totalCount": 24
+		}
+	}
+}

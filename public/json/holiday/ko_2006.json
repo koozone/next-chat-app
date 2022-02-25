@@ -1,0 +1,29 @@
+{
+	"response": {
+		"header": {"resultCode": "00", "resultMsg": "NORMAL SERVICE."},
+		"body": {
+			"items": {
+				"item": [
+					{"dateKind": "01", "dateName": "신정", "isHoliday": "Y", "locdate": 20060101, "seq": 1},
+					{"dateKind": "01", "dateName": "설날", "isHoliday": "Y", "locdate": 20060128, "seq": 1},
+					{"dateKind": "01", "dateName": "설날", "isHoliday": "Y", "locdate": 20060129, "seq": 1},
+					{"dateKind": "01", "dateName": "설날", "isHoliday": "Y", "locdate": 20060130, "seq": 1},
+					{"dateKind": "01", "dateName": "삼일절", "isHoliday": "Y", "locdate": 20060301, "seq": 1},
+					{"dateKind": "01", "dateName": "어린이날", "isHoliday": "Y", "locdate": 20060505, "seq": 1},
+					{"dateKind": "01", "dateName": "석가탄신일", "isHoliday": "Y", "locdate": 20060505, "seq": 2},
+					{"dateKind": "01", "dateName": "현충일", "isHoliday": "Y", "locdate": 20060606, "seq": 1},
+					{"dateKind": "01", "dateName": "제헌절", "isHoliday": "Y", "locdate": 20060717, "seq": 1},
+					{"dateKind": "01", "dateName": "광복절", "isHoliday": "Y", "locdate": 20060815, "seq": 1},
+					{"dateKind": "01", "dateName": "개천절", "isHoliday": "Y", "locdate": 20061003, "seq": 1},
+					{"dateKind": "01", "dateName": "추석", "isHoliday": "Y", "locdate": 20061005, "seq": 1},
+					{"dateKind": "01", "dateName": "추석", "isHoliday": "Y", "locdate": 20061006, "seq": 1},
+					{"dateKind": "01", "dateName": "추석", "isHoliday": "Y", "locdate": 20061007, "seq": 1},
+					{"dateKind": "01", "dateName": "기독탄신일", "isHoliday": "Y", "locdate": 20061225, "seq": 1}
+				]
+			},
+			"numOfRows": 100,
+			"pageNo": 1,
+			"totalCount": 15
+		}
+	}
+}

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {DateTime} from 'luxon';
-import {useEffect} from 'react';
+import {useCallback, useEffect, useState} from 'react';
 import {Button, Toggle} from '../../component/ui_ds7';
 import {SelectBox} from '../../view/sampleSelectbox2';
 import {SelectBox as SelectBox2} from '../antMan';
@@ -112,6 +112,7 @@ const holidayList = [
 ];
 
 export const CalendarModule = () => {
+	const [loading, setLoading] = useState(false);
 	const calendarData = UseData({
 		dateTime: DateTime.local(2022, 9, 3),
 		// dateTime: DateTime.now(),
@@ -133,6 +134,7 @@ export const CalendarModule = () => {
 	const [calendarState, runCalendarState] = calendarData;
 	const [optionState, runOptionState] = optionData;
 
+	const thisYear = calendarState.dateTime.year;
 	const viewWeekNumber = optionState.viewWeekNumber;
 	const viewWeekString = optionState.viewWeekString;
 	const weekStringShot = optionState.weekStringShot;
@@ -141,69 +143,121 @@ export const CalendarModule = () => {
 	const startWeekDay = optionState.startWeekDay;
 	const weekEndRatio = optionState.weekEndRatio;
 
+	// useEffect(async () => {
+	// 	// 데이터 호출을 시도한 년도면
+	// 	if (calendarState.doneYearList.includes(thisYear)) return;
+	// 	runCalendarState.change('doneYearList', [...calendarState.doneYearList, thisYear]);
+
+	// 	const apiKey = 'qw05m+7UYOhznr9HvHViWlahG8N7YCJnzY+uwSZueDRnjdW9g5rqpXjQ0S3vFki2K/3dZTczE07cwixOVpZH4A==';
+
+	// 	console.log('startList');
+	// 	const res = await axios.get('/SpcdeInfoService/get24DivisionsInfo', {
+	// 		params: {
+	// 			ServiceKey: apiKey,
+	// 			solYear: thisYear,
+	// 			//solMonth:09,
+	// 			//kst:0120,
+	// 			//sunHardness:285,
+	// 			numOfRows: 24,
+	// 			//pageNo:1,
+	// 			totalCount: 100,
+	// 		},
+	// 	});
+	// 	const resultList = [].concat(res.data?.response?.body?.items?.item || []);
+	// 	console.log('resultList', resultList);
+
+	// 	// runCalendarState.change(
+	// 	// 	'seasondayList',
+	// 	// 	calendarState.seasondayList.concat(
+	// 	// 		resultList.map((item) => ({
+	// 	// 			value: item.locdate,
+	// 	// 			label: item.dateName,
+	// 	// 		}))
+	// 	// 	)
+	// 	// );
+	// 	runCalendarState.change('publicdayList', calendarState.publicdayList.concat(resultList));
+
+	// 	console.log('startList2');
+	// 	const res2 = await axios.get('/SpcdeInfoService/getRestDeInfo', {
+	// 		params: {
+	// 			ServiceKey: apiKey,
+	// 			solYear: thisYear,
+	// 			// solMonth:09,
+	// 			numOfRows: 24,
+	// 		},
+	// 	});
+	// 	const resultList2 = [].concat(res2.data?.response?.body?.items?.item || []);
+	// 	console.log('resultList2', resultList2);
+
+	// 	// runCalendarState.change(
+	// 	// 	'holidayList',
+	// 	// 	calendarState.holidayList.concat(
+	// 	// 		resultList2.map((item) => ({
+	// 	// 			value: item.locdate,
+	// 	// 			label: item.dateName,
+	// 	// 		}))
+	// 	// 	)
+	// 	// );
+	// 	// runCalendarState.change('publicdayList', calendarState.publicdayList.concat(resultList2));
+
+	// 	console.log('calendarState.publicdayList', calendarState.publicdayList);
+	// }, [thisYear]);
+
+	const aaa = useCallback(
+		async ({kind, year}) => {
+			try {
+				let result;
+				let jsonList;
+				const newList = [...calendarState.publicdayList];
+
+				setLoading(true);
+				console.log(`seasonsday ${year} api start`);
+				result = await axios.get(`/json/seasonsday/ko_${year}.json`);
+				jsonList = [].concat(result.data?.response?.body?.items?.item || []);
+				console.log(`seasonsday ${year} api end`, jsonList);
+				newList = newList.concat(jsonList);
+
+				console.log(`holiday ${year} api start`);
+				result = await axios.get(`/json/holiday/ko_${year}.json`);
+				jsonList = [].concat(result.data?.response?.body?.items?.item || []);
+				console.log(`holiday ${year} api end`, jsonList);
+				newList = newList.concat(jsonList);
+
+				runCalendarState.change('publicdayList', newList);
+
+				console.log(`publicdayList 결과`, newList);
+			} catch (error) {
+				console.log(error);
+			}
+			setLoading(false);
+		},
+		[calendarState.publicdayList]
+	);
+
 	useEffect(async () => {
-		// 데이터 호출을 시도한 년도면
-		if (calendarState.doneYearList.includes(calendarState.dateTime.year)) return;
-		runCalendarState.change('doneYearList', [...calendarState.doneYearList, calendarState.dateTime.year]);
+		// 데이터 호출을 시도했던 년도면
+		if (calendarState.doneYearList.includes(thisYear)) return;
+		runCalendarState.change('doneYearList', [...calendarState.doneYearList, thisYear]);
 
-		const apiKey = 'qw05m+7UYOhznr9HvHViWlahG8N7YCJnzY+uwSZueDRnjdW9g5rqpXjQ0S3vFki2K/3dZTczE07cwixOVpZH4A==';
+		// try {
+		// 	console.log(`${thisYear} api start`);
+		// 	const result = await axios.get(`/json/seasonsday/ko_${thisYear}.json`);
+		// 	const jsonList = [].concat(result.data?.response?.body?.items?.item || []);
+		// 	console.log(`${thisYear} api end`, jsonList);
 
-		console.log('startList');
-		const res = await axios.get('/SpcdeInfoService/get24DivisionsInfo', {
-			params: {
-				ServiceKey: apiKey,
-				solYear: calendarState.dateTime.year,
-				//solMonth:09,
-				//kst:0120,
-				//sunHardness:285,
-				numOfRows: 24,
-				//pageNo:1,
-				totalCount: 100,
-			},
-		});
-		const resultList = [].concat(res.data?.response?.body?.items?.item || []);
-		console.log('resultList', resultList);
+		// 	runCalendarState.change('publicdayList', calendarState.publicdayList.concat(jsonList));
+		// } catch (error) {
+		// 	console.log(error);
+		// }
+		await aaa({kind: 'seasonsday', year: thisYear});
+		// await aaa({kind: 'holiday', year: thisYear});
+	}, [thisYear]);
 
-		// runCalendarState.change(
-		// 	'seasondayList',
-		// 	calendarState.seasondayList.concat(
-		// 		resultList.map((item) => ({
-		// 			value: item.locdate,
-		// 			label: item.dateName,
-		// 		}))
-		// 	)
-		// );
-		runCalendarState.change('publicdayList', calendarState.publicdayList.concat(resultList));
-
-		console.log('startList2');
-		const res2 = await axios.get('/SpcdeInfoService/getRestDeInfo', {
-			params: {
-				ServiceKey: apiKey,
-				solYear: calendarState.dateTime.year,
-				// solMonth:09,
-				numOfRows: 24,
-			},
-		});
-		const resultList2 = [].concat(res2.data?.response?.body?.items?.item || []);
-		console.log('resultList2', resultList2);
-
-		// runCalendarState.change(
-		// 	'holidayList',
-		// 	calendarState.holidayList.concat(
-		// 		resultList2.map((item) => ({
-		// 			value: item.locdate,
-		// 			label: item.dateName,
-		// 		}))
-		// 	)
-		// );
-		runCalendarState.change('publicdayList', calendarState.publicdayList.concat(resultList2));
-
-		console.log('calendarState.publicdayList', calendarState.publicdayList);
-	}, [calendarState.dateTime.year]);
+	if (loading) return <div>로딩중..</div>;
 
 	return (
 		<div className="p-10">
-			<div className="text-3xl">{`${calendarState.dateTime.year} ${calendarState.dateTime.setLocale(weekLocale)[weekStringShot ? 'monthShort' : 'monthLong']}`}</div>
+			<div className="text-3xl">{`${thisYear} ${calendarState.dateTime.setLocale(weekLocale)[weekStringShot ? 'monthShort' : 'monthLong']}`}</div>
 			<div className="inline-block w-full">
 				<ToyCalendar height="h-[400px]" calendarData={calendarData} optionData={optionData} />
 			</div>

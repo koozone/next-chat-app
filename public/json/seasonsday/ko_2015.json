@@ -1,0 +1,38 @@
+{
+	"response": {
+		"header": {"resultCode": "00", "resultMsg": "NORMAL SERVICE."},
+		"body": {
+			"items": {
+				"item": [
+					{"dateKind": "03", "dateName": "소한", "isHoliday": "N", "kst": "0120 ", "locdate": 20150106, "seq": 1, "sunLongitude": 285},
+					{"dateKind": "03", "dateName": "대한", "isHoliday": "N", "kst": "1843 ", "locdate": 20150120, "seq": 1, "sunLongitude": 300},
+					{"dateKind": "03", "dateName": "입춘", "isHoliday": "N", "kst": "1258 ", "locdate": 20150204, "seq": 1, "sunLongitude": 315},
+					{"dateKind": "03", "dateName": "우수", "isHoliday": "N", "kst": "0850 ", "locdate": 20150219, "seq": 2, "sunLongitude": 330},
+					{"dateKind": "03", "dateName": "경칩", "isHoliday": "N", "kst": "0656 ", "locdate": 20150306, "seq": 1, "sunLongitude": 345},
+					{"dateKind": "03", "dateName": "춘분", "isHoliday": "N", "kst": "0745 ", "locdate": 20150321, "seq": 1, "sunLongitude": 0},
+					{"dateKind": "03", "dateName": "청명", "isHoliday": "N", "kst": "1139 ", "locdate": 20150405, "seq": 2, "sunLongitude": 15},
+					{"dateKind": "03", "dateName": "곡우", "isHoliday": "N", "kst": "1842 ", "locdate": 20150420, "seq": 2, "sunLongitude": 30},
+					{"dateKind": "03", "dateName": "입하", "isHoliday": "N", "kst": "0452 ", "locdate": 20150506, "seq": 1, "sunLongitude": 45},
+					{"dateKind": "03", "dateName": "소만", "isHoliday": "N", "kst": "1745 ", "locdate": 20150521, "seq": 2, "sunLongitude": 60},
+					{"dateKind": "03", "dateName": "망종", "isHoliday": "N", "kst": "0858 ", "locdate": 20150606, "seq": 2, "sunLongitude": 75},
+					{"dateKind": "03", "dateName": "하지", "isHoliday": "N", "kst": "0158 ", "locdate": 20150622, "seq": 1, "sunLongitude": 90},
+					{"dateKind": "03", "dateName": "소서", "isHoliday": "N", "kst": "1912 ", "locdate": 20150707, "seq": 1, "sunLongitude": 105},
+					{"dateKind": "03", "dateName": "대서", "isHoliday": "N", "kst": "1230 ", "locdate": 20150723, "seq": 1, "sunLongitude": 120},
+					{"dateKind": "03", "dateName": "입추", "isHoliday": "N", "kst": "0501 ", "locdate": 20150808, "seq": 1, "sunLongitude": 135},
+					{"dateKind": "03", "dateName": "처서", "isHoliday": "N", "kst": "1937 ", "locdate": 20150823, "seq": 1, "sunLongitude": 150},
+					{"dateKind": "03", "dateName": "백로", "isHoliday": "N", "kst": "0759 ", "locdate": 20150908, "seq": 1, "sunLongitude": 165},
+					{"dateKind": "03", "dateName": "추분", "isHoliday": "N", "kst": "1720 ", "locdate": 20150923, "seq": 1, "sunLongitude": 180},
+					{"dateKind": "03", "dateName": "한로", "isHoliday": "N", "kst": "2343 ", "locdate": 20151008, "seq": 2, "sunLongitude": 195},
+					{"dateKind": "03", "dateName": "상강", "isHoliday": "N", "kst": "0247 ", "locdate": 20151024, "seq": 2, "sunLongitude": 210},
+					{"dateKind": "03", "dateName": "입동", "isHoliday": "N", "kst": "0258 ", "locdate": 20151108, "seq": 1, "sunLongitude": 225},
+					{"dateKind": "03", "dateName": "소설", "isHoliday": "N", "kst": "0025 ", "locdate": 20151123, "seq": 1, "sunLongitude": 240},
+					{"dateKind": "03", "dateName": "대설", "isHoliday": "N", "kst": "1953 ", "locdate": 20151207, "seq": 1, "sunLongitude": 255},
+					{"dateKind": "03", "dateName": "동지", "isHoliday": "N", "kst": "1348 ", "locdate": 20151222, "seq": 1, "sunLongitude": 270}
+				]
+			},
+			"numOfRows": 100,
+			"pageNo": 1,
+			"totalCount": 24
+		}
+	}
+}

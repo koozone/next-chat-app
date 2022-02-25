@@ -165,7 +165,8 @@ export const ToyCalendar = (props) => {
 								<DayItem key={`dayNumber${index}`} className={classNames(mainBgColor, mainOpacity, 'relative justify-center items-center')}>
 									<div className={classNames(mainTextColor, 'absolute aspect-square w-9 ring-4 text-3xl text-center rounded-full')}>{mainDateTime.day}</div>
 									{/* {viewSubDate && <div className={classNames(subVisible, 'text-xs text-slate-400')}>{memorialday || subDateTime.toFormat('L.d')}</div>} */}
-									{viewSubDate && <div className={classNames(subTextColor, 'absolute left-1 right-1 translate-y-4 truncate whitespace-nowrap text-xs text-center')}>{holiday || seasonday || memorialday || subDateTime.toFormat('L.d')}</div>}
+									{/* {viewSubDate && <div className={classNames(subTextColor, 'absolute left-1 right-1 translate-y-4 truncate whitespace-nowrap text-xs text-center')}>{holiday || seasonday || memorialday || subDateTime.toFormat('L.d')}</div>} */}
+									{viewSubDate && <div className={classNames(subTextColor, 'absolute left-1 right-1 translate-y-4 truncate whitespace-nowrap text-xs text-center')}>{holiday || seasonday || memorialday}</div>}
 								</DayItem>
 							);
 						})}
