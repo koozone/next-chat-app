@@ -71,7 +71,11 @@ export const ToyCalendar = (props) => {
 		<div className={classNames(width, height, 'grid gap-px rounded-lg ring-2 ring-slate-500 bg-slate-300 overflow-hidden')} style={{gridTemplateColumns: getGridCols(), gridTemplateRows: getGridRows()}}>
 			{viewWeekString && (
 				<Fragment>
-					{viewWeekNumber && <div className="bg-white"></div>}
+					{viewWeekNumber && (
+						<DayItem className="bg-slate-100 justify-center items-center">
+							<div className="text-slate-400 text-sm">CW</div>
+						</DayItem>
+					)}
 					{[...Array(7)].map((dayVal, k) => {
 						const index = k;
 						const weekIndex = (index + startWeekDay) % 7;
@@ -106,30 +110,26 @@ export const ToyCalendar = (props) => {
 							const weekIndex = (index + startWeekDay) % 7;
 							const mainDateTime = firstDateTime.plus({days: index});
 							const subDateTime = mainDateTime.reconfigure({outputCalendar: subDateLocale});
-							// 기념일
-							const memorialday = '';
-							// const memorialday = memorialdayList
-							// 	.filter((item) => item.value == mainDateTime.toFormat('LLdd'))
-							// 	.map((item) => item.label)
-							// 	.join(', ');
-							// 절기
-							// const seasonday = seasondayList
-							// 	.filter((item) => item.value == mainDateTime.toFormat('yyyyLLdd'))
-							// 	.map((item) => item.label)
-							// 	.join(', ');
-							const seasonday = publicdayList
-								.filter((item) => item.dateKind == '03' && item.locdate == mainDateTime.toFormat('yyyyLLdd'))
-								.map((item) => item.dateName)
-								.join(', ');
 							// 공휴일
 							const holiday = publicdayList
 								.filter((item) => item.dateKind == '01' && item.locdate == mainDateTime.toFormat('yyyyLLdd'))
 								.map((item) => item.dateName)
 								.join(', ');
-							// const holiday = holidayList
-							// 	.filter((item) => item.value == mainDateTime.toFormat('yyyyLLdd'))
-							// 	.map((item) => item.label)
-							// 	.join(', ');
+							// 기념일
+							const memorialday = publicdayList
+								.filter((item) => item.dateKind == '02' && item.locdate == mainDateTime.toFormat('yyyyLLdd'))
+								.map((item) => item.dateName)
+								.join(', ');
+							// 24절기
+							const seasonday = publicdayList
+								.filter((item) => item.dateKind == '03' && item.locdate == mainDateTime.toFormat('yyyyLLdd'))
+								.map((item) => item.dateName)
+								.join(', ');
+							// 잡절
+							const sundryday = publicdayList
+								.filter((item) => item.dateKind == '04' && item.locdate == mainDateTime.toFormat('yyyyLLdd'))
+								.map((item) => item.dateName)
+								.join(', ');
 							// 오늘
 							const today = mainDateTime.toISODate() == nowDateTime.toISODate();
 							const mainBgColor = classNames({
@@ -157,16 +157,20 @@ export const ToyCalendar = (props) => {
 								visible: ['1', '5', '10', '15', '20', '25', '30'].includes(subDateTime.toFormat('d')) || memorialday,
 							});
 							const subTextColor = classNames({
-								'text-slate-400': !holiday,
 								'text-red-400': holiday,
+								'text-blue-400': !holiday && (seasonday || sundryday),
+								'text-slate-400': !holiday && !(seasonday || sundryday),
 							});
 
 							return (
 								<DayItem key={`dayNumber${index}`} className={classNames(mainBgColor, mainOpacity, 'relative justify-center items-center')}>
 									<div className={classNames(mainTextColor, 'absolute aspect-square w-9 ring-4 text-3xl text-center rounded-full')}>{mainDateTime.day}</div>
 									{/* {viewSubDate && <div className={classNames(subVisible, 'text-xs text-slate-400')}>{memorialday || subDateTime.toFormat('L.d')}</div>} */}
-									{/* {viewSubDate && <div className={classNames(subTextColor, 'absolute left-1 right-1 translate-y-4 truncate whitespace-nowrap text-xs text-center')}>{holiday || seasonday || memorialday || subDateTime.toFormat('L.d')}</div>} */}
-									{viewSubDate && <div className={classNames(subTextColor, 'absolute left-1 right-1 translate-y-4 truncate whitespace-nowrap text-xs text-center')}>{holiday || seasonday || memorialday}</div>}
+									{viewSubDate && (
+										<div className={classNames(subTextColor, 'absolute left-1 right-1 translate-y-4 truncate whitespace-nowrap text-xs text-center')}>
+											{holiday || sundryday || seasonday || memorialday || (['1', '5', '10', '15', '20', '25', '30'].includes(subDateTime.toFormat('d')) && subDateTime.toFormat('L.d'))}
+										</div>
+									)}
 								</DayItem>
 							);
 						})}
