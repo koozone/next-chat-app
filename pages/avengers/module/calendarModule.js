@@ -18,10 +18,11 @@ export const CalendarModule = () => {
 		viewWeekNumber: true,
 		viewWeekString: true,
 		weekStringShot: true,
-		viewSubDate: true,
+		// viewSubDate: true,
 		weekLocale: 'ko',
 		startWeekDay: 7,
 		weekEndRatio: 0.5,
+		subDateKind: ['01', '03'],
 	});
 	const [calendarState, runCalendarState] = calendarData;
 	const [optionState, runOptionState] = optionData;
@@ -30,10 +31,27 @@ export const CalendarModule = () => {
 	const viewWeekNumber = optionState.viewWeekNumber;
 	const viewWeekString = optionState.viewWeekString;
 	const weekStringShot = optionState.weekStringShot;
-	const viewSubDate = optionState.viewSubDate;
+	// const viewSubDate = optionState.viewSubDate;
 	const weekLocale = optionState.weekLocale;
 	const startWeekDay = optionState.startWeekDay;
 	const weekEndRatio = optionState.weekEndRatio;
+	const subDateKind = optionState.subDateKind;
+
+	const changeSubDateKind = useCallback(
+		(event) => {
+			const {name, checked} = event.currentTarget;
+
+			if (checked) {
+				runOptionState.change('subDateKind', subDateKind.concat(name));
+			} else {
+				runOptionState.change(
+					'subDateKind',
+					subDateKind.filter((item) => item != name)
+				);
+			}
+		},
+		[subDateKind]
+	);
 
 	useEffect(() => {
 		// 데이터 호출을 시도했던 년도면
@@ -44,26 +62,28 @@ export const CalendarModule = () => {
 		const apiKey = 'qw05m+7UYOhznr9HvHViWlahG8N7YCJnzY+uwSZueDRnjdW9g5rqpXjQ0S3vFki2K/3dZTczE07cwixOVpZH4A==';
 
 		[
-			// {value: 'holiday', label: '공휴일 정보 조회'},
-			// {value: 'seasonsday', label: '24절기 정보 조회'},
-			{value: 'getRestDeInfo', label: '공휴일 정보 조회'},
-			{value: 'getAnniversaryInfo', label: '기념일 정보 조회'},
-			{value: 'get24DivisionsInfo', label: '24절기 정보 조회'},
-			{value: 'getSundryDayInfo', label: '잡절 정보 조회'},
+			{value: 'holiday', label: '공휴일 정보 조회'},
+			{value: 'mamorialday', label: '기념일 정보 조회'},
+			{value: 'seasonsday', label: '24절기 정보 조회'},
+			{value: 'sundryday', label: '잡절 정보 조회'},
+			// {value: 'getRestDeInfo', label: '공휴일 정보 조회'},
+			// {value: 'getAnniversaryInfo', label: '기념일 정보 조회'},
+			// {value: 'get24DivisionsInfo', label: '24절기 정보 조회'},
+			// {value: 'getSundryDayInfo', label: '잡절 정보 조회'},
 		].forEach(async ({value}) => {
 			try {
 				setLoading(true);
 
 				console.log(`${value} ${thisYear} 시도`);
-				// const result = await axios.get(`/json/${value}/ko_${thisYear}.json`);
-				const result = await axios.get(`/SpcdeInfoService/${value}`, {
-					params: {
-						ServiceKey: apiKey,
-						solYear: thisYear,
-						numOfRows: 100,
-						_type: 'json',
-					},
-				});
+				const result = await axios.get(`/json/${value}/ko_${thisYear}.json`);
+				// const result = await axios.get(`/SpcdeInfoService/${value}`, {
+				// 	params: {
+				// 		ServiceKey: apiKey,
+				// 		solYear: thisYear,
+				// 		numOfRows: 100,
+				// 		_type: 'json',
+				// 	},
+				// });
 				const jsonList = [].concat(result.data?.response?.body?.items?.item || []);
 				console.log(`${value} ${thisYear} 결과`, jsonList);
 
@@ -130,6 +150,9 @@ export const CalendarModule = () => {
 				/>
 			</div>
 			<div className="p-5 space-x-3 flex justify-center items-center flex-wrap ring-2 ring-gray-500 rounded-lg">
+				<Toggle theme="default-IL-md-md-md::danger-IL-md-md-md" text="공휴일" name="01" checked={subDateKind.includes('01')} onChange={changeSubDateKind} />
+				<Toggle theme="default-IL-md-md-md::danger-IL-md-md-md" text="24절기" name="03" checked={subDateKind.includes('03')} onChange={changeSubDateKind} />
+				<Toggle theme="default-IL-md-md-md::danger-IL-md-md-md" text="음력" name="05" checked={subDateKind.includes('05')} onChange={changeSubDateKind} />
 				<Toggle
 					theme="default-IL-md-md-md::danger-IL-md-md-md"
 					icon="bxs-chevrons-right::bx-leaf"
@@ -146,14 +169,14 @@ export const CalendarModule = () => {
 						runOptionState.change('viewWeekString', !viewWeekString);
 					}}
 				/>
-				<Toggle
+				{/* <Toggle
 					theme="default-IL-md-md-md::danger-IL-md-md-md"
 					icon="bxs-chevrons-right::bx-leaf"
 					checked={viewSubDate}
 					onChange={() => {
 						runOptionState.change('viewSubDate', !viewSubDate);
 					}}
-				/>
+				/> */}
 				<SelectBox2
 					width="w-[100px]"
 					direction={false}

@@ -3,14 +3,14 @@ import {DateTime, Info} from 'luxon';
 import {Fragment, useCallback} from 'react';
 import {UseData} from './../avengers/vision';
 
-const DayItem = (props) => {
-	const {children, className} = props;
+// const DayItem = (props) => {
+// 	const {children, className} = props;
 
-	return (
-		// <div className={classNames(className, '-mr-px -mt-px border border-red-400')}>
-		<div className={classNames(className, 'px-[2px] flex flex-col')}>{children}</div>
-	);
-};
+// 	return (
+// 		// <div className={classNames(className, '-mr-px -mt-px border border-red-400')}>
+// 		<div className={classNames(className, 'px-[2px] flex flex-col')}>{children}</div>
+// 	);
+// };
 
 export const ToyCalendar = (props) => {
 	const {width = 'w-full', height = 'h-[500px]', calendarData, optionData} = props;
@@ -20,7 +20,7 @@ export const ToyCalendar = (props) => {
 	const memorialdayList = calendarState.memorialdayList || [];
 	const seasondayList = calendarState.seasondayList || [];
 	const holidayList = calendarState.holidayList || [];
-	const publicdayList = calendarState.publicdayList || [];
+	let publicdayList = calendarState.publicdayList || [];
 	// const startWeekDay = 7; // 월요일(1), 화요일(2)...일요일(7)
 	// const startWeekDay = optionState.startWeekDay?.map((val) => val.value)[0]; // 월요일(1), 화요일(2)...일요일(7)
 	const startWeekDay = optionState.startWeekDay; // 월요일(1), 화요일(2)...일요일(7)
@@ -30,8 +30,14 @@ export const ToyCalendar = (props) => {
 	// const weekLocale = 'ja';
 	// const weekLocale = optionState.weekLocale?.map((val) => val.value)[0];
 	const weekLocale = optionState.weekLocale;
-	const viewSubDate = optionState.viewSubDate;
 	const weekEndRatio = optionState.weekEndRatio;
+	// 표기 우선순위 적용한 특일 값
+	let subDateKind = [];
+	if (optionState.subDateKind.includes('01')) subDateKind = subDateKind.concat('01');
+	if (optionState.subDateKind.includes('03')) subDateKind = subDateKind.concat('03');
+	if (optionState.subDateKind.includes('05')) subDateKind = subDateKind.concat('05');
+	// const viewSubDate = optionState.viewSubDate;
+	const viewSubDate = subDateKind.length ? true : false;
 	const subDateLocale = 'chinese';
 	const colList = ['30px', '1fr', '1fr', '1fr', '1fr', '1fr', `${weekEndRatio}fr`, `${weekEndRatio}fr`];
 	const rowList = ['40px', '1fr', '1fr', '1fr', '1fr', '1fr', '1fr'];
@@ -72,9 +78,9 @@ export const ToyCalendar = (props) => {
 			{viewWeekString && (
 				<Fragment>
 					{viewWeekNumber && (
-						<DayItem className="bg-slate-100 justify-center items-center">
+						<div className="bg-slate-100 flex justify-center items-center">
 							<div className="text-slate-400 text-sm">CW</div>
-						</DayItem>
+						</div>
 					)}
 					{[...Array(7)].map((dayVal, k) => {
 						const index = k;
@@ -88,9 +94,9 @@ export const ToyCalendar = (props) => {
 						});
 
 						return (
-							<DayItem key={`weekString${index}`} className={classNames(mainBgColor, 'justify-center items-center')}>
+							<div key={`weekString${index}`} className={classNames(mainBgColor, 'flex justify-center items-center')}>
 								<div className={classNames(mainTextColor, 'text-md')}>{mainDateTime.setLocale(weekLocale)[weekStringShot ? 'weekdayShort' : 'weekdayLong']}</div>
-							</DayItem>
+							</div>
 						);
 					})}
 				</Fragment>
@@ -101,48 +107,68 @@ export const ToyCalendar = (props) => {
 				return (
 					<Fragment key={`weekNumber${i}`}>
 						{viewWeekNumber && (
-							<DayItem className="bg-slate-100 justify-center items-center">
+							<div className="bg-slate-100 flex justify-center items-center">
 								<div className="text-slate-400 text-sm">{`${weekDateTime.weekNumber}`}</div>
-							</DayItem>
+							</div>
 						)}
 						{[...Array(7)].map((dayVal, k) => {
 							const index = k + i * 7;
 							const weekIndex = (index + startWeekDay) % 7;
 							const mainDateTime = firstDateTime.plus({days: index});
+							const mainFormat = mainDateTime.toFormat('yyyyLLdd');
 							const subDateTime = mainDateTime.reconfigure({outputCalendar: subDateLocale});
-							// 공휴일
-							const holiday = publicdayList
-								.filter((item) => item.dateKind == '01' && item.locdate == mainDateTime.toFormat('yyyyLLdd'))
-								.map((item) => item.dateName)
-								.join(', ');
-							// 기념일
-							const memorialday = publicdayList
-								.filter((item) => item.dateKind == '02' && item.locdate == mainDateTime.toFormat('yyyyLLdd'))
-								.map((item) => item.dateName)
-								.join(', ');
-							// 24절기
-							const seasonday = publicdayList
-								.filter((item) => item.dateKind == '03' && item.locdate == mainDateTime.toFormat('yyyyLLdd'))
-								.map((item) => item.dateName)
-								.join(', ');
-							// 잡절
-							const sundryday = publicdayList
-								.filter((item) => item.dateKind == '04' && item.locdate == mainDateTime.toFormat('yyyyLLdd'))
-								.map((item) => item.dateName)
-								.join(', ');
-							// 오늘
-							const today = mainDateTime.toISODate() == nowDateTime.toISODate();
+							// // 공휴일
+							// const holiday = publicdayList
+							// 	.filter((item) => item.dateKind == '01' && item.locdate == mainFormat)
+							// 	.map((item) => item.dateName)
+							// 	.join(', ');
+							// // 기념일
+							// const memorialday = publicdayList
+							// 	.filter((item) => item.dateKind == '02' && item.locdate == mainFormat)
+							// 	.map((item) => item.dateName)
+							// 	.join(', ');
+							// // 24절기
+							// const seasonday = publicdayList
+							// 	.filter((item) => item.dateKind == '03' && item.locdate == mainFormat)
+							// 	.map((item) => item.dateName)
+							// 	.join(', ');
+							// // 잡절
+							// const sundryday = publicdayList
+							// 	.filter((item) => item.dateKind == '04' && item.locdate == mainFormat)
+							// 	.map((item) => item.dateName)
+							// 	.join(', ');
+
+							// 음력 정보 추가
+							if (['1', '5', '10', '15', '20', '25', '30'].includes(subDateTime.toFormat('d'))) {
+								publicdayList = publicdayList.concat({dateKind: '05', dateName: subDateTime.toFormat('L.d'), locdate: mainFormat});
+							}
+
+							let allList = []; // 해당일 모든 일정
+							let viewList = []; // 해당일 표기 일정
+
+							// 특일 우선순위대로 정보 발췌
+							subDateKind.forEach((element) => {
+								let filterItem = publicdayList.filter((item) => item.dateKind == element && item.locdate == mainFormat);
+
+								allList = allList.concat(filterItem);
+								if (!viewList.length) viewList = viewList.concat(filterItem);
+							});
+
+							// 오늘여부
+							const isToday = mainDateTime.toISODate() == nowDateTime.toISODate();
+							// 휴일여부
+							const isHoliday = viewList.filter((item) => item.isHoliday == 'Y').length ? true : false;
 							const mainBgColor = classNames({
 								'bg-red-50': weekIndex == 0,
 								'bg-blue-50': weekIndex == 6,
 								'bg-white': !(weekIndex == 6 || weekIndex == 0),
 							});
 							const mainTextColor = classNames({
-								'ring-slate-500 bg-slate-500 text-white': today,
-								'ring-transparent bg-transparent': !today,
-								'text-red-500': !today && (weekIndex == 0 || holiday),
-								'text-blue-500': !today && weekIndex == 6,
-								'text-slate-500': !today && !(weekIndex == 6 || weekIndex == 0 || holiday),
+								'ring-slate-500 bg-slate-500 text-white': isToday,
+								'ring-transparent bg-transparent': !isToday,
+								'text-red-500': !isToday && (weekIndex == 0 || isHoliday),
+								'text-blue-500': !isToday && weekIndex == 6,
+								'text-slate-500': !isToday && !(weekIndex == 6 || weekIndex == 0 || isHoliday),
 								'-translate-y-2': viewSubDate,
 								'translate-y-0': !viewSubDate,
 							});
@@ -152,26 +178,26 @@ export const ToyCalendar = (props) => {
 								'brightness-90': mainDateTime.month != viewDateTime.month,
 								'brightness-100': mainDateTime.month == viewDateTime.month,
 							});
-							const subVisible = classNames({
-								invisible: !(['1', '5', '10', '15', '20', '25', '30'].includes(subDateTime.toFormat('d')) || memorialday),
-								visible: ['1', '5', '10', '15', '20', '25', '30'].includes(subDateTime.toFormat('d')) || memorialday,
-							});
+							// const subVisible = classNames({
+							// 	invisible: !(['1', '5', '10', '15', '20', '25', '30'].includes(subDateTime.toFormat('d')) || memorialday),
+							// 	visible: ['1', '5', '10', '15', '20', '25', '30'].includes(subDateTime.toFormat('d')) || memorialday,
+							// });
 							const subTextColor = classNames({
-								'text-red-400': holiday,
-								'text-blue-400': !holiday && (seasonday || sundryday),
-								'text-slate-400': !holiday && !(seasonday || sundryday),
+								'text-red-400': isHoliday,
+								'text-slate-400': !isHoliday,
 							});
 
 							return (
-								<DayItem key={`dayNumber${index}`} className={classNames(mainBgColor, mainOpacity, 'relative justify-center items-center')}>
+								<div key={`dayNumber${index}`} className={classNames(mainBgColor, mainOpacity, 'relative flex flex-col justify-center items-center')}>
 									<div className={classNames(mainTextColor, 'absolute aspect-square w-9 ring-4 text-3xl text-center rounded-full')}>{mainDateTime.day}</div>
 									{/* {viewSubDate && <div className={classNames(subVisible, 'text-xs text-slate-400')}>{memorialday || subDateTime.toFormat('L.d')}</div>} */}
 									{viewSubDate && (
 										<div className={classNames(subTextColor, 'absolute left-1 right-1 translate-y-4 truncate whitespace-nowrap text-xs text-center')}>
-											{holiday || sundryday || seasonday || memorialday || (['1', '5', '10', '15', '20', '25', '30'].includes(subDateTime.toFormat('d')) && subDateTime.toFormat('L.d'))}
+											{/* {holiday || sundryday || seasonday || memorialday || (['1', '5', '10', '15', '20', '25', '30'].includes(subDateTime.toFormat('d')) && subDateTime.toFormat('L.d'))} */}
+											{viewList.map((item) => item.dateName).join(', ')}
 										</div>
 									)}
-								</DayItem>
+								</div>
 							);
 						})}
 					</Fragment>
