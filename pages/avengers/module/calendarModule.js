@@ -53,12 +53,35 @@ export const CalendarModule = () => {
 		[subDateKind]
 	);
 
-	useEffect(() => {
+	const newList = [...calendarState.publicdayList];
+
+	// 구글 calendar 테스트
+	useEffect(async () => {
+		// const newList = [...calendarState.publicdayList];
+
+		const googleKey = 'AIzaSyA7V880ZtU-8xnFehGKdMAYF0Y8zscEzJA';
+		// const calendarID = 'qduatr3seur835pk4aolok2900@group.calendar.google.com';
+		// const calendarID = 'ko.south_korea#holiday@group.v.calendar.google.com';
+		const calendarID = 'gmakoo@gmail.com';
+		const minTime = `${thisYear}-01-01T00:00:00Z`;
+		const maxTime = `${thisYear}-12-31T00:00:00Z`;
+
+		const result = await axios.get(`https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(calendarID)}/events?orderBy=startTime&singleEvents=true&timeMax=${maxTime}&timeMin=${minTime}&key=${googleKey}`);
+		const jsonList = [].concat(result.data?.items || []);
+		console.log(`google ${thisYear} 결과`, jsonList);
+
+		newList = newList.concat(jsonList);
+		console.log(`publicdayList`, newList);
+
+		runCalendarState.change('publicdayList', newList);
+	}, []);
+
+	useEffect(async () => {
 		// 데이터 호출을 시도했던 년도면
 		if (calendarState.doneYearList.includes(thisYear)) return;
 		runCalendarState.change('doneYearList', [...calendarState.doneYearList, thisYear]);
 
-		const newList = [...calendarState.publicdayList];
+		// const newList = [...calendarState.publicdayList];
 		const apiKey = 'qw05m+7UYOhznr9HvHViWlahG8N7YCJnzY+uwSZueDRnjdW9g5rqpXjQ0S3vFki2K/3dZTczE07cwixOVpZH4A==';
 
 		[
