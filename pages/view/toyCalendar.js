@@ -1,3 +1,4 @@
+import axios from 'axios';
 import classNames from 'classnames';
 import {DateTime, Info} from 'luxon';
 import {Fragment, useCallback} from 'react';
@@ -76,6 +77,65 @@ export const ToyCalendar = (props) => {
 
 		return [...weekColList, ...dayColList].join(' ');
 	}, [startWeekDay, viewWeekNumber, weekEndRatio]);
+
+	// const gapi = window.gapi;
+	const CLIENT_ID = '7342048109-qrvboq0r7ac2uv7g3btugalg1casg6gc.apps.googleusercontent.com';
+	const API_KEY = 'AIzaSyA7V880ZtU-8xnFehGKdMAYF0Y8zscEzJA';
+	const DISCOVERY_DOCS = ['https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest'];
+	const SCOPES = 'https://www.googleapis.com/auth/calendar.events';
+
+	const fetchGapi = async () => {
+		const gapi = await import('gapi-script').then((pack) => pack.gapi);
+
+		gapi.load('client:auth2', () => {
+			gapi.client.init({
+				apiKey: API_KEY,
+				clientId: CLIENT_ID,
+				discoveryDocs: DISCOVERY_DOCS,
+				scope: SCOPES,
+			});
+
+			gapi.client.load('calendar', 'v3', () => console.log('bam!'));
+
+			gapi.auth2
+				.getAuthInstance()
+				.signIn()
+				.then(() => {
+					const event = {
+						summary: 'Awesome Event!',
+						location: '800 Howard St., San Francisco, CA 94103',
+						description: 'Really great refreshments',
+						start: {
+							dateTime: `2022-03-04T00:00:00Z`,
+							timeZone: 'America/Los_Angeles',
+						},
+						end: {
+							dateTime: `2022-03-06T00:00:00Z`,
+							timeZone: 'America/Los_Angeles',
+						},
+						recurrence: ['RRULE:FREQ=DAILY;COUNT=2'],
+						attendees: [{email: 'lpage@example.com'}, {email: 'sbrin@example.com'}],
+						reminders: {
+							useDefault: false,
+							overrides: [
+								{method: 'email', minutes: 24 * 60},
+								{method: 'popup', minutes: 10},
+							],
+						},
+					};
+
+					const request = window.gapi.client.calendar.events.insert({
+						calendarId: 'primary',
+						resource: event,
+					});
+
+					request.execute((event) => {
+						console.log(event);
+						window.open(event.htmlLink);
+					});
+				});
+		});
+	};
 
 	return (
 		<div className={classNames(width, height, 'grid gap-px rounded-lg ring-2 ring-slate-500 bg-slate-300 overflow-hidden')} style={{gridTemplateColumns: getGridCols(), gridTemplateRows: getGridRows()}}>
@@ -198,7 +258,9 @@ export const ToyCalendar = (props) => {
 
 							return (
 								<div key={`dayNumber${index}`} className={classNames(mainBgColor, mainOpacity, 'relative flex flex-col justify-center items-center')}>
-									<div className={classNames(mainTextColor, 'absolute aspect-square w-9 ring-4 text-3xl text-center rounded-full')}>{mainDateTime.day}</div>
+									<div className={classNames(mainTextColor, 'absolute aspect-square w-9 ring-4 text-3xl text-center rounded-full')} onClick={fetchGapi}>
+										{mainDateTime.day}
+									</div>
 									{/* {viewSubDate && <div className={classNames(subVisible, 'text-xs text-slate-400')}>{memorialday || subDateTime.toFormat('L.d')}</div>} */}
 									{viewSubDate && (
 										<div className={classNames(subTextColor, 'absolute left-1 right-1 top-1/2 translate-y-2 truncate whitespace-nowrap text-xs text-center')}>
@@ -215,8 +277,10 @@ export const ToyCalendar = (props) => {
 									} */}
 									{viewSubDate && (
 										<div className="absolute left-1 right-1 top-1/2 translate-y-2 list-disc list-inside -space-y-[5px] text-xs text-center">
-											{allPrivateList.map((item) => (
-												<div className="truncate whitespace-nowrap marker:text-sky-400 text-slate-400 before:content-['●_'] before:text-[0.5rem] before:text-red-500 before:align-middle">{item.summary}</div>
+											{allPrivateList.map((item, index) => (
+												<div key={`google${index}`} className="truncate whitespace-nowrap marker:text-sky-400 text-slate-400 before:content-['●_'] before:text-[0.5rem] before:text-red-500 before:align-middle">
+													{item.summary}
+												</div>
 											))}
 										</div>
 									)}

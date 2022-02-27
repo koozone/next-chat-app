@@ -197,6 +197,8 @@ export const CalendarModule = () => {
 						runOptionState.change('fullLunarDate', !fullLunarDate);
 					}}
 				/>
+			</div>
+			<div className="p-5 space-x-3 flex justify-center items-center flex-wrap ring-2 ring-gray-500 rounded-lg">
 				<Toggle
 					theme="default-IL-md-md-md::danger-IL-md-md-md"
 					icon="bxs-chevrons-right::bx-leaf"
