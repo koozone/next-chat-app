@@ -13,21 +13,23 @@ export const CalendarModule = () => {
 		// dateTime: DateTime.now(),
 		doneYearList: [],
 		publicdayList: [],
+		privatedayList: [],
 	});
 	const optionData = UseData({
 		viewWeekNumber: true,
 		viewWeekString: true,
 		weekStringShot: true,
 		// viewSubDate: true,
+		fullLunarDate: false,
 		weekLocale: 'ko',
 		startWeekDay: 7,
 		weekEndRatio: 0.5,
-		subDateKind: ['01', '03'],
+		subDateKind: ['01', '03', '04', '02'],
 	});
 	const [calendarState, runCalendarState] = calendarData;
 	const [optionState, runOptionState] = optionData;
 
-	const thisYear = calendarState.dateTime.year;
+	const viewYear = calendarState.dateTime.year;
 	const viewWeekNumber = optionState.viewWeekNumber;
 	const viewWeekString = optionState.viewWeekString;
 	const weekStringShot = optionState.weekStringShot;
@@ -36,6 +38,7 @@ export const CalendarModule = () => {
 	const startWeekDay = optionState.startWeekDay;
 	const weekEndRatio = optionState.weekEndRatio;
 	const subDateKind = optionState.subDateKind;
+	const fullLunarDate = optionState.fullLunarDate;
 
 	const changeSubDateKind = useCallback(
 		(event) => {
@@ -53,35 +56,41 @@ export const CalendarModule = () => {
 		[subDateKind]
 	);
 
-	const newList = [...calendarState.publicdayList];
-
 	// 구글 calendar 테스트
 	useEffect(async () => {
-		// const newList = [...calendarState.publicdayList];
+		const newList = [...calendarState.privatedayList];
 
 		const googleKey = 'AIzaSyA7V880ZtU-8xnFehGKdMAYF0Y8zscEzJA';
 		// const calendarID = 'qduatr3seur835pk4aolok2900@group.calendar.google.com';
 		// const calendarID = 'ko.south_korea#holiday@group.v.calendar.google.com';
 		const calendarID = 'gmakoo@gmail.com';
-		const minTime = `${thisYear}-01-01T00:00:00Z`;
-		const maxTime = `${thisYear}-12-31T00:00:00Z`;
+		const minTime = `${viewYear}-01-01T00:00:00Z`;
+		const maxTime = `${viewYear}-12-31T23:59:59Z`;
 
-		const result = await axios.get(`https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(calendarID)}/events?orderBy=startTime&singleEvents=true&timeMax=${maxTime}&timeMin=${minTime}&key=${googleKey}`);
+		const result = await axios.get(`/calendars/${encodeURIComponent(calendarID)}/events`, {
+			params: {
+				key: googleKey,
+				// timeMax: maxTime,
+				// timeMin: minTime,
+				// orderBy: 'startTime',
+				// singleEvents: 'true',
+			},
+		});
 		const jsonList = [].concat(result.data?.items || []);
-		console.log(`google ${thisYear} 결과`, jsonList);
+		console.log(`google ${viewYear} 결과`, jsonList);
 
 		newList = newList.concat(jsonList);
-		console.log(`publicdayList`, newList);
+		console.log(`privatedayList`, newList);
 
-		runCalendarState.change('publicdayList', newList);
+		runCalendarState.change('privatedayList', newList);
 	}, []);
 
 	useEffect(async () => {
 		// 데이터 호출을 시도했던 년도면
-		if (calendarState.doneYearList.includes(thisYear)) return;
-		runCalendarState.change('doneYearList', [...calendarState.doneYearList, thisYear]);
+		if (calendarState.doneYearList.includes(viewYear)) return;
+		runCalendarState.change('doneYearList', [...calendarState.doneYearList, viewYear]);
 
-		// const newList = [...calendarState.publicdayList];
+		const newList = [...calendarState.publicdayList];
 		const apiKey = 'qw05m+7UYOhznr9HvHViWlahG8N7YCJnzY+uwSZueDRnjdW9g5rqpXjQ0S3vFki2K/3dZTczE07cwixOVpZH4A==';
 
 		[
@@ -97,18 +106,18 @@ export const CalendarModule = () => {
 			try {
 				setLoading(true);
 
-				console.log(`${value} ${thisYear} 시도`);
-				const result = await axios.get(`/json/${value}/ko_${thisYear}.json`);
+				console.log(`${value} ${viewYear} 시도`);
+				const result = await axios.get(`/json/${value}/ko_${viewYear}.json`);
 				// const result = await axios.get(`/SpcdeInfoService/${value}`, {
 				// 	params: {
 				// 		ServiceKey: apiKey,
-				// 		solYear: thisYear,
+				// 		solYear: viewYear,
 				// 		numOfRows: 100,
 				// 		_type: 'json',
 				// 	},
 				// });
 				const jsonList = [].concat(result.data?.response?.body?.items?.item || []);
-				console.log(`${value} ${thisYear} 결과`, jsonList);
+				console.log(`${value} ${viewYear} 결과`, jsonList);
 
 				newList = newList.concat(jsonList);
 				console.log(`publicdayList`, newList);
@@ -119,13 +128,15 @@ export const CalendarModule = () => {
 			}
 			setLoading(false);
 		});
-	}, [thisYear]);
+	}, [viewYear]);
 
-	if (loading) return <div>로딩중..</div>;
+	// if (loading) return <div>로딩중..</div>;
 
 	return (
 		<div className="p-10">
-			<div className="text-3xl">{`${thisYear} ${calendarState.dateTime.setLocale(weekLocale)[weekStringShot ? 'monthShort' : 'monthLong']}`}</div>
+			{loading && <div className="absolute left-0 top-0">로딩중..</div>}
+
+			<div className="text-3xl">{`${viewYear} ${calendarState.dateTime.setLocale(weekLocale)[weekStringShot ? 'monthShort' : 'monthLong']}`}</div>
 			<div className="inline-block w-full">
 				<ToyCalendar height="h-[400px]" calendarData={calendarData} optionData={optionData} />
 			</div>
@@ -175,7 +186,17 @@ export const CalendarModule = () => {
 			<div className="p-5 space-x-3 flex justify-center items-center flex-wrap ring-2 ring-gray-500 rounded-lg">
 				<Toggle theme="default-IL-md-md-md::danger-IL-md-md-md" text="공휴일" name="01" checked={subDateKind.includes('01')} onChange={changeSubDateKind} />
 				<Toggle theme="default-IL-md-md-md::danger-IL-md-md-md" text="24절기" name="03" checked={subDateKind.includes('03')} onChange={changeSubDateKind} />
+				<Toggle theme="default-IL-md-md-md::danger-IL-md-md-md" text="잡절" name="04" checked={subDateKind.includes('04')} onChange={changeSubDateKind} />
+				<Toggle theme="default-IL-md-md-md::danger-IL-md-md-md" text="기념일" name="02" checked={subDateKind.includes('02')} onChange={changeSubDateKind} />
 				<Toggle theme="default-IL-md-md-md::danger-IL-md-md-md" text="음력" name="05" checked={subDateKind.includes('05')} onChange={changeSubDateKind} />
+				<Toggle
+					theme="default-IL-md-md-md::danger-IL-md-md-md"
+					icon="bxs-chevrons-right::bx-leaf"
+					checked={fullLunarDate}
+					onChange={() => {
+						runOptionState.change('fullLunarDate', !fullLunarDate);
+					}}
+				/>
 				<Toggle
 					theme="default-IL-md-md-md::danger-IL-md-md-md"
 					icon="bxs-chevrons-right::bx-leaf"

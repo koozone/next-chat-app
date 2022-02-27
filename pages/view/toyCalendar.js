@@ -21,6 +21,7 @@ export const ToyCalendar = (props) => {
 	const seasondayList = calendarState.seasondayList || [];
 	const holidayList = calendarState.holidayList || [];
 	let publicdayList = calendarState.publicdayList || [];
+	let privatedayList = calendarState.privatedayList || [];
 	// const startWeekDay = 7; // 월요일(1), 화요일(2)...일요일(7)
 	// const startWeekDay = optionState.startWeekDay?.map((val) => val.value)[0]; // 월요일(1), 화요일(2)...일요일(7)
 	const startWeekDay = optionState.startWeekDay; // 월요일(1), 화요일(2)...일요일(7)
@@ -35,9 +36,12 @@ export const ToyCalendar = (props) => {
 	let subDateKind = [];
 	if (optionState.subDateKind.includes('01')) subDateKind = subDateKind.concat('01');
 	if (optionState.subDateKind.includes('03')) subDateKind = subDateKind.concat('03');
+	if (optionState.subDateKind.includes('04')) subDateKind = subDateKind.concat('04');
+	if (optionState.subDateKind.includes('02')) subDateKind = subDateKind.concat('02');
 	if (optionState.subDateKind.includes('05')) subDateKind = subDateKind.concat('05');
 	// const viewSubDate = optionState.viewSubDate;
 	const viewSubDate = subDateKind.length ? true : false;
+	const fullLunarDate = optionState.fullLunarDate;
 	const subDateLocale = 'chinese';
 	const colList = ['30px', '1fr', '1fr', '1fr', '1fr', '1fr', `${weekEndRatio}fr`, `${weekEndRatio}fr`];
 	const rowList = ['40px', '1fr', '1fr', '1fr', '1fr', '1fr', '1fr'];
@@ -139,19 +143,20 @@ export const ToyCalendar = (props) => {
 							// 	.join(', ');
 
 							// 음력 정보 추가
-							if (['1', '5', '10', '15', '20', '25', '30'].includes(subDateTime.toFormat('d'))) {
+							if (fullLunarDate || ['1', '5', '10', '15', '20', '25', '30'].includes(subDateTime.toFormat('d'))) {
 								publicdayList = publicdayList.concat({dateKind: '05', dateName: subDateTime.toFormat('L.d'), locdate: mainFormat});
 							}
 
-							let allList = []; // 해당일 모든 일정
-							let viewList = []; // 해당일 표기 일정
-
+							const allPrivateList = privatedayList.filter((item) => item.start?.dateTime?.indexOf(mainDateTime.toFormat('yyyy-LL-dd')) > -1 || item.start.date == mainDateTime.toFormat('yyyy-LL-dd'));
+							// 해당일 모든 일정
+							const allList = publicdayList.filter((item) => item.locdate == mainFormat);
+							// 해당일 표기 일정
+							let viewList = [];
 							// 특일 우선순위대로 정보 발췌
 							subDateKind.forEach((element) => {
-								let filterItem = publicdayList.filter((item) => item.dateKind == element && item.locdate == mainFormat);
-
-								allList = allList.concat(filterItem);
-								if (!viewList.length) viewList = viewList.concat(filterItem);
+								if (!viewList.length) {
+									viewList = viewList.concat(allList.filter((item) => item.dateKind == element));
+								}
 							});
 
 							// 오늘여부
@@ -184,6 +189,10 @@ export const ToyCalendar = (props) => {
 							// });
 							const subTextColor = classNames({
 								'text-red-400': isHoliday,
+								'text-indigo-400': !isHoliday && viewList.filter((item) => item.dateKind == '01').length,
+								'text-blue-400': !isHoliday && viewList.filter((item) => item.dateKind == '03').length,
+								'text-sky-400': !isHoliday && viewList.filter((item) => item.dateKind == '04').length,
+								'text-green-400': !isHoliday && viewList.filter((item) => item.dateKind == '02').length,
 								'text-slate-400': !isHoliday,
 							});
 
@@ -192,9 +201,23 @@ export const ToyCalendar = (props) => {
 									<div className={classNames(mainTextColor, 'absolute aspect-square w-9 ring-4 text-3xl text-center rounded-full')}>{mainDateTime.day}</div>
 									{/* {viewSubDate && <div className={classNames(subVisible, 'text-xs text-slate-400')}>{memorialday || subDateTime.toFormat('L.d')}</div>} */}
 									{viewSubDate && (
-										<div className={classNames(subTextColor, 'absolute left-1 right-1 translate-y-4 truncate whitespace-nowrap text-xs text-center')}>
+										<div className={classNames(subTextColor, 'absolute left-1 right-1 top-1/2 translate-y-2 truncate whitespace-nowrap text-xs text-center')}>
 											{/* {holiday || sundryday || seasonday || memorialday || (['1', '5', '10', '15', '20', '25', '30'].includes(subDateTime.toFormat('d')) && subDateTime.toFormat('L.d'))} */}
 											{viewList.map((item) => item.dateName).join(', ')}
+										</div>
+									)}
+									{/* {
+										<ul role="list" className="absolute left-1 right-1 top-1/2 translate-y-2 list-disc list-inside -space-y-[5px] text-xs text-center">
+											{allPrivateList.map((item) => (
+												<li className="truncate whitespace-nowrap marker:text-sky-400 text-slate-400">{item.summary}</li>
+											))}
+										</ul>
+									} */}
+									{viewSubDate && (
+										<div className="absolute left-1 right-1 top-1/2 translate-y-2 list-disc list-inside -space-y-[5px] text-xs text-center">
+											{allPrivateList.map((item) => (
+												<div className="truncate whitespace-nowrap marker:text-sky-400 text-slate-400 before:content-['●_'] before:text-[0.5rem] before:text-red-500 before:align-middle">{item.summary}</div>
+											))}
 										</div>
 									)}
 								</div>

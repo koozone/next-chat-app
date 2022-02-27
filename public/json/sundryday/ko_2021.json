@@ -1,0 +1,21 @@
+{
+	"response": {
+		"header": {"resultCode": "00", "resultMsg": "NORMAL SERVICE."},
+		"body": {
+			"items": {
+				"item": [
+					{"dateKind": "04", "dateName": "정월대보름", "isHoliday": "N", "locdate": 20210226, "seq": 1},
+					{"dateKind": "04", "dateName": "한식", "isHoliday": "N", "locdate": 20210405, "seq": 2},
+					{"dateKind": "04", "dateName": "단오", "isHoliday": "N", "locdate": 20210614, "seq": 1},
+					{"dateKind": "04", "dateName": "초복", "isHoliday": "N", "locdate": 20210711, "seq": 2},
+					{"dateKind": "04", "dateName": "중복", "isHoliday": "N", "locdate": 20210721, "seq": 1},
+					{"dateKind": "04", "dateName": "말복", "isHoliday": "N", "locdate": 20210810, "seq": 1},
+					{"dateKind": "04", "dateName": "칠석", "isHoliday": "N", "locdate": 20210814, "seq": 1}
+				]
+			},
+			"numOfRows": 100,
+			"pageNo": 1,
+			"totalCount": 7
+		}
+	}
+}

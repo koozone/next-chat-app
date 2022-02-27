@@ -1,0 +1,56 @@
+{
+	"response": {
+		"header": {"resultCode": "00", "resultMsg": "NORMAL SERVICE."},
+		"body": {
+			"items": {
+				"item": [
+					{"dateKind": "02", "dateName": "납세자의 날", "isHoliday": "N", "locdate": 20060303, "seq": 1},
+					{"dateKind": "02", "dateName": "상공의 날", "isHoliday": "N", "locdate": 20060315, "seq": 1},
+					{"dateKind": "02", "dateName": "물의 날", "isHoliday": "N", "locdate": 20060322, "seq": 1},
+					{"dateKind": "02", "dateName": "기상의 날", "isHoliday": "N", "locdate": 20060323, "seq": 1},
+					{"dateKind": "02", "dateName": "향토예비군의 날", "isHoliday": "N", "locdate": 20060401, "seq": 1},
+					{"dateKind": "02", "dateName": "식목일", "isHoliday": "N", "locdate": 20060405, "seq": 1},
+					{"dateKind": "02", "dateName": "보건의 날", "isHoliday": "N", "locdate": 20060407, "seq": 1},
+					{"dateKind": "02", "dateName": "임시정부수립기념일", "isHoliday": "N", "locdate": 20060413, "seq": 1},
+					{"dateKind": "02", "dateName": "4·19 혁명 기념일", "isHoliday": "N", "locdate": 20060419, "seq": 1},
+					{"dateKind": "02", "dateName": "장애인의 날", "isHoliday": "N", "locdate": 20060420, "seq": 1},
+					{"dateKind": "02", "dateName": "과학의 날", "isHoliday": "N", "locdate": 20060421, "seq": 1},
+					{"dateKind": "02", "dateName": "정보통신의 날", "isHoliday": "N", "locdate": 20060422, "seq": 1},
+					{"dateKind": "02", "dateName": "법의 날", "isHoliday": "N", "locdate": 20060425, "seq": 1},
+					{"dateKind": "02", "dateName": "충무공 이순신 탄신일", "isHoliday": "N", "locdate": 20060428, "seq": 1},
+					{"dateKind": "02", "dateName": "근로자의 날", "isHoliday": "N", "locdate": 20060501, "seq": 1},
+					{"dateKind": "02", "dateName": "어버이 날", "isHoliday": "N", "locdate": 20060508, "seq": 1},
+					{"dateKind": "02", "dateName": "스승의 날", "isHoliday": "N", "locdate": 20060515, "seq": 1},
+					{"dateKind": "02", "dateName": "성년의 날", "isHoliday": "N", "locdate": 20060515, "seq": 2},
+					{"dateKind": "02", "dateName": "5·18 민주화운동기념일", "isHoliday": "N", "locdate": 20060518, "seq": 1},
+					{"dateKind": "02", "dateName": "발명의 날", "isHoliday": "N", "locdate": 20060519, "seq": 1},
+					{"dateKind": "02", "dateName": "방재의 날", "isHoliday": "N", "locdate": 20060525, "seq": 1},
+					{"dateKind": "02", "dateName": "바다의 날", "isHoliday": "N", "locdate": 20060531, "seq": 1},
+					{"dateKind": "02", "dateName": "환경의 날", "isHoliday": "N", "locdate": 20060605, "seq": 1},
+					{"dateKind": "02", "dateName": "6·25 전쟁일", "isHoliday": "N", "locdate": 20060625, "seq": 1},
+					{"dateKind": "02", "dateName": "사회복지의 날", "isHoliday": "N", "locdate": 20060907, "seq": 1},
+					{"dateKind": "02", "dateName": "철도의 날", "isHoliday": "N", "locdate": 20060918, "seq": 1},
+					{"dateKind": "02", "dateName": "국군의 날", "isHoliday": "N", "locdate": 20061001, "seq": 1},
+					{"dateKind": "02", "dateName": "노인의 날", "isHoliday": "N", "locdate": 20061002, "seq": 1},
+					{"dateKind": "02", "dateName": "재향군인의 날", "isHoliday": "N", "locdate": 20061008, "seq": 1},
+					{"dateKind": "02", "dateName": "한글날", "isHoliday": "N", "locdate": 20061009, "seq": 1},
+					{"dateKind": "02", "dateName": "체육의 날", "isHoliday": "N", "locdate": 20061015, "seq": 1},
+					{"dateKind": "02", "dateName": "문화의 날", "isHoliday": "N", "locdate": 20061021, "seq": 1},
+					{"dateKind": "02", "dateName": "경찰의 날", "isHoliday": "N", "locdate": 20061021, "seq": 2},
+					{"dateKind": "02", "dateName": "국제연합일", "isHoliday": "N", "locdate": 20061024, "seq": 1},
+					{"dateKind": "02", "dateName": "교정의 날", "isHoliday": "N", "locdate": 20061028, "seq": 1},
+					{"dateKind": "02", "dateName": "저축의 날", "isHoliday": "N", "locdate": 20061031, "seq": 1},
+					{"dateKind": "02", "dateName": "학생의 날", "isHoliday": "N", "locdate": 20061103, "seq": 1},
+					{"dateKind": "02", "dateName": "소방의 날", "isHoliday": "N", "locdate": 20061109, "seq": 1},
+					{"dateKind": "02", "dateName": "농업인의 날", "isHoliday": "N", "locdate": 20061111, "seq": 1},
+					{"dateKind": "02", "dateName": "순국선열의 날", "isHoliday": "N", "locdate": 20061117, "seq": 1},
+					{"dateKind": "02", "dateName": "무역의 날", "isHoliday": "N", "locdate": 20061130, "seq": 1},
+					{"dateKind": "02", "dateName": "소비자의 날", "isHoliday": "N", "locdate": 20061203, "seq": 1}
+				]
+			},
+			"numOfRows": 100,
+			"pageNo": 1,
+			"totalCount": 42
+		}
+	}
+}

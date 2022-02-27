@@ -1,0 +1,23 @@
+{
+	"response": {
+		"header": {"resultCode": "00", "resultMsg": "NORMAL SERVICE."},
+		"body": {
+			"items": {
+				"item": [
+					{"dateKind": "04", "dateName": "토왕용사", "isHoliday": "N", "kst": "0259      ", "locdate": 20080118, "seq": 1, "sunLongitude": 297},
+					{"dateKind": "04", "dateName": "한식", "isHoliday": "N", "locdate": 20080405, "seq": 2},
+					{"dateKind": "04", "dateName": "토왕용사", "isHoliday": "N", "kst": "0009      ", "locdate": 20080417, "seq": 1, "sunLongitude": 27},
+					{"dateKind": "04", "dateName": "단오", "isHoliday": "N", "locdate": 20080608, "seq": 1},
+					{"dateKind": "04", "dateName": "토왕용사", "isHoliday": "N", "kst": "1627      ", "locdate": 20080719, "seq": 1, "sunLongitude": 117},
+					{"dateKind": "04", "dateName": "초복", "isHoliday": "N", "locdate": 20080719, "seq": 2},
+					{"dateKind": "04", "dateName": "중복", "isHoliday": "N", "locdate": 20080729, "seq": 1},
+					{"dateKind": "04", "dateName": "말복", "isHoliday": "N", "locdate": 20080808, "seq": 1},
+					{"dateKind": "04", "dateName": "토왕용사", "isHoliday": "N", "kst": "0946      ", "locdate": 20081020, "seq": 1, "sunLongitude": 207}
+				]
+			},
+			"numOfRows": 100,
+			"pageNo": 1,
+			"totalCount": 9
+		}
+	}
+}
