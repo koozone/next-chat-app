@@ -27,7 +27,7 @@ export const CalendarModule = () => {
 		weekLocale: 'ko',
 		startWeekDay: 7,
 		weekEndRatio: 0.5,
-		subDateKind: ['google', '01', '03', '04', '02'],
+		subDateKind: ['google', '01', '03', '04', '02', 'lunar'],
 	});
 	const [calendarState, runCalendarState] = calendarData;
 	const [optionState, runOptionState] = optionData;
@@ -241,7 +241,7 @@ export const CalendarModule = () => {
 				<Toggle theme="default-IL-md-md-md::danger-IL-md-md-md" text="24절기" name="03" checked={subDateKind.includes('03')} onChange={changeSubDateKind} />
 				<Toggle theme="default-IL-md-md-md::danger-IL-md-md-md" text="잡절" name="04" checked={subDateKind.includes('04')} onChange={changeSubDateKind} />
 				<Toggle theme="default-IL-md-md-md::danger-IL-md-md-md" text="기념일" name="02" checked={subDateKind.includes('02')} onChange={changeSubDateKind} />
-				<Toggle theme="default-IL-md-md-md::danger-IL-md-md-md" text="음력" name="05" checked={subDateKind.includes('05')} onChange={changeSubDateKind} />
+				<Toggle theme="default-IL-md-md-md::danger-IL-md-md-md" text="음력" name="lunar" checked={subDateKind.includes('lunar')} onChange={changeSubDateKind} />
 				<Toggle
 					theme="default-IL-md-md-md::danger-IL-md-md-md"
 					icon="bxs-chevrons-right::bx-leaf"
@@ -296,13 +296,13 @@ export const CalendarModule = () => {
 					direction={false}
 					value={startWeekDay}
 					options={[
-						{value: 7, label: '일'},
-						{value: 1, label: '월'},
-						{value: 2, label: '화'},
-						{value: 3, label: '수'},
-						{value: 4, label: '목'},
-						{value: 5, label: '금'},
-						{value: 6, label: '토'},
+						{value: 7, label: '일요일'},
+						{value: 1, label: '월요일'},
+						{value: 2, label: '화요일'},
+						{value: 3, label: '수요일'},
+						{value: 4, label: '목요일'},
+						{value: 5, label: '금요일'},
+						{value: 6, label: '토요일'},
 					]}
 					onChange={(event) => {
 						const {name} = event.currentTarget;

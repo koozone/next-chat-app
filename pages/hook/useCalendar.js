@@ -17,7 +17,7 @@ export const UseCalendar = (initData) => {
 		const process = () => {
 			const request = window.gapi.client.calendar.events[method]({
 				// 캘린더 ID (기본 캘린더 사용시 'primary')
-				calendarId: '3fube0lde5d7hahjim83l664so@group.calendar.google.com',
+				calendarId: 'qduatr3seur835pk4aolok2900@group.calendar.google.com',
 				...option,
 			});
 
@@ -73,14 +73,12 @@ export const UseCalendar = (initData) => {
 	const add = (props) => {
 		const {isoDate} = props;
 		const eventDateTime = DateTime.fromISO(isoDate);
-		const diffDay = DateTime.now().diff(eventDateTime, 'days');
-		const dday = Math.floor(diffDay.as('days'));
-		console.log('eventDateTime', dday);
+
 		action({
 			method: 'insert',
 			option: {
 				resource: {
-					summary: `Event! (D${dday}})`, // 일정 제목
+					summary: 'Event!', // 일정 제목
 					location: '800 Howard St., San Francisco, CA 94103', // 일정 장소
 					description: 'Really great refreshments', // 일정 설명
 					start: {

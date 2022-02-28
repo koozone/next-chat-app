@@ -42,7 +42,7 @@ export const ToyCalendar = (props) => {
 	if (optionState.subDateKind.includes('03')) subDateKind = subDateKind.concat('03');
 	if (optionState.subDateKind.includes('04')) subDateKind = subDateKind.concat('04');
 	if (optionState.subDateKind.includes('02')) subDateKind = subDateKind.concat('02');
-	if (optionState.subDateKind.includes('05')) subDateKind = subDateKind.concat('05');
+	if (optionState.subDateKind.includes('lunar')) subDateKind = subDateKind.concat('lunar');
 	// const viewSubDate = optionState.viewSubDate;
 	const viewSubDate = subDateKind.length ? true : false;
 	const fullLunarDate = optionState.fullLunarDate;
@@ -175,7 +175,7 @@ export const ToyCalendar = (props) => {
 				</Fragment>
 			)}
 			{[...Array(weekLenght)].map((weekVal, i) => {
-				const weekDateTime = firstDateTime.plus({weeks: i});
+				const weekDateTime = firstDateTime.plus({weeks: i, days: 1});
 
 				return (
 					<Fragment key={`weekNumber${i}`}>
@@ -190,6 +190,8 @@ export const ToyCalendar = (props) => {
 							const mainDateTime = firstDateTime.plus({days: index});
 							const mainFormat = mainDateTime.toFormat('yyyyLLdd');
 							const subDateTime = mainDateTime.reconfigure({outputCalendar: subDateLocale});
+
+							const dday = Math.floor(nowDateTime.diff(mainDateTime, 'days').as('days'));
 							// // 공휴일
 							// const holiday = publicdayList
 							// 	.filter((item) => item.dateKind == '01' && item.locdate == mainFormat)
@@ -213,7 +215,7 @@ export const ToyCalendar = (props) => {
 
 							// 음력 정보 추가
 							if (fullLunarDate || ['1', '5', '10', '15', '20', '25', '30'].includes(subDateTime.toFormat('d'))) {
-								publicdayList = publicdayList.concat({dateKind: '05', dateName: subDateTime.toFormat('L.d'), locdate: mainFormat});
+								publicdayList = publicdayList.concat({dateKind: 'lunar', dateName: subDateTime.toFormat('L.d'), locdate: mainFormat});
 							}
 
 							const privateList = privatedayList.filter((item) => item.start?.dateTime?.indexOf(mainDateTime.toISODate()) > -1 || item.start?.date == mainDateTime.toFormat('yyyy-LL-dd'));
@@ -231,7 +233,8 @@ export const ToyCalendar = (props) => {
 							// 오늘여부
 							const isToday = mainDateTime.toISODate() == nowDateTime.toISODate();
 							// 휴일여부
-							const isHoliday = publicList.filter((item) => item.isHoliday == 'Y').length ? true : false;
+							const isMainHoliday = publicList.filter((item) => item.isHoliday == 'Y').length ? true : false;
+							const isSubHoliday = viewList.filter((item) => item.isHoliday == 'Y').length ? true : false;
 							const mainBgColor = classNames({
 								'bg-red-50': weekIndex == 0,
 								'bg-blue-50': weekIndex == 6,
@@ -240,9 +243,9 @@ export const ToyCalendar = (props) => {
 							const mainTextColor = classNames({
 								'ring-slate-500 bg-slate-500 text-white': isToday,
 								'ring-transparent bg-transparent': !isToday,
-								'text-red-500': !isToday && (weekIndex == 0 || isHoliday),
+								'text-red-500': !isToday && (weekIndex == 0 || isMainHoliday),
 								'text-blue-500': !isToday && weekIndex == 6,
-								'text-slate-500': !isToday && !(weekIndex == 6 || weekIndex == 0 || isHoliday),
+								'text-slate-500': !isToday && !(weekIndex == 6 || weekIndex == 0 || isMainHoliday),
 								'-translate-y-2': viewSubDate,
 								'translate-y-0': !viewSubDate,
 							});
@@ -257,12 +260,12 @@ export const ToyCalendar = (props) => {
 							// 	visible: ['1', '5', '10', '15', '20', '25', '30'].includes(subDateTime.toFormat('d')) || memorialday,
 							// });
 							const subTextColor = classNames({
-								'text-red-400': isHoliday,
-								'text-indigo-400': !isHoliday && viewList.filter((item) => item.dateKind == '01').length,
-								'text-blue-400': !isHoliday && viewList.filter((item) => item.dateKind == '03').length,
-								'text-sky-400': !isHoliday && viewList.filter((item) => item.dateKind == '04').length,
-								'text-green-400': !isHoliday && viewList.filter((item) => item.dateKind == '02').length,
-								'text-slate-400': !isHoliday,
+								'text-red-400': isSubHoliday,
+								'text-indigo-400': !isSubHoliday && viewList.filter((item) => item.dateKind == '01').length,
+								'text-blue-400': !isSubHoliday && viewList.filter((item) => item.dateKind == '03').length,
+								'text-sky-400': !isSubHoliday && viewList.filter((item) => item.dateKind == '04').length,
+								'text-green-400': !isSubHoliday && viewList.filter((item) => item.dateKind == '02').length,
+								'text-slate-400': !isSubHoliday,
 							});
 
 							return (
@@ -308,7 +311,7 @@ export const ToyCalendar = (props) => {
 															runGoogleCalendar.remove({eventId: item.id});
 														}}
 													>
-														{item.summary}
+														{`${item.summary} (D${dday > 0 ? '+' : '-'}${Math.abs(dday)})`}
 													</div>
 												))}
 											</div>
