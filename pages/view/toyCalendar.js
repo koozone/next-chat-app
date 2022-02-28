@@ -23,6 +23,8 @@ export const ToyCalendar = (props) => {
 	const holidayList = calendarState.holidayList || [];
 	let publicdayList = calendarState.publicdayList || [];
 	let privatedayList = calendarState.privatedayList || [];
+	const [googleCalendar, runGoogleCalendar] = calendarState.useGoogleCalendar;
+
 	// const startWeekDay = 7; // 월요일(1), 화요일(2)...일요일(7)
 	// const startWeekDay = optionState.startWeekDay?.map((val) => val.value)[0]; // 월요일(1), 화요일(2)...일요일(7)
 	const startWeekDay = optionState.startWeekDay; // 월요일(1), 화요일(2)...일요일(7)
@@ -35,6 +37,7 @@ export const ToyCalendar = (props) => {
 	const weekEndRatio = optionState.weekEndRatio;
 	// 표기 우선순위 적용한 특일 값
 	let subDateKind = [];
+	if (optionState.subDateKind.includes('google')) subDateKind = subDateKind.concat('google');
 	if (optionState.subDateKind.includes('01')) subDateKind = subDateKind.concat('01');
 	if (optionState.subDateKind.includes('03')) subDateKind = subDateKind.concat('03');
 	if (optionState.subDateKind.includes('04')) subDateKind = subDateKind.concat('04');
@@ -78,64 +81,70 @@ export const ToyCalendar = (props) => {
 		return [...weekColList, ...dayColList].join(' ');
 	}, [startWeekDay, viewWeekNumber, weekEndRatio]);
 
-	// const gapi = window.gapi;
-	const CLIENT_ID = '7342048109-qrvboq0r7ac2uv7g3btugalg1casg6gc.apps.googleusercontent.com';
-	const API_KEY = 'AIzaSyA7V880ZtU-8xnFehGKdMAYF0Y8zscEzJA';
-	const DISCOVERY_DOCS = ['https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest'];
-	const SCOPES = 'https://www.googleapis.com/auth/calendar.events';
+	// // const gapi = window.gapi;
+	// const CLIENT_ID = '7342048109-qrvboq0r7ac2uv7g3btugalg1casg6gc.apps.googleusercontent.com';
+	// const API_KEY = 'AIzaSyA7V880ZtU-8xnFehGKdMAYF0Y8zscEzJA';
+	// const DISCOVERY_DOCS = ['https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest'];
+	// const SCOPES = 'https://www.googleapis.com/auth/calendar.events';
 
-	const fetchGapi = async () => {
-		const gapi = await import('gapi-script').then((pack) => pack.gapi);
+	// const insertEvent = async ({isoDate}) => {
+	// 	const gapi = await import('gapi-script').then((pack) => pack.gapi);
+	// 	console.log('insertEvent');
+	// 	gapi.load('client:auth2', () => {
+	// 		gapi.client.init({
+	// 			apiKey: API_KEY,
+	// 			clientId: CLIENT_ID,
+	// 			discoveryDocs: DISCOVERY_DOCS,
+	// 			scope: SCOPES,
+	// 		});
 
-		gapi.load('client:auth2', () => {
-			gapi.client.init({
-				apiKey: API_KEY,
-				clientId: CLIENT_ID,
-				discoveryDocs: DISCOVERY_DOCS,
-				scope: SCOPES,
-			});
+	// 		gapi.client.load('calendar', 'v3', () => console.log('bam!'));
 
-			gapi.client.load('calendar', 'v3', () => console.log('bam!'));
+	// 		gapi.auth2
+	// 			.getAuthInstance()
+	// 			.signIn()
+	// 			.then(() => {
+	// 				const event = {
+	// 					summary: 'Very Awesome Event!', // 일정 제목
+	// 					location: '800 Howard St., San Francisco, CA 94103', // 일정 장소
+	// 					description: 'Really great refreshments', // 일정 설명
+	// 					start: {
+	// 						// 시작 날짜
+	// 						date: DateTime.fromISO(isoDate).toISODate(),
+	// 						// dateTime: `2022-03-03T00:00:00Z`,
+	// 						// timeZone: 'Asia/Seoul',
+	// 					},
+	// 					end: {
+	// 						// 종료 날짜
+	// 						date: DateTime.fromISO(isoDate).toISODate(),
+	// 						// dateTime: `2022-03-03T23:59:59Z`,
+	// 						// timeZone: 'Asia/Seoul',
+	// 					},
+	// 					recurrence: ['RRULE:FREQ=DAILY;COUNT=2'], // 반복 지정 (일단위; 총 2번 반복)
+	// 					attendees: [{email: 'lpage@example.com'}, {email: 'sbrin@example.com'}], // 참석자
+	// 					reminders: {
+	// 						// 알림 설정
+	// 						useDefault: false,
+	// 						overrides: [
+	// 							{method: 'email', minutes: 24 * 60}, // 하루전 알림
+	// 							{method: 'popup', minutes: 10}, // 10분전 알림
+	// 						],
+	// 					},
+	// 				};
 
-			gapi.auth2
-				.getAuthInstance()
-				.signIn()
-				.then(() => {
-					const event = {
-						summary: 'Awesome Event!',
-						location: '800 Howard St., San Francisco, CA 94103',
-						description: 'Really great refreshments',
-						start: {
-							dateTime: `2022-03-04T00:00:00Z`,
-							timeZone: 'America/Los_Angeles',
-						},
-						end: {
-							dateTime: `2022-03-06T00:00:00Z`,
-							timeZone: 'America/Los_Angeles',
-						},
-						recurrence: ['RRULE:FREQ=DAILY;COUNT=2'],
-						attendees: [{email: 'lpage@example.com'}, {email: 'sbrin@example.com'}],
-						reminders: {
-							useDefault: false,
-							overrides: [
-								{method: 'email', minutes: 24 * 60},
-								{method: 'popup', minutes: 10},
-							],
-						},
-					};
+	// 				const request = window.gapi.client.calendar.events.insert({
+	// 					// 캘린더 ID (기본 캘린더 사용시 'primary')
+	// 					calendarId: '3fube0lde5d7hahjim83l664so@group.calendar.google.com',
+	// 					resource: event,
+	// 				});
 
-					const request = window.gapi.client.calendar.events.insert({
-						calendarId: 'primary',
-						resource: event,
-					});
-
-					request.execute((event) => {
-						console.log(event);
-						window.open(event.htmlLink);
-					});
-				});
-		});
-	};
+	// 				request.execute((event) => {
+	// 					console.log(event);
+	// 					// window.open(event.htmlLink);
+	// 				});
+	// 			});
+	// 	});
+	// };
 
 	return (
 		<div className={classNames(width, height, 'grid gap-px rounded-lg ring-2 ring-slate-500 bg-slate-300 overflow-hidden')} style={{gridTemplateColumns: getGridCols(), gridTemplateRows: getGridRows()}}>
@@ -207,22 +216,22 @@ export const ToyCalendar = (props) => {
 								publicdayList = publicdayList.concat({dateKind: '05', dateName: subDateTime.toFormat('L.d'), locdate: mainFormat});
 							}
 
-							const allPrivateList = privatedayList.filter((item) => item.start?.dateTime?.indexOf(mainDateTime.toFormat('yyyy-LL-dd')) > -1 || item.start.date == mainDateTime.toFormat('yyyy-LL-dd'));
+							const privateList = privatedayList.filter((item) => item.start?.dateTime?.indexOf(mainDateTime.toISODate()) > -1 || item.start?.date == mainDateTime.toFormat('yyyy-LL-dd'));
 							// 해당일 모든 일정
-							const allList = publicdayList.filter((item) => item.locdate == mainFormat);
+							const publicList = publicdayList.filter((item) => item.locdate == mainFormat);
 							// 해당일 표기 일정
 							let viewList = [];
 							// 특일 우선순위대로 정보 발췌
 							subDateKind.forEach((element) => {
 								if (!viewList.length) {
-									viewList = viewList.concat(allList.filter((item) => item.dateKind == element));
+									viewList = viewList.concat(publicList.filter((item) => item.dateKind == element));
 								}
 							});
 
 							// 오늘여부
 							const isToday = mainDateTime.toISODate() == nowDateTime.toISODate();
 							// 휴일여부
-							const isHoliday = viewList.filter((item) => item.isHoliday == 'Y').length ? true : false;
+							const isHoliday = publicList.filter((item) => item.isHoliday == 'Y').length ? true : false;
 							const mainBgColor = classNames({
 								'bg-red-50': weekIndex == 0,
 								'bg-blue-50': weekIndex == 6,
@@ -258,31 +267,59 @@ export const ToyCalendar = (props) => {
 
 							return (
 								<div key={`dayNumber${index}`} className={classNames(mainBgColor, mainOpacity, 'relative flex flex-col justify-center items-center')}>
-									<div className={classNames(mainTextColor, 'absolute aspect-square w-9 ring-4 text-3xl text-center rounded-full')} onClick={fetchGapi}>
+									<div
+										className={classNames(mainTextColor, 'absolute aspect-square w-9 ring-4 text-3xl text-center rounded-full')}
+										onClick={(event) => {
+											// insertEvent({isoDate: mainDateTime.toISODate()});
+											runGoogleCalendar.add({isoDate: mainDateTime.toISODate()});
+										}}
+									>
 										{mainDateTime.day}
 									</div>
 									{/* {viewSubDate && <div className={classNames(subVisible, 'text-xs text-slate-400')}>{memorialday || subDateTime.toFormat('L.d')}</div>} */}
-									{viewSubDate && (
+									{/* {viewSubDate && (
 										<div className={classNames(subTextColor, 'absolute left-1 right-1 top-1/2 translate-y-2 truncate whitespace-nowrap text-xs text-center')}>
-											{/* {holiday || sundryday || seasonday || memorialday || (['1', '5', '10', '15', '20', '25', '30'].includes(subDateTime.toFormat('d')) && subDateTime.toFormat('L.d'))} */}
 											{viewList.map((item) => item.dateName).join(', ')}
 										</div>
-									)}
-									{/* {
-										<ul role="list" className="absolute left-1 right-1 top-1/2 translate-y-2 list-disc list-inside -space-y-[5px] text-xs text-center">
-											{allPrivateList.map((item) => (
-												<li className="truncate whitespace-nowrap marker:text-sky-400 text-slate-400">{item.summary}</li>
-											))}
-										</ul>
-									} */}
-									{viewSubDate && (
+									)} */}
+									{/* {viewSubDate && (
 										<div className="absolute left-1 right-1 top-1/2 translate-y-2 list-disc list-inside -space-y-[5px] text-xs text-center">
-											{allPrivateList.map((item, index) => (
-												<div key={`google${index}`} className="truncate whitespace-nowrap marker:text-sky-400 text-slate-400 before:content-['●_'] before:text-[0.5rem] before:text-red-500 before:align-middle">
+											{privateList.map((item, index) => (
+												<div
+													key={`google${index}`}
+													className="truncate whitespace-nowrap marker:text-sky-400 text-slate-400 before:content-['●_'] before:text-[0.5rem] before:text-red-500 before:align-middle"
+													onClick={(event) => {
+														runGoogleCalendar.remove({eventId: item.id});
+													}}
+												>
 													{item.summary}
 												</div>
 											))}
 										</div>
+									)} */}
+									{viewSubDate ? (
+										privateList.length && subDateKind.includes('google') ? (
+											<div className="absolute left-1 right-1 top-1/2 translate-y-2 list-disc list-inside -space-y-[5px] text-xs text-center">
+												{privateList.map((item, index) => (
+													<div
+														key={`google${index}`}
+														className="truncate whitespace-nowrap marker:text-sky-400 text-slate-400 before:content-['●_'] before:text-[0.5rem] before:text-red-500 before:align-middle"
+														onClick={(event) => {
+															runGoogleCalendar.remove({eventId: item.id});
+														}}
+													>
+														{item.summary}
+													</div>
+												))}
+											</div>
+										) : (
+											<div className={classNames(subTextColor, 'absolute left-1 right-1 top-1/2 translate-y-2 truncate whitespace-nowrap text-xs text-center')}>
+												{/* {holiday || sundryday || seasonday || memorialday || (['1', '5', '10', '15', '20', '25', '30'].includes(subDateTime.toFormat('d')) && subDateTime.toFormat('L.d'))} */}
+												{viewList.map((item) => item.dateName).join(', ')}
+											</div>
+										)
+									) : (
+										<></>
 									)}
 								</div>
 							);

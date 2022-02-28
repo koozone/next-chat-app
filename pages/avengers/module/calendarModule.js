@@ -5,15 +5,18 @@ import {Button, Toggle} from '../../component/ui_ds7';
 import {SelectBox as SelectBox2} from '../antMan';
 import ToyCalendar from '../../view/toyCalendar';
 import {UseData} from '../vision';
+import {UseCalendar} from '../../hook/useCalendar';
 
 export const CalendarModule = () => {
 	const [loading, setLoading] = useState(false);
+	const useGoogleCalendar = UseCalendar();
 	const calendarData = UseData({
 		dateTime: DateTime.local(2022, 9, 3),
 		// dateTime: DateTime.now(),
 		doneYearList: [],
 		publicdayList: [],
 		privatedayList: [],
+		useGoogleCalendar: useGoogleCalendar,
 	});
 	const optionData = UseData({
 		viewWeekNumber: true,
@@ -24,7 +27,7 @@ export const CalendarModule = () => {
 		weekLocale: 'ko',
 		startWeekDay: 7,
 		weekEndRatio: 0.5,
-		subDateKind: ['01', '03', '04', '02'],
+		subDateKind: ['google', '01', '03', '04', '02'],
 	});
 	const [calendarState, runCalendarState] = calendarData;
 	const [optionState, runOptionState] = optionData;
@@ -57,33 +60,82 @@ export const CalendarModule = () => {
 	);
 
 	// 구글 calendar 테스트
-	useEffect(async () => {
-		const newList = [...calendarState.privatedayList];
+	// useEffect(async () => {
+	// 	const newList = [...calendarState.privatedayList];
 
-		const googleKey = 'AIzaSyA7V880ZtU-8xnFehGKdMAYF0Y8zscEzJA';
-		// const calendarID = 'qduatr3seur835pk4aolok2900@group.calendar.google.com';
-		// const calendarID = 'ko.south_korea#holiday@group.v.calendar.google.com';
-		const calendarID = 'gmakoo@gmail.com';
-		const minTime = `${viewYear}-01-01T00:00:00Z`;
-		const maxTime = `${viewYear}-12-31T23:59:59Z`;
+	// 	const googleKey = 'AIzaSyA7V880ZtU-8xnFehGKdMAYF0Y8zscEzJA';
+	// 	// const calendarID = 'qduatr3seur835pk4aolok2900@group.calendar.google.com';
+	// 	// const calendarID = 'ko.south_korea#holiday@group.v.calendar.google.com';
+	// 	const calendarID = '3fube0lde5d7hahjim83l664so@group.calendar.google.com';
+	// 	const minTime = `${viewYear}-01-01T00:00:00Z`;
+	// 	const maxTime = `${viewYear}-12-31T23:59:59Z`;
 
-		const result = await axios.get(`/calendars/${encodeURIComponent(calendarID)}/events`, {
-			params: {
-				key: googleKey,
-				// timeMax: maxTime,
-				// timeMin: minTime,
-				// orderBy: 'startTime',
-				// singleEvents: 'true',
-			},
-		});
-		const jsonList = [].concat(result.data?.items || []);
-		console.log(`google ${viewYear} 결과`, jsonList);
+	// 	const result = await axios.get(`/calendars/${encodeURIComponent(calendarID)}/events`, {
+	// 		params: {
+	// 			key: googleKey,
+	// 			// timeMax: maxTime,
+	// 			// timeMin: minTime,
+	// 			// orderBy: 'startTime',
+	// 			// singleEvents: 'true',
+	// 		},
+	// 	});
+	// 	const jsonList = [].concat(result.data?.items || []);
+	// 	console.log(`google ${viewYear} 결과`, jsonList);
 
-		newList = newList.concat(jsonList);
-		console.log(`privatedayList`, newList);
+	// 	newList = newList.concat(jsonList);
+	// 	console.log(`privatedayList`, newList);
 
-		runCalendarState.change('privatedayList', newList);
+	// 	runCalendarState.change('privatedayList', newList);
+	// }, []);
+
+	// const gapi = window.gapi;
+
+	// const CLIENT_ID = '7342048109-qrvboq0r7ac2uv7g3btugalg1casg6gc.apps.googleusercontent.com';
+	// const API_KEY = 'AIzaSyA7V880ZtU-8xnFehGKdMAYF0Y8zscEzJA';
+	// const DISCOVERY_DOCS = ['https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest'];
+	// const SCOPES = 'https://www.googleapis.com/auth/calendar.events';
+
+	// const listEvent = useCallback(async () => {
+	// 	const gapi = await import('gapi-script').then((pack) => pack.gapi);
+	// 	console.log('listEvent');
+	// 	gapi.load('client:auth2', () => {
+	// 		gapi.client.init({
+	// 			apiKey: API_KEY,
+	// 			clientId: CLIENT_ID,
+	// 			discoveryDocs: DISCOVERY_DOCS,
+	// 			scope: SCOPES,
+	// 		});
+
+	// 		gapi.client.load('calendar', 'v3', () => console.log('bam!'));
+
+	// 		gapi.auth2
+	// 			.getAuthInstance()
+	// 			.signIn()
+	// 			.then(() => {
+	// 				const request = window.gapi.client.calendar.events.list({
+	// 					calendarId: '3fube0lde5d7hahjim83l664so@group.calendar.google.com',
+	// 					// resource: event,
+	// 				});
+
+	// 				request.execute((event) => {
+	// 					console.log(event);
+
+	// 					runCalendarState.change('privatedayList', event.items);
+	// 				});
+	// 			});
+	// 	});
+	// }, []);
+
+	const [googleCalendar, runGoogleCalendar] = useGoogleCalendar;
+
+	useEffect(() => {
+		// listEvent();
+		runGoogleCalendar.load();
 	}, []);
+
+	useEffect(async () => {
+		runCalendarState.change('privatedayList', googleCalendar);
+	}, [googleCalendar]);
 
 	useEffect(async () => {
 		// 데이터 호출을 시도했던 년도면
@@ -184,6 +236,7 @@ export const CalendarModule = () => {
 				/>
 			</div>
 			<div className="p-5 space-x-3 flex justify-center items-center flex-wrap ring-2 ring-gray-500 rounded-lg">
+				<Toggle theme="default-IL-md-md-md::danger-IL-md-md-md" text="일정" name="google" checked={subDateKind.includes('google')} onChange={changeSubDateKind} />
 				<Toggle theme="default-IL-md-md-md::danger-IL-md-md-md" text="공휴일" name="01" checked={subDateKind.includes('01')} onChange={changeSubDateKind} />
 				<Toggle theme="default-IL-md-md-md::danger-IL-md-md-md" text="24절기" name="03" checked={subDateKind.includes('03')} onChange={changeSubDateKind} />
 				<Toggle theme="default-IL-md-md-md::danger-IL-md-md-md" text="잡절" name="04" checked={subDateKind.includes('04')} onChange={changeSubDateKind} />
